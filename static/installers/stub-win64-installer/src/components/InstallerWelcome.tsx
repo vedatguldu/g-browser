@@ -63,7 +63,7 @@ const InstallerWelcome: React.FC<InstallerWelcomeProps> = ({ onInstall }) => {
                 setCustomPath(selected as string);
             }
         } catch (error) {
-            console.error("failed to select folder:", error);
+            console.error("failed to select folder status message:", error);
         }
     };
 
@@ -92,6 +92,8 @@ const InstallerWelcome: React.FC<InstallerWelcomeProps> = ({ onInstall }) => {
                                     {t("app.installer.adminRights")}
                                 </span>
                                 <input
+                                    id="admin-rights-toggle"
+                                    aria-label={t("app.installer.adminRights")}
                                     type="checkbox"
                                     className="toggle toggle-primary"
                                     checked={useCustomPath ? true : useAdmin}
@@ -171,6 +173,8 @@ const InstallerWelcome: React.FC<InstallerWelcomeProps> = ({ onInstall }) => {
                         </label>
                         <div className="join w-full">
                             <input
+                                id="install-path-input"
+                                aria-label={t("app.modal.installPath")}
                                 type="text"
                                 className="input input-bordered join-item w-full"
                                 placeholder={defaultInstallPath}

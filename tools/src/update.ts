@@ -30,7 +30,7 @@ export function readBuildid2(pathBuildid2: string): string | null {
 
 export function generateUuidV7(): string {
   const scriptPath = path.join(PROJECT_ROOT, "tools", "scripts", "gen-uuid.ts");
-  const res = runCommandChecked("deno", ["run", "--allow-net", scriptPath]);
+  const res = runCommandChecked(Deno.execPath(), ["run", "--allow-net", scriptPath]);
   if (!res.success) {
     throw new Error(`Failed to generate UUIDv7: ${res.stderr}`);
   }

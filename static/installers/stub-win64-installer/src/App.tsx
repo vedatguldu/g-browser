@@ -33,7 +33,7 @@ function App() {
           setError("rust.errors.cpu_not_supported");
         }
       } catch (e) {
-        console.error("Failed to check CPU support:", e);
+        console.error("Failed to check CPU support status message:", e);
         setCpuSupported(false);
         setCpuCheckComplete(true);
         setError("rust.errors.cpu_check_failed");

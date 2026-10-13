@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: MPL-2.0
 
+import * as path from "@std/path";
 import * as Initializer from "./src/initializer.ts";
 import * as Patcher from "./src/patcher.ts";
 import * as CustomAppIcons from "./src/custom_app_icons.ts";
@@ -13,6 +14,13 @@ import * as BrowserLauncher from "./src/browser_launcher.ts";
 import * as DevEnvManager from "./src/dev_env_manager.ts";
 import { DEV_SERVER } from "./src/defines.ts";
 import { Logger } from "./src/utils.ts";
+
+// Ensure the running Deno executable directory is in PATH for all spawned child tasks
+const denoDir = path.dirname(Deno.execPath());
+const currentPath = Deno.env.get("PATH") ?? "";
+if (!currentPath.toLowerCase().includes(denoDir.toLowerCase())) {
+  Deno.env.set("PATH", `${denoDir}${path.delimiter}${currentPath}`);
+}
 
 const logger = new Logger("feles-build");
 

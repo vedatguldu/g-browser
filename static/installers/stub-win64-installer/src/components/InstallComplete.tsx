@@ -29,7 +29,7 @@ export default function InstallComplete(
                 } catch (e) {
                     const errorMessage = e as string;
                     console.error(
-                        "Failed to launch Floorp browser:",
+                        "Failed to launch Floorp browser status message:",
                         errorMessage,
                     );
 
@@ -45,7 +45,7 @@ export default function InstallComplete(
 
             await invoke("exit_application");
         } catch (err) {
-            console.error("Failed to exit application:", err);
+            console.error("Failed to exit application status message:", err);
             setIsClosing(false);
         }
     };
@@ -92,6 +92,8 @@ export default function InstallComplete(
                                         {t("app.complete.launchCheckbox")}
                                     </span>
                                     <input
+                                        id="launch-app-checkbox"
+                                        aria-label={t("app.complete.launchCheckbox")}
                                         type="checkbox"
                                         className="checkbox checkbox-primary"
                                         checked={launchApp}

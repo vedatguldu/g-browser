@@ -22,16 +22,13 @@ function errorToMessage(error: unknown): string {
  * This ensures we can find deno even if PATH resolution is problematic.
  */
 function getDenoPath(): string {
-  // First, check if DENO_EXECUTABLE_PATH is set (by CI/CD)
   const envPath = Deno.env.get("DENO_EXECUTABLE_PATH");
-  if (envPath) {
-    logger.debug(`Using Deno executable from DENO_EXECUTABLE_PATH: ${envPath}`);
-    return envPath;
+  const denoPath = envPath || Deno.execPath();
+  const denoDir = path.dirname(denoPath);
+  const currentPath = Deno.env.get("PATH") ?? "";
+  if (!currentPath.toLowerCase().includes(denoDir.toLowerCase())) {
+    Deno.env.set("PATH", `${denoDir}${path.delimiter}${currentPath}`);
   }
-
-  // Otherwise, use Deno.execPath() which gives us the current deno executable
-  const denoPath = Deno.execPath();
-  logger.debug(`Using Deno executable from Deno.execPath(): ${denoPath}`);
   return denoPath;
 }
 
@@ -111,7 +108,7 @@ export async function run(mode = "dev", buildid2: string): Promise<void> {
         deno,
         "run",
         "-A",
-        "vite",
+        "npm:vite",
         "build",
         "--base",
         "chrome://noraneko/content",
@@ -130,7 +127,7 @@ export async function run(mode = "dev", buildid2: string): Promise<void> {
         deno,
         "run",
         "-A",
-        "vite",
+        "npm:vite",
         "build",
         "--base",
         "chrome://noraneko/content",
@@ -144,7 +141,7 @@ export async function run(mode = "dev", buildid2: string): Promise<void> {
         deno,
         "run",
         "-A",
-        "vite",
+        "npm:vite",
         "build",
         "--config",
         "vite.config.ts",
@@ -158,7 +155,7 @@ export async function run(mode = "dev", buildid2: string): Promise<void> {
         deno,
         "run",
         "-A",
-        "vite",
+        "npm:vite",
         "build",
         "--config",
         "vite.config.ts",
@@ -172,7 +169,7 @@ export async function run(mode = "dev", buildid2: string): Promise<void> {
         deno,
         "run",
         "-A",
-        "vite",
+        "npm:vite",
         "build",
         "--config",
         "vite.config.ts",
@@ -186,7 +183,7 @@ export async function run(mode = "dev", buildid2: string): Promise<void> {
         deno,
         "run",
         "-A",
-        "vite",
+        "npm:vite",
         "build",
         "--config",
         "vite.config.ts",
@@ -200,7 +197,7 @@ export async function run(mode = "dev", buildid2: string): Promise<void> {
         deno,
         "run",
         "-A",
-        "vite",
+        "npm:vite",
         "build",
         "--config",
         "vite.config.ts",
@@ -215,7 +212,7 @@ export async function run(mode = "dev", buildid2: string): Promise<void> {
         deno,
         "run",
         "-A",
-        "vite",
+        "npm:vite",
         "build",
         "--config",
         "vite.config.ts",
@@ -230,7 +227,7 @@ export async function run(mode = "dev", buildid2: string): Promise<void> {
         deno,
         "run",
         "-A",
-        "vite",
+        "npm:vite",
         "build",
         "--config",
         "vite.config.ts",

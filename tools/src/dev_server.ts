@@ -74,7 +74,7 @@ export async function run(writer: any): Promise<void> {
   for (const server of servers) {
     const port = getPortFor(server.name);
     // Run Vite via Deno's npm compatibility (Deno-only)
-    const cmd = "deno";
+    const cmd = Deno.execPath();
     const args = ["run", "-A", "npm:vite", "--port", String(port)];
 
     const child = new Deno.Command(cmd, {

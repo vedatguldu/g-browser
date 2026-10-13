@@ -91,7 +91,7 @@ export async function injectXhtmlFromTs(
 
   const args = buildXhtmlInjectionArgs(scriptPath, binPath, options);
 
-  const result = runCommandChecked("deno", args);
+  const result = runCommandChecked(Deno.execPath(), args);
   if (!result.success) {
     throw new Error(`Failed to inject XHTML: ${result.stderr}`);
   }

@@ -11,7 +11,14 @@ import {
 } from "#features-chrome/utils/base.ts";
 import { MediaDownloaderPageActionButton } from "./media-downloader-button.tsx";
 import { MediaDownloaderPanel } from "./media-downloader-panel.tsx";
-import { extractMediaFromDocument, type MediaItem } from "./media-detector.ts";
+import {
+  startMediaObserver,
+  stopMediaObserver,
+  getMediaItemsForActiveTab,
+  clearMediaForTab,
+  addMediaUpdateListener,
+  type MediaItem,
+} from "./media-detector.ts";
 import style from "./style.css?inline";
 
 const [mediaItems, setMediaItems] = createSignal<MediaItem[]>([]);
@@ -24,12 +31,8 @@ export function scanCurrentTabMedia(): void {
       setMediaItems([]);
       return;
     }
-    const gBrowser = (globalThis as unknown as { gBrowser?: { selectedBrowser?: { contentDocument?: Document } } }).gBrowser;
-    const doc = gBrowser?.selectedBrowser?.contentDocument;
-    if (doc) {
-      const items = extractMediaFromDocument(doc);
-      setMediaItems(items);
-    }
+    const items = getMediaItemsForActiveTab();
+    setMediaItems(items);
   } catch {
     // Cross-process fallback
   }
@@ -37,6 +40,8 @@ export function scanCurrentTabMedia(): void {
 
 @noraComponent(import.meta.hot)
 export default class MediaDownloader extends NoraComponentBase {
+  private removeUpdateListener: (() => void) | null = null;
+
   init(): void {
     // Attach local stylesheet to browser window
     const styleEl = document?.createElement("style");
@@ -44,6 +49,14 @@ export default class MediaDownloader extends NoraComponentBase {
       styleEl.textContent = style;
       document?.head?.appendChild(styleEl);
     }
+
+    // Start native HTTP media stream observer
+    startMediaObserver();
+
+    // Listen for media stream detections
+    this.removeUpdateListener = addMediaUpdateListener(() => {
+      scanCurrentTabMedia();
+    });
 
     // Mount panel to mainPopupSet
     const mainPopupSet = document?.getElementById("mainPopupSet");
@@ -73,9 +86,18 @@ export default class MediaDownloader extends NoraComponentBase {
     this.setupTabListeners();
   }
 
+  destroy(): void {
+    if (this.removeUpdateListener) {
+      this.removeUpdateListener();
+      this.removeUpdateListener = null;
+    }
+    stopMediaObserver();
+  }
+
   private setupTabListeners(): void {
     try {
-      const gBrowser = (globalThis as unknown as { gBrowser?: { tabContainer?: Element } }).gBrowser;
+      // deno-lint-ignore no-explicit-any
+      const gBrowser = (globalThis as any).gBrowser;
       if (!gBrowser?.tabContainer) return;
 
       gBrowser.tabContainer.addEventListener("TabSelect", () => {
@@ -84,12 +106,31 @@ export default class MediaDownloader extends NoraComponentBase {
         scanCurrentTabMedia();
       });
 
-      // Periodic check while page media might be lazy-loaded
+      // Tab progress listener for navigation (location change)
+      const progressListener = {
+        // deno-lint-ignore no-explicit-any
+        onLocationChange: (browser: any, _webProgress: any, _request: any, _location: any, flags: number) => {
+          // If top-level document navigation, reset previous tab media
+          // deno-lint-ignore no-explicit-any
+          const Ci = (globalThis as any).Ci;
+          if (flags & Ci?.nsIWebProgressListener?.LOCATION_CHANGE_SAME_DOCUMENT) {
+            return;
+          }
+          if (browser?.browserId) {
+            clearMediaForTab(browser.browserId);
+          }
+          scanCurrentTabMedia();
+        },
+      };
+
+      if (typeof gBrowser.addTabsProgressListener === "function") {
+        gBrowser.addTabsProgressListener(progressListener);
+      }
+
+      // Initial scan
       setTimeout(() => {
-        const Services = (globalThis as unknown as { Services?: { prefs?: { getBoolPref?: (p: string, d?: boolean) => boolean } } }).Services;
-        if (Services?.prefs?.getBoolPref && !Services.prefs.getBoolPref("floorp.mediadownloader.auto_scan", true)) return;
         scanCurrentTabMedia();
-      }, 1500);
+      }, 1000);
     } catch {
       // Safe fallback
     }

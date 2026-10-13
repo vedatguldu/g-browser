@@ -7,12 +7,17 @@ import i18next from "i18next";
 import { For, Show, createSignal } from "solid-js";
 import { addI18nObserver } from "#i18n/config-browser-chrome.ts";
 import { detectedMediaItems, scanCurrentTabMedia } from "./index.ts";
-import { downloadMediaItem, copyMediaUrlToClipboard, type MediaItem } from "./media-detector.ts";
+import {
+  downloadMediaItem,
+  copyMediaUrlToClipboard,
+  openDownloadManager,
+  type MediaItem,
+} from "./media-detector.ts";
 
 export function MediaDownloaderPanel() {
   const [panelTitle, setPanelTitle] = createSignal(
     i18next.t("media-downloader-title", {
-      defaultValue: "İndirilebilir Medyalar",
+      defaultValue: "Ortam ve Video İndirici",
     }),
   );
   const [downloadSuccessId, setDownloadSuccessId] = createSignal<string | null>(null);
@@ -20,7 +25,7 @@ export function MediaDownloaderPanel() {
   addI18nObserver(() => {
     setPanelTitle(
       i18next.t("media-downloader-title", {
-        defaultValue: "İndirilebilir Medyalar",
+        defaultValue: "Ortam ve Video İndirici",
       }),
     );
   });
@@ -51,7 +56,19 @@ export function MediaDownloaderPanel() {
     await downloadMediaItem(item);
     setTimeout(() => {
       setDownloadSuccessId(null);
-    }, 2000);
+    }, 2500);
+  };
+
+  const openInNewTab = (url: string) => {
+    try {
+      // deno-lint-ignore no-explicit-any
+      const gBrowser = (globalThis as any).gBrowser;
+      if (gBrowser?.addTrustedTab) {
+        gBrowser.addTrustedTab(url);
+      }
+    } catch {
+      // fallback
+    }
   };
 
   const handleButtonKeyDown = (e: KeyboardEvent, action: () => void) => {
@@ -75,12 +92,25 @@ export function MediaDownloaderPanel() {
     >
       <xul:vbox class="media-panel-box">
         <xul:hbox class="media-panel-header">
-          <xul:label id="media-panel-title-label" class="media-panel-title">
-            {panelTitle()}
-          </xul:label>
-          <xul:label class="media-panel-count" role="status">
-            {detectedMediaItems().length} Öğe
-          </xul:label>
+          <div class="media-panel-title-group">
+            <xul:label id="media-panel-title-label" class="media-panel-title">
+              {panelTitle()}
+            </xul:label>
+            <xul:label class="media-panel-count" role="status">
+              {detectedMediaItems().length} Öğe
+            </xul:label>
+          </div>
+          <button
+            class="media-panel-manager-btn"
+            tabindex="0"
+            role="button"
+            onClick={openDownloadManager}
+            onKeyDown={(e) => handleButtonKeyDown(e, openDownloadManager)}
+            title="İndirme Yöneticisi (about:downloads) - Ctrl+J"
+            aria-label="İndirme Yöneticisini Aç (Ctrl+J)"
+          >
+            İndirme Yöneticisi
+          </button>
         </xul:hbox>
 
         <xul:toolbarseparator class="media-panel-separator" />
@@ -89,7 +119,7 @@ export function MediaDownloaderPanel() {
           when={detectedMediaItems().length > 0}
           fallback={
             <div class="media-empty-state" role="status" tabindex="0">
-              Bu sayfada indirilebilir video veya ses akışı tespit edilmedi. Sayfada bir video oynatmayı deneyebilirsiniz.
+              Bu sayfada henüz indirilebilir medya akışı tespit edilmedi. Sayfada bir video veya ses oynattığınızda (YouTube, Twitter/X, Instagram, TikTok, Reddit, Vimeo, HLS/M3U8 vb.) akış anında burada listelenecektir.
             </div>
           }
         >
@@ -103,12 +133,28 @@ export function MediaDownloaderPanel() {
                     </span>
                     <div class="media-item-meta">
                       <span class="media-format-pill">{item.format}</span>
-                      <span>{item.type === "video" ? "Video" : item.type === "stream" ? "Akış" : "Ses"}</span>
+                      <Show when={item.size}>
+                        <span class="media-size-pill">{item.size}</span>
+                      </Show>
+                      <span>
+                        {item.type === "video" ? "Video" : item.type === "stream" ? "Akış" : "Ses"}
+                      </span>
                     </div>
                   </div>
                   <div class="media-item-actions">
                     <button
-                      class="media-btn-copy"
+                      class="media-btn-action"
+                      tabindex="0"
+                      role="button"
+                      onClick={() => openInNewTab(item.url)}
+                      onKeyDown={(e) => handleButtonKeyDown(e, () => openInNewTab(item.url))}
+                      title="Sekmede Aç"
+                      aria-label={`${item.title} sekmede aç`}
+                    >
+                      Aç
+                    </button>
+                    <button
+                      class="media-btn-action"
                       tabindex="0"
                       role="button"
                       onClick={() => copyMediaUrlToClipboard(item.url)}
@@ -124,6 +170,7 @@ export function MediaDownloaderPanel() {
                       role="button"
                       onClick={() => handleDownload(item)}
                       onKeyDown={(e) => handleButtonKeyDown(e, () => handleDownload(item))}
+                      title="İndir"
                       aria-label={`${item.title} indir`}
                     >
                       {downloadSuccessId() === item.id ? "Başlatıldı ✓" : "İndir"}

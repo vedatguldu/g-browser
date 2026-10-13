@@ -116,7 +116,7 @@ export class DOMWaitOperations {
             finish(false);
             return;
           }
-          console.error("DOMWaitOperations: Error waiting for element:", e);
+          console.error("DOMWaitOperations: Error waiting for element status message:", e);
           finish(false);
         }
       };
@@ -193,6 +193,7 @@ export class DOMWaitOperations {
             finish(true);
           }
         } catch (e) {
+          // Status failure message: readyState check error fallback
           if (this.isDeadObjectError(e)) {
             finish(false);
             return;

@@ -25,7 +25,7 @@ export default async function initScripts() {
   try {
     Services.prefs.setStringPref("nora.loader.initialized", String(Date.now()));
   } catch (e) {
-    console.error("[noraneko] Failed to set loader initialized marker:", e);
+    console.error("[noraneko] Failed to set loader initialized marker status message:", e);
   }
 
   // Import required modules and initialize i18n
@@ -114,7 +114,7 @@ async function loadEnabledModules(
               ...(module as Omit<LoaderModule, "name">),
             };
           } catch (e) {
-            console.error(`[noraneko] Failed to load module ${moduleName}:`, e);
+            console.error(`[noraneko] Failed to load module ${moduleName} status message:`, e);
             return null;
           }
         }),
@@ -132,7 +132,7 @@ async function initializeModules(modules: LoaderModule[]) {
       await module?.initBeforeSessionStoreInit?.();
     } catch (e) {
       console.error(
-        `[noraneko] Failed to initBeforeSessionStoreInit module ${module.name}:`,
+        `[noraneko] Failed to initBeforeSessionStoreInit module ${module.name} status message:`,
         e,
       );
     }
@@ -153,7 +153,7 @@ async function initializeModules(modules: LoaderModule[]) {
       }
       _registerModuleLoadState(module.name, true);
     } catch (e) {
-      console.error(`[noraneko] Failed to init module ${module.name}:`, e);
+      console.error(`[noraneko] Failed to init module ${module.name} status message:`, e);
       _registerModuleLoadState(module.name, false);
     }
   }

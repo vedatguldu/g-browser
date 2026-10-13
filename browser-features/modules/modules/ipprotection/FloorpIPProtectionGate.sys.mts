@@ -29,7 +29,7 @@ export function shouldEnableFloorpIPProtection(
     );
   } catch (error) {
     console.error(
-      "[FloorpIPProtectionGate] Failed to check floorp_ip_protection Flasco:",
+      "[FloorpIPProtectionGate] Failed to check floorp_ip_protection Flasco status message:",
       error,
     );
     return false;

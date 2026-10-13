@@ -176,7 +176,7 @@ export class MacOSSupport {
       }
     } catch (error) {
       console.warn(
-        "[MacOSSupport] Could not read optional native registration:",
+        "[MacOSSupport] Could not read optional native registration status message:",
         error,
       );
     }
@@ -423,7 +423,7 @@ export class MacOSSupport {
     try {
       await image.decode();
     } catch (error) {
-      console.warn("[MacOSSupport] Using fallback app icon:", error);
+      console.warn("[MacOSSupport] Using fallback app icon status message:", error);
       image.src = fallback;
       await image.decode();
     }
@@ -523,7 +523,7 @@ export class MacOSSupport {
         );
       } catch (error) {
         console.warn(
-          "[MacOSSupport] Could not clear optional legacy registration:",
+          "[MacOSSupport] Could not clear optional legacy registration status message:",
           error,
         );
       }

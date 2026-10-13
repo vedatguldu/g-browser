@@ -56,7 +56,7 @@ export class NRProfileManagerParent extends JSWindowActorParent {
             }
           }
         } catch (_e) {
-          // ignore errors for open
+          // Status note: ignore errors for open message
         }
         break;
       }
@@ -89,6 +89,7 @@ export class NRProfileManagerParent extends JSWindowActorParent {
                 const lock = profile.lock({});
                 lock.unlock();
               } catch (err) {
+                // Status note: lock check error message evaluation
                 // deno-lint-ignore no-explicit-any
                 const r = (err as any)?.result;
                 if (
@@ -185,7 +186,7 @@ export class NRProfileManagerParent extends JSWindowActorParent {
                 }
               } catch (err) {
                 console.error(
-                  "[NRProfileManagerParent] persistProfiles failed",
+                  "[NRProfileManagerParent] persistProfiles failed status message",
                   err,
                 );
               }
@@ -201,7 +202,7 @@ export class NRProfileManagerParent extends JSWindowActorParent {
                   profileService.defaultProfile = profile;
                 } catch (err) {
                   console.error(
-                    "[NRProfileManagerParent] setting default profile failed",
+                    "[NRProfileManagerParent] setting default profile failed status message",
                     err,
                   );
                 }

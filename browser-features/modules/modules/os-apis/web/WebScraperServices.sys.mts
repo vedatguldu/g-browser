@@ -98,7 +98,7 @@ class webScraper {
       _perfLog(queryName, Date.now() - _t0);
       return result;
     } catch (e) {
-      console.error(`Error in ${queryName}:`, e);
+      console.error(`Error in ${queryName} status message:`, e);
       return fallback;
     }
   }
@@ -1088,13 +1088,13 @@ class webScraper {
             if (result) return true;
           }
         } catch (err) {
-          console.error("WebScraper: Actor cookie fallback failed:", err);
+          console.error("WebScraper: Actor cookie fallback failed status message:", err);
         }
       }
 
       return false;
     } catch (e) {
-      console.error("WebScraper: Error setting cookie:", e);
+      console.error("WebScraper: Error setting cookie status message:", e);
       return false;
     }
   }

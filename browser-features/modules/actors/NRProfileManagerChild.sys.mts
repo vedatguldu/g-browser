@@ -45,7 +45,7 @@ export class NRProfileManagerChild extends JSWindowActorChild {
             });
           } catch (e) {
             console.error(
-              "[NRProfileManagerChild] failed to export function:",
+              "[NRProfileManagerChild] failed to export function status message:",
               name,
               e,
             );
@@ -74,7 +74,7 @@ export class NRProfileManagerChild extends JSWindowActorChild {
       } catch (e) {
         this._pending.delete(id);
         console.error(
-          "[NRProfileManagerChild] _sendRequest: sendAsyncMessage failed",
+          "[NRProfileManagerChild] _sendRequest: sendAsyncMessage failed status message",
           e,
         );
         reject(e);
@@ -108,7 +108,7 @@ export class NRProfileManagerChild extends JSWindowActorChild {
           callback(out);
         } catch (e) {
           console.error(
-            "[NRProfileManagerChild] NRGetCurrentProfile: cloneInto failed, falling back to raw",
+            "[NRProfileManagerChild] NRGetCurrentProfile: cloneInto failed, falling back to raw status message",
             e,
           );
           callback(res);
@@ -132,7 +132,7 @@ export class NRProfileManagerChild extends JSWindowActorChild {
           callback(out);
         } catch (e) {
           console.error(
-            "[NRProfileManagerChild] NRGetFxAccountsInfo: cloneInto failed, falling back to raw",
+            "[NRProfileManagerChild] NRGetFxAccountsInfo: cloneInto failed, falling back to raw status message",
             e,
           );
           callback(res);
@@ -162,7 +162,7 @@ export class NRProfileManagerChild extends JSWindowActorChild {
           callback(Array.isArray(out) ? (out as unknown[]) : []);
         } catch (e) {
           console.error(
-            "[NRProfileManagerChild] NRGetProfiles: cloneInto failed, falling back to raw",
+            "[NRProfileManagerChild] NRGetProfiles: cloneInto failed, falling back to raw status message",
             e,
           );
           callback(Array.isArray(res) ? (res as unknown[]) : []);

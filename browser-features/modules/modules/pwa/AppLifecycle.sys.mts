@@ -48,7 +48,7 @@ export const AppLifecycle = new class {
     try {
       return this.adapter.getCapabilities();
     } catch (error) {
-      console.error("[AppLifecycle] Native capability query failed:", error);
+      console.error("[AppLifecycle] Native capability query failed status message:", error);
       return null;
     }
   }

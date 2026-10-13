@@ -164,7 +164,7 @@ export class NRPluginStoreChild extends JSWindowActorChild {
       // Dispatch ready event
       this.dispatchReadyEvent(win);
     } catch (e) {
-      console.error("[NRPluginStoreChild] Failed to inject API:", e);
+      console.error("[NRPluginStoreChild] Failed to inject API status message:", e);
     }
   }
 
@@ -178,7 +178,7 @@ export class NRPluginStoreChild extends JSWindowActorChild {
       const event = new EventCtor("floorpPluginStoreReady", { detail });
       win.dispatchEvent(event);
     } catch (e) {
-      console.error("[NRPluginStoreChild] Failed to dispatch ready event:", e);
+      console.error("[NRPluginStoreChild] Failed to dispatch ready event status message:", e);
     }
   }
 

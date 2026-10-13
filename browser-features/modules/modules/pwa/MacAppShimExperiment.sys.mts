@@ -41,7 +41,7 @@ export const MacAppShimExperiment = {
       return resolveMacAppShimEnabled(os, null, enrollment, cachedEnrollment);
     } catch (error) {
       console.error(
-        "[MacAppShimExperiment] Failed to check pwa_mac_app_shim Flasco:",
+        "[MacAppShimExperiment] Failed to check pwa_mac_app_shim Flasco status message:",
         error,
       );
       return false;

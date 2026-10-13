@@ -13,7 +13,7 @@ const readLinuxExperimentAssignment = (): boolean => {
     return variant !== null;
   } catch (error) {
     console.error(
-      "[TaskbarExperiment] Failed to check pwa_taskbar_integration_linux experiment:",
+      "[TaskbarExperiment] Failed to check pwa_taskbar_integration_linux experiment status message:",
       error,
     );
     // If experiments system fails, default to disabled for safety

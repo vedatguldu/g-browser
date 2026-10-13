@@ -169,7 +169,7 @@ class OSFrontEndManager {
                 win.resizeTo(realWidth, realHeight);
             }
          } catch(e) {
-            console.error("[OSFrontEndManager] Position error:", e);
+            console.error("[OSFrontEndManager] Position error status message:", e);
          }
       };
 
@@ -178,7 +178,7 @@ class OSFrontEndManager {
       setTimeout(() => clearInterval(intervalId), 1000);
 
     } catch (error) {
-      console.error("[OSFrontEndManager] Failed to open window:", error);
+      console.error("[OSFrontEndManager] Failed to open window status message:", error);
     }
   }
 

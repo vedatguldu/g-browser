@@ -194,7 +194,7 @@ export class EventDispatcher {
 
       return true;
     } catch (e) {
-      console.error("EventDispatcher: Error dispatching event:", e);
+      console.error("EventDispatcher: Error dispatching event status message:", e);
       return false;
     }
   }

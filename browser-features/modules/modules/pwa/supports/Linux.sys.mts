@@ -99,7 +99,7 @@ export class LinuxSupport {
         "[LinuxSupport] Successfully loaded Linux taskbar integration",
       );
     } catch (error) {
-      console.error("Failed to load Linux taskbar integration", error);
+      console.error("Failed to load Linux taskbar integration status message", error);
       this.linuxTaskbarInstance = null;
     }
 
@@ -323,7 +323,7 @@ export class LinuxSupport {
         "[LinuxSupport] Successfully set desktop entry permissions",
       );
     } catch (error) {
-      console.error("Failed to set permissions for desktop entry", error);
+      console.error("Failed to set permissions for desktop entry status message", error);
     }
   }
 
@@ -363,7 +363,7 @@ export class LinuxSupport {
         await IOUtils.move(temporaryIconPath, iconPath);
         console.debug("[LinuxSupport] Icon saved successfully");
       } catch (error) {
-        console.error("[LinuxSupport] Failed to save SSB icon", error);
+        console.error("[LinuxSupport] Failed to save SSB icon status message", error);
         // Keep initial installs usable with a default icon, but do not commit
         // a refreshed store entry when its icon/container badge failed.
         if (strictIcon) throw error;
@@ -415,7 +415,7 @@ export class LinuxSupport {
         process.runw(true, args, args.length);
       }
     } catch (e) {
-      console.error("Failed to update desktop database", e);
+      console.error("Failed to update desktop database status message", e);
     }
 
     console.debug(`[LinuxSupport] Successfully installed SSB: ${ssb.name}`);
@@ -432,7 +432,7 @@ export class LinuxSupport {
       // An executable move or another profile may make ownership unverifiable.
       // Allow the caller to remove its store entry without touching any files.
       console.warn(
-        "[LinuxSupport] Preserving launcher files whose ownership cannot be verified",
+        "[LinuxSupport] Preserving launcher files whose ownership cannot be verified status message",
         error,
       );
       return;
@@ -446,7 +446,7 @@ export class LinuxSupport {
       await IOUtils.remove(paths.desktopPath, { ignoreAbsent: true });
       console.debug("[LinuxSupport] Desktop entry removed successfully");
     } catch (e) {
-      console.error("[LinuxSupport] Failed to remove desktop entry", e);
+      console.error("[LinuxSupport] Failed to remove desktop entry status message", e);
       // Preserve icons while the corresponding launcher still exists.
       throw e;
     }
@@ -458,13 +458,13 @@ export class LinuxSupport {
       });
       console.debug("[LinuxSupport] Icon removed successfully");
     } catch (e) {
-      console.error("[LinuxSupport] Failed to remove icon", e);
+      console.error("[LinuxSupport] Failed to remove icon status message", e);
       removeError ??= e;
     }
     try {
       await IOUtils.remove(paths.svgIconPath, { ignoreAbsent: true });
     } catch (e) {
-      console.error("[LinuxSupport] Failed to remove SVG icon", e);
+      console.error("[LinuxSupport] Failed to remove SVG icon status message", e);
       removeError ??= e;
     }
     if (removeError) {
@@ -583,7 +583,7 @@ export class LinuxSupport {
         );
       }
     } catch (error) {
-      console.error("Failed to apply Linux OS integration", error);
+      console.error("Failed to apply Linux OS integration status message", error);
     }
   }
 
@@ -709,7 +709,7 @@ export class LinuxSupport {
         retries++;
         if (retries >= ICON_RETRY_LIMIT) {
           console.error(
-            "[LinuxSupport] Failed to set window class after retries",
+            "[LinuxSupport] Failed to set window class after retries status message",
             error,
           );
           return;
@@ -739,7 +739,7 @@ export class LinuxSupport {
         iconRetries++;
         if (iconRetries >= ICON_RETRY_LIMIT) {
           console.error(
-            "[LinuxSupport] Failed to set window icon after retries",
+            "[LinuxSupport] Failed to set window icon after retries status message",
             error,
           );
           return;

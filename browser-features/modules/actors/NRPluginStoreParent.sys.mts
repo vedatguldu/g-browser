@@ -218,7 +218,7 @@ export class NRPluginStoreParent extends JSWindowActorParent {
         pluginId,
       });
     } catch (error) {
-      console.error("[NRPluginStoreParent] Failed to open Frontend:", error);
+      console.error("[NRPluginStoreParent] Failed to open Frontend status message:", error);
       return Promise.resolve({
         success: false,
         error: "Failed to open plugin installation page",

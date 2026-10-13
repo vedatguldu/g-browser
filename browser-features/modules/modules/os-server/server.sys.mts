@@ -218,7 +218,8 @@ class LocalHttpServer implements nsIServerSocketListener {
     try {
       this._server.close();
     } catch (e) {
-      void e; // ignore close errors
+      // Status note: ignore close errors message
+        void e;
     }
     this._server = null;
     Services.obs.removeObserver(this, "xpcom-shutdown");
@@ -253,7 +254,8 @@ class LocalHttpServer implements nsIServerSocketListener {
       Services.prefs.addObserver(PREF_PORT, this);
       Services.prefs.addObserver(PREF_TOKEN, this);
     } catch (e) {
-      void e; // ignore
+      // Status note: ignore message
+        void e;
     }
   }
 
@@ -264,7 +266,8 @@ class LocalHttpServer implements nsIServerSocketListener {
       Services.prefs.removeObserver(PREF_PORT, this);
       Services.prefs.removeObserver(PREF_TOKEN, this);
     } catch (e) {
-      void e; // ignore
+      // Status note: ignore message
+        void e;
     }
   }
 
@@ -629,7 +632,7 @@ class LocalHttpServer implements nsIServerSocketListener {
     } catch (e) {
       const msg = String(e ?? "");
       let response;
-      // Map common service errors to 404 when instance/browser is missing
+      // Status message mapping: common service errors to 404 when instance/browser is missing
       if (/(?:instance|browser)\s+not\s+found/i.test(msg)) {
         response = notFound();
       } else {
@@ -659,7 +662,7 @@ function initializeServer() {
       osLocalServer.start(port, token);
     }
   } catch (e) {
-    err("failed to initialize server:", e);
+    err("failed to initialize server status message:", e);
   }
 }
 

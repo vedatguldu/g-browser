@@ -240,7 +240,7 @@ class TabManager {
       win.gBrowser.tabContainer.addEventListener("TabClose", this._onTabClose);
       this._listenedWindows.add(win);
     } catch (e) {
-      console.warn("TabManager: Failed to attach TabClose listener:", e);
+      console.warn("TabManager: Failed to attach TabClose listener status message:", e);
     }
   }
 
@@ -264,6 +264,7 @@ class TabManager {
         if (tab.removeAttribute) {
           tab.removeAttribute("data-floorp-os-automated");
           tab.removeAttribute("data-floorp-os-instance-id");
+          tab.removeAttribute("aria-description");
         }
         console.log(
           `TabManager: Auto-cleaned instance ${instanceId} on tab close`,
@@ -305,6 +306,10 @@ class TabManager {
           TAB_MANAGER_ACTOR_SETS.add(entry.browser);
           if (targetTab.setAttribute) {
             targetTab.setAttribute("data-floorp-os-automated", "true");
+            targetTab.setAttribute(
+              "aria-description",
+              "Automated tab controlled by Floorp OS",
+            );
           }
         }
       } catch {
@@ -403,7 +408,7 @@ class TabManager {
         // ignore browser focus failures
       }
     } catch (error) {
-      console.error("TabManager: Failed to focus instance", error);
+      console.error("TabManager: Failed to focus instance status message", error);
     }
   }
 
@@ -562,7 +567,7 @@ class TabManager {
       }
       return (await actor.sendQuery(query, data)) as T;
     } catch (e) {
-      console.error(`Error in actor query '${query}':`, e);
+      console.error(`Error in actor query '${query}' status message:`, e);
       return null;
     }
   }
@@ -607,6 +612,10 @@ class TabManager {
     if (tab.setAttribute) {
       tab.setAttribute("data-floorp-os-automated", "true");
       tab.setAttribute("data-floorp-os-instance-id", instanceId);
+      tab.setAttribute(
+        "aria-description",
+        "Automated tab controlled by Floorp OS",
+      );
     }
 
     // Show control overlay to block user interaction
@@ -646,6 +655,10 @@ class TabManager {
     if (targetTab.setAttribute) {
       targetTab.setAttribute("data-floorp-os-automated", "true");
       targetTab.setAttribute("data-floorp-os-instance-id", instanceId);
+      targetTab.setAttribute(
+        "aria-description",
+        "Automated tab controlled by Floorp OS",
+      );
     }
 
     // Show control overlay to block user interaction
@@ -730,6 +743,7 @@ class TabManager {
       try {
         await this._queryActor(instanceId, "WebScraper:ClearEffects");
       } catch (error) {
+        // Status fallback message: ignore actor clearance error on destroy
         void error;
       }
       // Remove automated attribute from tab
@@ -787,7 +801,7 @@ class TabManager {
           win.gBrowser.removeTab(tab);
         }
       } catch (e) {
-        console.error("TabManager: Failed to close tab", e);
+        console.error("TabManager: Failed to close tab status message", e);
       }
     } finally {
       this._destroying.delete(instanceId);
@@ -1389,7 +1403,7 @@ class TabManager {
 
       return false;
     } catch (e) {
-      console.error("TabManager: Error setting cookie:", e);
+      console.error("TabManager: Error setting cookie status message:", e);
       return false;
     }
   }
@@ -1436,7 +1450,7 @@ class TabManager {
           }
         } catch (e) {
           // TabDialogBox failures are expected in some headless/test scenarios
-          console.warn("TabManager: Failed to access TabDialogBox:", e);
+          console.warn("TabManager: Failed to access TabDialogBox status message:", e);
           return Promise.resolve(false);
         }
       }
@@ -1492,7 +1506,7 @@ class TabManager {
           }
         } catch (e) {
           // TabDialogBox failures are expected in some headless/test scenarios
-          console.warn("TabManager: Failed to access TabDialogBox:", e);
+          console.warn("TabManager: Failed to access TabDialogBox status message:", e);
           return Promise.resolve(false);
         }
       }
@@ -1554,6 +1568,7 @@ class TabManager {
         printSettings.isInitializedFromPrinter = true;
         printSettings.isInitializedFromPrefs = true;
       } catch (_e) {
+        // Status fallback message: printer pref init failed
         printSettings.isInitializedFromPrinter = false;
         printSettings.isInitializedFromPrefs = false;
       }
@@ -1595,7 +1610,7 @@ class TabManager {
         // These settings might be read-only in some environments (headless, etc.)
         // We log but proceed, as basic PDF generation might still work.
         console.warn(
-          "TabManager: Some print settings could not be applied:",
+          "TabManager: Some print settings could not be applied status message:",
           e,
         );
       }
@@ -1619,7 +1634,7 @@ class TabManager {
       return base64;
     } catch (e) {
       console.warn(
-        "TabManager: PDF generation partial failure (metadata/settings issue):",
+        "TabManager: PDF generation partial failure (metadata/settings issue status message):",
         e,
       );
       return null;

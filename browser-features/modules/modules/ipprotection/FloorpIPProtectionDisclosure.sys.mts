@@ -6,6 +6,12 @@ import enUSBrowserChrome from "../../../../i18n/en-US/browser-chrome.json" with 
 import jaJPBrowserChrome from "../../../../i18n/ja-JP/browser-chrome.json" with {
   type: "json",
 };
+import jaJPMacBrowserChrome from "../../../../i18n/ja-JP-mac/browser-chrome.json" with {
+  type: "json",
+};
+import trTRBrowserChrome from "../../../../i18n/tr-TR/browser-chrome.json" with {
+  type: "json",
+};
 
 export type FloorpIPProtectionDisclosureStrings = Readonly<{
   title: string;
@@ -142,13 +148,29 @@ const JAPANESE_STRINGS = createFloorpIPProtectionDisclosureStringsOrFallback(
   (jaJPBrowserChrome as Readonly<Record<string, unknown>>)["ipProtection"],
   ENGLISH_STRINGS,
 );
+const JAPANESE_MAC_STRINGS = createFloorpIPProtectionDisclosureStringsOrFallback(
+  (jaJPMacBrowserChrome as Readonly<Record<string, unknown>>)["ipProtection"],
+  JAPANESE_STRINGS,
+);
+const TURKISH_STRINGS = createFloorpIPProtectionDisclosureStringsOrFallback(
+  (trTRBrowserChrome as Readonly<Record<string, unknown>>)["ipProtection"],
+  ENGLISH_STRINGS,
+);
 
 export function resolveFloorpIPProtectionDisclosureStrings(
   locale: string,
 ): FloorpIPProtectionDisclosureStrings {
-  return locale.toLowerCase() === "ja" || locale.toLowerCase().startsWith("ja-")
-    ? JAPANESE_STRINGS
-    : ENGLISH_STRINGS;
+  const norm = (locale || "").toLowerCase();
+  if (norm === "tr" || norm.startsWith("tr-")) {
+    return TURKISH_STRINGS;
+  }
+  if (norm === "ja-jp-mac") {
+    return JAPANESE_MAC_STRINGS;
+  }
+  if (norm === "ja" || norm.startsWith("ja-")) {
+    return JAPANESE_STRINGS;
+  }
+  return ENGLISH_STRINGS;
 }
 
 export function getFloorpIPProtectionDisclosureStrings(): FloorpIPProtectionDisclosureStrings {

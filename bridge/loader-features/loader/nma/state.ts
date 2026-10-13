@@ -110,7 +110,7 @@ export const emitEvent = (event: string, data: unknown): void => {
     try {
       listener(data);
     } catch (e) {
-      console.error(`[NMA] Event listener error for ${event}:`, e);
+      console.error(`[NMA] Event listener error for ${event} status message:`, e);
     }
   }
 };

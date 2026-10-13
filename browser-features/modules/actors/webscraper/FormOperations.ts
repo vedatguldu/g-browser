@@ -212,7 +212,7 @@ export class FormOperations {
           eventDispatcher.dispatchInputEvents(element);
         } catch (e) {
           console.error(
-            `FormOperations: Error setting value for selector ${selector}`,
+            `FormOperations: Error setting value for selector ${selector} status message`,
             e,
           );
           finalOk = false;
@@ -221,7 +221,7 @@ export class FormOperations {
 
       return allFilled && finalOk;
     } catch (e) {
-      console.error("FormOperations: Error filling form:", e);
+      console.error("FormOperations: Error filling form status message:", e);
       return false;
     }
   }
@@ -272,7 +272,7 @@ export class FormOperations {
       }
       return true;
     } catch (e) {
-      console.error("FormOperations: Error submitting form:", e);
+      console.error("FormOperations: Error submitting form status message:", e);
       return false;
     }
   }

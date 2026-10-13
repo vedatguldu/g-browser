@@ -59,7 +59,7 @@ export class ScreenshotOperations {
 
       return canvas.toDataURL("image/png");
     } catch (e) {
-      console.error("ScreenshotOperations: Error taking screenshot:", e);
+      console.error("ScreenshotOperations: Error taking screenshot status message:", e);
       return null;
     }
   }
@@ -111,7 +111,7 @@ export class ScreenshotOperations {
       return canvas.toDataURL("image/png");
     } catch (e) {
       console.error(
-        "ScreenshotOperations: Error taking element screenshot:",
+        "ScreenshotOperations: Error taking element screenshot status message:",
         e,
       );
       return null;
@@ -156,7 +156,7 @@ export class ScreenshotOperations {
       return canvas.toDataURL("image/png");
     } catch (e) {
       console.error(
-        "ScreenshotOperations: Error taking full page screenshot:",
+        "ScreenshotOperations: Error taking full page screenshot status message:",
         e,
       );
       return null;
@@ -210,7 +210,7 @@ export class ScreenshotOperations {
 
       return canvas.toDataURL("image/png");
     } catch (e) {
-      console.error("ScreenshotOperations: Error taking region screenshot:", e);
+      console.error("ScreenshotOperations: Error taking region screenshot status message:", e);
       return null;
     }
   }

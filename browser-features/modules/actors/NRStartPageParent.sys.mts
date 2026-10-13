@@ -25,7 +25,7 @@ export class NRStartPageParent extends JSWindowActorParent {
           }
         } catch (e) {
           console.error(
-            "[NRStartPageParent] Error while getting top sites:",
+            "[NRStartPageParent] Error while getting top sites status message:",
             e,
           );
         }
@@ -150,7 +150,7 @@ export class NRStartPageParent extends JSWindowActorParent {
             );
           }
         } catch (e) {
-          console.error("Error converting file to data URL:", e);
+          console.error("Error converting file to data URL status message:", e);
           this.sendAsyncMessage(
             "NRStartPage:GetRandomImageFromFolder",
             JSON.stringify({
@@ -174,7 +174,7 @@ export class NRStartPageParent extends JSWindowActorParent {
             }
           }
         } catch (e) {
-          console.error("[NRStartPageParent] Error focusing URL bar:", e);
+          console.error("[NRStartPageParent] Error focusing URL bar status message:", e);
         }
         break;
       }
@@ -220,7 +220,7 @@ export class NRStartPageParent extends JSWindowActorParent {
 
       return `data:${mimeType};base64,${base64}`;
     } catch (e) {
-      console.error("Error in fileToDataURL:", e);
+      console.error("Error in fileToDataURL status message:", e);
       return null;
     }
   }

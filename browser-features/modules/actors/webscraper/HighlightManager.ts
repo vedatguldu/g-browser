@@ -381,7 +381,7 @@ getActionIconEmoji(action: string): string {
         timerSetTimeout(() => this.hideInfoPanel(), 4000),
       );
     } catch (error) {
-      console.warn("HighlightManager: Failed to show info panel", error);
+      console.warn("HighlightManager: Failed to show info panel status message", error);
     }
   }
 
@@ -962,10 +962,19 @@ getActionIconEmoji(action: string): string {
 
     const label = doc.createElement("div");
     label.className = "nr-webscraper-control-overlay__label";
-    label.textContent = "Floorp が操作中...";
+    label.setAttribute("role", "status");
+    label.setAttribute("aria-live", "assertive");
+    label.setAttribute("aria-atomic", "true");
+    label.textContent = "Floorp...";
+    void this.translationHelper.translate("panelTitle").then((text) => {
+      if (text && label.isConnected) {
+        label.textContent = text;
+      }
+    });
 
     (doc.body ?? doc.documentElement)?.appendChild(overlay);
     (doc.body ?? doc.documentElement)?.appendChild(label);
+    doc.body?.setAttribute("aria-busy", "true");
 
     // Disable scrolling and pointer events on body/html via CSS
     const body = doc.body;
@@ -1118,6 +1127,7 @@ getActionIconEmoji(action: string): string {
       bodyState?.element.style.removeProperty("overflow");
       const html = doc?.documentElement as HTMLElement | null | undefined;
       html?.style.removeProperty("overflow");
+      doc?.body?.removeAttribute("aria-busy");
     }
     this.restoreControlOverlayBodyPointerEvents();
 

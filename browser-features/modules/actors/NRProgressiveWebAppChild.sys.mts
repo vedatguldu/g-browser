@@ -75,7 +75,7 @@ export class NRProgressiveWebAppChild extends JSWindowActorChild {
           results.push(absolute);
         }
       } catch (e) {
-        console.warn("NRProgressiveWebAppChild: invalid icon href", e);
+        console.warn("NRProgressiveWebAppChild: invalid icon href status message", e);
       }
     }
 

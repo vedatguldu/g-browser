@@ -105,7 +105,7 @@ export class WindowsSupport {
       );
       console.debug(`[WindowsSupport] Pinned PWA to taskbar: ${ssb.name}`);
     } catch (e) {
-      console.warn(`[WindowsSupport] Failed to pin PWA to taskbar: ${e}`);
+      console.warn(`[WindowsSupport] Failed to pin PWA to taskbar status message: ${e}`);
     }
     console.debug("[PWA:install-launch] WindowsSupport.install finished");
   }
@@ -121,7 +121,7 @@ export class WindowsSupport {
       );
       console.debug(`[WindowsSupport] Unpinned PWA from taskbar: ${ssb.name}`);
     } catch (e) {
-      console.warn(`[WindowsSupport] Failed to unpin PWA from taskbar: ${e}`);
+      console.warn(`[WindowsSupport] Failed to unpin PWA from taskbar status message: ${e}`);
     }
 
     try {
@@ -130,14 +130,14 @@ export class WindowsSupport {
       }\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\`;
       await IOUtils.remove(`${startMenu + displayName}.lnk`);
     } catch (e) {
-      console.error(e);
+      console.error("[WindowsSupport] Failed to remove start menu shortcut status message:", e);
     }
 
     const dir = PathUtils.join(PathUtils.profileDir, "ssb", ssb.id);
     try {
       await IOUtils.remove(dir, { recursive: true });
     } catch (e) {
-      console.error(e);
+      console.error("[WindowsSupport] Failed to remove SSB directory status message:", e);
     }
   }
 
@@ -160,7 +160,7 @@ export class WindowsSupport {
           size,
         );
       } catch (e) {
-        console.error(e);
+        console.error("[WindowsSupport] Failed to load or badge SSB icon status message:", e);
         return null;
       }
     };
@@ -194,7 +194,7 @@ export class WindowsSupport {
       );
       await DataStoreProvider.getDataManager().saveSsbData(ssb);
     } catch (e) {
-      console.error("[WindowsSupport] Failed to save pinPromptShown:", e);
+      console.error("[WindowsSupport] Failed to save pinPromptShown status message:", e);
     }
 
     await new Promise((resolve) => setTimeout(resolve, 2000));
@@ -219,7 +219,7 @@ export class WindowsSupport {
       );
       console.debug(`[WindowsSupport] Triggered pin dialog for ${ssb.name}`);
     } catch (e) {
-      console.warn(`[WindowsSupport] Failed to trigger pin dialog: ${e}`);
+      console.warn(`[WindowsSupport] Failed to trigger pin dialog status message: ${e}`);
     }
   }
 }

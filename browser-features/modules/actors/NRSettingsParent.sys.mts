@@ -35,7 +35,7 @@ function openExternalLinkInBrowser(
     });
     return true;
   } catch (error) {
-    console.error("[noraneko] openExternalLinkInBrowser failed", error);
+    console.error("[noraneko] openExternalLinkInBrowser failed status message", error);
     return false;
   }
 }

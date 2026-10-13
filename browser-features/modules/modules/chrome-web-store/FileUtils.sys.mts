@@ -239,7 +239,7 @@ export function readInputStreamToBuffer(
       totalLength += chunk.length;
     }
   } catch (error) {
-    // NS_BASE_STREAM_CLOSED is expected at end of stream
+    // NS_BASE_STREAM_CLOSED status message: expected at end of stream
     const nsError = error as { result?: number };
     if (nsError.result !== NS_BASE_STREAM_CLOSED) {
       // Stream reading error - ignore silently

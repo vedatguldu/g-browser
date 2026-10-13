@@ -191,7 +191,7 @@ export class DOMActionOperations {
         return sent;
       }
     } catch (e) {
-      console.error("[DOMActionOperations] Error clicking element:", e);
+      console.error("[DOMActionOperations] Error clicking element status message:", e);
       return finish("unknown", `click-error: ${String(e)}`);
     }
     return finish("refused", "deadline-exceeded");
@@ -390,7 +390,7 @@ export class DOMActionOperations {
 
       return true;
     } catch (e) {
-      console.error("DOMActionOperations: Error hovering element:", e);
+      console.error("DOMActionOperations: Error hovering element status message:", e);
       return false;
     }
   }
@@ -406,7 +406,15 @@ export class DOMActionOperations {
       );
       const options = this.deps.highlightManager.getHighlightOptions("Inspect");
 
-      element.scrollIntoView({ behavior: "smooth", block: "center" });
+      const prefersReducedMotion =
+        this.contentWindow?.matchMedia("(prefers-reduced-motion: reduce)").matches ??
+        element.ownerDocument?.defaultView?.matchMedia("(prefers-reduced-motion: reduce)").matches ??
+        false;
+
+      element.scrollIntoView({
+        behavior: prefersReducedMotion ? "auto" : "smooth",
+        block: "center",
+      });
 
       this.deps.highlightManager
         .applyHighlight(element, options, elementInfo)
@@ -414,7 +422,7 @@ export class DOMActionOperations {
 
       return true;
     } catch (e) {
-      console.error("DOMActionOperations: Error scrolling to element:", e);
+      console.error("DOMActionOperations: Error scrolling to element status message:", e);
       return false;
     }
   }
@@ -471,7 +479,7 @@ export class DOMActionOperations {
 
       return true;
     } catch (e) {
-      console.error("DOMActionOperations: Error focusing element:", e);
+      console.error("DOMActionOperations: Error focusing element status message:", e);
       return false;
     }
   }
@@ -561,7 +569,7 @@ export class DOMActionOperations {
       await Promise.resolve();
       return true;
     } catch (e) {
-      console.error("DOMActionOperations: Error pressing key:", e);
+      console.error("DOMActionOperations: Error pressing key status message:", e);
       return false;
     }
   }
@@ -695,7 +703,7 @@ export class DOMActionOperations {
 
       return true;
     } catch (e) {
-      console.error("DOMActionOperations: Error in drag and drop:", e);
+      console.error("DOMActionOperations: Error in drag and drop status message:", e);
       return false;
     }
   }

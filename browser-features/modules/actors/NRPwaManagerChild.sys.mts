@@ -41,7 +41,7 @@ export class NRPwaManagerChild extends JSWindowActorChild {
         }
       } catch (error) {
         console.error(
-          "[NRPwaManagerChild] Failed to check container experiment:",
+          "[NRPwaManagerChild] Failed to check container experiment status message:",
           error,
         );
       }

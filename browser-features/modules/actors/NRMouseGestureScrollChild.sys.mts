@@ -33,7 +33,9 @@ export class NRMouseGestureScrollChild extends JSWindowActorChild {
   }
 
   private executeScroll(win: Window, direction: ScrollDirection): void {
-    const BEHAVIOR = "smooth"; // You can change this to "auto" if you want instant scrolling
+    const prefersReducedMotion =
+      win.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches ?? false;
+    const BEHAVIOR: ScrollBehavior = prefersReducedMotion ? "auto" : "smooth";
     const LINE_SCROLL_AMOUNT = 100; // Amount to scroll for line up/down
 
     switch (direction) {
@@ -70,6 +72,14 @@ export class NRMouseGestureScrollChild extends JSWindowActorChild {
       case "toTop": {
         const el = findScrollableElement(win, false);
         el?.scrollTo({ top: 0, behavior: BEHAVIOR });
+        try {
+          const doc = win.document;
+          if (doc.activeElement && doc.activeElement !== doc.body) {
+            (doc.activeElement as HTMLElement)?.blur?.();
+          }
+        } catch (e) {
+          console.debug?.("[NRMouseGestureScrollChild] blur failed:", e);
+        }
         break;
       }
       case "toBottom": {
@@ -78,6 +88,14 @@ export class NRMouseGestureScrollChild extends JSWindowActorChild {
           top: (el?.scrollHeight ?? win.document.documentElement?.scrollHeight ?? 0),
           behavior: BEHAVIOR,
         });
+        try {
+          const doc = win.document;
+          if (doc.activeElement && doc.activeElement !== doc.body) {
+            (doc.activeElement as HTMLElement)?.blur?.();
+          }
+        } catch (e) {
+          console.debug?.("[NRMouseGestureScrollChild] blur failed:", e);
+        }
         break;
       }
     }

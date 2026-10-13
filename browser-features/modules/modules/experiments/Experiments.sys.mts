@@ -141,7 +141,7 @@ export class ExperimentsClient {
       Services.prefs.setStringPref(key, value);
       return true;
     } catch (e) {
-      console.error(`Failed to set experiment pref "${key}": ${String(e)}`);
+      console.error(`Failed to set experiment pref "${key}" status message: ${String(e)}`);
       return false;
     }
   }
@@ -153,7 +153,7 @@ export class ExperimentsClient {
       }
       return true;
     } catch (e) {
-      console.error(`Failed to clear experiment pref "${key}": ${String(e)}`);
+      console.error(`Failed to clear experiment pref "${key}" status message: ${String(e)}`);
       return false;
     }
   }
@@ -164,7 +164,7 @@ export class ExperimentsClient {
       if (!raw) return {};
       return JSON.parse(raw) as Record<string, Assignment>;
     } catch (e) {
-      console.error("Failed to parse experiments assignments: " + String(e));
+      console.error("Failed to parse experiments assignments status message: " + String(e));
       return {};
     }
   }
@@ -173,7 +173,7 @@ export class ExperimentsClient {
     try {
       this.setPrefString(ASSIGNMENTS_PREF, JSON.stringify(this.assignments));
     } catch (e) {
-      console.error("Failed to save experiments assignments: " + String(e));
+      console.error("Failed to save experiments assignments status message: " + String(e));
     }
   }
 
@@ -184,7 +184,7 @@ export class ExperimentsClient {
       const arr = JSON.parse(raw) as string[];
       return new Set(Array.isArray(arr) ? arr : []);
     } catch (e) {
-      console.error("Failed to parse disabled experiments: " + String(e));
+      console.error("Failed to parse disabled experiments status message: " + String(e));
       return new Set();
     }
   }
@@ -194,7 +194,7 @@ export class ExperimentsClient {
       const arr = Array.from(this.disabledExperiments);
       this.setPrefString(DISABLED_EXPERIMENTS_PREF, JSON.stringify(arr));
     } catch (e) {
-      console.error("Failed to save disabled experiments: " + String(e));
+      console.error("Failed to save disabled experiments status message: " + String(e));
     }
   }
 
@@ -205,7 +205,7 @@ export class ExperimentsClient {
       const arr = JSON.parse(raw) as string[];
       return new Set(Array.isArray(arr) ? arr : []);
     } catch (e) {
-      console.error("Failed to parse force-enrolled experiments: " + String(e));
+      console.error("Failed to parse force-enrolled experiments status message: " + String(e));
       return new Set();
     }
   }
@@ -215,7 +215,7 @@ export class ExperimentsClient {
       const arr = Array.from(this.forceEnrolledExperiments);
       this.setPrefString(FORCE_ENROLLED_EXPERIMENTS_PREF, JSON.stringify(arr));
     } catch (e) {
-      console.error("Failed to save force-enrolled experiments: " + String(e));
+      console.error("Failed to save force-enrolled experiments status message: " + String(e));
     }
   }
 
@@ -235,7 +235,7 @@ export class ExperimentsClient {
       const parsed = JSON.parse(raw) as ConfigStore;
       return parsed.config || null;
     } catch (e) {
-      console.error("Failed to load cached config: " + String(e));
+      console.error("Failed to load cached config status message: " + String(e));
       return null;
     }
   }
@@ -252,7 +252,7 @@ export class ExperimentsClient {
       this.setPrefString(key, JSON.stringify(store));
       return true;
     } catch (e) {
-      console.error("Failed to save config to prefs: " + String(e));
+      console.error("Failed to save config to prefs status message: " + String(e));
       return false;
     }
   }
@@ -266,6 +266,22 @@ export class ExperimentsClient {
     return true;
   }
 
+  private isA11yActive(): boolean {
+    try {
+      if (typeof Services !== "undefined" && Services.prefs) {
+        if (Services.prefs.getIntPref("accessibility.force_disabled", 0) === -1) {
+          return true;
+        }
+        if (Services.prefs.getBoolPref("accessibility.browsewithcaret", false)) {
+          return true;
+        }
+      }
+    } catch (e) {
+      console.warn("[Experiments] Failed to query accessibility preferences status message:", e);
+    }
+    return false;
+  }
+
   private chooseVariantForExperiment(
     exp: Experiment,
     installId: string,
@@ -273,6 +289,15 @@ export class ExperimentsClient {
     // Check user's participation policy preference
     const policy = this.getPrefString(PARTICIPATION_POLICY_PREF, "default");
     const variants = exp.variants || [];
+
+    // Guard assistive tech users from disruptive experiments
+    if (
+      this.isA11yActive() &&
+      (exp as unknown as { a11yCritical?: boolean }).a11yCritical
+    ) {
+      const control = variants.find((v: Variant) => v.id === "control");
+      return control ? control.id : null;
+    }
 
     // Handle "never" policy: user opts out of all experiments
     if (policy === "never") {
@@ -458,7 +483,7 @@ export class ExperimentsClient {
       return config as unknown;
     } catch (e) {
       console.error(
-        `Failed to fetch config for ${experimentId}/${variantId}: ${String(e)}`,
+        `Failed to fetch config for ${experimentId}/${variantId} status message: ${String(e)}`,
       );
       return null;
     }
@@ -507,7 +532,7 @@ export class ExperimentsClient {
       try {
         listener();
       } catch (error) {
-        console.error("[Experiments] State listener failed", error);
+        console.error("[Experiments] State listener status message failed", error);
       }
     }
   }
@@ -539,7 +564,7 @@ export class ExperimentsClient {
       try {
         this.setPrefString(INSTALLID_PREF, this.installId);
       } catch (e) {
-        console.error("Could not persist installId: " + String(e));
+        console.error("Could not persist installId status message: " + String(e));
       }
     }
     this.assignments = this.loadAssignmentsFromPrefs();
@@ -571,7 +596,7 @@ export class ExperimentsClient {
       }
     } catch (e) {
       console.error(
-        "Failed to fetch experiments.json, using cached assignments if present: " +
+        "Failed to fetch experiments.json status message, using cached assignments if present: " +
           String(e),
       );
       return this;
@@ -803,7 +828,7 @@ export class ExperimentsClient {
       }
       return { success: true };
     } catch (e) {
-      console.error(`Failed to clear experiments cache: ${String(e)}`);
+      console.error(`Failed to clear experiments cache status message: ${String(e)}`);
       return { success: false, errors: [String(e)] };
     } finally {
       this.notifyListeners();
@@ -882,7 +907,7 @@ export class ExperimentsClient {
       this.notifyListeners();
       return { success: true };
     } catch (error) {
-      return { success: false, error: String(error) };
+      return { success: false, error: String(error), message: String(error) };
     }
   }
 
@@ -920,7 +945,7 @@ export class ExperimentsClient {
       this.notifyListeners();
       return { success: true };
     } catch (error) {
-      return { success: false, error: String(error) };
+      return { success: false, error: String(error), message: String(error) };
     }
   }
 
@@ -1033,7 +1058,7 @@ export class ExperimentsClient {
       this.notifyListeners();
       return { success: true };
     } catch (error) {
-      return { success: false, error: String(error) };
+      return { success: false, error: String(error), message: String(error) };
     }
   }
 
@@ -1068,7 +1093,7 @@ export class ExperimentsClient {
       this.notifyListeners();
       return { success: true };
     } catch (error) {
-      return { success: false, error: String(error) };
+      return { success: false, error: String(error), message: String(error) };
     }
   }
 }

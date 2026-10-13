@@ -74,7 +74,7 @@ export class NRPwaManagerParent extends JSWindowActorParent {
             JSON.stringify(containers),
           );
         } catch (e) {
-          console.error("[NRPwaManagerParent] Error getting containers:", e);
+          console.error("[NRPwaManagerParent] Error getting containers status message:", e);
           this.sendAsyncMessage("PwaManager:GetContainers", "[]");
         }
         break;
@@ -251,14 +251,14 @@ export class NRPwaManagerParent extends JSWindowActorParent {
           );
         } catch (error) {
           console.warn(
-            "[NRPwaManagerParent] Could not reconcile optional launcher metadata:",
+            "[NRPwaManagerParent] Could not reconcile optional launcher metadata status message:",
             error,
           );
         }
       }
       return "ok";
     } catch (e) {
-      console.error("[NRPwaManagerParent] setContainerForSsb error:", e);
+      console.error("[NRPwaManagerParent] setContainerForSsb error status message:", e);
       return "failed";
     }
   }

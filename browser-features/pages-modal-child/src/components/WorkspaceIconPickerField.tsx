@@ -53,6 +53,58 @@ export function WorkspaceIconPickerField({
     }
   };
 
+  const handleKeyDown = (
+    event: React.KeyboardEvent<HTMLInputElement>,
+    currentIndex: number,
+  ) => {
+    const total = visibleOptions.length;
+    if (total === 0) return;
+
+    let targetIndex = -1;
+    const COLUMNS = 6;
+
+    switch (event.key) {
+      case "ArrowRight":
+        targetIndex = (currentIndex + 1) % total;
+        break;
+      case "ArrowLeft":
+        targetIndex = (currentIndex - 1 + total) % total;
+        break;
+      case "ArrowDown":
+        targetIndex =
+          currentIndex + COLUMNS < total
+            ? currentIndex + COLUMNS
+            : currentIndex;
+        break;
+      case "ArrowUp":
+        targetIndex =
+          currentIndex - COLUMNS >= 0
+            ? currentIndex - COLUMNS
+            : currentIndex;
+        break;
+      case "Home":
+        targetIndex = 0;
+        break;
+      case "End":
+        targetIndex = total - 1;
+        break;
+      default:
+        return;
+    }
+
+    if (targetIndex >= 0 && targetIndex !== currentIndex) {
+      event.preventDefault();
+      const targetOption = visibleOptions[targetIndex];
+      if (targetOption) {
+        commitSelection(targetOption.value);
+        const input = document.querySelector<HTMLInputElement>(
+          `input[name="${radioGroupName}"][value="${targetOption.value}"]`,
+        );
+        input?.focus();
+      }
+    }
+  };
+
   return (
     <fieldset className="mb-4 w-full">
       <legend className="block text-sm font-medium mb-2 text-gray-900 dark:text-white">
@@ -80,43 +132,58 @@ export function WorkspaceIconPickerField({
       />
 
       <div
+        role="status"
+        aria-live="polite"
+        className="sr-only"
+      >
+        {query ? `${visibleOptions.length} icons found` : ""}
+      </div>
+
+      <div
         role="radiogroup"
         aria-label={fieldLabel}
         className="grid max-h-48 grid-cols-6 gap-2 overflow-y-auto rounded-md border border-gray-300 p-2 dark:border-[#42414D]"
       >
-        {visibleOptions.map((option) => (
-          <label
-            key={option.value}
-            className="block h-10 w-full cursor-pointer"
-          >
-            <input
-              type="radio"
-              name={radioGroupName}
-              value={option.value}
-              checked={displayValue === option.value}
-              aria-label={option.label}
-              className="peer sr-only"
-              onChange={() => commitSelection(option.value)}
-              onClick={() => {
-                if (
-                  displayValue === option.value && value !== option.value
-                ) {
-                  commitSelection(option.value);
-                }
-              }}
-            />
-            <span
-              title={option.label}
-              className={`flex h-full w-full items-center justify-center rounded-md border p-2 peer-focus-visible:outline-none peer-focus-visible:ring-2 peer-focus-visible:ring-[#0061E0] ${
-                displayValue === option.value
-                  ? "border-[#0061E0] bg-blue-50 dark:bg-[#42414D]"
-                  : "border-transparent hover:bg-gray-100 dark:hover:bg-gray-600"
-              }`}
+        {visibleOptions.length === 0 ? (
+          <p className="col-span-6 py-4 text-center text-sm text-gray-500 dark:text-gray-400">
+            {item.placeholder ?? "No icons found"}
+          </p>
+        ) : (
+          visibleOptions.map((option, index) => (
+            <label
+              key={option.value}
+              className="block h-10 w-full cursor-pointer"
             >
-              <img src={option.icon} className="h-5 w-5" alt="" />
-            </span>
-          </label>
-        ))}
+              <input
+                type="radio"
+                name={radioGroupName}
+                value={option.value}
+                checked={displayValue === option.value}
+                aria-label={option.label}
+                className="peer sr-only"
+                onChange={() => commitSelection(option.value)}
+                onKeyDown={(event) => handleKeyDown(event, index)}
+                onClick={() => {
+                  if (
+                    displayValue === option.value && value !== option.value
+                  ) {
+                    commitSelection(option.value);
+                  }
+                }}
+              />
+              <span
+                title={option.label}
+                className={`flex h-full w-full items-center justify-center rounded-md border p-2 peer-focus-visible:outline-none peer-focus-visible:ring-2 peer-focus-visible:ring-[#0061E0] ${
+                  displayValue === option.value
+                    ? "border-[#0061E0] bg-blue-50 dark:bg-[#42414D]"
+                    : "border-transparent hover:bg-gray-100 dark:hover:bg-gray-600"
+                }`}
+              >
+                <img src={option.icon} className="h-5 w-5" alt="" />
+              </span>
+            </label>
+          ))
+        )}
       </div>
     </fieldset>
   );

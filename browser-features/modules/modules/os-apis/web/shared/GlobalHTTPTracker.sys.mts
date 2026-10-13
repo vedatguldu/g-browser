@@ -19,7 +19,7 @@ const GlobalHTTPTracker = {
       Services.obs.addObserver(this, "http-on-stop-request");
       Services.obs.addObserver(this, "browsing-context-detached");
     } catch (e) {
-      console.error("GlobalHTTPTracker: init failed:", e);
+      console.error("GlobalHTTPTracker: init failed status message:", e);
     }
   },
 

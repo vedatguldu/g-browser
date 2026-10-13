@@ -79,7 +79,7 @@ export class NRWebContentModifierParent extends JSWindowActorParent {
           );
         } catch (e) {
           console.error(
-            "NRWebContentModifierParent: Error registering callback:",
+            "NRWebContentModifierParent: Error registering callback status message:",
             e,
           );
         }
@@ -103,7 +103,7 @@ export class NRWebContentModifierParent extends JSWindowActorParent {
           this.sendFileDataToTab(callbackTabId, fileListJson);
         } catch (e) {
           console.error(
-            "NRWebContentModifierParent: Error sending file data to tab:",
+            "NRWebContentModifierParent: Error sending file data to tab status message:",
             e,
           );
         }
@@ -203,13 +203,13 @@ export class NRWebContentModifierParent extends JSWindowActorParent {
         );
       } catch (sendError) {
         console.error(
-          `NRWebContentModifierParent: Error sending to tab ${tabId}:`,
+          `NRWebContentModifierParent: Error sending to tab ${tabId} status message:`,
           sendError,
         );
       }
     } catch (e) {
       console.error(
-        "NRWebContentModifierParent: Error in sendFileDataToTab:",
+        "NRWebContentModifierParent: Error in sendFileDataToTab status message:",
         e,
       );
     }
@@ -300,13 +300,13 @@ export class NRWebContentModifierParent extends JSWindowActorParent {
         return;
       } catch (error) {
         console.error(
-          "NRWebContentModifierParent: Error opening tab:",
+          "NRWebContentModifierParent: Error opening tab status message:",
           error,
         );
       }
     } catch (e) {
       console.error(
-        "NRWebContentModifierParent: Error opening OneDrive page:",
+        "NRWebContentModifierParent: Error opening OneDrive page status message:",
         e,
       );
     }
@@ -347,7 +347,7 @@ export class NRWebContentModifierParent extends JSWindowActorParent {
       }
     } catch (e) {
       console.error(
-        "NRWebContentModifierParent: Error in checkAndModifyFloorpWebsite:",
+        "NRWebContentModifierParent: Error in checkAndModifyFloorpWebsite status message:",
         e,
       );
     }
@@ -441,7 +441,7 @@ export class NRWebContentModifierParent extends JSWindowActorParent {
       setTimeout(() => attemptToSendToGmailTab(), 1000);
     } catch (error) {
       console.error(
-        "NRWebContentModifierParent: Error opening Gmail compose:",
+        "NRWebContentModifierParent: Error opening Gmail compose status message:",
         error,
       );
       this.forwardGmailResult(callbackId, {
@@ -491,7 +491,7 @@ export class NRWebContentModifierParent extends JSWindowActorParent {
             // break;
           } catch (e) {
             console.warn(
-              "NRWebContentModifierParent: Error sending GmailResult to a tab:",
+              "NRWebContentModifierParent: Error sending GmailResult to a tab status message:",
               e,
             );
           }

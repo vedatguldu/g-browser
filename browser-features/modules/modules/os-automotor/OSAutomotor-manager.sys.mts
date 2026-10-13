@@ -113,7 +113,7 @@ class OSAutomotorManager {
           await this.ensureFrontendInstalled();
           await this.startFrontend();
         } catch (e) {
-          console.error("[Floorp OS] Failed to initialize frontend:", e);
+          console.error("[Floorp OS] Failed to initialize frontend status message:", e);
         }
         console.log("[Floorp OS] Floorp OS initialization complete.");
       } else {
@@ -122,9 +122,33 @@ class OSAutomotorManager {
       this._initialized = true;
     } catch (error) {
       console.error("[Floorp OS] Initialization failed:", error);
+      const errMsg = error instanceof Error ? error.message : String(error);
+      this.reportErrorToUser(errMsg);
       // Mark as initialized even on failure to prevent repeated attempts
       this._initialized = true;
       throw error;
+    }
+  }
+
+  /**
+   * Surface process or download failures to the user via browser notification box (WCAG 3.3.1)
+   */
+  private reportErrorToUser(message: string): void {
+    try {
+      // deno-lint-ignore no-explicit-any
+      const win = (Services as any).wm?.getMostRecentWindow?.("navigator:browser");
+      if (win?.gNotificationBox) {
+        win.gNotificationBox.appendNotification(
+          "floorp-os-error",
+          {
+            label: `Floorp OS: ${message}`,
+            priority: win.gNotificationBox.PRIORITY_WARNING_HIGH,
+          },
+          [],
+        );
+      }
+    } catch (e) {
+      console.error("[Floorp OS] Could not append notification box:", e);
     }
   }
 
@@ -296,12 +320,15 @@ class OSAutomotorManager {
       Services.prefs.setStringPref(FLOORP_OS_VERSION_PREF, CURRENT_VERSION);
     } catch (error) {
       console.error("[Floorp OS] Failed to download binary:", error);
+      this.reportErrorToUser(
+        (error as Error).message || "Failed to download binary",
+      );
       // On failure during setup, reset installation to initial state
       try {
         await this.resetInstallation();
       } catch (e) {
         console.error(
-          "[Floorp OS] Failed to reset after binary download error:",
+          "[Floorp OS] Failed to reset after binary download error status message:",
           e,
         );
       }
@@ -360,12 +387,15 @@ class OSAutomotorManager {
       );
     } catch (error) {
       console.error("[Floorp OS] Failed to download frontend:", error);
+      this.reportErrorToUser(
+        (error as Error).message || "Failed to download frontend",
+      );
       // On failure during setup, reset installation to initial state
       try {
         await this.resetInstallation();
       } catch (e) {
         console.error(
-          "[Floorp OS] Failed to reset after frontend download error:",
+          "[Floorp OS] Failed to reset after frontend download error status message:",
           e,
         );
       }
@@ -442,7 +472,7 @@ class OSAutomotorManager {
         corePid: this.getProcessPid(process),
       });
     } catch (error) {
-      console.error("[Floorp OS] Failed to start binary:", error);
+      console.error("[Floorp OS] Failed to start binary status message:", error);
       throw error;
     }
   }
@@ -479,7 +509,7 @@ class OSAutomotorManager {
         frontendPid: this.getProcessPid(process),
       });
     } catch (error) {
-      console.error("[Floorp OS] Failed to start frontend:", error);
+      console.error("[Floorp OS] Failed to start frontend status message:", error);
       throw error;
     }
   }
@@ -531,7 +561,7 @@ class OSAutomotorManager {
         await this.startFrontend();
       } catch (e) {
         // Non-fatal for enabling OS — log and continue; we still mark enabled only when core succeeded
-        console.error("[Floorp OS] Failed to start frontend during enable:", e);
+        console.error("[Floorp OS] Failed to start frontend during enable status message:", e);
       }
 
       // Only set enabled to true if everything succeeded
@@ -539,11 +569,11 @@ class OSAutomotorManager {
     } catch (error) {
       // Make sure enabled is set to false on error
       Services.prefs.setBoolPref(FLOORP_OS_ENABLED_PREF, false);
-      console.error("[Floorp OS] Failed to enable:", error);
+      console.error("[Floorp OS] Failed to enable status message:", error);
       try {
         await this.resetInstallation();
       } catch (e) {
-        console.error("[Floorp OS] Failed to reset after enable error:", e);
+        console.error("[Floorp OS] Failed to reset after enable error status message:", e);
       }
       throw error;
     }
@@ -599,13 +629,13 @@ class OSAutomotorManager {
     try {
       await this.stopFrontend();
     } catch (e) {
-      console.error("[Floorp OS] Error stopping frontend during reset:", e);
+      console.error("[Floorp OS] Error stopping frontend during reset status message:", e);
     }
 
     try {
       await this.stopFloorpOS();
     } catch (e) {
-      console.error("[Floorp OS] Error stopping core binary during reset:", e);
+      console.error("[Floorp OS] Error stopping core binary during reset status message:", e);
     }
 
     // Remove files and directory under profile
@@ -619,7 +649,7 @@ class OSAutomotorManager {
       } catch (e) {
         // Continue even if specific file removal fails
         console.error(
-          "[Floorp OS] Failed to remove frontend file during reset:",
+          "[Floorp OS] Failed to remove frontend file during reset status message:",
           e,
         );
       }
@@ -630,7 +660,7 @@ class OSAutomotorManager {
         await IOUtils.remove(binaryPath, { ignoreAbsent: true });
       } catch (e) {
         console.error(
-          "[Floorp OS] Failed to remove core binary during reset:",
+          "[Floorp OS] Failed to remove core binary during reset status message:",
           e,
         );
       }
@@ -643,12 +673,12 @@ class OSAutomotorManager {
         });
       } catch (e) {
         console.error(
-          "[Floorp OS] Failed to remove floorp-os directory during reset:",
+          "[Floorp OS] Failed to remove floorp-os directory during reset status message:",
           e,
         );
       }
     } catch (e) {
-      console.error("[Floorp OS] Error during filesystem cleanup:", e);
+      console.error("[Floorp OS] Error during filesystem cleanup status message:", e);
     }
 
     // Remove token file
@@ -657,7 +687,7 @@ class OSAutomotorManager {
       const tokenFile = PathUtils.join(homeDir, ".floorp", "os-server-token");
       await IOUtils.remove(tokenFile, { ignoreAbsent: true });
     } catch (e) {
-      console.error("[Floorp OS] Failed to remove token file:", e);
+      console.error("[Floorp OS] Failed to remove token file status message:", e);
     }
 
     // Clear preferences
@@ -673,7 +703,7 @@ class OSAutomotorManager {
           Services.prefs.clearUserPref(FLOORP_OS_BINARY_PATH_PREF);
         }
       } catch (e) {
-        console.error("[Floorp OS] Failed to clear binary path pref:", e);
+        console.error("[Floorp OS] Failed to clear binary path pref status message:", e);
       }
 
       try {
@@ -681,7 +711,7 @@ class OSAutomotorManager {
           Services.prefs.clearUserPref(FLOORP_OS_VERSION_PREF);
         }
       } catch (e) {
-        console.error("[Floorp OS] Failed to clear binary version pref:", e);
+        console.error("[Floorp OS] Failed to clear binary version pref status message:", e);
       }
 
       try {
@@ -689,7 +719,7 @@ class OSAutomotorManager {
           Services.prefs.clearUserPref(FLOORP_FRONTEND_BINARY_PATH_PREF);
         }
       } catch (e) {
-        console.error("[Floorp OS] Failed to clear frontend path pref:", e);
+        console.error("[Floorp OS] Failed to clear frontend path pref status message:", e);
       }
 
       try {
@@ -697,7 +727,7 @@ class OSAutomotorManager {
           Services.prefs.clearUserPref(FLOORP_FRONTEND_VERSION_PREF);
         }
       } catch (e) {
-        console.error("[Floorp OS] Failed to clear frontend version pref:", e);
+        console.error("[Floorp OS] Failed to clear frontend version pref status message:", e);
       }
 
       try {
@@ -705,16 +735,16 @@ class OSAutomotorManager {
           Services.prefs.clearUserPref("floorp.os.server.token");
         }
       } catch (e) {
-        console.error("[Floorp OS] Failed to clear server token pref:", e);
+        console.error("[Floorp OS] Failed to clear server token pref status message:", e);
       }
     } catch (e) {
-      console.error("[Floorp OS] Error clearing prefs during reset:", e);
+      console.error("[Floorp OS] Error clearing prefs during reset status message:", e);
     }
     try {
       await this.clearRuntimeState();
     } catch (e) {
       console.error(
-        "[Floorp OS] Failed to clear runtime state during reset:",
+        "[Floorp OS] Failed to clear runtime state during reset status message:",
         e,
       );
     }
@@ -817,10 +847,10 @@ class OSAutomotorManager {
           console.log(`[Floorp OS][${label}] ${output}`);
         }
       } catch (error: unknown) {
-        console.error(`[Floorp OS] Failed reading ${label}:`, error);
+        console.error(`[Floorp OS] Failed reading ${label} status message:`, error);
       }
     })().catch((error: unknown) => {
-      console.error(`[Floorp OS] Unexpected error capturing ${label}:`, error);
+      console.error(`[Floorp OS] Unexpected error capturing ${label} status message:`, error);
     });
   }
 
@@ -834,7 +864,7 @@ class OSAutomotorManager {
       await process.wait();
       console.info(`[Floorp OS] ${label} stopped successfully.`);
     } catch (error) {
-      console.error(`[Floorp OS] Failed to stop ${label}:`, error);
+      console.error(`[Floorp OS] Failed to stop ${label} status message:`, error);
     }
   }
 
@@ -882,7 +912,7 @@ class OSAutomotorManager {
         return;
       }
     } catch (error) {
-      console.error("[Floorp OS] Failed to read current process ID:", error);
+      console.error("[Floorp OS] Failed to read current process ID status message:", error);
     }
 
     // Safe Check: Verify process name before killing
@@ -895,7 +925,7 @@ class OSAutomotorManager {
 
       if (!expectedName) {
         console.warn(
-          `[Floorp OS] No expected binary name for ${kind}, skipping safe kill.`,
+          `[Floorp OS] No expected binary name for ${kind}, skipping safe kill status message.`,
         );
         return;
       }
@@ -903,13 +933,13 @@ class OSAutomotorManager {
       const isProcessMatch = await this.verifyProcessName(pid, expectedName);
       if (!isProcessMatch) {
         console.warn(
-          `[Floorp OS] Process ${pid} does not match expected name ${expectedName}. Skipping kill to prevent data loss.`,
+          `[Floorp OS] Process ${pid} does not match expected name ${expectedName}. Skipping kill to prevent data loss status message.`,
         );
         return;
       }
     } catch (error) {
       console.error(
-        `[Floorp OS] Error verifying process ${pid} for ${kind}:`,
+        `[Floorp OS] Error verifying process ${pid} for ${kind} status message:`,
         error,
       );
       return;
@@ -936,7 +966,7 @@ class OSAutomotorManager {
       );
     } catch (error) {
       console.error(
-        `[Floorp OS] Failed to terminate ${kind} process by pid ${pid}:`,
+        `[Floorp OS] Failed to terminate ${kind} process by pid ${pid} status message:`,
         error,
       );
     }
@@ -1001,7 +1031,7 @@ class OSAutomotorManager {
         );
       }
     } catch (e) {
-      console.error(`[Floorp OS] Failed to verify process name for ${pid}:`, e);
+      console.error(`[Floorp OS] Failed to verify process name for ${pid} status message:`, e);
       return false;
     }
   }
@@ -1033,7 +1063,7 @@ class OSAutomotorManager {
       this._runtimeState = state;
       return state;
     } catch (error) {
-      console.error("[Floorp OS] Failed to read runtime state:", error);
+      console.error("[Floorp OS] Failed to read runtime state status message:", error);
       return null;
     }
   }
@@ -1045,7 +1075,7 @@ class OSAutomotorManager {
         await IOUtils.makeDirectory(floorpOSDir);
       }
     } catch (error) {
-      console.error("[Floorp OS] Failed to ensure floorp-os directory:", error);
+      console.error("[Floorp OS] Failed to ensure floorp-os directory status message:", error);
       return;
     }
     const statePath = this.getRuntimeStatePath();
@@ -1054,7 +1084,7 @@ class OSAutomotorManager {
     try {
       await IOUtils.write(statePath, content, { mode: "overwrite" });
     } catch (error) {
-      console.error("[Floorp OS] Failed to write runtime state:", error);
+      console.error("[Floorp OS] Failed to write runtime state status message:", error);
     }
   }
 
@@ -1086,7 +1116,7 @@ class OSAutomotorManager {
       await IOUtils.remove(statePath, { ignoreAbsent: true });
       this._runtimeState = null;
     } catch (error) {
-      console.error("[Floorp OS] Failed to clear runtime state file:", error);
+      console.error("[Floorp OS] Failed to clear runtime state file status message:", error);
     }
   }
 }

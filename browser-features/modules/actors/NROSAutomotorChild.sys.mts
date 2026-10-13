@@ -154,7 +154,7 @@ export class NROSAutomotorChild extends JSWindowActorChild {
         console.info("[OSAutomotor] API initialized on window.OSAutomotor");
       }
     } catch (error) {
-      console.error("[OSAutomotor Child] Error in actorCreated:", error);
+      console.error("[OSAutomotor Child] Error in actorCreated status message:", error);
     }
   }
   handleEvent(_event: Event): void {

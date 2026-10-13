@@ -70,7 +70,7 @@ export async function runTestBootstrapWithFailureReporting<T>(
     try {
       recordStartupError(description);
     } catch {
-      // Diagnostic marker failures must not replace the startup failure.
+      // Marker status message: Diagnostic marker failures must not replace the startup failure.
     }
     publishTestBootstrapFailure(prefs, runId, description);
     throw error;

@@ -71,7 +71,7 @@ export class DOMWriteOperations {
         return true;
       }
     } catch (e) {
-      console.warn("DOMWriteOperations: execCommand failed, falling back:", e);
+      console.warn("DOMWriteOperations: execCommand status message failed, falling back:", e);
     }
     return false;
   }
@@ -240,12 +240,9 @@ export class DOMWriteOperations {
         );
       }
 
-      rawElement.dispatchEvent(
-        new FocusEv("blur", cloneOpts({ bubbles: false })),
-      );
       return true;
     } catch (e) {
-      console.error("DOMWriteOperations: Error setting input value:", e);
+      console.error("DOMWriteOperations: Error setting input value status message:", e);
       return false;
     }
   }
@@ -286,7 +283,7 @@ export class DOMWriteOperations {
 
       return true;
     } catch (e) {
-      console.error("DOMWriteOperations: Error clearing input:", e);
+      console.error("DOMWriteOperations: Error clearing input status message:", e);
       return false;
     }
   }
@@ -352,7 +349,7 @@ export class DOMWriteOperations {
 
       return true;
     } catch (e) {
-      console.error("DOMWriteOperations: Error selecting option:", e);
+      console.error("DOMWriteOperations: Error selecting option status message:", e);
       return false;
     }
   }
@@ -406,7 +403,7 @@ export class DOMWriteOperations {
             target.setAttribute("aria-checked", "false");
           }
         } catch (e) {
-          console.error("[NRWebScraper] syncAttrs failed:", e);
+          console.error("[NRWebScraper] syncAttrs status message failed:", e);
         }
       };
 
@@ -438,7 +435,7 @@ export class DOMWriteOperations {
 
       return true;
     } catch (e) {
-      console.error("DOMWriteOperations: Error setting checked state:", e);
+      console.error("DOMWriteOperations: Error setting checked state status message:", e);
       return false;
     }
   }
@@ -566,7 +563,7 @@ export class DOMWriteOperations {
         rawElement.dispatchEvent(new ContentEvent("change", eventOptions));
       } catch (e) {
         console.error(
-          "DOMWriteOperations: Failed to create upload file:",
+          "DOMWriteOperations: Failed to create upload file status message:",
           e,
         );
         return false;
@@ -574,7 +571,7 @@ export class DOMWriteOperations {
 
       return true;
     } catch (e) {
-      console.error("DOMWriteOperations: Error uploading file:", e);
+      console.error("DOMWriteOperations: Error uploading file status message:", e);
       return false;
     }
   }
@@ -669,7 +666,7 @@ export class DOMWriteOperations {
       );
       return false;
     } catch (e) {
-      console.error("DOMWriteOperations: Error in dispatchTextInput:", e);
+      console.error("DOMWriteOperations: Error in dispatchTextInput status message:", e);
       return false;
     }
   }
@@ -786,7 +783,7 @@ export class DOMWriteOperations {
 
       return true;
     } catch (e) {
-      console.error("DOMWriteOperations: Error in setInnerHTML:", e);
+      console.error("DOMWriteOperations: Error in setInnerHTML status message:", e);
       return false;
     }
   }
@@ -876,7 +873,7 @@ export class DOMWriteOperations {
 
       return true;
     } catch (e) {
-      console.error("DOMWriteOperations: Error in setTextContent:", e);
+      console.error("DOMWriteOperations: Error in setTextContent status message:", e);
       return false;
     }
   }

@@ -50,7 +50,7 @@ export async function prepareUploadFile(
       fileName,
     };
   } catch (error) {
-    console.error("[WebScraper] Failed to prepare upload file:", error);
+    console.error("[WebScraper] Failed to prepare upload file status message:", error);
     return null;
   }
 }

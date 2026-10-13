@@ -10,7 +10,7 @@ export class NRRestartBrowserParent extends JSWindowActorParent {
           );
           result = true;
         } catch (error) {
-          console.error("Failed to restart browser:", error);
+          console.error("Failed to restart browser status message:", error);
         }
 
         this.sendAsyncMessage("RestartBrowser:Result", result);

@@ -128,7 +128,7 @@ export function registerBrowserRoutes(api: NamespaceBuilder): void {
             Services.obs.addObserver(wsObserver, WORKSPACES_CHANGED_TOPIC);
           } catch (e) {
             console.error(
-              `[os-server] Failed to add observer for ${WORKSPACES_CHANGED_TOPIC}:`,
+              `[os-server] Failed to add observer for ${WORKSPACES_CHANGED_TOPIC} status message:`,
               e,
             );
           }
@@ -138,7 +138,7 @@ export function registerBrowserRoutes(api: NamespaceBuilder): void {
             try {
               Services.obs.removeObserver(wsObserver, WORKSPACES_CHANGED_TOPIC);
             } catch (e) {
-              // ignore
+              // Status note: ignore cleanup error message
               void e;
             }
           };

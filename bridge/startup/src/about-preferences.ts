@@ -129,7 +129,7 @@ function getI18nextInstance(): I18NextLike | null {
       i18nextInstance = null;
     }
   } catch (error) {
-    console.error("Floorp Hub:", "Failed to import i18next module", error);
+    console.error("Floorp Hub:", "Failed to import i18next module status message", error);
     i18nextInstance = null;
   }
 
@@ -197,7 +197,7 @@ function bindGlobalI18nInitializedObserver(): void {
         applyFloorpHubWarningTexts();
         applyFloorpStartWarningTexts();
       } catch (e) {
-        // Prevent observer exceptions from bubbling and stopping other observers
+        // Observer status message: Prevent observer exceptions from bubbling and stopping other observers
         // Log with a clear prefix to make debugging easier in runtime logs.
         try {
           console.error(
@@ -400,7 +400,7 @@ function logI18nextDiagnostics(instance: I18NextLike | null): void {
       hasMessageKey: hasMessage,
     });
   } catch (error) {
-    console.error("Floorp Hub:", "Failed to run i18next diagnostics", error);
+    console.error("Floorp Hub:", "Failed to run i18next diagnostics status message", error);
   }
 }
 
@@ -557,7 +557,7 @@ function bindI18nHandlersForWarning(): void {
       }, 200);
     }
   } catch (error) {
-    console.error("Floorp Hub:", "Failed to bind i18n handlers", error);
+    console.error("Floorp Hub:", "Failed to bind i18n handlers status message", error);
   }
 }
 
@@ -583,7 +583,7 @@ function bindLocaleObserverForWarning(): void {
     localeObserverBound = true;
     logFloorpHub("Bound locale change observer for warning banner.");
   } catch (error) {
-    console.error("Floorp Hub:", "Failed to bind locale observer", error);
+    console.error("Floorp Hub:", "Failed to bind locale observer status message", error);
   }
 }
 
@@ -874,7 +874,7 @@ function getI18nUtils(): {
     i18nUtilsInstance = module.I18nUtils;
     logFloorpHub("Retrieved I18nUtils instance.");
   } catch (error) {
-    console.error("Floorp Hub:", "Failed to import I18n-Utils.sys.mjs", error);
+    console.error("Floorp Hub:", "Failed to import I18n-Utils.sys.mjs status message", error);
     i18nUtilsInstance = null;
   }
 
@@ -1043,7 +1043,7 @@ function initHideNewTabPage(): void {
   try {
     Services.obs.addObserver(hideNewTabPage, "home-pane-loaded");
   } catch (error) {
-    console.error("[Floorp Hub]", "Failed to add home-pane-loaded observer", error);
+    console.error("[Floorp Hub]", "Failed to add home-pane-loaded observer status message", error);
   }
 }
 
@@ -1107,7 +1107,7 @@ function loadFloorpIPProtectionDisclosure():
     floorpIPProtectionDisclosure = null;
     console.error(
       "[FloorpIPProtectionPreferences]",
-      "Failed to load IP Protection disclosure; skipping preferences adaptation.",
+      "Failed to load IP Protection disclosure status message; skipping preferences adaptation.",
       error,
     );
   }

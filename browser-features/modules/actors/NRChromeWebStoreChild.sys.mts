@@ -548,6 +548,18 @@ export class NRChromeWebStoreChild extends JSWindowActorChild {
         background: #063281;
       }
 
+      .floorp-add-button:focus-visible {
+        outline: 3px solid #005fb8 !important;
+        outline-offset: 2px !important;
+      }
+
+      @media (forced-colors: active) {
+        .floorp-add-button:focus-visible {
+          outline: 3px solid Highlight !important;
+        }
+      }
+
+      .floorp-add-button[aria-disabled="true"],
       .floorp-add-button:disabled {
         background: #9ca3af;
         cursor: not-allowed;
@@ -634,6 +646,15 @@ export class NRChromeWebStoreChild extends JSWindowActorChild {
         flex-shrink: 0;
         width: 20px;
         height: 20px;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .floorp-add-button,
+        .floorp-add-button__spinner,
+        .floorp-cws-notice {
+          animation: none !important;
+          transition: none !important;
+        }
       }
 
       /* Hide Chrome promotional elements */
@@ -1040,7 +1061,8 @@ export class NRChromeWebStoreChild extends JSWindowActorChild {
         const span = this.document!.createElement("span");
         span.textContent = installingText;
         button.appendChild(span);
-        (button as HTMLButtonElement).disabled = true;
+        button.setAttribute("aria-busy", "true");
+        button.setAttribute("aria-disabled", "true");
         break;
       }
 
@@ -1050,7 +1072,8 @@ export class NRChromeWebStoreChild extends JSWindowActorChild {
         button.appendChild(
           this.createButtonContent(SVG_PATH_CHECK, successText),
         );
-        (button as HTMLButtonElement).disabled = true;
+        button.removeAttribute("aria-busy");
+        button.setAttribute("aria-disabled", "true");
         break;
       }
 
@@ -1060,7 +1083,8 @@ export class NRChromeWebStoreChild extends JSWindowActorChild {
         button.appendChild(
           this.createButtonContent(SVG_PATH_CHECK, installedText),
         );
-        (button as HTMLButtonElement).disabled = true;
+        button.removeAttribute("aria-busy");
+        button.setAttribute("aria-disabled", "true");
         break;
       }
 
@@ -1068,7 +1092,8 @@ export class NRChromeWebStoreChild extends JSWindowActorChild {
         const errorText = this.t(CWS_I18N_KEYS.button.error);
         button.classList.add("floorp-add-button--error");
         button.appendChild(this.createButtonContent(SVG_PATH_ERROR, errorText));
-        (button as HTMLButtonElement).disabled = true;
+        button.removeAttribute("aria-busy");
+        button.setAttribute("aria-disabled", "true");
         break;
       }
 
@@ -1077,6 +1102,8 @@ export class NRChromeWebStoreChild extends JSWindowActorChild {
         button.appendChild(
           this.createButtonContent(SVG_PATH_PLUS, defaultText),
         );
+        button.removeAttribute("aria-busy");
+        button.removeAttribute("aria-disabled");
         (button as HTMLButtonElement).disabled = false;
       }
     }
@@ -1224,6 +1251,9 @@ export class NRChromeWebStoreChild extends JSWindowActorChild {
     const notice = doc.createElement("div");
     notice.id = "floorp-cws-error";
     notice.className = "floorp-cws-notice floorp-cws-notice--error";
+    notice.setAttribute("role", "alert");
+    notice.setAttribute("aria-live", "assertive");
+    notice.setAttribute("aria-atomic", "true");
 
     // Create error icon
     const errorIcon = this.createSvgElement(
@@ -1263,7 +1293,11 @@ export class NRChromeWebStoreChild extends JSWindowActorChild {
     closeIcon.setAttribute("width", "16");
     closeIcon.setAttribute("height", "16");
     closeBtn.appendChild(closeIcon);
-    closeBtn.addEventListener("click", () => notice.remove());
+    closeBtn.addEventListener("click", () => {
+      notice.remove();
+      const addBtn = doc.querySelector(".floorp-add-button") as HTMLElement | null;
+      addBtn?.focus();
+    });
     notice.appendChild(closeBtn);
 
     // Append to body for fixed positioning

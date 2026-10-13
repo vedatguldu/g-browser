@@ -67,7 +67,7 @@ export class CookieHelper {
 
       return cookies;
     } catch (e) {
-      console.error("[CookieHelper] Error getting cookies:", e);
+      console.error("[CookieHelper] Error getting cookies status message:", e);
       return [];
     }
   }
@@ -143,13 +143,13 @@ export class CookieHelper {
           // immediately after add() due to timing or originAttributes mismatch)
           return true;
         } catch (err) {
-          console.error("[CookieHelper] Error adding cookie:", err);
+          console.error("[CookieHelper] Error adding cookie status message:", err);
         }
       }
 
       return false;
     } catch (e) {
-      console.error("[CookieHelper] Error in setCookieDirect:", e);
+      console.error("[CookieHelper] Error in setCookieDirect status message:", e);
       return false;
     }
   }

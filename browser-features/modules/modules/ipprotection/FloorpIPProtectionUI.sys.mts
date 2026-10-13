@@ -17,16 +17,18 @@ const OUTER_STYLE_ID = "floorp-ipprotection-outer-style";
 const INNER_STYLE_ID = "floorp-ipprotection-inner-style";
 
 const GUARD_STYLES = `
-#${TOOLBAR_BUTTON_ID}:not([${READY_ATTRIBUTE}="true"]),
+#${TOOLBAR_BUTTON_ID}[aria-busy="true"] {
+  opacity: 0.7;
+}
+
 #${PANEL_ID}:not([${READY_ATTRIBUTE}="true"]) {
   visibility: hidden !important;
   pointer-events: none !important;
 }
 
 @-moz-document url-prefix("about:preferences"), url-prefix("about:settings") {
-  setting-group[groupid="ipprotection"]:not([${READY_ATTRIBUTE}="true"]) {
-    visibility: hidden !important;
-    pointer-events: none !important;
+  setting-group[groupid="ipprotection"][aria-busy="true"] {
+    opacity: 0.7;
   }
 }
 `;
@@ -140,10 +142,12 @@ function setTextIfChanged(element: Element, value: string): void {
 
 function markReady(element: Element): void {
   setAttributeIfChanged(element, READY_ATTRIBUTE, "true");
+  element.removeAttribute("aria-busy");
 }
 
 function markNotReady(element: Element | null): void {
   element?.removeAttribute(READY_ATTRIBUTE);
+  element?.setAttribute("aria-busy", "true");
 }
 
 function ensureStyle(
@@ -641,7 +645,7 @@ export const FloorpIPProtectionUI = {
       try {
         Services.prefs.setBoolPref(ENABLED_PREF, false);
       } catch {
-        // The adapter must remain fail-closed even if startup is incomplete.
+        // Fail-closed status message: The adapter must remain fail-closed even if startup is incomplete.
       }
       earlyInstallResult = false;
       console.error(

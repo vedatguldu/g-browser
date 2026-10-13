@@ -318,7 +318,7 @@ export class MacNativeAppRuntime {
     } catch (error) {
       const cancelled = error instanceof AppLaunchCancelled ||
         this.shuttingDown || session.closing || this.mutations.has(ssb.id);
-      console.error("[NativeAppRuntime] App Shim launch failed:", error);
+      console.error("[NativeAppRuntime] App Shim launch failed status message:", error);
       session.launching = false;
       for (const window of session.windows.values()) {
         if (!window.closed) window.close();
@@ -337,9 +337,37 @@ export class MacNativeAppRuntime {
         this.sessions.delete(session.appId);
         if (transactionId) await installer.rollback(ssb.id, transactionId);
       } catch (rollbackError) {
-        console.error("[NativeAppRuntime] Recovery required:", rollbackError);
+        console.error("[NativeAppRuntime] Recovery required status message:", rollbackError);
       }
       if (cancelled) throw new AppLaunchCancelled();
+      try {
+        const win = Services.wm?.getMostRecentWindow?.("navigator:browser") as {
+          gNotificationBox?: {
+            appendNotification(
+              id: string,
+              desc: { label: string; priority: number },
+              buttons?: unknown[],
+            ): void;
+            PRIORITY_WARNING_HIGH?: number;
+          };
+        } | null;
+        if (win?.gNotificationBox) {
+          const appLabel = ssb.name || ssb.id;
+          win.gNotificationBox.appendNotification(
+            "floorp-pwa-launch-failed",
+            {
+              label: `Web App (${appLabel}) launch failed.`,
+              priority: win.gNotificationBox.PRIORITY_WARNING_HIGH ?? 2,
+            },
+            [],
+          );
+        }
+      } catch (notifyErr) {
+        console.error(
+          "[NativeAppRuntime] Failed to notify window of launch failure status message:",
+          notifyErr,
+        );
+      }
       // Preserve the working legacy launcher when native initialization fails.
       return null;
     } finally {
@@ -471,7 +499,7 @@ export class MacNativeAppRuntime {
       else this.service?.cancelLaunch(session.appId);
     } catch (error) {
       session.terminateSent = false;
-      console.error("[NativeAppRuntime] Shim termination failed:", error);
+      console.error("[NativeAppRuntime] Shim termination failed status message:", error);
     }
   }
 
@@ -524,14 +552,14 @@ export class MacNativeAppRuntime {
       session.windows.values().next().value?.focus();
     } catch (error) {
       if (this.shuttingDown || session.closing) return;
-      console.error("[NativeAppRuntime] App window recovery failed:", error);
+      console.error("[NativeAppRuntime] App window recovery failed status message:", error);
       session.closing = true;
       for (const window of [...session.windows.values()]) {
         try {
           this.forceCloseOrphan(window);
         } catch (closeError) {
           console.error(
-            "[NativeAppRuntime] Orphan window cleanup failed:",
+            "[NativeAppRuntime] Orphan window cleanup failed status message:",
             closeError,
           );
         }
@@ -545,7 +573,7 @@ export class MacNativeAppRuntime {
           );
         } catch (stopError) {
           console.error(
-            "[NativeAppRuntime] Recovery process cleanup is pending:",
+            "[NativeAppRuntime] Recovery process cleanup is pending status message:",
             stopError,
           );
         }
@@ -734,7 +762,7 @@ export class MacNativeAppRuntime {
         if (command && window) window.goDoCommand?.(command);
       }
     } catch (error) {
-      console.error("[NativeAppRuntime] Shim event failed:", error);
+      console.error("[NativeAppRuntime] Shim event failed status message:", error);
     }
   }
 }

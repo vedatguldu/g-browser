@@ -118,11 +118,11 @@ export const ImageTools = {
           );
         }
       } catch (vectorErr) {
-        console.warn("ImageTools: failed initial encode, retrying", vectorErr);
+        console.warn("ImageTools: failed initial encode status message, retrying", vectorErr);
         try {
           stream = ImgTools.encodeImage(container, "image/png", "");
         } catch (e2) {
-          console.error("ImageTools: failed fallback encode", e2);
+          console.error("ImageTools: failed fallback encode status message", e2);
           reject(e2);
           return;
         }
@@ -134,7 +134,7 @@ export const ImageTools = {
         ).QueryInterface(Ci.nsIAsyncInputStream);
       } catch (err) {
         console.error(
-          "ImageTools: stream does not implement nsIAsyncInputStream",
+          "ImageTools: stream does not implement nsIAsyncInputStream status message:",
           err,
         );
         reject(
@@ -223,7 +223,7 @@ export const ImageTools = {
           );
         }
       } catch (vectorErr) {
-        console.warn("ImageTools: failed initial encode, retrying", vectorErr);
+        console.warn("ImageTools: failed initial encode status message, retrying", vectorErr);
         try {
           stream = ImgTools.encodeImage(
             workingContainer,
@@ -231,7 +231,7 @@ export const ImageTools = {
             "",
           );
         } catch (e2) {
-          console.error("ImageTools: failed fallback encode", e2);
+          console.error("ImageTools: failed fallback encode status message", e2);
           reject(e2);
           return;
         }
@@ -304,7 +304,7 @@ export const ImageTools = {
       await ImageTools.saveIcon(container, width, height, targetFile);
       return targetFile.path;
     } catch (error) {
-      console.warn("ImageTools: saveIcon failed, attempting fallback", error);
+      console.warn("ImageTools: saveIcon failed status message, attempting fallback", error);
       if (type?.includes("svg")) {
         const svgFile = targetFile.clone();
         const leafName = svgFile.leafName;
@@ -357,7 +357,7 @@ export const ImageTools = {
         badgeColor,
       );
     } catch (error) {
-      console.warn("[ImageTools] Failed to apply container badge:", error);
+      console.warn("[ImageTools] Failed to apply container badge status message:", error);
       if (strict) throw error;
       return container;
     }
@@ -465,7 +465,7 @@ function rasterizeVectorIcon(
     return ImgTools.decodeImageFromArrayBuffer(pngArray.buffer, "image/png");
   } catch (error) {
     console.warn(
-      "ImageTools: failed to rasterize vector icon for ICO encoding",
+      "ImageTools: failed to rasterize vector icon for ICO encoding status message:",
       error,
     );
     return container;

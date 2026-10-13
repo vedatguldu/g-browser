@@ -94,7 +94,7 @@ export class SsbRunnerUtils {
         );
       } catch (error) {
         console.error(
-          "[SsbRunnerUtils] Failed to create macOS app launcher:",
+          "[SsbRunnerUtils] Failed to create macOS app launcher status message:",
           error,
         );
       }

@@ -106,7 +106,7 @@ export class NRKeyboardShortcutFocusChild extends JSWindowActorChild {
     try {
       this.sendAsyncMessage(NR_KEYBOARD_SHORTCUT_FOCUS_MESSAGE, data);
     } catch (_error) {
-      // Teardown can invalidate the actor between the event and this send.
+      // Teardown status message: invalidate the actor between the event and this send.
     }
   }
 }

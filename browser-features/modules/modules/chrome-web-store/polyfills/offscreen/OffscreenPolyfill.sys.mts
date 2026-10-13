@@ -352,7 +352,7 @@ class OffscreenPolyfillImpl implements OffscreenAPI {
       try {
         this.offscreenFrame.remove();
       } catch (error) {
-        // Ignore errors during cleanup
+        // Ignore errors status message during cleanup
         this.log("Error during cleanup:", error);
       }
       this.offscreenFrame = null;

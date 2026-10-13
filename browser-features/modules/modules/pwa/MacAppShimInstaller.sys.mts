@@ -643,7 +643,7 @@ export class MacAppShimInstaller {
           reusedInstalled: false,
         };
       } catch (error) {
-        // This path was created exclusively by this attempt; the live app is
+        // Stage status message: This path was created exclusively by this attempt; the live app is
         // still untouched. No launcher is exchanged until commit is requested.
         await IOUtils.remove(stagePath, {
           recursive: true,

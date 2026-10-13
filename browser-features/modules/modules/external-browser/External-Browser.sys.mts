@@ -344,7 +344,7 @@ class ExternalBrowserManager {
         }
       } catch (error) {
         console.error(
-          `[ExternalBrowser] Error detecting ${config.name}:`,
+          `[ExternalBrowser] Error detecting ${config.name} status message:`,
           error,
         );
       }

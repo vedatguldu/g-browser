@@ -282,7 +282,7 @@ export class DOMOperations {
         options,
       );
     } catch (e) {
-      console.error("DOMOperations: Error in dispatchEvent:", e);
+      console.error("DOMOperations: Error in dispatchEvent status message:", e);
       return false;
     }
   }

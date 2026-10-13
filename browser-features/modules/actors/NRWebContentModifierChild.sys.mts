@@ -369,7 +369,7 @@ export class NRWebContentModifierChild extends JSWindowActorChild {
               }
             } catch (clickError) {
               console.error(
-                "NRWebContentModifier: Error clicking download button:",
+                "NRWebContentModifier: Error clicking download button status message:",
                 clickError,
               );
             }
@@ -381,7 +381,7 @@ export class NRWebContentModifierChild extends JSWindowActorChild {
         }
       } catch (docxError) {
         console.error(
-          "NRWebContentModifier: Error in docx click & download process:",
+          "NRWebContentModifier: Error in docx click & download process status message:",
           docxError,
         );
       }
@@ -425,7 +425,7 @@ export class NRWebContentModifierChild extends JSWindowActorChild {
       };
     } catch (e: unknown) {
       console.error(
-        "NRWebContentModifier: Error extracting OneDrive file list:",
+        "NRWebContentModifier: Error extracting OneDrive file list status message:",
         e,
       );
 
@@ -502,7 +502,7 @@ export class NRWebContentModifierChild extends JSWindowActorChild {
         reason: "Target element not found",
       };
     } catch (e: unknown) {
-      console.error("NRWebContentModifier: Error modifying Floorp heading:", e);
+      console.error("NRWebContentModifier: Error modifying Floorp heading status message:", e);
       return {
         success: false,
         error: e instanceof Error ? e.toString() : String(e),
@@ -551,7 +551,7 @@ export class NRWebContentModifierChild extends JSWindowActorChild {
         callback(result);
       } catch (e) {
         console.error(
-          "NRWebContentModifier: Error executing Gmail callback:",
+          "NRWebContentModifier: Error executing Gmail callback status message:",
           e,
         );
       }
@@ -656,7 +656,7 @@ export class NRWebContentModifierChild extends JSWindowActorChild {
       });
     } catch (error) {
       console.error(
-        "NRWebContentModifier: Error filling or sending Gmail:",
+        "NRWebContentModifier: Error filling or sending Gmail status message:",
         error,
       );
       // Send failure result back to parent

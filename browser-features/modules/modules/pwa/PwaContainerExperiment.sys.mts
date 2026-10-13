@@ -11,7 +11,7 @@ const readPwaContainerExperimentAssignment = (): boolean => {
     return variant !== null;
   } catch (error) {
     console.error(
-      "[PwaContainerExperiment] Failed to check pwa_container_support experiment:",
+      "[PwaContainerExperiment] Failed to check pwa_container_support experiment status message:",
       error,
     );
     return false;

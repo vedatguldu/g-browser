@@ -102,7 +102,7 @@ function getWorkspaceData(): {
       return parsed;
     }
   } catch (e) {
-    console.error("[WorkspacesApiService] Failed to parse workspace data:", e);
+    console.error("[WorkspacesApiService] Failed to parse workspace data status message:", e);
   }
   return null;
 }
@@ -123,7 +123,7 @@ function getSelectedWorkspaceIdFromWindow(): string | null {
     }
   } catch (e) {
     console.error(
-      "[WorkspacesApiService] Failed to get selected workspace ID:",
+      "[WorkspacesApiService] Failed to get selected workspace ID status message:",
       e,
     );
   }
@@ -185,7 +185,7 @@ export const WorkspacesApiService: WorkspacesApiServiceType = {
         return true;
       }
     } catch (e) {
-      console.error("[WorkspacesApiService] Failed to switch workspace:", e);
+      console.error("[WorkspacesApiService] Failed to switch workspace status message:", e);
     }
     return false;
   },
@@ -210,7 +210,7 @@ export const WorkspacesApiService: WorkspacesApiServiceType = {
       }
     } catch (e) {
       console.error(
-        "[WorkspacesApiService] Failed to switch to next workspace:",
+        "[WorkspacesApiService] Failed to switch to next workspace status message:",
         e,
       );
     }
@@ -237,7 +237,7 @@ export const WorkspacesApiService: WorkspacesApiServiceType = {
       }
     } catch (e) {
       console.error(
-        "[WorkspacesApiService] Failed to switch to previous workspace:",
+        "[WorkspacesApiService] Failed to switch to previous workspace status message:",
         e,
       );
     }

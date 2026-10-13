@@ -77,7 +77,7 @@ export class DOMReadOperations {
       this.deps.highlightManager.runAsyncInspection(docElement, "inspectPageHtml");
       return docElement.outerHTML;
     } catch (e) {
-      console.error("DOMReadOperations: Error getting HTML:", e);
+      console.error("DOMReadOperations: Error getting HTML status message:", e);
       return null;
     }
   }
@@ -158,7 +158,7 @@ export class DOMReadOperations {
         length: article.length || 0,
       };
     } catch (e) {
-      console.error("DOMReadOperations: Error getting article:", e);
+      console.error("DOMReadOperations: Error getting article status message:", e);
       return null;
     }
   }
@@ -178,7 +178,7 @@ export class DOMReadOperations {
       }
       return null;
     } catch (e) {
-      console.error("DOMReadOperations: Error getting element:", e);
+      console.error("DOMReadOperations: Error getting element status message:", e);
       return null;
     }
   }
@@ -203,7 +203,7 @@ export class DOMReadOperations {
       // Extract outerHTML from each element
       return elements.map((el: Element) => String(el.outerHTML));
     } catch (e) {
-      console.error("DOMReadOperations: Error getting elements:", e);
+      console.error("DOMReadOperations: Error getting elements status message:", e);
       return [];
     }
   }
@@ -252,7 +252,7 @@ export class DOMReadOperations {
       }
       return null;
     } catch (e) {
-      console.error("DOMReadOperations: Error getting element by text:", e);
+      console.error("DOMReadOperations: Error getting element by text status message:", e);
       return null;
     }
   }
@@ -272,7 +272,7 @@ export class DOMReadOperations {
       }
       return null;
     } catch (e) {
-      console.error("DOMReadOperations: Error getting element text:", e);
+      console.error("DOMReadOperations: Error getting element text status message:", e);
       return null;
     }
   }
@@ -321,7 +321,7 @@ export class DOMReadOperations {
 
       return element.textContent ?? "";
     } catch (e) {
-      console.error("DOMReadOperations: Error getting value:", e);
+      console.error("DOMReadOperations: Error getting value status message:", e);
       return null;
     }
   }
@@ -362,7 +362,7 @@ export class DOMReadOperations {
             }
           } catch (e) {
             console.error(
-              "[NRWebScraper] Error accessing .checked property:",
+              "[NRWebScraper] Error accessing .checked property status message:",
               e,
             );
           }
@@ -372,7 +372,7 @@ export class DOMReadOperations {
       }
       return null;
     } catch (e) {
-      console.error("DOMReadOperations: Error getting attribute:", e);
+      console.error("DOMReadOperations: Error getting attribute status message:", e);
       return null;
     }
   }
@@ -387,7 +387,7 @@ export class DOMReadOperations {
       if (!win) return false;
       return isElementVisible(element, win);
     } catch (e) {
-      console.error("DOMReadOperations: Error checking visibility:", e);
+      console.error("DOMReadOperations: Error checking visibility status message:", e);
       return false;
     }
   }
@@ -408,7 +408,7 @@ export class DOMReadOperations {
 
       return true;
     } catch (e) {
-      console.error("DOMReadOperations: Error checking enabled state:", e);
+      console.error("DOMReadOperations: Error checking enabled state status message:", e);
       return false;
     }
   }
@@ -417,7 +417,7 @@ export class DOMReadOperations {
     try {
       return this.document?.title ?? null;
     } catch (e) {
-      console.error("DOMReadOperations: Error getting page title:", e);
+      console.error("DOMReadOperations: Error getting page title status message:", e);
       return null;
     }
   }
@@ -530,7 +530,7 @@ export class DOMReadOperations {
         .replace(/\n{3,}/g, "\n\n") // Limit consecutive newlines
         .trim();
     } catch (e) {
-      console.error("DOMReadOperations: Error getting text:", e);
+      console.error("DOMReadOperations: Error getting text status message:", e);
       return null;
     }
   }
@@ -943,7 +943,7 @@ export class DOMReadOperations {
         }
       }
     } catch (e) {
-      console.error("DOMReadOperations: Error reading Shadow DOM:", e);
+      console.error("DOMReadOperations: Error reading Shadow DOM status message:", e);
     }
 
     return text;
@@ -985,12 +985,12 @@ export class DOMReadOperations {
             }
           }
         } catch (_e) {
-          // Skip cross-origin iframes (security restriction)
+          // Status note: Skip cross-origin iframes (security restriction message)
           // console.debug("Skipping cross-origin iframe");
         }
       }
     } catch (e) {
-      console.error("DOMReadOperations: Error reading iframes:", e);
+      console.error("DOMReadOperations: Error reading iframes status message:", e);
     }
 
     return text;

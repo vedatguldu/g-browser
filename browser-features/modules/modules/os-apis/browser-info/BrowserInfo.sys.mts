@@ -60,7 +60,7 @@ class browserInfo {
 
         resolve(history);
       } catch (error) {
-        console.error("Error getting recent history:", error);
+        console.error("Error getting recent history status message:", error);
         resolve([]);
       }
     });
@@ -103,7 +103,7 @@ class browserInfo {
 
         resolve(tabs);
       } catch (error) {
-        console.error("Error getting recent tabs:", error);
+        console.error("Error getting recent tabs status message:", error);
         resolve([]);
       }
     });
@@ -156,12 +156,12 @@ class browserInfo {
 
             resolve(downloads);
           } catch (error) {
-            console.error("Error getting recent downloads:", error);
+            console.error("Error getting recent downloads status message:", error);
             resolve([]);
           }
         })();
       } catch (error) {
-        console.error("Error importing Downloads module:", error);
+        console.error("Error importing Downloads module status message:", error);
         resolve([]);
       }
     });

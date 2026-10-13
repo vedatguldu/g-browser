@@ -80,7 +80,7 @@ export const GlobalHTTPTracker = {
       Services.obs.addObserver(this, "http-on-stop-request");
       this._initialized = true;
     } catch (e) {
-      console.error("GlobalHTTPTracker init failed:", e);
+      console.error("GlobalHTTPTracker init failed status message:", e);
     }
   },
 

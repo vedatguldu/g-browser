@@ -134,7 +134,10 @@ const FormField = ({ item, control }: FormFieldProps) => {
       return (
         <div className="mb-4 w-full">
           {item.label && (
-            <label className="block text-sm font-medium mb-2 text-gray-900 dark:text-white">
+            <label
+              htmlFor={`form-item-${item.id}`}
+              className="block text-sm font-medium mb-2 text-gray-900 dark:text-white"
+            >
               {item.label}
             </label>
           )}
@@ -145,6 +148,7 @@ const FormField = ({ item, control }: FormFieldProps) => {
             rules={{ required: item.required }}
             render={({ field }) => (
               <input
+                id={`form-item-${item.id}`}
                 {...field}
                 type={item.type === "url" ? "text" : item.type}
                 className={`w-full px-4 py-2
@@ -173,7 +177,10 @@ const FormField = ({ item, control }: FormFieldProps) => {
       return (
         <div className="mb-4 w-full">
           {item.label && (
-            <label className="block text-sm font-medium mb-2 text-gray-900 dark:text-white">
+            <label
+              htmlFor={`form-item-${item.id}`}
+              className="block text-sm font-medium mb-2 text-gray-900 dark:text-white"
+            >
               {item.label}
             </label>
           )}
@@ -184,6 +191,7 @@ const FormField = ({ item, control }: FormFieldProps) => {
             rules={{ required: item.required }}
             render={({ field }) => (
               <textarea
+                id={`form-item-${item.id}`}
                 {...field}
                 className={`w-full px-4 py-2 text-gray-900 dark:text-white bg-white dark:bg-[#42414D] border border-gray-300 dark:border-[#42414D] rounded-md focus:outline-none focus:ring-2 focus:ring-[#0061E0] transition duration-150 ease-in-out ${
                   item.classList || ""
@@ -200,7 +208,10 @@ const FormField = ({ item, control }: FormFieldProps) => {
       return (
         <div className="mb-4 w-full">
           {item.label && (
-            <label className="block text-sm font-medium mb-2 text-gray-900 dark:text-white">
+            <label
+              htmlFor={`form-item-${item.id}`}
+              className="block text-sm font-medium mb-2 text-gray-900 dark:text-white"
+            >
               {item.label}
             </label>
           )}
@@ -211,6 +222,7 @@ const FormField = ({ item, control }: FormFieldProps) => {
             rules={{ required: item.required }}
             render={({ field }) => (
               <select
+                id={`form-item-${item.id}`}
                 {...field}
                 className={`w-full px-4 py-2 text-gray-900 dark:text-white bg-white dark:bg-[#42414D] border border-gray-300 dark:border-[#42414D] rounded-md focus:outline-none focus:ring-2 focus:ring-[#0061E0] transition duration-150 ease-in-out ${
                   item.classList || ""
@@ -231,7 +243,11 @@ const FormField = ({ item, control }: FormFieldProps) => {
       return (
         <div className="mb-4 w-full">
           {item.label && (
-            <label className="block text-sm font-medium mb-2 text-gray-900 dark:text-white">
+            <label
+              id={`form-item-label-${item.id}`}
+              htmlFor={`form-item-${item.id}`}
+              className="block text-sm font-medium mb-2 text-gray-900 dark:text-white"
+            >
               {item.label}
             </label>
           )}
@@ -244,11 +260,23 @@ const FormField = ({ item, control }: FormFieldProps) => {
               <div className="relative">
                 <button
                   ref={buttonRef}
+                  id={`form-item-${item.id}`}
                   type="button"
+                  aria-haspopup="listbox"
+                  aria-expanded={dropdownOpen}
+                  aria-labelledby={item.label ? `form-item-label-${item.id} form-item-${item.id}` : undefined}
                   className={`w-full px-4 py-2 text-left text-gray-900 dark:text-white bg-white dark:bg-[#42414D] border border-gray-300 dark:border-[#42414D] rounded-md focus:outline-none focus:ring-2 focus:ring-[#0061E0] transition duration-150 ease-in-out ${
                     item.classList || ""
                   }`}
                   onClick={() => setDropdownOpen(!dropdownOpen)}
+                  onKeyDown={(e) => {
+                    if (e.key === "ArrowDown" || e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setDropdownOpen(true);
+                    } else if (e.key === "Escape") {
+                      setDropdownOpen(false);
+                    }
+                  }}
                 >
                   {item.options?.find((opt) => opt.value === value)?.label ||
                     value}
@@ -259,14 +287,34 @@ const FormField = ({ item, control }: FormFieldProps) => {
                     style={dropdownStyle}
                     className="fixed bg-white dark:bg-[#42414D] border border-gray-300 dark:border-[#42414D] rounded-md shadow-lg overflow-y-auto scrollbar-thin"
                   >
-                    <ul>
+                    <ul
+                      role="listbox"
+                      tabIndex={-1}
+                      aria-labelledby={item.label ? `form-item-label-${item.id}` : undefined}
+                    >
                       {item.options?.map((opt) => (
                         <li
                           key={opt.value}
-                          className="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 cursor-pointer"
+                          role="option"
+                          aria-selected={opt.value === value}
+                          tabIndex={0}
+                          className="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 cursor-pointer focus:bg-gray-100 dark:focus:bg-gray-600 focus:outline-none"
                           onClick={() => {
                             onChange(opt.value);
                             setDropdownOpen(false);
+                            buttonRef.current?.focus();
+                          }}
+                          onKeyDown={(e) => {
+                            if (e.key === "Enter" || e.key === " ") {
+                              e.preventDefault();
+                              onChange(opt.value);
+                              setDropdownOpen(false);
+                              buttonRef.current?.focus();
+                            } else if (e.key === "Escape") {
+                              e.preventDefault();
+                              setDropdownOpen(false);
+                              buttonRef.current?.focus();
+                            }
                           }}
                         >
                           {opt.icon
@@ -275,6 +323,7 @@ const FormField = ({ item, control }: FormFieldProps) => {
                                 src={opt.icon}
                                 className="w-4 h-4 mr-2"
                                 alt=""
+                                aria-hidden="true"
                               />
                             )
                             : null}
@@ -310,13 +359,14 @@ const FormField = ({ item, control }: FormFieldProps) => {
     case "checkbox":
       return (
         <div className="mb-4 w-full">
-          <label className="flex items-center cursor-pointer">
+          <label htmlFor={`form-item-${item.id}`} className="flex items-center cursor-pointer">
             <Controller
               name={item.id}
               control={control}
               defaultValue={String(item.value || "false")}
               render={({ field: { onChange, value } }) => (
                 <input
+                  id={`form-item-${item.id}`}
                   type="checkbox"
                   className={`mr-2 h-4 w-4 text-[#0061E0] bg-white dark:bg-[#42414D] border-gray-300 dark:border-[#42414D] rounded focus:ring-[#0061E0] ${
                     item.classList || ""
@@ -335,11 +385,11 @@ const FormField = ({ item, control }: FormFieldProps) => {
 
     case "radio":
       return (
-        <div className="mb-4 w-full">
+        <fieldset className="mb-4 w-full">
           {item.label && (
-            <label className="block text-sm font-medium mb-2 text-gray-900 dark:text-white">
+            <legend className="block text-sm font-medium mb-2 text-gray-900 dark:text-white">
               {item.label}
-            </label>
+            </legend>
           )}
           <div className="space-y-2">
             <Controller
@@ -352,10 +402,13 @@ const FormField = ({ item, control }: FormFieldProps) => {
                     (opt: { label: string; value: string }) => (
                       <label
                         key={opt.value}
+                        htmlFor={`form-item-${item.id}-${opt.value}`}
                         className="flex items-center cursor-pointer mb-2"
                       >
                         <input
+                          id={`form-item-${item.id}-${opt.value}`}
                           type="radio"
+                          name={item.id}
                           className={`mr-2 h-4 w-4 text-[#0061E0] bg-white dark:bg-[#42414D] border-gray-300 dark:border-[#42414D] focus:ring-[#0061E0] ${
                             item.classList || ""
                           }`}
@@ -373,7 +426,7 @@ const FormField = ({ item, control }: FormFieldProps) => {
               )}
             />
           </div>
-        </div>
+        </fieldset>
       );
 
     default:
@@ -450,12 +503,21 @@ function App() {
       }
     };
 
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        handleCancel();
+      }
+    };
+
     globalThis.addEventListener("message", messageHandler);
+    globalThis.addEventListener("keydown", handleKeyDown);
 
     document.documentElement.dataset.noraModalReady = "true";
 
     return () => {
       globalThis.removeEventListener("message", messageHandler);
+      globalThis.removeEventListener("keydown", handleKeyDown);
       delete document.documentElement.dataset.noraModalReady;
     };
   }, [methods]);
@@ -466,12 +528,15 @@ function App() {
         <FormProvider {...methods}>
           <form
             id="dynamic-form"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby={formConfig?.title ? "modal-title" : undefined}
             className="w-full flex flex-col bg-white dark:bg-[#2B2A33] p-4"
             onSubmit={methods.handleSubmit(onSubmit)}
           >
             {formConfig?.title && (
               <div className="flex-none py-3 px-1 border-b border-gray-200 dark:border-gray-700">
-                <h1 className="text-xl font-bold text-gray-900 dark:text-white">
+                <h1 id="modal-title" className="text-xl font-bold text-gray-900 dark:text-white">
                   {formConfig.title}
                 </h1>
               </div>

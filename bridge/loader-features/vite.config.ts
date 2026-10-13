@@ -12,8 +12,17 @@ const r = (dir: string) => {
   return path.resolve(import.meta.dirname, dir);
 };
 
-const dndKitCoreDir = realpathSync(
-  r("../../browser-features/pages-settings/node_modules/@dnd-kit/core"),
+function resolvePkgDir(subPath: string, rootFallback: string): string {
+  try {
+    return realpathSync(r(subPath));
+  } catch {
+    return realpathSync(r(rootFallback));
+  }
+}
+
+const dndKitCoreDir = resolvePkgDir(
+  "../../browser-features/pages-settings/node_modules/@dnd-kit/core",
+  "../../node_modules/@dnd-kit/core",
 );
 const dndKitAccessibilityDir = realpathSync(
   path.join(path.dirname(dndKitCoreDir), "accessibility"),
@@ -24,14 +33,17 @@ const REACT_UI_PATH =
 // CSS modules and other assets in Vite's own transform pipeline.
 const REACT_UI_SOURCE_PATH =
   /[\\/](?:browser-features[\\/]pages-settings|libs[\\/]ui)[\\/].*\.[cm]?[jt]sx?(?:\?.*)?$/;
-const chakraReactDir = realpathSync(
-  r("../../libs/ui/node_modules/@chakra-ui/react"),
+const chakraReactDir = resolvePkgDir(
+  "../../libs/ui/node_modules/@chakra-ui/react",
+  "../../node_modules/@chakra-ui/react",
 );
-const emotionReactDir = realpathSync(
-  r("../../libs/ui/node_modules/@emotion/react"),
+const emotionReactDir = resolvePkgDir(
+  "../../libs/ui/node_modules/@emotion/react",
+  "../../node_modules/@emotion/react",
 );
-const reactRouterDomDir = realpathSync(
-  r("../../browser-features/pages-settings/node_modules/react-router-dom"),
+const reactRouterDomDir = resolvePkgDir(
+  "../../browser-features/pages-settings/node_modules/react-router-dom",
+  "../../node_modules/react-router-dom",
 );
 
 export default defineConfig({

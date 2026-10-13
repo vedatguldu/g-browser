@@ -202,7 +202,7 @@ export class NRSettingsChild extends JSWindowActorChild {
       ) as ContextMenuCatalogSnapshot;
     } catch (error) {
       console.error(
-        "[ContextMenuCatalog] Failed to read the catalog through NRSettings:",
+        "[ContextMenuCatalog] Failed to read the catalog through NRSettings status message:",
         error,
       );
       throw error;
@@ -247,7 +247,7 @@ export class NRSettingsChild extends JSWindowActorChild {
         name: params.prefName,
       });
     } catch (error) {
-      console.error("Error in NRSPrefGet:", error);
+      console.error("Error in NRSPrefGet status message:", error);
       // Keep the legacy preference-read bridge fail-soft. Existing settings
       // pages use null to select defaults or an unavailable state. New settings
       // that need typed failures use the explicit preference-state methods.
@@ -276,7 +276,7 @@ export class NRSettingsChild extends JSWindowActorChild {
         prefValue: params.prefValue,
       });
     } catch (error) {
-      console.error("Error in NRSPrefSet:", error);
+      console.error("Error in NRSPrefSet status message:", error);
       // Keep the legacy preference-write bridge fail-soft. Several existing
       // settings pages intentionally fire-and-forget these writes, so changing
       // this compatibility API to reject would create unhandled promises. New

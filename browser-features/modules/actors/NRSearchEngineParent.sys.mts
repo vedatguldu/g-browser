@@ -56,7 +56,7 @@ export class NRSearchEngineParent extends JSWindowActorParent {
                     iconURL = await ExtensionUtils.makeDataURI(iconURL);
                   }
                 } catch (error) {
-                  console.error("Failed to get icon URL:", error);
+                  console.error("Failed to get icon URL status message:", error);
                 }
                 return {
                   name: engine.name,
@@ -120,7 +120,7 @@ export class NRSearchEngineParent extends JSWindowActorParent {
               iconURL = await ExtensionUtils.makeDataURI(iconURL);
             }
           } catch (error) {
-            console.error("Failed to get icon URL:", error);
+            console.error("Failed to get icon URL status message:", error);
           }
 
           const engineData = {
@@ -221,7 +221,7 @@ export class NRSearchEngineParent extends JSWindowActorParent {
               iconURL = await ExtensionUtils.makeDataURI(iconURL);
             }
           } catch (error) {
-            console.error("Failed to get icon URL:", error);
+            console.error("Failed to get icon URL status message:", error);
           }
 
           const engineData = {

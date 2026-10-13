@@ -147,7 +147,7 @@ export async function fetchRemoteUpdateInfo(): Promise<RemoteUpdateInfo | null> 
     const xmlText = await response.text();
     return parseUpdateXml(xmlText);
   } catch (error) {
-    console.error("[NoranekoUpdateChecker] Error fetching update.xml:", error);
+    console.error("[NoranekoUpdateChecker] Error fetching update.xml status message:", error);
     return null;
   }
 }
@@ -193,7 +193,7 @@ function parseUpdateXml(xmlText: string): RemoteUpdateInfo | null {
       updateType: updateElement.getAttribute("type") ?? "major",
     };
   } catch (error) {
-    console.error("[NoranekoUpdateChecker] Error parsing update.xml:", error);
+    console.error("[NoranekoUpdateChecker] Error parsing update.xml status message:", error);
     return null;
   }
 }

@@ -46,7 +46,7 @@ export class DataManager {
       try {
         this.schemaValidator = await getSchemaValidator();
       } catch (e) {
-        console.warn("[DataManager] Failed to load schema validator:", e);
+        console.warn("[DataManager] Failed to load schema validator status message:", e);
       }
     }
     return this.schemaValidator;

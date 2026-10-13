@@ -43,7 +43,7 @@ function installFloorpIPProtectionUIEarly(): boolean {
     return FloorpIPProtectionUI.installEarly();
   } catch (error) {
     console.error(
-      "[FloorpIPProtectionUI] Failed to install the early runtime adapter:",
+      "[FloorpIPProtectionUI] Failed to install the early runtime adapter status message:",
       error,
     );
     return false;
@@ -75,7 +75,7 @@ function getComponentRegistrar(): nsIComponentRegistrar | null {
     }
     return maybeQI.call(cm, Ci.nsIComponentRegistrar) as nsIComponentRegistrar;
   } catch (e) {
-    console.error("[NoranekoStartup] Failed to get nsIComponentRegistrar:", e);
+    console.error("[NoranekoStartup] Failed to get nsIComponentRegistrar status message:", e);
     return null;
   }
 }
@@ -199,7 +199,7 @@ async function openReleaseNotesInRecentWindow(): Promise<void> {
           const id = funcs.getSelectedWorkspaceID();
           if (id) return id;
         } catch (e) {
-          console.error("[NoranekoStartup] Failed to get workspace ID", e);
+          console.error("[NoranekoStartup] Failed to get workspace ID status message", e);
         }
       }
       await new Promise((r) => setTimeout(r, 100));
@@ -215,7 +215,7 @@ async function openReleaseNotesInRecentWindow(): Promise<void> {
       newTab.setAttribute(WORKSPACE_TAB_ATTRIBUTION_ID, currentWorkspaceID);
     } catch (e) {
       console.error(
-        "[NoranekoStartup] Failed to set workspace for release notes tab",
+        "[NoranekoStartup] Failed to set workspace for release notes tab status message",
         e,
       );
     }
@@ -324,7 +324,7 @@ async function isResourceAvailable(url: string): Promise<boolean> {
     const response = await fetch(url);
     return response.ok;
   } catch (error) {
-    console.error(`[noraneko] Failed to check resource: ${url}`, error);
+    console.error(`[noraneko] Failed to check resource: ${url} status message`, error);
     return false;
   }
 }

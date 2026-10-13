@@ -50,7 +50,7 @@ class OSGlue {
         ChromeUtils.importESModule(module);
         loaded++;
       } catch (e) {
-        console.error(`[Floorp OS] Failed to load module: ${module}`, e);
+        console.error(`[Floorp OS] Failed to load module status message: ${module}`, e);
       }
     }
     console.info(`[Floorp OS] Loaded ${loaded}/${this.modules.length} OS API modules.`);

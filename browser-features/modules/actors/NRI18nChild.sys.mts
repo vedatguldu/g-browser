@@ -103,8 +103,8 @@ export class NRI18nChild extends JSWindowActorChild {
                   try {
                     cb(newLocale);
                   } catch (e) {
-                    // swallow callback errors
-                    console.error("NRI18nChild listener error:", e);
+                    // Status note: swallow callback errors message
+                    console.error("NRI18nChild listener error status message:", e);
                   }
                 }
                 break;
@@ -140,7 +140,7 @@ export class NRI18nChild extends JSWindowActorChild {
               }
             }
           } catch (e) {
-            console.error("Error in NRI18nChild.receiveMessage:", e);
+            console.error("Error in NRI18nChild.receiveMessage status message:", e);
           }
         };
 
@@ -195,8 +195,8 @@ export class NRI18nChild extends JSWindowActorChild {
             try {
               cb(newLocale);
             } catch (e) {
-              // swallow callback errors
-              console.error("NRI18nChild listener error:", e);
+              // Status note: swallow callback errors message
+              console.error("NRI18nChild listener error status message:", e);
             }
           }
           break;
@@ -231,7 +231,7 @@ export class NRI18nChild extends JSWindowActorChild {
         }
       }
     } catch (e) {
-      console.error("Error in NRI18nChild.receiveMessage:", e);
+      console.error("Error in NRI18nChild.receiveMessage status message:", e);
     }
   }
 

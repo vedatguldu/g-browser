@@ -7,7 +7,7 @@ import downloadIcon from "./icons/download.svg?inline";
 import i18next from "i18next";
 import { Show, createSignal } from "solid-js";
 import { addI18nObserver } from "#i18n/config-browser-chrome.ts";
-import { detectedMediaItems } from "./index.ts";
+import { detectedMediaItems, scanCurrentTabMedia } from "./index.ts";
 
 export function MediaDownloaderPageActionButton() {
   const [baseTooltip, setBaseTooltip] = createSignal(
@@ -46,6 +46,34 @@ export function MediaDownloaderPageActionButton() {
   const tooltipText = () =>
     count() > 0 ? `${baseTooltip()} (${count()} medya bulundu)` : baseTooltip();
 
+  const togglePanel = (e?: Event) => {
+    e?.preventDefault();
+    e?.stopPropagation();
+    // deno-lint-ignore no-explicit-any
+    const panel = document?.getElementById("media-downloader-panel") as any;
+    const anchor = document?.getElementById("MediaDownloaderPageAction");
+    if (panel && anchor) {
+      if (panel.state === "open" || panel.state === "showing") {
+        panel.hidePopup();
+      } else {
+        scanCurrentTabMedia();
+        panel.openPopup(anchor, "bottomright topright", 0, 0, false, false);
+        setTimeout(() => {
+          const firstBtn = panel.querySelector(".media-btn-download, .media-btn-copy, [tabindex='0']") as HTMLElement | null;
+          firstBtn?.focus();
+        }, 80);
+      }
+    }
+  };
+
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (e.key === "Enter" || e.key === " " || e.key === "ArrowDown") {
+      e.preventDefault();
+      e.stopPropagation();
+      togglePanel();
+    }
+  };
+
   return (
     <Show when={isEnabled()}>
       <xul:hbox
@@ -58,8 +86,12 @@ export function MediaDownloaderPageActionButton() {
         title={tooltipText()}
         role="button"
         tabindex="0"
+        aria-haspopup="dialog"
+        aria-expanded="false"
         aria-label={tooltipText()}
         popup="media-downloader-panel"
+        onClick={togglePanel}
+        onKeyDown={handleKeyDown}
       >
         <xul:image
           id="MediaDownloaderPageAction-image"

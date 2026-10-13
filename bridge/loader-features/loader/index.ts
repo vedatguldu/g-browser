@@ -141,6 +141,7 @@ async function initializeModules(modules: LoaderModule[]) {
   if (!isWebPanelChild) {
     // @ts-expect-error SessionStore type not defined
     await SessionStore.promiseInitialized;
+    setupPageActionKeyboardAccessibility();
   }
 
   for (const module of modules) {
@@ -159,4 +160,63 @@ async function initializeModules(modules: LoaderModule[]) {
   }
   _registerModuleLoadState("__init_all__", true);
   await _rejectOtherLoadStates();
+}
+
+function setupPageActionKeyboardAccessibility(): void {
+  try {
+    const pageActions = document.getElementById("page-action-buttons");
+    if (!pageActions) return;
+
+    pageActions.addEventListener(
+      "keydown",
+      (e: KeyboardEvent) => {
+        if (e.key === "Enter" || e.key === " ") {
+          const target = e.target as HTMLElement | null;
+          if (!target) return;
+          const btn = target.closest(
+            ".urlbar-page-action, #reader-mode-button, #star-button-box, #star-button",
+          ) as HTMLElement | null;
+
+          if (btn) {
+            if (
+              btn.id === "reader-mode-button" ||
+              btn.closest("#reader-mode-button")
+            ) {
+              e.preventDefault();
+              e.stopPropagation();
+              try {
+                // deno-lint-ignore no-explicit-any
+                const win = window as any;
+                if (typeof win.AboutReaderListener?.toggleReaderMode === "function") {
+                  win.AboutReaderListener.toggleReaderMode(e);
+                } else if (
+                  typeof win.gBrowser?.selectedBrowser?.messageManager
+                    ?.sendAsyncMessage === "function"
+                ) {
+                  win.gBrowser.selectedBrowser.messageManager.sendAsyncMessage(
+                    "Reader:Toggle",
+                  );
+                } else {
+                  btn.click();
+                }
+              } catch {
+                btn.click();
+              }
+            } else if (
+              btn.id === "star-button-box" ||
+              btn.id === "star-button" ||
+              btn.closest("#star-button-box")
+            ) {
+              e.preventDefault();
+              e.stopPropagation();
+              btn.click();
+            }
+          }
+        }
+      },
+      true,
+    );
+  } catch (err) {
+    console.error("[noraneko] Failed to setup page action keyboard accessibility:", err);
+  }
 }

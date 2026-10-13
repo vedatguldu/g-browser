@@ -19,6 +19,29 @@ export function QRCodePageActionButton() {
     setTooltip(i18next.t("qrcode-generate-page-action"));
   });
 
+  const togglePanel = (e?: Event) => {
+    e?.preventDefault();
+    e?.stopPropagation();
+    // deno-lint-ignore no-explicit-any
+    const panel = document?.getElementById("qrcode-panel") as any;
+    const anchor = document?.getElementById("QRCodeGeneratePageAction");
+    if (panel && anchor) {
+      if (panel.state === "open" || panel.state === "showing") {
+        panel.hidePopup();
+      } else {
+        panel.openPopup(anchor, "bottomright topright", 0, 0, false, false);
+      }
+    }
+  };
+
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (e.key === "Enter" || e.key === " " || e.key === "ArrowDown") {
+      e.preventDefault();
+      e.stopPropagation();
+      togglePanel();
+    }
+  };
+
   return (
     <Show when={!config().uiCustomization.qrCode.disableButton}>
       <xul:hbox
@@ -30,8 +53,12 @@ export function QRCodePageActionButton() {
         title={tooltip()}
         role="button"
         tabindex="0"
+        aria-haspopup="dialog"
+        aria-expanded="false"
         aria-label={tooltip()}
         popup="qrcode-panel"
+        onClick={togglePanel}
+        onKeyDown={handleKeyDown}
       >
         <xul:image
           id="QRCodeGeneratePageAction-image"

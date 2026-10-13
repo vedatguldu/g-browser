@@ -25,12 +25,41 @@ export function MediaDownloaderPanel() {
     );
   });
 
+  const onPopupShowing = () => {
+    document?.getElementById("MediaDownloaderPageAction")?.setAttribute("aria-expanded", "true");
+    scanCurrentTabMedia();
+  };
+
+  const onPopupHiding = () => {
+    const anchor = document?.getElementById("MediaDownloaderPageAction");
+    if (anchor) {
+      anchor.setAttribute("aria-expanded", "false");
+      anchor.focus();
+    }
+  };
+
+  const handlePanelKeyDown = (e: KeyboardEvent) => {
+    if (e.key === "Escape") {
+      // deno-lint-ignore no-explicit-any
+      const panel = document?.getElementById("media-downloader-panel") as any;
+      panel?.hidePopup?.();
+    }
+  };
+
   const handleDownload = async (item: MediaItem) => {
     setDownloadSuccessId(item.id);
     await downloadMediaItem(item);
     setTimeout(() => {
       setDownloadSuccessId(null);
     }, 2000);
+  };
+
+  const handleButtonKeyDown = (e: KeyboardEvent, action: () => void) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      e.stopPropagation();
+      action();
+    }
   };
 
   return (
@@ -40,14 +69,16 @@ export function MediaDownloaderPanel() {
       role="dialog"
       aria-labelledby="media-panel-title-label"
       position="bottomright topright"
-      onPopupShowing={() => scanCurrentTabMedia()}
+      onPopupShowing={onPopupShowing}
+      onPopupHiding={onPopupHiding}
+      onKeyDown={handlePanelKeyDown}
     >
       <xul:vbox class="media-panel-box">
         <xul:hbox class="media-panel-header">
           <xul:label id="media-panel-title-label" class="media-panel-title">
             {panelTitle()}
           </xul:label>
-          <xul:label class="media-panel-count">
+          <xul:label class="media-panel-count" role="status">
             {detectedMediaItems().length} Öğe
           </xul:label>
         </xul:hbox>
@@ -57,7 +88,7 @@ export function MediaDownloaderPanel() {
         <Show
           when={detectedMediaItems().length > 0}
           fallback={
-            <div class="media-empty-state">
+            <div class="media-empty-state" role="status" tabindex="0">
               Bu sayfada indirilebilir video veya ses akışı tespit edilmedi. Sayfada bir video oynatmayı deneyebilirsiniz.
             </div>
           }
@@ -78,7 +109,10 @@ export function MediaDownloaderPanel() {
                   <div class="media-item-actions">
                     <button
                       class="media-btn-copy"
+                      tabindex="0"
+                      role="button"
                       onClick={() => copyMediaUrlToClipboard(item.url)}
+                      onKeyDown={(e) => handleButtonKeyDown(e, () => copyMediaUrlToClipboard(item.url))}
                       title="Bağlantıyı Kopyala"
                       aria-label={`${item.title} bağlantısını kopyala`}
                     >
@@ -86,7 +120,10 @@ export function MediaDownloaderPanel() {
                     </button>
                     <button
                       class="media-btn-download"
+                      tabindex="0"
+                      role="button"
                       onClick={() => handleDownload(item)}
+                      onKeyDown={(e) => handleButtonKeyDown(e, () => handleDownload(item))}
                       aria-label={`${item.title} indir`}
                     >
                       {downloadSuccessId() === item.id ? "Başlatıldı ✓" : "İndir"}

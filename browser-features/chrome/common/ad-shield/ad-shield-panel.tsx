@@ -23,6 +23,34 @@ export function AdShieldPanel() {
     );
   });
 
+  const onPopupShowing = () => {
+    document?.getElementById("AdShieldPageAction")?.setAttribute("aria-expanded", "true");
+  };
+
+  const onPopupHiding = () => {
+    const anchor = document?.getElementById("AdShieldPageAction");
+    if (anchor) {
+      anchor.setAttribute("aria-expanded", "false");
+      anchor.focus();
+    }
+  };
+
+  const handlePanelKeyDown = (e: KeyboardEvent) => {
+    if (e.key === "Escape") {
+      // deno-lint-ignore no-explicit-any
+      const panel = document?.getElementById("adshield-panel") as any;
+      panel?.hidePopup?.();
+    }
+  };
+
+  const handleToggleKeyDown = (e: KeyboardEvent) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      e.stopPropagation();
+      toggleAdShield();
+    }
+  };
+
   return (
     <xul:panel
       id="adshield-panel"
@@ -30,6 +58,9 @@ export function AdShieldPanel() {
       role="dialog"
       aria-labelledby="adshield-title-label"
       position="bottomright topright"
+      onPopupShowing={onPopupShowing}
+      onPopupHiding={onPopupHiding}
+      onKeyDown={handlePanelKeyDown}
     >
       <xul:vbox class="adshield-box">
         <xul:hbox class="adshield-header">
@@ -39,6 +70,7 @@ export function AdShieldPanel() {
           <xul:label
             class="adshield-status-badge"
             data-active={isAdShieldActive() ? "true" : "false"}
+            role="status"
           >
             {isAdShieldActive() ? "Aktif" : "Devre Dışı"}
           </xul:label>
@@ -67,8 +99,12 @@ export function AdShieldPanel() {
 
         <button
           class="adshield-toggle-btn"
+          tabindex="0"
+          role="button"
+          aria-pressed={isAdShieldActive() ? "true" : "false"}
           data-active={isAdShieldActive() ? "true" : "false"}
           onClick={() => toggleAdShield()}
+          onKeyDown={handleToggleKeyDown}
         >
           {isAdShieldActive()
             ? "Korumayı Duraklat"

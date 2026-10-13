@@ -24,6 +24,33 @@ export function AdShieldPageActionButton() {
     );
   });
 
+  const togglePanel = (e?: Event) => {
+    e?.preventDefault();
+    e?.stopPropagation();
+    // deno-lint-ignore no-explicit-any
+    const panel = document?.getElementById("adshield-panel") as any;
+    const anchor = document?.getElementById("AdShieldPageAction");
+    if (panel && anchor) {
+      if (panel.state === "open" || panel.state === "showing") {
+        panel.hidePopup();
+      } else {
+        panel.openPopup(anchor, "bottomright topright", 0, 0, false, false);
+        setTimeout(() => {
+          const btn = panel.querySelector(".adshield-toggle-btn") as HTMLElement | null;
+          btn?.focus();
+        }, 80);
+      }
+    }
+  };
+
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (e.key === "Enter" || e.key === " " || e.key === "ArrowDown") {
+      e.preventDefault();
+      e.stopPropagation();
+      togglePanel();
+    }
+  };
+
   return (
     <xul:hbox
       id="AdShieldPageAction"
@@ -35,8 +62,12 @@ export function AdShieldPageActionButton() {
       title={tooltip()}
       role="button"
       tabindex="0"
+      aria-haspopup="dialog"
+      aria-expanded="false"
       aria-label={tooltip()}
       popup="adshield-panel"
+      onClick={togglePanel}
+      onKeyDown={handleKeyDown}
     >
       <xul:image
         id="AdShieldPageAction-image"

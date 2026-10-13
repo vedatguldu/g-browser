@@ -262,6 +262,16 @@ function addFloorpHubCategory(): void {
   hubButton.activate = () => {
     openFloorpHub();
   };
+  hubButton.addEventListener("click", () => {
+    openFloorpHub();
+  });
+  hubButton.addEventListener("keydown", (e: Event) => {
+    const ke = e as KeyboardEvent;
+    if (ke.key === "Enter" || ke.key === " ") {
+      ke.preventDefault();
+      openFloorpHub();
+    }
+  });
 
   nav_root.insertBefore(hubButton, before_fragment);
 }
@@ -347,9 +357,14 @@ function createFloorpHubWarning(): void {
 
   const button = doc.createXULElement("button") as XULElement;
   button.id = FLOORP_HUB_WARNING_IDS.button;
-  button.classList.add("floorp-hub-warning__button");
-  button.setAttribute("label", defaultWarningTexts.buttonLabel);
   button.addEventListener("click", openFloorpHub);
+  button.addEventListener("keydown", (e: Event) => {
+    const ke = e as KeyboardEvent;
+    if (ke.key === "Enter" || ke.key === " ") {
+      ke.preventDefault();
+      openFloorpHub();
+    }
+  });
 
   container.appendChild(message);
   container.appendChild(button);

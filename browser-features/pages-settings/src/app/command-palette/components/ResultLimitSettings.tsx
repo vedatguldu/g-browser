@@ -21,7 +21,7 @@ export function ResultLimitSettings() {
     <Card>
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          <SlidersHorizontal className="size-5" />
+          <SlidersHorizontal className="size-5" aria-hidden="true" />
           {t("commandPalette.resultLimit")}
         </CardTitle>
         <CardDescription>

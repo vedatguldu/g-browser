@@ -52,7 +52,7 @@ export default function Page() {
         setLoadError(false);
       } catch (error) {
         if (isStale()) return;
-        console.error("[Settings:workspaces] Load failed", error);
+        console.error("[Settings:workspaces] Load failed status message", error);
         setLoadError(true);
       }
     };
@@ -83,7 +83,7 @@ export default function Page() {
         savedRef.current = snapshot;
         if (mountedRef.current) setSaveError(false);
       } catch (error) {
-        console.error("[Settings:workspaces] Save failed", error);
+        console.error("[Settings:workspaces] Save failed status message", error);
         if (mountedRef.current) setSaveError(true);
       } finally {
         pendingRef.current--;
@@ -119,8 +119,10 @@ export default function Page() {
           <p role="alert">{t("ui.saveError")}</p>
           <Button
             variant="secondary"
-            disabled={saving}
+            aria-disabled={saving}
+            aria-busy={saving}
             onClick={() => {
+              if (saving) return;
               requestedRef.current = null;
               setSaveRetry((n) => n + 1);
             }}
@@ -140,6 +142,9 @@ export default function Page() {
             aria-busy={!ready || saving}
             className={styles.sections}
           >
+            <legend className="sr-only">
+              {t("workspaces.workspaces")}
+            </legend>
             <BasicSettings />
             {/* <BackupSettings /> */}
           </fieldset>

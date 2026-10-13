@@ -46,6 +46,9 @@ export function ShortcutList() {
   const [newPrefix, setNewPrefix] = useState("");
   const [newCommandId, setNewCommandId] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const [loadError, setLoadError] = useState(false);
+  const [saveError, setSaveError] = useState(false);
+  const [announcement, setAnnouncement] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
   // Load shortcuts + selectable catalog in parallel on mount.
@@ -53,6 +56,7 @@ export function ShortcutList() {
     let cancelled = false;
     const load = async (): Promise<void> => {
       try {
+        setLoadError(false);
         const [loadedShortcuts, loadedSelectable] = await Promise.all([
           loadShortcuts(),
           loadSelectableCommands(),
@@ -61,7 +65,8 @@ export function ShortcutList() {
         setShortcuts(loadedShortcuts);
         setSelectable(loadedSelectable);
       } catch (error) {
-        console.error("[command-palette] Failed to load shortcuts:", error);
+        console.error("[command-palette] Failed to load shortcuts status message:", error);
+        if (!cancelled) setLoadError(true);
       } finally {
         if (!cancelled) setIsLoading(false);
       }
@@ -107,9 +112,10 @@ export function ShortcutList() {
 
   const persist = (updated: CommandPaletteShortcut[]): void => {
     setShortcuts(updated);
-    // Best-effort save; dataManager already swallows errors.
-    saveShortcuts(updated).catch((saveError) => {
-      console.error("[command-palette] Failed to save shortcuts:", saveError);
+    setSaveError(false);
+    saveShortcuts(updated).catch((saveErr) => {
+      console.error("[command-palette] Failed to save shortcuts:", saveErr);
+      setSaveError(true);
     });
   };
 
@@ -146,13 +152,28 @@ export function ShortcutList() {
     }
 
     persist([...shortcuts, { prefix, commandId: newCommandId }]);
+    setAnnouncement(
+      t("commandPalette.shortcuts.addedNamed", {
+        prefix: `@${prefix}`,
+        command: labelFor(newCommandId),
+      }),
+    );
     setNewPrefix("");
     setNewCommandId("");
     setError(null);
   };
 
   const handleRemove = (prefix: string): void => {
+    const toRemove = shortcuts.find((s) => s.prefix === prefix);
     persist(shortcuts.filter((shortcut) => shortcut.prefix !== prefix));
+    if (toRemove) {
+      setAnnouncement(
+        t("commandPalette.shortcuts.removedNamed", {
+          prefix: `@${prefix}`,
+          command: labelFor(toRemove.commandId),
+        }),
+      );
+    }
   };
 
   const handlePrefixKeyDown = (
@@ -198,6 +219,14 @@ export function ShortcutList() {
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-6">
+        <div className="sr-only" role="status" aria-live="polite" aria-atomic="true">
+          {announcement}
+        </div>
+        {(loadError || saveError) && (
+          <div role="alert" className="floorp-notice floorp-notice-error">
+            <span>{loadError ? t("ui.loadError") : t("ui.saveError")}</span>
+          </div>
+        )}
         {/* Reserved shortcuts section */}
         <div className="space-y-2">
           <h3 className="text-sm font-medium">
@@ -241,8 +270,12 @@ export function ShortcutList() {
                       "commandPalette.shortcuts.prefixPlaceholder",
                     )}
                     value={newPrefix}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      setNewPrefix(e.target.value)}
+                    aria-invalid={Boolean(error)}
+                    aria-describedby={error ? "command-palette-shortcut-error" : undefined}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                      setNewPrefix(e.target.value);
+                      if (error) setError(null);
+                    }}
                     onKeyDown={handlePrefixKeyDown}
                     autoComplete="off"
                   />
@@ -293,7 +326,15 @@ export function ShortcutList() {
                   </button>
                 </div>
               </div>
-              {error && <p className="text-sm text-destructive">{error}</p>}
+              {error && (
+                <p
+                  id="command-palette-shortcut-error"
+                  role="alert"
+                  className="text-sm text-destructive"
+                >
+                  {error}
+                </p>
+              )}
             </div>
           )
           : (
@@ -326,7 +367,10 @@ export function ShortcutList() {
                     type="button"
                     onClick={() => handleRemove(shortcut.prefix)}
                     className="opacity-60 hover:opacity-100 text-destructive p-1 rounded hover:bg-destructive/10 transition-all shrink-0"
-                    aria-label={t("commandPalette.shortcuts.remove")}
+                    aria-label={t("commandPalette.shortcuts.removeNamed", {
+                      prefix: `@${shortcut.prefix}`,
+                      command: labelFor(shortcut.commandId),
+                    })}
                   >
                     <X className="size-4" />
                   </button>

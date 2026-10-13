@@ -95,7 +95,7 @@ export function GeneralSettings({
       <Card className={styles.section}>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <Settings className="size-5" />
+            <Settings className="size-5" aria-hidden="true" />
             {t("mouseGesture.generalSettings")}
           </CardTitle>
           <CardDescription className={styles.description}>
@@ -107,15 +107,15 @@ export function GeneralSettings({
           <div className="space-y-3">
             <div className={styles.row}>
               <div>
-                <span className="text-base-content/90 font-medium">
+                <label htmlFor="mouse-gesture-enabled" className="text-base-content/90 font-medium cursor-pointer">
                   {t("mouseGesture.enabled")}
-                </span>
+                </label>
                 <p className="text-sm text-base-content/60">
                   {t("mouseGesture.enabledDescription")}
                 </p>
               </div>
               <Switch
-                aria-label={t("mouseGesture.enabled")}
+                id="mouse-gesture-enabled"
                 data-setting="mouse-gesture-enabled"
                 checked={config.enabled}
                 onChange={() => toggleEnabled()}
@@ -124,15 +124,15 @@ export function GeneralSettings({
 
             <div className={styles.row}>
               <div>
-                <span className="text-base-content/90 font-medium">
+                <label htmlFor="mouse-gesture-rocker-enabled" className="text-base-content/90 font-medium cursor-pointer">
                   {t("mouseGesture.rockerGesturesEnabled")}
-                </span>
+                </label>
                 <p className="text-sm text-base-content/60">
                   {t("mouseGesture.rockerGesturesDescription")}
                 </p>
               </div>
               <Switch
-                aria-label={t("mouseGesture.rockerGesturesEnabled")}
+                id="mouse-gesture-rocker-enabled"
                 checked={config.rockerGesturesEnabled ?? true}
                 onChange={() =>
                   updateConfig((current) => ({
@@ -148,16 +148,16 @@ export function GeneralSettings({
               <>
                 <div className={styles.field}>
                   <div className="flex-1">
-                    <span className="text-base-content/90 font-medium">
+                    <label htmlFor="rocker-action-left-right" className="text-base-content/90 font-medium">
                       {t("mouseGesture.rockerLeftRight")}
-                    </span>
+                    </label>
                     <p className="text-sm text-base-content/60">
                       {t("mouseGesture.rockerLeftRightDescription")}
                     </p>
                   </div>
                   <Select
+                    id="rocker-action-left-right"
                     className="w-64 max-w-xs text-sm"
-                    aria-label={t("mouseGesture.rockerLeftRight")}
                     value={config.rockerActions.leftRight}
                     onChange={(e) =>
                       updateRockerAction("leftRight", e.target.value)}
@@ -173,16 +173,16 @@ export function GeneralSettings({
 
                 <div className={styles.field}>
                   <div className="flex-1">
-                    <span className="text-base-content/90 font-medium">
+                    <label htmlFor="rocker-action-right-left" className="text-base-content/90 font-medium">
                       {t("mouseGesture.rockerRightLeft")}
-                    </span>
+                    </label>
                     <p className="text-sm text-base-content/60">
                       {t("mouseGesture.rockerRightLeftDescription")}
                     </p>
                   </div>
                   <Select
+                    id="rocker-action-right-left"
                     className="w-64 max-w-xs text-sm"
-                    aria-label={t("mouseGesture.rockerRightLeft")}
                     value={config.rockerActions.rightLeft}
                     onChange={(e) =>
                       updateRockerAction("rightLeft", e.target.value)}
@@ -199,11 +199,11 @@ export function GeneralSettings({
             )}
 
             <div className={styles.row}>
-              <span className="text-base-content/90 font-medium">
+              <label htmlFor="mouse-gesture-wheel-enabled" className="text-base-content/90 font-medium cursor-pointer">
                 {t("mouseGesture.wheelGesturesEnabled")}
-              </span>
+              </label>
               <Switch
-                aria-label={t("mouseGesture.wheelGesturesEnabled")}
+                id="mouse-gesture-wheel-enabled"
                 data-setting="mouse-gesture-wheel-enabled"
                 checked={config.wheelGesturesEnabled ?? true}
                 onChange={() =>
@@ -220,16 +220,16 @@ export function GeneralSettings({
               <>
                 <div className={styles.field}>
                   <div className="flex-1">
-                    <span className="text-base-content/90 font-medium">
+                    <label htmlFor="wheel-action-scroll-up" className="text-base-content/90 font-medium">
                       {t("mouseGesture.wheelScrollUp")}
-                    </span>
+                    </label>
                     <p className="text-sm text-base-content/60">
                       {t("mouseGesture.wheelScrollUpDescription")}
                     </p>
                   </div>
                   <Select
+                    id="wheel-action-scroll-up"
                     className="w-64 max-w-xs text-sm"
-                    aria-label={t("mouseGesture.wheelScrollUp")}
                     value={config.wheelActions.scrollUp}
                     onChange={(e) =>
                       updateWheelAction("scrollUp", e.target.value)}
@@ -245,16 +245,16 @@ export function GeneralSettings({
 
                 <div className={styles.field}>
                   <div className="flex-1">
-                    <span className="text-base-content/90 font-medium">
+                    <label htmlFor="wheel-action-scroll-down" className="text-base-content/90 font-medium">
                       {t("mouseGesture.wheelScrollDown")}
-                    </span>
+                    </label>
                     <p className="text-sm text-base-content/60">
                       {t("mouseGesture.wheelScrollDownDescription")}
                     </p>
                   </div>
                   <Select
+                    id="wheel-action-scroll-down"
                     className="w-64 max-w-xs text-sm"
-                    aria-label={t("mouseGesture.wheelScrollDown")}
                     value={config.wheelActions.scrollDown}
                     onChange={(e) =>
                       updateWheelAction("scrollDown", e.target.value)}
@@ -333,15 +333,15 @@ export function GeneralSettings({
           <div className="space-y-6">
             <div className={styles.row}>
               <div>
-                <span className="text-base-content/90 font-medium">
+                <label htmlFor="mouse-gesture-show-trail" className="text-base-content/90 font-medium cursor-pointer">
                   {t("mouseGesture.showTrail")}
-                </span>
+                </label>
                 <p className="text-sm text-base-content/60">
                   {t("mouseGesture.showTrailDescription")}
                 </p>
               </div>
               <Switch
-                aria-label={t("mouseGesture.showTrail")}
+                id="mouse-gesture-show-trail"
                 checked={config.showTrail}
                 onChange={() => toggleShowTrail()}
                 disabled={!config.enabled}
@@ -350,15 +350,15 @@ export function GeneralSettings({
 
             <div className={styles.row}>
               <div>
-                <span className="text-base-content/90 font-medium">
+                <label htmlFor="mouse-gesture-show-label" className="text-base-content/90 font-medium cursor-pointer">
                   {t("mouseGesture.showLabel")}
-                </span>
+                </label>
                 <p className="text-sm text-base-content/60">
                   {t("mouseGesture.showLabelDescription")}
                 </p>
               </div>
               <Switch
-                aria-label={t("mouseGesture.showLabel")}
+                id="mouse-gesture-show-label"
                 checked={config.showLabel ?? true}
                 onChange={() => toggleShowLabel()}
                 disabled={!config.enabled}
@@ -395,6 +395,7 @@ export function GeneralSettings({
                     disabled={!config.enabled || !config.showTrail}
                   />
                   <div
+                    aria-hidden="true"
                     className="w-full h-full"
                     style={{ backgroundColor: config.trailColor }}
                   >

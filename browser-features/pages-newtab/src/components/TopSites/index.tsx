@@ -143,10 +143,11 @@ function AddSiteModal({
         <h3 className="font-bold text-lg mb-2">{t("topSites.addNewSite")}</h3>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="form-control">
-            <label className="label">
+            <label htmlFor="top-site-url-input" className="label">
               <span className="label-text">{t("topSites.url")}</span>
             </label>
             <input
+              id="top-site-url-input"
               ref={urlInputRef}
               type="text"
               className="input input-bordered w-full"
@@ -157,10 +158,11 @@ function AddSiteModal({
             />
           </div>
           <div className="form-control">
-            <label className="label">
+            <label htmlFor="top-site-label-input" className="label">
               <span className="label-text">{t("topSites.label")}</span>
             </label>
             <input
+              id="top-site-label-input"
               type="text"
               className="input input-bordered w-full"
               placeholder={t("topSites.labelPlaceholder", {
@@ -388,26 +390,49 @@ export function TopSites({ isFirefoxMode = false }: { isFirefoxMode?: boolean })
       {contextMenu && (
         <div
           ref={contextMenuRef}
+          role="menu"
+          aria-label={t("topSites.contextMenu", { defaultValue: "Site options" })}
           className="absolute z-10 bg-base-200 rounded-md shadow-lg"
           style={{
             top: `${contextMenu.y}px`,
             left: `${contextMenu.x}px`,
           }}
         >
-          <ul className="menu p-2">
+          <ul className="menu p-2" role="none">
             {isPinned(contextMenu.site)
               ? (
-                <li onClick={() => unpinSite(contextMenu.site as PinnedSite)}>
-                  <a>{t("topSites.unpin")}</a>
+                <li role="none">
+                  <button
+                    type="button"
+                    role="menuitem"
+                    className="w-full text-left"
+                    onClick={() => unpinSite(contextMenu.site as PinnedSite)}
+                  >
+                    {t("topSites.unpin")}
+                  </button>
                 </li>
               )
               : (
-                <li onClick={() => pinSite(contextMenu.site)}>
-                  <a>{t("topSites.pin")}</a>
+                <li role="none">
+                  <button
+                    type="button"
+                    role="menuitem"
+                    className="w-full text-left"
+                    onClick={() => pinSite(contextMenu.site)}
+                  >
+                    {t("topSites.pin")}
+                  </button>
                 </li>
               )}
-            <li onClick={() => handleBlockRequest(contextMenu.site)}>
-              <a>{t("topSites.block")}</a>
+            <li role="none">
+              <button
+                type="button"
+                role="menuitem"
+                className="w-full text-left"
+                onClick={() => handleBlockRequest(contextMenu.site)}
+              >
+                {t("topSites.block")}
+              </button>
             </li>
           </ul>
         </div>

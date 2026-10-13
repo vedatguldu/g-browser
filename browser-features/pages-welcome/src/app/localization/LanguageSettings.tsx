@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   getLocaleData,
@@ -26,6 +26,7 @@ export function LanguageSettings() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState(false);
+  const lastFocusedRef = useRef<HTMLElement | null>(null);
   const systemLocale = data ? resolveSystemLocale(
     data.localeInfo.systemLocale,
     [selected, ...data.installedLocales, ...data.availableLocales.map((pack) => pack.target_locale)],
@@ -54,7 +55,7 @@ export function LanguageSettings() {
           );
         }
       } catch (error) {
-        console.error("[Welcome] Language loading failed", error);
+        console.error("[Welcome] Language loading failed status message", error);
         if (active) setError(true);
       } finally {
         if (active) setLoading(false);
@@ -67,6 +68,7 @@ export function LanguageSettings() {
   }, [attempt]);
   async function changeLocale(locale: string) {
     if (!data || saving || locale === selected) return;
+    lastFocusedRef.current = document.activeElement as HTMLElement | null;
     setSaving(true);
     setError(false);
     try {
@@ -90,20 +92,24 @@ export function LanguageSettings() {
         installedLocales: [...new Set([...data.installedLocales, locale])],
       });
     } catch (error) {
-      console.error("[Welcome] Language update failed", error);
+      console.error("[Welcome] Language update failed status message", error);
       setError(true);
     } finally {
       setSaving(false);
+      setTimeout(() => {
+        lastFocusedRef.current?.focus();
+      }, 50);
     }
   }
   return (
     <div>
       {loading ? <p role="status">{t("ui.loading")}</p> : data && (
-        <section>
+        <section aria-busy={saving}>
           <CurrentSetting
             icon={<Languages size={32} />}
             label={t("localizationPage.floorpLanguage")}
             value={names[selected] || selected}
+            valueLang={selected}
             detail={t("setupRich.languageActive")}
           />
           <DataList.Root unstyled className={styles.list}>
@@ -122,7 +128,7 @@ export function LanguageSettings() {
             icon={<Languages size={22} />}
             label={t("setupV5.languageLabel")}
             hint={t("setupV5.languageHint")}
-            disabled={saving}
+            ariaDisabled={saving}
             value={selected}
             onChange={(value) => void changeLocale(value)}
             options={[
@@ -132,7 +138,11 @@ export function LanguageSettings() {
               ]),
             ]
               .sort((a, b) => (names[a] || a).localeCompare(names[b] || b))
-              .map((code) => ({ value: code, label: names[code] || code }))}
+              .map((code) => ({
+                value: code,
+                label: names[code] || code,
+                lang: code,
+              }))}
           />
           <Button
             variant="secondary"

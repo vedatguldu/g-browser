@@ -1,24 +1,32 @@
 {
-    "profileManager": {
-        "title": "Profiler",
-        "buttons": {
-            "refresh": "Refresh",
-            "create": "Skapa"
-        },
-        "loading": "Laddar…",
-        "noProfiles": "Inga profiler hittades.",
-        "current": "Nuvarande",
-        "default": "Standard",
-        "actions": {
-            "open": "Open",
-            "new": "Nytt",
-            "rename": "Byt namn",
-            "remove": "Ta bort",
-            "setDefault": "Standard"
-        },
-        "prompts": {
-            "confirmRemove": "Är du säker du vill ta bort denna profil?",
-            "newName": "Nytt profilnamn:"
-        }
+  "profileManager": {
+    "title": "Profiler",
+    "buttons": {
+      "refresh": "Refresh",
+      "create": "Skapa"
+    },
+    "loading": "Laddar…",
+    "noProfiles": "Inga profiler hittades.",
+    "current": "Nuvarande",
+    "default": "Standard",
+    "actions": {
+      "open": "Open",
+      "new": "Nytt",
+      "rename": "Byt namn",
+      "remove": "Ta bort",
+      "setDefault": "Standard",
+      "openProfile": "Launch {{name}} profile",
+      "removeProfile": "Remove {{name}} profile",
+      "currentProfileNotice": "Currently active profile"
+    },
+    "prompts": {
+      "confirmRemove": "Är du säker du vill ta bort denna profil?",
+      "newName": "Nytt profilnamn:"
+    },
+    "status": {
+      "loaded": "{{count}} profiles loaded.",
+      "removedSuccess": "Profile {{name}} was permanently deleted.",
+      "removeFailed": "Failed to remove profile {{name}}."
     }
+  }
 }

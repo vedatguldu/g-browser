@@ -24,48 +24,54 @@ export function Tabbar() {
       </CardHeader>
       <CardContent className="space-y-3">
         <div>
-          <label className="block mb-2 text-base font-medium">
-            {t("design.style")}
-          </label>
-          <p className="text-sm text-muted-foreground mb-4">
-            {t("design.styleDescription")}
-          </p>
-          <div className="flex space-x-4">
-            <label className="flex items-center space-x-2">
-              <input
-                type="radio"
-                name="style"
-                value="horizontal"
-                checked={getValues("style") === "horizontal"}
-                onChange={(e) => setValue("style", e.target.value)}
-              />
-              <span>{t("design.horizontal")}</span>
-            </label>
-            <label className="flex items-center space-x-2">
-              <input
-                type="radio"
-                name="style"
-                value="multirow"
-                checked={getValues("style") === "multirow"}
-                onChange={(e) => setValue("style", e.target.value)}
-              />
-              <span>{t("design.multirow")}</span>
-            </label>
-            <label className="flex items-center space-x-2">
-              <input
-                type="radio"
-                name="style"
-                value="vertical"
-                checked={getValues("style") === "vertical"}
-                onChange={(e) => setValue("style", e.target.value)}
-              />
-              <span>{t("design.vertical")}</span>
-            </label>
-          </div>
+          <fieldset>
+            <legend className="block mb-2 text-base font-medium">
+              {t("design.style")}
+            </legend>
+            <p className="text-sm text-muted-foreground mb-4">
+              {t("design.styleDescription")}
+            </p>
+            <div className="flex space-x-4">
+              <label htmlFor="tabbar-style-horizontal" className="flex items-center space-x-2">
+                <input
+                  id="tabbar-style-horizontal"
+                  type="radio"
+                  name="style"
+                  value="horizontal"
+                  checked={getValues("style") === "horizontal"}
+                  onChange={(e) => setValue("style", e.target.value)}
+                />
+                <span>{t("design.horizontal")}</span>
+              </label>
+              <label htmlFor="tabbar-style-multirow" className="flex items-center space-x-2">
+                <input
+                  id="tabbar-style-multirow"
+                  type="radio"
+                  name="style"
+                  value="multirow"
+                  checked={getValues("style") === "multirow"}
+                  onChange={(e) => setValue("style", e.target.value)}
+                />
+                <span>{t("design.multirow")}</span>
+              </label>
+              <label htmlFor="tabbar-style-vertical" className="flex items-center space-x-2">
+                <input
+                  id="tabbar-style-vertical"
+                  type="radio"
+                  name="style"
+                  value="vertical"
+                  checked={getValues("style") === "vertical"}
+                  onChange={(e) => setValue("style", e.target.value)}
+                />
+                <span>{t("design.vertical")}</span>
+              </label>
+            </div>
+          </fieldset>
           {getValues("style") === "multirow" && (
             <div className="flex flex-col gap-y-2 mt-6">
-              <label className="flex items-center space-x-2 cursor-pointer">
+              <label htmlFor="tabbar-max-row-enabled" className="flex items-center space-x-2 cursor-pointer">
                 <input
+                  id="tabbar-max-row-enabled"
                   type="checkbox"
                   name="maxRowEnabled"
                   checked={getValues("maxRowEnabled")}
@@ -76,13 +82,14 @@ export function Tabbar() {
                 <span className="text-sm">{t("design.maxRowEnabled")}</span>
               </label>
               <div className="flex flex-col">
-                <label className="block mb-1">
+                <label htmlFor="tabbar-max-row" className="block mb-1">
                   {t("design.maxRow")}
                   <span className="float-right text-xs text-muted-foreground">
                     1 ~ 10
                   </span>
                 </label>
                 <Input
+                  id="tabbar-max-row"
                   type="number"
                   name="maxRow"
                   value={getValues("maxRow")}
@@ -104,51 +111,56 @@ export function Tabbar() {
             <a
               href="https://docs.floorp.app/docs/features/tab-bar-layout"
               target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${t("design.learnMore")} (${t("common.opensInNewWindow", { defaultValue: "opens in a new tab" })})`}
               className="text-[var(--link-text-color)] hover:underline inline-flex items-center gap-2"
             >
               {t("design.learnMore")}
-              <ExternalLink className="size-4" />
+              <ExternalLink className="size-4" aria-hidden="true" />
             </a>
           </span>
         </div>
 
         <div className="mt-4">
-          <label className="block mb-2 text-base font-medium">
-            {t("design.position")}
-          </label>
-          <p className="text-sm text-muted-foreground mb-4">
-            {t("design.positionDescription")}
-          </p>
-          <div className="flex flex-col">
-            {[
-              { value: "default", label: "design.default" },
-              { value: "hide-horizontal-tabbar", label: "design.hideTabBar" },
-              {
-                value: "optimise-to-vertical-tabbar",
-                label: "design.hideTabBarAndTitleBar",
-              },
-              {
-                value: "bottom-of-navigation-toolbar",
-                label: "design.showTabBarOnBottomOfNavigationBar",
-              },
-              {
-                value: "bottom-of-window",
-                label: "design.showTabBarOnBottomOfWindow",
-              },
-            ].map(({ value, label }) => (
-              <label key={value} className="flex items-center space-x-2">
-                <input
-                  type="radio"
-                  name="position"
-                  value={value}
-                  checked={getValues("position") === value}
-                  onChange={(e) =>
-                    setValue("position", e.target.value)}
-                />
-                <span>{t(label)}</span>
-              </label>
-            ))}
-          </div>
+          <fieldset>
+            <legend className="block mb-2 text-base font-medium">
+              {t("design.position")}
+            </legend>
+            <p className="text-sm text-muted-foreground mb-4">
+              {t("design.positionDescription")}
+            </p>
+            <div className="flex flex-col">
+              {[
+                { value: "default", label: "design.default" },
+                { value: "hide-horizontal-tabbar", label: "design.hideTabBar" },
+                {
+                  value: "optimise-to-vertical-tabbar",
+                  label: "design.hideTabBarAndTitleBar",
+                },
+                {
+                  value: "bottom-of-navigation-toolbar",
+                  label: "design.showTabBarOnBottomOfNavigationBar",
+                },
+                {
+                  value: "bottom-of-window",
+                  label: "design.showTabBarOnBottomOfWindow",
+                },
+              ].map(({ value, label }) => (
+                <label key={value} htmlFor={`tabbar-position-${value}`} className="flex items-center space-x-2">
+                  <input
+                    id={`tabbar-position-${value}`}
+                    type="radio"
+                    name="position"
+                    value={value}
+                    checked={getValues("position") === value}
+                    onChange={(e) =>
+                      setValue("position", e.target.value)}
+                  />
+                  <span>{t(label)}</span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
         </div>
       </CardContent>
     </Card>

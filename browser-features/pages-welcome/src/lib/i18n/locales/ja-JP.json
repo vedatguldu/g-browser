@@ -319,7 +319,8 @@
     "getStarted": "Floorp に飛び込もう",
     "hint": "より詳細な設定は、右上のメニューボタンの中にある [設定] からいつでもアクセスできます。",
     "resourcesLabel": "リソース",
-    "defaultBrowserSuccess": "Floorp が既定のブラウザーに設定されました！"
+    "defaultBrowserSuccess": "Floorp が既定のブラウザーに設定されました！",
+    "opensInNewWindow": "新しいウィンドウで開きます"
   },
   "whatsNew": {
     "title": "Floorp {{version}} へようこそ！",

@@ -22,10 +22,13 @@ export default function SupportPage() {
       <RadioCard.Root
         unstyled
         value={choice.mode}
-        disabled={!choice.ready || choice.saving}
+        disabled={!choice.ready}
+        aria-busy={choice.saving}
+        aria-disabled={choice.saving}
         aria-label={t("setupV5.supportTitle")}
         className={styles.radioStack}
         onValueChange={({ value }) => {
+          if (!choice.ready || choice.saving) return;
           const mode = RELEASE_NOTES_MODES.find((mode) => mode === value);
           if (mode) choice.setMode(mode);
         }}
@@ -57,6 +60,9 @@ export default function SupportPage() {
           rel="noopener noreferrer"
         >
           {t("releaseNotes.learnMore")}
+          <span className="sr-only">
+            {" "}({t("finishPage.opensInNewWindow", { defaultValue: "opens in a new tab" })})
+          </span>
         </a>
       </SetupInfo>
       <p className={styles.muted}>{t("setupV5.supportNotice")}</p>

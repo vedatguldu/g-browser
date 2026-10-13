@@ -319,7 +319,8 @@
     "getStarted": "Kom igång med Floorp",
     "hint": "För mer detaljerade inställningar kan du anpassa via alternativet Inställningar i menyknappen längst upp till höger.",
     "resourcesLabel": "Resurser",
-    "defaultBrowserSuccess": "Floorp har ställts in som din standardwebbläsare!"
+    "defaultBrowserSuccess": "Floorp har ställts in som din standardwebbläsare!",
+    "opensInNewWindow": "opens in new window"
   },
   "whatsNew": {
     "title": "Välkommen till Floorp {{version}}!",

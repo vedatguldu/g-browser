@@ -1,24 +1,32 @@
 {
-    "profileManager": {
-        "title": "Profil",
-        "buttons": {
-            "refresh": "Refresh",
-            "create": "Buat"
-        },
-        "loading": "Memuat …",
-        "noProfiles": "Tidak ada profil ditemukan.",
-        "current": "Saat ini",
-        "default": "Bawaan",
-        "actions": {
-            "open": "Open",
-            "new": "Baru",
-            "rename": "Ganti nama",
-            "remove": "Hapus",
-            "setDefault": "Bawaan"
-        },
-        "prompts": {
-            "confirmRemove": "Yakin ingin menghapus profil ini?",
-            "newName": "Nama profil baru:"
-        }
+  "profileManager": {
+    "title": "Profil",
+    "buttons": {
+      "refresh": "Refresh",
+      "create": "Buat"
+    },
+    "loading": "Memuat …",
+    "noProfiles": "Tidak ada profil ditemukan.",
+    "current": "Saat ini",
+    "default": "Bawaan",
+    "actions": {
+      "open": "Open",
+      "new": "Baru",
+      "rename": "Ganti nama",
+      "remove": "Hapus",
+      "setDefault": "Bawaan",
+      "openProfile": "Launch {{name}} profile",
+      "removeProfile": "Remove {{name}} profile",
+      "currentProfileNotice": "Currently active profile"
+    },
+    "prompts": {
+      "confirmRemove": "Yakin ingin menghapus profil ini?",
+      "newName": "Nama profil baru:"
+    },
+    "status": {
+      "loaded": "{{count}} profiles loaded.",
+      "removedSuccess": "Profile {{name}} was permanently deleted.",
+      "removeFailed": "Failed to remove profile {{name}}."
     }
+  }
 }

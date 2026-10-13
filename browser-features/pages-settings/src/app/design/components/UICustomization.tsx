@@ -45,13 +45,14 @@ export function UICustomization() {
               {t("design.uiCustomization.navbar.title")}
             </h3>
             <div className="space-y-4">
-              <div>
-                <label className="block">
+              <fieldset>
+                <legend className="block mb-2 font-medium">
                   {t("design.uiCustomization.navbar.positionWithExperiment")}
-                </label>
+                </legend>
                 <div className="flex space-x-4">
-                  <label className="flex items-center space-x-2">
+                  <label htmlFor="navbar-pos-top" className="flex items-center space-x-2">
                     <input
+                      id="navbar-pos-top"
                       type="radio"
                       name="navbarPosition"
                       value="top"
@@ -63,8 +64,9 @@ export function UICustomization() {
                     />
                     <span>{t("design.uiCustomization.navbar.top")}</span>
                   </label>
-                  <label className="flex items-center space-x-2">
+                  <label htmlFor="navbar-pos-bottom" className="flex items-center space-x-2">
                     <input
+                      id="navbar-pos-bottom"
                       type="radio"
                       name="navbarPosition"
                       value="bottom"
@@ -75,7 +77,7 @@ export function UICustomization() {
                     <span>{t("design.uiCustomization.navbar.bottom")}</span>
                   </label>
                 </div>
-              </div>
+              </fieldset>
 
               <div className="flex items-center justify-between gap-2">
                 <label htmlFor="search-bar-top">
@@ -209,13 +211,14 @@ export function UICustomization() {
               {t("design.uiCustomization.bookmarkBar.title")}
             </h3>
             <div className="space-y-4">
-              <div>
-                <label className="block">
+              <fieldset>
+                <legend className="block mb-2 font-medium">
                   {t("design.uiCustomization.bookmarkBar.position")}
-                </label>
+                </legend>
                 <div className="flex space-x-4">
-                  <label className="flex items-center space-x-2">
+                  <label htmlFor="bookmark-bar-pos-top" className="flex items-center space-x-2">
                     <input
+                      id="bookmark-bar-pos-top"
                       type="radio"
                       name="bookmarkBarPosition"
                       value="top"
@@ -226,8 +229,9 @@ export function UICustomization() {
                     />
                     <span>{t("design.uiCustomization.bookmarkBar.top")}</span>
                   </label>
-                  <label className="flex items-center space-x-2">
+                  <label htmlFor="bookmark-bar-pos-bottom" className="flex items-center space-x-2">
                     <input
+                      id="bookmark-bar-pos-bottom"
                       type="radio"
                       name="bookmarkBarPosition"
                       value="bottom"
@@ -241,7 +245,7 @@ export function UICustomization() {
                     </span>
                   </label>
                 </div>
-              </div>
+              </fieldset>
 
               <div className="flex items-center justify-between gap-2">
                 <label htmlFor="bookmark-bar-focus-expand">

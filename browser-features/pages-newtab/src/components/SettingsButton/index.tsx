@@ -1,14 +1,22 @@
 import { useTranslation } from "react-i18next";
 
-export function SettingsButton({ onClick }: { onClick: () => void }) {
+export function SettingsButton({
+  onClick,
+  isOpen = false,
+}: {
+  onClick: () => void;
+  isOpen?: boolean;
+}) {
   const { t } = useTranslation();
 
   return (
     <button
       type="button"
       onClick={onClick}
-      className="fixed bottom-4 right-4 p-2 bg-gray-800/50 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl transition-shadow duration-200 group"
+      className="fixed bottom-4 right-4 p-2 bg-gray-800/50 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl transition-shadow duration-200 group focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"
       aria-label={t("settingsButton.settings")}
+      aria-haspopup="dialog"
+      aria-expanded={isOpen}
     >
       <svg
         className="w-6 h-6 text-gray-300 group-hover:text-gray-900 transition-colors"

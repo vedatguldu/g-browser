@@ -319,7 +319,8 @@
     "getStarted": "Начало работы с Floorp",
     "hint": "Более подробные настройки можно выполнить с помощью пункта «Настройки» в меню, расположенном в правом верхнем углу.",
     "resourcesLabel": "Ресурсы",
-    "defaultBrowserSuccess": "Floorp был установлен в качестве браузера по умолчанию!"
+    "defaultBrowserSuccess": "Floorp был установлен в качестве браузера по умолчанию!",
+    "opensInNewWindow": "opens in new window"
   },
   "whatsNew": {
     "title": "Добро пожаловать в Floorp {{version}}!",

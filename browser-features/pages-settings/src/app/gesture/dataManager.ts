@@ -42,7 +42,7 @@ export const useMouseGestureConfig = () => {
           const result = await rpc.getBoolPref(MOUSE_GESTURE_ENABLED_PREF);
           enabled = result === null ? false : result;
         } catch (e) {
-          console.error("Failed to get enabled state", e);
+          console.error("Failed to get enabled state status message", e);
           enabled = false;
         }
 
@@ -51,7 +51,7 @@ export const useMouseGestureConfig = () => {
           const configStr = await rpc.getStringPref(MOUSE_GESTURE_CONFIG_PREF);
           loadedConfig = parseMouseGestureConfig(configStr, enabled);
         } catch (parseError) {
-          console.error("Failed to load configuration", parseError);
+          console.error("Failed to load configuration status message", parseError);
         }
 
         if (cancelled) return;
@@ -72,7 +72,7 @@ export const useMouseGestureConfig = () => {
           setError(snapshot.error);
         });
       } catch (error) {
-        console.error("Failed to load configuration", error);
+        console.error("Failed to load configuration status message", error);
       } finally {
         if (!cancelled) setLoading(false);
       }

@@ -7,8 +7,9 @@ export interface SetupSelectProps {
   icon?: ReactNode;
   value: string;
   disabled?: boolean;
+  ariaDisabled?: boolean;
   onChange: (value: string) => void;
-  options: { value: string; label: string }[];
+  options: { value: string; label: string; lang?: string }[];
 }
 
 export interface NavigationProps {
@@ -23,5 +24,6 @@ export interface CurrentSettingProps {
   icon: ReactNode;
   label: string;
   value: string;
+  valueLang?: string;
   detail?: string;
 }

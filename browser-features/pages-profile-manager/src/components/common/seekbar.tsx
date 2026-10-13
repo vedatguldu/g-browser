@@ -62,6 +62,8 @@ const Seekbar = forwardRef<HTMLInputElement, SeekbarProps>(
                 )}
 
                 <input
+                    id={props.id}
+                    aria-label={props["aria-label"]}
                     type="range"
                     ref={ref}
                     className={cn(

@@ -45,12 +45,12 @@ export function getInstalledApps(): Promise<TProgressiveWebAppObject> {
           const parsed = JSON.parse(installedApps);
           resolve(parsed);
         } catch (_e) {
-          console.error("Failed to parse installed apps:", installedApps);
+          console.error("Failed to parse installed apps status message:", installedApps);
           resolve({});
         }
       });
     } catch (e) {
-      console.error("Failed to get installed apps:", e);
+      console.error("Failed to get installed apps status message:", e);
       resolve({});
     }
   });
@@ -84,14 +84,14 @@ export function getContainers(): Promise<Container[]> {
           resolve(JSON.parse(containersJson));
         } catch (e) {
           console.error(
-            "[PWA:dataManager] Failed to parse containers JSON:",
+            "[PWA:dataManager] Failed to parse containers JSON status message:",
             e,
           );
           resolve([]);
         }
       });
     } catch (e) {
-      console.error("[PWA:dataManager] Failed to get containers:", e);
+      console.error("[PWA:dataManager] Failed to get containers status message:", e);
       resolve([]);
     }
   });

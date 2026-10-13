@@ -55,6 +55,7 @@ export default function FloorpOS() {
   const [statusLoading, setStatusLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+  const [copyFeedback, setCopyFeedback] = useState("");
 
   useEffect(() => {
     loadStatus();
@@ -80,6 +81,7 @@ export default function FloorpOS() {
   };
 
   const handleEnable = async () => {
+    if (loading || !status?.platformSupported || status?.enabled) return;
     setLoading(true);
     setMessage(t("floorpOS.messages.enabling"));
     setError("");
@@ -94,7 +96,7 @@ export default function FloorpOS() {
         setMessage("");
       }
     } catch (err) {
-      console.error("Error enabling Floorp OS:", err);
+      console.error("Error enabling Floorp OS status message:", err);
       setError(t("floorpOS.errors.enableAction", { reason: String(err) }));
       setMessage("");
     } finally {
@@ -103,6 +105,7 @@ export default function FloorpOS() {
   };
 
   const handleDisable = async () => {
+    if (loading || !status?.enabled) return;
     setLoading(true);
     setMessage(t("floorpOS.messages.disabling"));
     setError("");
@@ -117,7 +120,7 @@ export default function FloorpOS() {
         setMessage("");
       }
     } catch (err) {
-      console.error("Error disabling Floorp OS:", err);
+      console.error("Error disabling Floorp OS status message:", err);
       setError(t("floorpOS.errors.disableAction", { reason: String(err) }));
       setMessage("");
     } finally {
@@ -259,13 +262,20 @@ export default function FloorpOS() {
                           throw new Error("Clipboard API unavailable");
                         }
                         await navigator.clipboard.writeText(status.serverToken);
+                        setCopyFeedback(t("floorpOS.statusCard.tokenCopied"));
                       } catch (e) {
-                        console.error("[Floorp OS]", "Failed to copy token:", e);
+                        console.error("[Floorp OS]", "Failed to copy token status message:", e);
+                        setError(t("floorpOS.errors.copyFailed"));
                       }
                     }}
                   >
                     {t("floorpOS.statusCard.copyToken")}
                   </Button>
+                </div>
+              )}
+              {copyFeedback && (
+                <div className="sr-only" role="status" aria-live="polite">
+                  {copyFeedback}
                 </div>
               )}
             </div>
@@ -284,28 +294,31 @@ export default function FloorpOS() {
             <div className="flex gap-4">
               <Button
                 onClick={handleEnable}
-                disabled={loading ||
+                aria-busy={loading}
+                aria-disabled={loading ||
                   !status.platformSupported ||
                   status.enabled}
                 className="flex-1"
               >
-                <Power className="mr-2 h-4 w-4" />
+                <Power className="mr-2 h-4 w-4" aria-hidden="true" />
                 {t("floorpOS.controlsCard.enable")}
               </Button>
               <Button
                 onClick={handleDisable}
-                disabled={loading || !status.enabled}
+                aria-busy={loading}
+                aria-disabled={loading || !status.enabled}
                 variant="secondary"
                 className="flex-1"
               >
-                <Power className="mr-2 h-4 w-4" />
+                <Power className="mr-2 h-4 w-4" aria-hidden="true" />
                 {t("floorpOS.controlsCard.disable")}
               </Button>
             </div>
 
             <Button
               onClick={loadStatus}
-              disabled={loading}
+              aria-busy={loading}
+              aria-disabled={loading}
               variant="secondary"
               className="w-full"
             >
@@ -314,7 +327,7 @@ export default function FloorpOS() {
 
             {loading && (
               <div className="flex items-center justify-center p-3 space-x-2">
-                <progress className="progress w-56"></progress>
+                <progress className="progress w-56" aria-label={t("common.loading", { defaultValue: "Loading..." })}></progress>
                 <span>{message}</span>
               </div>
             )}

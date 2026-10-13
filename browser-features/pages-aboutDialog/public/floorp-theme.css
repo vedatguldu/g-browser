@@ -169,6 +169,13 @@ html {
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .ad-spinner {
+    animation: none;
+    border-style: dashed;
+  }
+}
+
 .ad-status-text {
   font-size: 14px;
   color: var(--ad-text-2);
@@ -314,6 +321,12 @@ html {
   transition: color 0.15s, transform 0.15s;
 }
 
+.ad-community-item:focus-visible {
+  outline: 2px solid var(--ad-accent);
+  outline-offset: 4px;
+  border-radius: 8px;
+}
+
 .ad-community-item:hover {
   color: var(--ad-accent);
 }
@@ -380,6 +393,12 @@ html {
   text-decoration: none;
   font-weight: 500;
   transition: color 0.15s;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-family: inherit;
+  text-align: left;
 }
 
 .ad-help-link:hover {
@@ -438,5 +457,32 @@ html {
   text-align: center;
   font-size: 11px;
   color: var(--ad-text-3);
-  opacity: 0.9;
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (forced-colors: active) {
+  .ad-btn-primary,
+  .ad-btn-outline,
+  .ad-badge {
+    forced-color-adjust: none;
+    border: 2px solid ButtonText !important;
+  }
+  .ad-btn:focus-visible,
+  .ad-help-link:focus-visible,
+  .ad-community-item:focus-visible,
+  .ad-footer a:focus-visible {
+    outline: 2px solid Highlight !important;
+  }
+  .ad-community-icon {
+    border: 1px solid ButtonText !important;
+  }
 }

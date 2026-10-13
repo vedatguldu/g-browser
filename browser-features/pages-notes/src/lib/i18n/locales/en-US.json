@@ -24,7 +24,10 @@
         "noteList": "Notes list",
         "search": "Search notes",
         "clearSearch": "Clear search",
-        "noSearchResults": "No notes match your search"
+        "noSearchResults": "No notes match your search",
+        "searchResults": "{{count}} notes found",
+        "deleteSpecific": "Delete note \"{{title}}\"",
+        "reorderedAnnouncement": "Moved note \"{{title}}\" to position {{index}}"
     },
     "editor": {
         "bold": "Bold",
@@ -50,7 +53,8 @@
         "alignment": "Alignment",
         "contentArea": "Note content",
         "placeholder": "Start writing...",
-        "image": "Insert image"
+        "image": "Insert image",
+        "resizeImage": "Resize image"
     },
     "common": {
         "close": "Close",

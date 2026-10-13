@@ -314,7 +314,7 @@ export async function saveCommandPaletteSettings(
       );
     }
   } catch (error) {
-    console.error("[command-palette] Failed to save settings:", error);
+    console.error("[command-palette] Failed to save settings status message:", error);
   }
 }
 
@@ -405,7 +405,7 @@ export async function getCommandPaletteSettings(): Promise<
       ),
     };
   } catch (error) {
-    console.error("[command-palette] Failed to load settings:", error);
+    console.error("[command-palette] Failed to load settings status message:", error);
     return null;
   }
 }
@@ -536,7 +536,7 @@ export async function loadShortcuts(): Promise<CommandPaletteShortcut[]> {
     }
     return cleaned;
   } catch (error) {
-    console.error("[command-palette] Failed to load shortcuts:", error);
+    console.error("[command-palette] Failed to load shortcuts status message:", error);
     return [];
   }
 }
@@ -564,7 +564,7 @@ export async function saveShortcuts(
       JSON.stringify(shortcuts),
     );
   } catch (error) {
-    console.error("[command-palette] Failed to save shortcuts:", error);
+    console.error("[command-palette] Failed to save shortcuts status message:", error);
   }
 }
 
@@ -581,7 +581,7 @@ export async function loadSelectableCommands(): Promise<SelectableCommand[]> {
     return parseSelectableCommands(raw);
   } catch (error) {
     console.error(
-      "[command-palette] Failed to load selectable commands:",
+      "[command-palette] Failed to load selectable commands status message:",
       error,
     );
     return [];

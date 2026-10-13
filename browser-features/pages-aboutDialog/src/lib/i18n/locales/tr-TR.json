@@ -7,40 +7,42 @@
       "esr": "ESR"
     },
     "update": {
-      "idle": "Check for updates",
-      "checking": "Checking for updates…",
-      "checkFailed": "Couldn't check for updates. Try again later.",
-      "upToDate": "You're up to date.",
-      "downloading": "Downloading update… {{progress}}",
-      "applying": "Installing update…",
-      "readyToRestart": "Update ready — restart to apply.",
-      "restarting": "Restarting…",
-      "policyDisabled": "Updates are managed by your organisation.",
-      "downloadFailed": "Download failed. Please try again.",
-      "noUpdater": "Updates are managed externally.",
-      "available": "Download update {{version}}",
-      "tryAgain": "Try again",
-      "restartToApply": "Restart to apply update"
+      "idle": "Güncellemeleri denetle",
+      "checking": "Güncellemeler denetleniyor…",
+      "checkFailed": "Güncellemeler denetlenemedi. Daha sonra tekrar deneyin.",
+      "upToDate": "Güncelsiniz.",
+      "downloading": "Güncelleme indiriliyor… {{progress}}",
+      "applying": "Güncelleme kuruluyor…",
+      "readyToRestart": "Güncelleme hazır — uygulamak için yeniden başlatın.",
+      "restarting": "Yeniden başlatılıyor…",
+      "policyDisabled": "Güncellemeler kuruluşunuz tarafından yönetiliyor.",
+      "downloadFailed": "İndirme başarısız oldu. Lütfen tekrar deneyin.",
+      "noUpdater": "Güncellemeler harici olarak yönetiliyor.",
+      "available": "Güncellemeyi indir {{version}}",
+      "tryAgain": "Tekrar dene",
+      "restartToApply": "Güncellemeyi uygulamak için yeniden başlat"
     },
     "community": {
-      "title": "Join the Community"
+      "title": "Topluluğa Katılın"
     },
     "help": {
-      "title": "Help & Support",
+      "title": "Yardım ve Destek",
       "support": "Destek"
     },
     "sponsor": {
-      "title": "Support the Project",
-      "button": "Become a Sponsor"
+      "title": "Projeyi Destekleyin",
+      "button": "Sponsor Olun"
     },
     "links": {
-      "releaseNotes": "Release Notes",
-      "help": "Floorp Help",
-      "feedback": "Submit Feedback",
+      "releaseNotes": "Sürüm Notları",
+      "help": "Floorp Yardımı",
+      "feedback": "Geri Bildirim Gönder",
       "licensing": "Lisans",
-      "terms": "Terms of Service",
-      "privacy": "Privacy Policy"
+      "terms": "Kullanım Koşulları",
+      "privacy": "Gizlilik Politikası"
     },
-    "trademark": "The name Floorp is a trademark in Japan."
+    "trademark": "Floorp adı Japonya'da tescilli bir ticari markadır.",
+    "opensExternal": "harici bağlantı",
+    "opensInNewWindow": "yeni pencerede açılır"
   }
 }

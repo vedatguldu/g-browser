@@ -51,7 +51,7 @@ export function DynamicSearchSettings() {
     <Card>
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          <Search className="size-5" />
+          <Search className="size-5" aria-hidden="true" />
           {t("commandPalette.dynamicSearch")}
         </CardTitle>
         <CardDescription>

@@ -67,7 +67,7 @@ export default function Page() {
         setLoadError(false);
       } catch (error) {
         if (!active) return;
-        console.error("[Settings:design] Load failed", error);
+        console.error("[Settings:design] Load failed status message", error);
         setLoadError(true);
       }
     };
@@ -114,7 +114,7 @@ export default function Page() {
         lastSavedSettingsRef.current = snapshot;
         if (mountedRef.current) setSaveError(false);
       } catch (error) {
-        console.error("[Settings:design] Save failed", error);
+        console.error("[Settings:design] Save failed status message", error);
         if (mountedRef.current) setSaveError(true);
       } finally {
         pendingRef.current--;
@@ -167,8 +167,10 @@ export default function Page() {
             <Button
               type="button"
               variant="secondary"
-              disabled={saving}
+              aria-disabled={saving}
+              aria-busy={saving}
               onClick={() => {
+                if (saving) return;
                 lastRequestedSettingsRef.current = null;
                 setRetry((value) => value + 1);
               }}

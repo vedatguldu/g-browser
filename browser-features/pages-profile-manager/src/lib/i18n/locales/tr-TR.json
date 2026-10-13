@@ -11,10 +11,18 @@
         "default": "Varsayılan",
         "actions": {
             "open": "Aç",
+            "openProfile": "{{name}} profilini aç",
             "new": "Yeni",
             "rename": "Yeniden adlandır",
             "remove": "Kaldır",
+            "removeProfile": "{{name}} profilini kaldır",
+            "currentProfileNotice": "Şu anda kullanımda olan profil",
             "setDefault": "Varsayılan"
+        },
+        "status": {
+            "loaded": "{{count}} profil yüklendi.",
+            "removedSuccess": "{{name}} profili kalıcı olarak silindi.",
+            "removeFailed": "{{name}} profili silinemedi."
         },
         "prompts": {
             "confirmRemove": "Bu profili silmek istediğinizden emin misiniz?",

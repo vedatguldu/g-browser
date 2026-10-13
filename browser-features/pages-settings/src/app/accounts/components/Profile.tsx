@@ -23,7 +23,7 @@ export function Profile({ accountAndProfileData }: ProfileProps) {
     <Card className={styles.section}>
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          <User className="size-5" />
+          <User className="size-5" aria-hidden="true" />
           {t("accounts.profileManagement")}
         </CardTitle>
       </CardHeader>
@@ -47,29 +47,27 @@ export function Profile({ accountAndProfileData }: ProfileProps) {
         </div>
 
         <div className={styles.actions}>
-          <a
-            href="#"
-            onClick={(e) => {
-              e.preventDefault();
+          <button
+            type="button"
+            onClick={() => {
               globalThis.NRAddTab("about:profiles");
             }}
             className={styles.link}
           >
             {t("accounts.openProfileManager")}
-            <ExternalLink className="size-4" />
-          </a>
-          <a
-            href="#"
-            onClick={async (event) => {
-              event.preventDefault();
+            <ExternalLink className="size-4" aria-hidden="true" />
+          </button>
+          <button
+            type="button"
+            onClick={async () => {
               try { setOpenError(!await openCurrentProfileDirectory()); }
               catch { setOpenError(true); }
             }}
             className={styles.link}
           >
             {t("accounts.openProfileSaveLocation")}
-            <ExternalLink className="size-4" />
-          </a>
+            <ExternalLink className="size-4" aria-hidden="true" />
+          </button>
         </div>
         {openError && <p role="alert" className="floorp-notice floorp-notice-error">{t("ui.loadError")}</p>}
       </CardContent>

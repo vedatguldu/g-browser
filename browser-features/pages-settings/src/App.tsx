@@ -56,9 +56,49 @@ function SettingsApp() {
   useHashSync(location.pathname + location.search);
   useSettingFocus(location.pathname, location.search);
 
+  useEffect(() => {
+    const path = location.pathname;
+    let pageTitle = t("settings.title", { defaultValue: "Settings" });
+    if (path.includes("dashboard") || path.includes("home")) {
+      pageTitle = t("navigation.home", { defaultValue: "Home" });
+    } else if (path.includes("design")) {
+      pageTitle = t("navigation.design", { defaultValue: "Design" });
+    } else if (path.includes("sidebar")) {
+      pageTitle = t("navigation.sidebar", { defaultValue: "Sidebar" });
+    } else if (path.includes("workspaces")) {
+      pageTitle = t("navigation.workspaces", { defaultValue: "Workspaces" });
+    } else if (path.includes("webapps")) {
+      pageTitle = t("navigation.webapps", { defaultValue: "Web Apps" });
+    } else if (path.includes("command-palette")) {
+      pageTitle = t("navigation.commandPalette", { defaultValue: "Command Palette" });
+    } else if (path.includes("floorp-os")) {
+      pageTitle = t("navigation.floorpOS", { defaultValue: "Floorp OS" });
+    } else if (path.includes("accounts")) {
+      pageTitle = t("navigation.accounts", { defaultValue: "Accounts" });
+    } else if (path.includes("gesture")) {
+      pageTitle = t("navigation.gesture", { defaultValue: "Mouse Gestures" });
+    } else if (path.includes("shortcuts")) {
+      pageTitle = t("navigation.shortcuts", { defaultValue: "Keyboard Shortcuts" });
+    } else if (path.includes("context-menu")) {
+      pageTitle = t("navigation.contextMenu", { defaultValue: "Context Menu" });
+    } else if (path.includes("performance")) {
+      pageTitle = t("navigation.performance", { defaultValue: "Performance" });
+    } else if (path.includes("about")) {
+      pageTitle = t("navigation.about", { defaultValue: "About" });
+    } else if (path.includes("updates")) {
+      pageTitle = t("navigation.updates", { defaultValue: "Updates" });
+    } else if (path.includes("search")) {
+      pageTitle = t("navigation.search", { defaultValue: "Search" });
+    }
+    document.title = `${pageTitle} - ${t("settings.title", { defaultValue: "Settings" })}`;
+  }, [location.pathname, t]);
+
   return (
     <SidebarProvider>
       <div className="floorp-settings">
+        <div role="status" aria-live="polite" aria-atomic="true" className="sr-only">
+          {document.title}
+        </div>
         <a className="floorp-skip" href="#settings-content">
           {t("ui.skipToContent", { defaultValue: "Skip to content" })}
         </a>

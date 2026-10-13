@@ -119,7 +119,7 @@ export async function getIdleMemoryReclaimSettings(): Promise<
     const raw = await rpc.getStringPref(IDLE_MEMORY_RECLAIM_PREF);
     return normalizeIdleMemoryReclaimSettings(parseSettingsJson(raw));
   } catch (error) {
-    console.error("[Performance] Failed to load idle reclaim settings:", error);
+    console.error("[Performance] Failed to load idle reclaim settings status message:", error);
     return { ...DEFAULT_IDLE_MEMORY_RECLAIM_SETTINGS };
   }
 }

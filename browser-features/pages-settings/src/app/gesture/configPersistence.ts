@@ -185,7 +185,7 @@ export function parseMouseGestureConfig(
   try {
     return normalizeMouseGestureConfig(JSON.parse(serializedConfig), enabled);
   } catch (error) {
-    console.error("Failed to parse mouse gesture configuration", error);
+    console.error("Failed to parse mouse gesture configuration status message", error);
     return createDefaultMouseGestureConfig(enabled);
   }
 }

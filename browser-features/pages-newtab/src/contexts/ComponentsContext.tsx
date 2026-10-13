@@ -43,7 +43,7 @@ export function ComponentsProvider(
         setComponents(newComponents);
       } catch (e) {
         console.error(
-          "[ComponentsContext] Failed to load component settings:",
+          "[ComponentsContext] Failed to load component settings status message:",
           e,
         );
       } finally {
@@ -68,7 +68,7 @@ export function ComponentsProvider(
 
       setComponents(newComponents as ComponentsState);
     } catch (e) {
-      console.error(`Failed to toggle ${key}:`, e);
+      console.error(`Failed to toggle ${key} status message:`, e);
     }
   }, []);
 

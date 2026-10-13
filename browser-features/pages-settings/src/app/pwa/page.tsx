@@ -23,7 +23,7 @@ export default function Page() {
         setReady(true);
         setError(false);
       } catch (error) {
-        console.error("[Settings:pwa] Load failed", error);
+        console.error("[Settings:pwa] Load failed status message", error);
         setError(true);
       }
     };
@@ -58,6 +58,9 @@ export default function Page() {
           onSubmit={(event) => event.preventDefault()}
         >
           <fieldset disabled={!ready} aria-busy={!ready} className="min-w-0">
+            <legend className="sr-only">
+              {t("progressiveWebApp.basicSettings")}
+            </legend>
             <Preferences />
           </fieldset>
           <InstalledApps />

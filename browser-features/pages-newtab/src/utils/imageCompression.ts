@@ -137,7 +137,7 @@ export async function prepareImageForStorage(
     const compressedDataUrl = await compressDataURL(originalDataUrl, options);
     return compressedDataUrl;
   } catch (error) {
-    console.error("[prepareImageForStorage] Failed to compress image:", error);
+    console.error("[prepareImageForStorage] Failed to compress image status message:", error);
     return originalDataUrl;
   }
 }

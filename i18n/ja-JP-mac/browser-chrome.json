@@ -2,6 +2,23 @@
   "tab-refresh": {
     "reload": "タブを再読み込み"
   },
+  "tabA11y": {
+    "sleeping": "休止中のタブ (選択時に再読み込み)",
+    "privateContainer": "プライベートコンテナータブ (履歴は記録されません)",
+    "audioPlaying": "音声再生中",
+    "audioMuted": "ミュート中",
+    "sharingActive": "デバイス共有中",
+    "mutedAnnouncement": "タブの音声をミュートしました",
+    "unmutedAnnouncement": "タブのミュートを解除しました"
+  },
+  "tabStacks": {
+    "tablist": "タブスタックのタブ一覧",
+    "closeTab": "タブを閉じる ({{title}})",
+    "reloadTab": "タブを再読み込み ({{title}})",
+    "scrollLeft": "タブを左にスクロール",
+    "scrollRight": "タブを右にスクロール",
+    "newTab": "スタックに新しいタブを追加"
+  },
   "undo-closed-tab": {
     "label": "閉じたタブを元に戻す",
     "tooltiptext": "最後に閉じたタブを開きなおす {{shortcut}}"
@@ -68,6 +85,7 @@
       "move-up": "このワークスペースを上に移動",
       "move-down": "このワークスペースを下に移動",
       "delete": "ワークスペースを削除",
+      "delete-confirm": "このワークスペースを削除してもよろしいですか？",
       "manage": "ワークスペースを管理",
       "archive": "ワークスペースをアーカイブ"
     },
@@ -124,6 +142,7 @@
       "open": "アプリを開く",
       "cancel": "キャンセル",
       "site-icon": "サイトのアイコン",
+      "installing": "アプリケーションをインストール中…",
       "container": "コンテナー",
       "no-container": "コンテナーなし"
     },
@@ -140,7 +159,13 @@
   "tabInlineEdit": {
     "contextMenu": "タブの URL を編集",
     "inputLabel": "タブの URL",
-    "keyboardAction": "タブの URL を編集"
+    "keyboardAction": "タブの URL を編集",
+    "inputDescription": "Return で保存、Esc でキャンセル",
+    "invalidUrl": "無効な URL が入力されました",
+    "navigateFailed": "URL への移動に失敗しました"
+  },
+  "tabSleepExclusion": {
+    "tabDescription": "スリープ保護対象"
   },
   "mouseGesture": {
     "actions": {
@@ -285,7 +310,35 @@
   },
   "qrcode-generate-page-action": "このページの QR コードを生成",
   "qrcode-generate-page-action-title": "QR コードジェネレーター",
+  "firefoxSidebar": {
+    "edgeToggle": "Firefox サイドバーを開く・固定表示する",
+    "resize": "Firefox サイドバーの幅を変更する"
+  },
   "panelSidebar": {
+    "resize": "パネルサイドバーの幅を変更する",
+    "buttons": {
+      "add": "ウェブパネルを追加",
+      "addons": "アドオン",
+      "passwords": "パスワード",
+      "preferences": "設定"
+    },
+    "header": {
+      "toolbar": "パネルサイドバーの操作",
+      "back": "戻る",
+      "forward": "進む",
+      "reload": "再読み込み",
+      "goIndex": "初期ページへ移動",
+      "float": "パネルを別ウインドウでフローティング表示",
+      "unfloat": "パネルをサイドバーにドッキング",
+      "openInMainWindow": "メインウインドウで開く",
+      "close": "パネルを閉じる"
+    },
+    "floating": {
+      "header": "フローティングパネルヘッダー - 矢印キーで位置を変更"
+    },
+    "splitter": {
+      "label": "パネルサイドバーのサイズ変更スプリッター"
+    },
     "modal": {
       "type": "パネルの種類",
       "typeOptions": {
@@ -340,7 +393,9 @@
       "normal-restart": "再起動",
       "restart-cache-clear": "キャッシュを消去して再起動",
       "restart-safe-mode": "セーフモードで再起動",
-      "restart-profile-manager": "再起動してプロファイルマネージャーを表示"
+      "restart-profile-manager": "再起動してプロファイルマネージャーを表示",
+      "confirm-restart-title": "ブラウザーを再起動",
+      "confirm-restart-message": "今すぐブラウザーを再起動してもよろしいですか？"
     }
   },
   "nr-webscraper": {
@@ -372,7 +427,8 @@
       "openLinkIn": "外部ブラウザーでリンクを開く",
       "defaultBrowser": "システムのデフォルトウェブブラウザー",
       "noBrowsers": "外部ブラウザーが見つかりません",
-      "noValidUrl": "開ける URL がありません"
+      "noValidUrl": "開ける URL がありません",
+      "launchFailed": "外部ブラウザーで URL を開けませんでした。システムの権限を確認してください。"
     }
   },
   "chromeWebStore": {
@@ -433,7 +489,7 @@
   "splitView": {
     "contextMenu": {
       "openInSplitView": "分割ビューで開く",
-      "paneLimit": "Open in Split View (up to {{max}} tabs)",
+      "paneLimit": "分割ビューで開く (最大 {{max}} タブ)",
       "addPane": "分割ビューに区分けを追加",
       "moveToPane": "区分けの中に移動",
       "moveToPaneN": "区分け {{n}} ({{title}})"
@@ -451,12 +507,26 @@
     },
     "dropZone": {
       "newWindow": "ここにドロップして新しいウインドウで開く"
+    },
+    "splitter": {
+      "resizeHandle": "分割ビューサイズ変更ハンドル",
+      "resizeHandleWithVal": "分割ビューサイズ変更ハンドル、{{value}}パーセント"
     }
   },
   "zen-mode": {
     "label": "禅モード",
     "tooltiptext": "禅モードの表示を切り替える",
-    "menu-label": "禅モードの表示を切り替える"
+    "menu-label": "禅モードの表示を切り替える",
+    "enabled-announcement": "禅モードが有効になりました",
+    "disabled-announcement": "禅モードが無効になりました"
+  },
+  "reverseSidebar": {
+    "label": "サイドバーの位置を反転",
+    "tooltiptext": "サイドバーをウインドウの反対側に移動",
+    "movedRight": "サイドバーを右側に移動しました",
+    "movedLeft": "サイドバーを左側に移動しました",
+    "moveToLeft": "サイドバーを左に移動",
+    "moveToRight": "サイドバーを右に移動"
   },
   "ipProtection": {
     "title": "ブラウザー VPN",
@@ -513,6 +583,8 @@
       "history-suggestions": "履歴",
       "bookmark-suggestions": "ブックマーク"
     },
+    "listLabel": "コマンド一覧",
+    "resultsCount": "{{count}} 件のコマンドが見つかりました",
     "noResults": "コマンドが見つかりません",
     "noResultsHint": "別の検索語句をお試しください",
     "stepIndicator": "ステップ {{current}} / {{total}}",
@@ -596,7 +668,15 @@
     "bookmarkSwitcherWhereLabel": "開く場所",
     "bookmarkSwitcherWhereNewTab": "新規タブ",
     "bookmarkSwitcherWhereNewTabDesc": "新しいタブに切り替えて開く",
-    "bookmarkSwitcherWherePlaceholder": "開く場所を選択..."
+    "bookmarkSwitcherWherePlaceholder": "開く場所を選択...",
+    "shortcutLabel": "@{{prefix}}",
+    "shortcutWithArgsLabel": "@{{prefix}} {{args}}",
+    "searchShortcutDescription": "「{{query}}」を検索",
+    "shortcuts": {
+      "reservedTabSearch": "開いているタブを検索",
+      "reservedBookmarkSearch": "ブックマークを検索",
+      "reservedHistorySearch": "履歴を検索"
+    }
   },
   "commandPaletteReadings": {}
 }

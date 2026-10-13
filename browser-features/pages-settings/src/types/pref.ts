@@ -348,7 +348,7 @@ export function parseKeyboardShortcutConfig(
   try {
     return migrateKeyboardShortcutConfig(JSON.parse(value), enabled, platform);
   } catch (error) {
-    console.error("Failed to parse configuration", error);
+    console.error("Failed to parse configuration status message", error);
     return createDefaultKeyboardShortcutConfig(enabled, platform);
   }
 }

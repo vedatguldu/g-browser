@@ -66,12 +66,12 @@ export const NoteItem = memo(function NoteItem({ note, isSelected, onSelect, onD
             className="mb-1"
             {...(isReorderMode ? attributes : {})}
         >
-            <button
-                type="button"
+            <div
                 data-testid="notes-row"
                 role="option"
                 aria-selected={isSelected}
-                className={`w-full flex flex-col px-2 py-1.5 rounded-lg border transition-colors text-sm ${isReorderMode
+                tabIndex={isSelected ? 0 : -1}
+                className={`w-full flex flex-col px-2 py-1.5 rounded-lg border transition-colors text-sm cursor-pointer ${isReorderMode
                     ? 'cursor-grab active:cursor-grabbing border-secondary/50'
                     : ''
                     } ${isSelected
@@ -79,17 +79,18 @@ export const NoteItem = memo(function NoteItem({ note, isSelected, onSelect, onD
                         : 'hover:bg-base-200 border-base-content/5'
                     }`}
                 onClick={() => onSelect(note)}
-                onContextMenu={(e) => {
-                    if (isReorderMode) return;
-                    e.preventDefault();
-                    onDelete(note.id);
+                onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        onSelect(note);
+                    }
                 }}
                 {...(isReorderMode ? listeners : {})}
             >
                 <div className="flex justify-between items-center">
                     <div className="flex items-center gap-1 min-w-0">
                         {isReorderMode && (
-                            <MoveVertical className="h-4 w-4 text-secondary shrink-0" />
+                            <MoveVertical className="h-4 w-4 text-secondary shrink-0" aria-hidden="true" />
                         )}
                         <span className="font-medium truncate" title={note.title}>{note.title}</span>
                     </div>
@@ -97,14 +98,14 @@ export const NoteItem = memo(function NoteItem({ note, isSelected, onSelect, onD
                         <button
                             type="button"
                             data-testid="notes-delete"
-                            className="btn btn-xs btn-ghost btn-circle opacity-0 hover:opacity-100 focus-visible:opacity-100 shrink-0"
+                            className="btn btn-xs btn-ghost btn-circle opacity-80 hover:opacity-100 focus-visible:opacity-100 shrink-0"
                             onClick={(e) => {
                                 e.stopPropagation();
                                 onDelete(note.id);
                             }}
-                            aria-label={t("notes.delete")}
+                            aria-label={t("notes.deleteSpecific", { title: note.title, defaultValue: `Delete note "${note.title}"` })}
                         >
-                            <X className="h-3 w-3" />
+                            <X className="h-3 w-3" aria-hidden="true" />
                         </button>
                     )}
                 </div>
@@ -112,7 +113,7 @@ export const NoteItem = memo(function NoteItem({ note, isSelected, onSelect, onD
                     <span className="text-xs flex-1 text-base-content/70 truncate text-left min-w-0">{contentPreview}</span>
                     <span className="text-xs text-base-content/70 shrink-0 ml-2">{formattedDate}</span>
                 </div>
-            </button>
+            </div>
         </div>
     );
 });

@@ -14,7 +14,8 @@
         "block": "ブロック",
         "blockTitle": "[{{title}}] をブロックしますか？",
         "blockConfirm": "このサイトはトップサイトから削除され、二度と提案されなくなります。設定でブロックされたサイトを管理できます。",
-        "invalidUrl": "無効な URL"
+        "invalidUrl": "無効な URL",
+        "contextMenu": "サイトのオプション"
     },
     "settings": {
         "newTabSettings": "新しいタブの設定",
@@ -39,7 +40,11 @@
         "disableFloorpStart": "Floorp Start を無効にする (クラシックな about:newtab を使用)",
         "disableFloorpStartDescription": "有効にすると、Floorp Start は従来の Firefox の新しいタブ / ホームページで置き換えられます。",
         "restartRequired": "完全に有効にするにはブラウザーの再起動が必要です。",
-        "firefoxLayout": "従来のレイアウトを使用 (Firefox Home 風)"
+        "firefoxLayout": "従来のレイアウトを使用 (Firefox Home 風)",
+        "blockedSites": "ブロックされたサイト",
+        "unblock": "ブロック解除",
+        "noBlockedSites": "ブロックされたサイトはありません。",
+        "uploadImage": "カスタム画像をアップロード"
     },
     "searchBar": {
         "searchOrEnterUrl": "検索または URL を入力",

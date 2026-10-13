@@ -51,6 +51,7 @@ export default function CustomizePage() {
       await action();
     } catch (error) {
       console.error("[Welcome] Could not save customization", error);
+      // Propagate error status to alert element for screen reader
       setError(true);
     } finally {
       setSaving(false);
@@ -64,7 +65,7 @@ export default function CustomizePage() {
       <RadioCard.Root
         unstyled
         value={theme}
-        disabled={saving}
+        aria-disabled={saving}
         onValueChange={({ value }) => {
           if (
             value === "light" || value === "dark" || value === "system"
@@ -118,7 +119,7 @@ export default function CustomizePage() {
             label={t("customize.searchEngine.title")}
             hint={t("setupV5.searchHint")}
             value={engine}
-            disabled={saving}
+            aria-disabled={saving}
             options={engines.map((item) => ({
               value: item.identifier,
               label: item.name,
@@ -149,9 +150,11 @@ export default function CustomizePage() {
       <div className={styles.links}>
         <a href="about:hub" target="_blank" rel="noopener noreferrer">
           {t("setupV5.openHub")}
+          <span className="sr-only"> (opens in new window)</span>
         </a>
         <a href="about:preferences" target="_blank" rel="noopener noreferrer">
           {t("setupV5.openPreferences")}
+          <span className="sr-only"> (opens in new window)</span>
         </a>
       </div>
       <Navigation />

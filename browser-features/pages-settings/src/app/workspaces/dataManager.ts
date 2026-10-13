@@ -38,7 +38,7 @@ export async function initializeWorkspaces(reason?: string): Promise<boolean> {
       return false;
     } catch (error) {
       console.error(
-        "initializeWorkspaces: actor call threw an exception",
+        "initializeWorkspaces: actor call threw an exception status message",
         error,
       );
       return false;
@@ -129,7 +129,7 @@ async function getWorkspacesConfigsExcludeEnabled(): Promise<
     return { ...defaultConfigs, ...userConfigs };
   } catch (e) {
     console.error(
-      "Failed to parse workspace configuration, falling back to defaults:",
+      "Failed to parse workspace configuration status message, falling back to defaults:",
       e,
     );
     return defaultConfigs;

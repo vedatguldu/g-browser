@@ -41,7 +41,7 @@ const ControlledNumberInput = forwardRef<
   { defaultValue: _defaultValue, ...props },
   ref,
 ) {
-  return <input {...props} ref={ref} />;
+  return <input id={props.id} aria-label={props["aria-label"]} {...props} ref={ref} />;
 });
 
 /**
@@ -92,7 +92,12 @@ function NumberField({
       >
         <NumberInput.Input asChild>
           <ControlledNumberInput
+            id={id}
             value={text}
+            role="spinbutton"
+            aria-label={label}
+            aria-valuenow={Number.isFinite(Number(text)) ? Number(text) : value}
+            aria-valuemin={min}
             onChange={(event) => setText(event.currentTarget.value)}
           />
         </NumberInput.Input>
@@ -135,6 +140,7 @@ export function IdleMemoryReclaim() {
           "[Performance] Failed to save idle reclaim settings:",
           error,
         );
+        // Propagate error status to alert element for screen readers
         setSaveFailed(true);
         setSettings(await getIdleMemoryReclaimSettings());
       }
@@ -181,6 +187,7 @@ export function IdleMemoryReclaim() {
           <Switch
             id="idle-memory-reclaim-enabled"
             checked={settings.enabled}
+            aria-label={t("performance.idleReclaim.enable")}
             onChange={(e) =>
               save({ ...settings, enabled: e.currentTarget.checked })}
           />
@@ -219,7 +226,7 @@ export function IdleMemoryReclaim() {
         </p>
 
         {saveFailed && (
-          <p className="text-sm text-destructive">
+          <p className="text-sm text-destructive" role="alert" aria-live="assertive">
             {t("performance.idleReclaim.saveFailed")}
           </p>
         )}

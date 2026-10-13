@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ExternalLink } from "lucide-react";
 import { Button } from "../../../../../libs/ui/button.tsx";
 import { FloorpBrand } from "../../../../../libs/ui/brand.tsx";
 import { LanguageSettings } from "../localization/LanguageSettings.tsx";
@@ -23,7 +23,7 @@ export default function WhatsNewPage() {
   }, [t, version]);
   function closePage() {
     globalThis.open("about:newtab", "_blank");
-    setTimeout(() => globalThis.close(), 50);
+    setTimeout(() => globalThis.close(), 800);
   }
   return (
     <div className={styles.shell}>
@@ -72,22 +72,28 @@ export default function WhatsNewPage() {
             href="https://github.com/Floorp-Projects/Floorp"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label={`GitHub (${t("finishPage.opensInNewWindow", { defaultValue: "opens in new window" })})`}
           >
             GitHub
+            <ExternalLink size={14} aria-hidden="true" />
           </a>
           <a
             href="https://twitter.com/floorp_browser"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label={`X (Twitter) (${t("finishPage.opensInNewWindow", { defaultValue: "opens in new window" })})`}
           >
             X (Twitter)
+            <ExternalLink size={14} aria-hidden="true" />
           </a>
           <a
             href="https://floorp.app/discord"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label={`Discord (${t("finishPage.opensInNewWindow", { defaultValue: "opens in new window" })})`}
           >
             Discord
+            <ExternalLink size={14} aria-hidden="true" />
           </a>
         </div>
         <div className={styles.links}>
@@ -95,22 +101,28 @@ export default function WhatsNewPage() {
             href="https://floorp.app/terms"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label={`${t("whatsNew.footer.terms")} (${t("finishPage.opensInNewWindow", { defaultValue: "opens in new window" })})`}
           >
             {t("whatsNew.footer.terms")}
+            <ExternalLink size={14} aria-hidden="true" />
           </a>
           <a
             href="https://floorp.app/privacy"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label={`${t("whatsNew.footer.privacy")} (${t("finishPage.opensInNewWindow", { defaultValue: "opens in new window" })})`}
           >
             {t("whatsNew.footer.privacy")}
+            <ExternalLink size={14} aria-hidden="true" />
           </a>
           <a
             href="https://docs.floorp.app"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label={`${t("whatsNew.footer.about")} (${t("finishPage.opensInNewWindow", { defaultValue: "opens in new window" })})`}
           >
             {t("whatsNew.footer.about")}
+            <ExternalLink size={14} aria-hidden="true" />
           </a>
         </div>
         <p>

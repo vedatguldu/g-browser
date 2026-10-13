@@ -41,6 +41,8 @@
       "terms": "Användarvillkor",
       "privacy": "Integritetspolicy"
     },
-    "trademark": "Namnet Floorp är ett varumärke i Japan."
+    "trademark": "Namnet Floorp är ett varumärke i Japan.",
+    "opensExternal": "opens external link",
+    "opensInNewWindow": "opens in new window"
   }
 }

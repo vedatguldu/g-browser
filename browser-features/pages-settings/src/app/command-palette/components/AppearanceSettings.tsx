@@ -121,6 +121,7 @@ export function AppearanceSettings() {
             </div>
             <DropDown
               className="max-w-xs"
+              aria-label={t("commandPalette.horizontalAlign")}
               value={getValues("horizontalAlign")}
               options={alignOptions}
               onChange={(e) =>

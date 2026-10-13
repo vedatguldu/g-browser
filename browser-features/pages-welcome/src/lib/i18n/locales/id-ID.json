@@ -319,7 +319,8 @@
     "getStarted": "Memulai dengan Floorp",
     "hint": "Untuk pengaturan yang lebih rinci, Anda dapat mengunjungi Pengaturan melalui tombol menu di kanan atas.",
     "resourcesLabel": "Sumber-Sumber",
-    "defaultBrowserSuccess": "Floorp telah dijadikan peramban utama Anda!"
+    "defaultBrowserSuccess": "Floorp telah dijadikan peramban utama Anda!",
+    "opensInNewWindow": "opens in new window"
   },
   "whatsNew": {
     "title": "Selamat datang di Floorp {{version}}!",

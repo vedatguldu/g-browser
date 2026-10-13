@@ -72,12 +72,12 @@ export const ShortcutsSettings = ({
             </CardHeader>
             <CardContent>
                 <div className="overflow-x-auto">
-                    <table className={`floorp-table ${styles.table}`}>
+                    <table className={`floorp-table ${styles.table}`} aria-label={t("keyboardShortcut.shortcuts")}>
                         <thead>
                             <tr>
-                                <th>{t("keyboardShortcut.action")}</th>
-                                <th>{t("keyboardShortcut.shortcut")}</th>
-                                <th>{t("keyboardShortcut.actions")}</th>
+                                <th scope="col">{t("keyboardShortcut.action")}</th>
+                                <th scope="col">{t("keyboardShortcut.shortcut")}</th>
+                                <th scope="col">{t("keyboardShortcut.actions")}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -85,7 +85,7 @@ export const ShortcutsSettings = ({
                                 const shortcut = config.shortcuts[action.id];
                                 return (
                                     <tr key={action.id}>
-                                        <td>{action.name}</td>
+                                        <td className="font-medium">{action.name}</td>
                                         <td>
                                             {shortcut ? (
                                                 <div className="flex items-center space-x-2">
@@ -111,6 +111,9 @@ export const ShortcutsSettings = ({
                                                         setEditingAction(action.id);
                                                         setIsEditorOpen(true);
                                                     }}
+                                                    aria-label={shortcut
+                                                        ? t("keyboardShortcut.editActionNamed", { name: action.name })
+                                                        : t("keyboardShortcut.addActionNamed", { name: action.name })}
                                                 >
                                                     {shortcut ? t("keyboardShortcut.edit") : t("keyboardShortcut.add")}
                                                 </Button>
@@ -119,6 +122,7 @@ export const ShortcutsSettings = ({
                                                         type="button"
                                                         variant="danger"
                                                         onClick={() => deleteShortcut(action.id)}
+                                                        aria-label={t("keyboardShortcut.deleteActionNamed", { name: action.name })}
                                                     >
                                                         {t("keyboardShortcut.delete")}
                                                     </Button>

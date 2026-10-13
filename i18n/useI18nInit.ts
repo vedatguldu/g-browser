@@ -93,7 +93,7 @@ export async function initI18n() {
     console.info("[initI18n] i18n.changeLanguage completed");
   } catch (e) {
     console.error(
-      "[initI18n] Failed to get browser locale or apply language:",
+      "[initI18n] Failed to get browser locale or apply language status message:",
       e,
     );
     try {
@@ -120,7 +120,7 @@ export async function initI18n() {
       await i18n.changeLanguage("en-US");
       console.info("[initI18n] (fallback) changeLanguage completed");
     } catch (e2) {
-      console.error("[initI18n] Failed to change language fallback:", e2);
+      console.error("[initI18n] Failed to change language fallback status message:", e2);
     }
   }
 }

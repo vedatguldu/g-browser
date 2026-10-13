@@ -40,7 +40,7 @@ export async function getSearchEngines(): Promise<SearchEngine[]> {
       },
     );
   } catch (e) {
-    console.error("Failed to get search engines:", e);
+    console.error("Failed to get search engines status message:", e);
     return [];
   }
 }
@@ -58,7 +58,7 @@ export async function getDefaultEngine(): Promise<SearchEngine> {
       },
     );
   } catch (e) {
-    console.error("Failed to get default engine:", e);
+    console.error("Failed to get default engine status message:", e);
     return {
       identifier: "",
       name: "",
@@ -82,7 +82,7 @@ export async function getDefaultPrivateEngine(): Promise<SearchEngine> {
       },
     );
   } catch (e) {
-    console.error("Failed to get default private engine:", e);
+    console.error("Failed to get default private engine status message:", e);
     return {
       identifier: "",
       name: "",
@@ -114,7 +114,7 @@ export async function getSuggestions(
       },
     );
   } catch (e) {
-    console.error("Failed to get suggestions:", e);
+    console.error("Failed to get suggestions status message:", e);
     return { success: false, suggestions: [] };
   }
 }

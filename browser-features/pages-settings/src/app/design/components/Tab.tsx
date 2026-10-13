@@ -77,31 +77,34 @@ export function Tab() {
           )}
 
         <div>
-          <h3 className="text-base font-medium mb-2">
-            {t("design.tab.openPosition")}
-          </h3>
-          <p className="text-sm text-muted-foreground mb-3">
-            {t("design.tab.openPositionDescription")}
-          </p>
-          <div className="flex flex-col">
-            {[
-              { value: -1, label: "design.tab.openDefault" },
-              { value: 0, label: "design.tab.openLast" },
-              { value: 1, label: "design.tab.openNext" },
-            ].map(({ value, label }) => (
-              <label key={value} className="flex items-center space-x-2">
-                <input
-                  type="radio"
-                  name="tabOpenPosition"
-                  value={value}
-                  checked={getValues("tabOpenPosition") === value}
-                  onChange={(e) =>
-                    setValue("tabOpenPosition", Number(e.target.value))}
-                />
-                <span>{t(label)}</span>
-              </label>
-            ))}
-          </div>
+          <fieldset>
+            <legend className="text-base font-medium mb-2">
+              {t("design.tab.openPosition")}
+            </legend>
+            <p className="text-sm text-muted-foreground mb-3">
+              {t("design.tab.openPositionDescription")}
+            </p>
+            <div className="flex flex-col">
+              {[
+                { value: -1, label: "design.tab.openDefault" },
+                { value: 0, label: "design.tab.openLast" },
+                { value: 1, label: "design.tab.openNext" },
+              ].map(({ value, label }) => (
+                <label key={value} htmlFor={`tab-open-pos-${value}`} className="flex items-center space-x-2">
+                  <input
+                    id={`tab-open-pos-${value}`}
+                    type="radio"
+                    name="tabOpenPosition"
+                    value={value}
+                    checked={getValues("tabOpenPosition") === value}
+                    onChange={(e) =>
+                      setValue("tabOpenPosition", Number(e.target.value))}
+                  />
+                  <span>{t(label)}</span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
         </div>
 
         <div className="flex items-center justify-between gap-2">
@@ -147,10 +150,12 @@ export function Tab() {
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setValue("tabMinWidth", Number(e.target.value))}
             className="w-full"
+            aria-invalid={getValues("tabMinWidth") < 60 || getValues("tabMinWidth") > 300 ? "true" : "false"}
+            aria-describedby={getValues("tabMinWidth") < 60 || getValues("tabMinWidth") > 300 ? "tab-min-width-error" : undefined}
           />
           {(getValues("tabMinWidth") < 60 || getValues("tabMinWidth") > 300) &&
             (
-              <p className="text-destructive text-sm mt-1">
+              <p id="tab-min-width-error" role="alert" className="text-destructive text-sm mt-1">
                 {t("design.tab.minWidthError", { min: 60, max: 300 })}
               </p>
             )}
@@ -168,10 +173,12 @@ export function Tab() {
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setValue("tabMinHeight", Number(e.target.value))}
             className="w-full"
+            aria-invalid={getValues("tabMinHeight") < 20 || getValues("tabMinHeight") > 100 ? "true" : "false"}
+            aria-describedby={getValues("tabMinHeight") < 20 || getValues("tabMinHeight") > 100 ? "tab-min-height-error" : undefined}
           />
           {(getValues("tabMinHeight") < 20 ||
             getValues("tabMinHeight") > 100) && (
-              <p className="text-destructive text-sm mt-1">
+              <p id="tab-min-height-error" role="alert" className="text-destructive text-sm mt-1">
                 {t("design.tab.minHeightError", { min: 20, max: 100 })}
               </p>
             )}

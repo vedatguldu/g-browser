@@ -11,10 +11,18 @@
         "default": "既定",
         "actions": {
             "open": "起動",
+            "openProfile": "{{name}} プロファイルを起動",
             "new": "新規作成",
             "rename": "名前を変更",
             "remove": "削除",
+            "removeProfile": "{{name}} プロファイルを削除",
+            "currentProfileNotice": "現在使用中のプロファイル",
             "setDefault": "既定"
+        },
+        "status": {
+            "loaded": "{{count}} 個のプロファイルを読み込みました。",
+            "removedSuccess": "プロファイル {{name}} を完全に削除しました。",
+            "removeFailed": "プロファイル {{name}} の削除に失敗しました。"
         },
         "prompts": {
             "confirmRemove": "本当にこのプロファイルを削除してもよろしいですか？",

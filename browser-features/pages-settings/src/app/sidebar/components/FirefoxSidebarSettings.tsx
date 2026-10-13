@@ -38,7 +38,7 @@ export function FirefoxSidebarSettings() {
         setLoadError(false);
       } catch (error) {
         if (!mounted.current || requestVersion !== version.current) return;
-        console.error("[Settings:sidebar] Firefox settings load failed", error);
+        console.error("[Settings:sidebar] Firefox settings load failed status message", error);
         setLoadError(true);
       }
     };
@@ -75,6 +75,9 @@ export function FirefoxSidebarSettings() {
         {loadError && <p role="alert">{t("ui.loadError")}</p>}
         {saveError && <p role="alert">{t("ui.saveError")}</p>}
         <fieldset disabled={!ready} aria-busy={!ready} className="space-y-4">
+          <legend className="sr-only">
+            {t("panelSidebar.firefoxTitle")}
+          </legend>
           <div className={styles.row}>
             <div className="space-y-1">
               <label
@@ -83,12 +86,16 @@ export function FirefoxSidebarSettings() {
               >
                 {t("panelSidebar.overlay")}
               </label>
-              <p className="text-sm text-base-content/70">
+              <p
+                id="firefox-sidebar-overlay-desc"
+                className="text-sm text-base-content/70"
+              >
                 {t("panelSidebar.overlayDescription")}
               </p>
             </div>
             <Switch
               id="firefox-sidebar-overlay"
+              aria-describedby="firefox-sidebar-overlay-desc"
               checked={settings.sidebarOverlap}
               onChange={(event) =>
                 update(
@@ -106,12 +113,16 @@ export function FirefoxSidebarSettings() {
               >
                 {t("panelSidebar.openOnHover")}
               </label>
-              <p className="text-sm text-base-content/70">
+              <p
+                id="firefox-sidebar-hover-desc"
+                className="text-sm text-base-content/70"
+              >
                 {t("panelSidebar.firefoxHoverDescription")}
               </p>
             </div>
             <Switch
               id="firefox-sidebar-hover"
+              aria-describedby="firefox-sidebar-hover-desc"
               checked={settings.autohideSidebar}
               onChange={(event) =>
                 update(

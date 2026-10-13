@@ -33,7 +33,7 @@ export const GeneralSettings = ({
         <Card className={styles.section}>
             <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                    <Settings className="size-5" />
+                    <Settings className="size-5" aria-hidden="true" />
                     {t("keyboardShortcut.basicSettings")}
                 </CardTitle>
                 <CardDescription className={styles.description}>

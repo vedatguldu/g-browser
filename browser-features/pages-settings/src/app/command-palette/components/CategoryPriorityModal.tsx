@@ -19,7 +19,7 @@ import {
 } from "@dnd-kit/sortable";
 import { restrictToParentElement } from "@dnd-kit/modifiers";
 import { CSS } from "@dnd-kit/utilities";
-import { GripVertical } from "lucide-react";
+import { ChevronDown, ChevronUp, GripVertical } from "lucide-react";
 import { Button } from "@/components/common/button.tsx";
 import { DEFAULT_CATEGORY_PRIORITY } from "../dataManager.ts";
 import type { CommandPaletteFormData } from "@/types/pref.ts";
@@ -34,6 +34,10 @@ interface SortableCategoryRowProps {
   ordinal: number;
   displayName: string;
   dragLabel: string;
+  isFirst: boolean;
+  isLast: boolean;
+  onMoveUp: () => void;
+  onMoveDown: () => void;
 }
 
 const SortableCategoryRow = ({
@@ -41,7 +45,12 @@ const SortableCategoryRow = ({
   ordinal,
   displayName,
   dragLabel,
+  isFirst,
+  isLast,
+  onMoveUp,
+  onMoveDown,
 }: SortableCategoryRowProps) => {
+  const { t } = useTranslation();
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } =
     useSortable({ id: category });
 
@@ -72,7 +81,27 @@ const SortableCategoryRow = ({
         <GripVertical className="size-4" />
       </button>
       <span className="flex-1 truncate">{displayName}</span>
-      <span className="text-xs text-base-content/40 font-mono">{category}</span>
+      <span className="text-xs text-base-content/40 font-mono mr-2">{category}</span>
+      <div className="flex items-center gap-1">
+        <button
+          type="button"
+          onClick={onMoveUp}
+          disabled={isFirst}
+          className="btn btn-ghost btn-xs btn-square text-base-content/60 hover:text-base-content disabled:opacity-30"
+          aria-label={t("commandPalette.moveUp", { displayName })}
+        >
+          <ChevronUp className="size-3.5" />
+        </button>
+        <button
+          type="button"
+          onClick={onMoveDown}
+          disabled={isLast}
+          className="btn btn-ghost btn-xs btn-square text-base-content/60 hover:text-base-content disabled:opacity-30"
+          aria-label={t("commandPalette.moveDown", { displayName })}
+        >
+          <ChevronDown className="size-3.5" />
+        </button>
+      </div>
     </div>
   );
 };
@@ -85,6 +114,7 @@ export function CategoryPriorityModal({
   const { getValues, setValue } = useFormContext<CommandPaletteFormData>();
   const dialogRef = useRef<HTMLDialogElement>(null);
   const [order, setOrder] = useState<string[]>([...DEFAULT_CATEGORY_PRIORITY]);
+  const [announcement, setAnnouncement] = useState("");
 
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 8 } }),
@@ -110,6 +140,43 @@ export function CategoryPriorityModal({
     dialogRef.current?.showModal();
   }, [isOpen, getValues]);
 
+  const getDisplayName = (category: string): string => {
+    const key = `commandPalette.categoryNames.${category}`;
+    const translated = t(key);
+    // i18next returns the key itself when the entry is missing.
+    return translated === key ? category : translated;
+  };
+
+  const handleMoveUp = (index: number) => {
+    if (index <= 0) return;
+    const next = arrayMove(order, index, index - 1);
+    setValue("categoryPriority", next, { shouldValidate: true });
+    setOrder(next);
+    const displayName = getDisplayName(next[index - 1]);
+    setAnnouncement(
+      t("commandPalette.categoryMoved", {
+        displayName,
+        position: index,
+        total: next.length,
+      }),
+    );
+  };
+
+  const handleMoveDown = (index: number) => {
+    if (index >= order.length - 1) return;
+    const next = arrayMove(order, index, index + 1);
+    setValue("categoryPriority", next, { shouldValidate: true });
+    setOrder(next);
+    const displayName = getDisplayName(next[index + 1]);
+    setAnnouncement(
+      t("commandPalette.categoryMoved", {
+        displayName,
+        position: index + 2,
+        total: next.length,
+      }),
+    );
+  };
+
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
     if (!over || active.id === over.id) return;
@@ -119,19 +186,21 @@ export function CategoryPriorityModal({
     const next = arrayMove(order, oldIndex, newIndex);
     setValue("categoryPriority", next, { shouldValidate: true });
     setOrder(next);
+    const displayName = getDisplayName(next[newIndex]);
+    setAnnouncement(
+      t("commandPalette.categoryMoved", {
+        displayName,
+        position: newIndex + 1,
+        total: next.length,
+      }),
+    );
   };
 
   const handleReset = () => {
     const next = [...DEFAULT_CATEGORY_PRIORITY];
     setOrder(next);
     setValue("categoryPriority", next, { shouldValidate: true });
-  };
-
-  const getDisplayName = (category: string): string => {
-    const key = `commandPalette.categoryNames.${category}`;
-    const translated = t(key);
-    // i18next returns the key itself when the entry is missing.
-    return translated === key ? category : translated;
+    setAnnouncement(t("commandPalette.priorityReset"));
   };
 
   return (
@@ -142,6 +211,9 @@ export function CategoryPriorityModal({
       aria-labelledby="category-priority-modal-title"
     >
       <div className="modal-box max-w-2xl">
+        <div className="sr-only" role="status" aria-live="polite" aria-atomic="true">
+          {announcement}
+        </div>
         <h3 id="category-priority-modal-title" className="font-bold text-lg">
           {t("commandPalette.priorityModalTitle")}
         </h3>
@@ -170,6 +242,10 @@ export function CategoryPriorityModal({
                     dragLabel={t("commandPalette.dragToReorder", {
                       displayName,
                     })}
+                    isFirst={index === 0}
+                    isLast={index === order.length - 1}
+                    onMoveUp={() => handleMoveUp(index)}
+                    onMoveDown={() => handleMoveDown(index)}
                   />
                 );
               })}
@@ -186,7 +262,7 @@ export function CategoryPriorityModal({
         </div>
       </div>
       <form method="dialog" className="modal-backdrop">
-        <button type="button" onClick={onClose} />
+        <button type="button" onClick={onClose} aria-label={t("common.close")} />
       </form>
     </dialog>
   );

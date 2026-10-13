@@ -66,7 +66,7 @@ export function ContextMenuAvailabilityProvider(
         ) availability = "available";
       } catch (error) {
         console.error(
-          "[ContextMenuAvailability] Failed to read Flasco state",
+          "[ContextMenuAvailability] Failed to read Flasco state status message",
           error,
         );
       }

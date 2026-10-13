@@ -319,7 +319,8 @@
     "getStarted": "Aan de slag met Floorp",
     "hint": "Voor meer gedetailleerde instellingen, kun je deze aanpassen via de optie ‘Instellingen’ in de menuknop rechtsboven.",
     "resourcesLabel": "Bronnen",
-    "defaultBrowserSuccess": "Floorp is ingesteld als uw standaardbrowser!"
+    "defaultBrowserSuccess": "Floorp is ingesteld als uw standaardbrowser!",
+    "opensInNewWindow": "opens in new window"
   },
   "whatsNew": {
     "title": "Welkom bij Floorp {{version}}!",

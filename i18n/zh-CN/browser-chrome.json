@@ -69,7 +69,8 @@
       "move-down": "下移此工作区",
       "delete": "删除工作区",
       "manage": "管理工作区",
-      "archive": "归档工作区"
+      "archive": "归档工作区",
+      "delete-confirm": "Are you sure you want to delete this workspace?"
     },
     "popup": {
       "create-new": "创建新工作区……",
@@ -125,7 +126,8 @@
       "cancel": "取消",
       "site-icon": "网站图标",
       "container": "身份",
-      "no-container": "无身份"
+      "no-container": "无身份",
+      "installing": "Installing application…"
     },
     "window": {
       "container-tooltip": "身份： {{name}}",
@@ -140,7 +142,10 @@
   "tabInlineEdit": {
     "contextMenu": "编辑标签页网址",
     "inputLabel": "标签页网址",
-    "keyboardAction": "编辑标签页网址"
+    "keyboardAction": "编辑标签页网址",
+    "inputDescription": "Press Enter to save, Escape to cancel",
+    "invalidUrl": "Invalid URL entered",
+    "navigateFailed": "Failed to navigate to URL"
   },
   "mouseGesture": {
     "actions": {
@@ -314,6 +319,30 @@
       "resetZoom": "重置缩放",
       "changeUA": "在该网络面板上将用户代理切换为移动/桌面版本",
       "delete": "删除此面板"
+    },
+    "resize": "Resize panel sidebar",
+    "buttons": {
+      "add": "Add web panel",
+      "addons": "Add-ons",
+      "passwords": "Passwords",
+      "preferences": "Settings"
+    },
+    "header": {
+      "toolbar": "Panel sidebar controls",
+      "back": "Back",
+      "forward": "Forward",
+      "reload": "Reload",
+      "goIndex": "Go to initial page",
+      "float": "Float panel into separate window",
+      "unfloat": "Dock panel to sidebar",
+      "openInMainWindow": "Open in main window",
+      "close": "Close panel"
+    },
+    "floating": {
+      "header": "Floating panel header - Use arrow keys to reposition"
+    },
+    "splitter": {
+      "label": "Panel sidebar resize splitter"
     }
   },
   "chrome_css": {
@@ -340,7 +369,9 @@
       "normal-restart": "重新启动",
       "restart-cache-clear": "清空缓存后重新启动",
       "restart-safe-mode": "以安全模式重新启动",
-      "restart-profile-manager": "使用配置文件管理器重新启动"
+      "restart-profile-manager": "使用配置文件管理器重新启动",
+      "confirm-restart-title": "Restart Browser",
+      "confirm-restart-message": "Are you sure you want to restart the browser now?"
     }
   },
   "nr-webscraper": {
@@ -372,7 +403,8 @@
       "openLinkIn": "在外部浏览器中打开链接",
       "defaultBrowser": "系统默认浏览器",
       "noBrowsers": "未检测到外部浏览器",
-      "noValidUrl": "没有可打开的有效网址"
+      "noValidUrl": "没有可打开的有效网址",
+      "launchFailed": "Failed to open URL in external browser. Please check system permissions."
     }
   },
   "chromeWebStore": {
@@ -451,12 +483,18 @@
     },
     "dropZone": {
       "newWindow": "拖放到此处以在新窗口中打开"
+    },
+    "splitter": {
+      "resizeHandle": "Split view resize handle",
+      "resizeHandleWithVal": "Split view resize handle, {{value}} percent"
     }
   },
   "zen-mode": {
     "label": "禅模式",
     "tooltiptext": "开启/关闭禅模式",
-    "menu-label": "开启/关闭禅模式"
+    "menu-label": "开启/关闭禅模式",
+    "enabled-announcement": "Zen Mode enabled",
+    "disabled-announcement": "Zen Mode disabled"
   },
   "ipProtection": {
     "title": "浏览器 VPN",
@@ -596,7 +634,49 @@
     "bookmarkSwitcherWhereLabel": "打开位置",
     "bookmarkSwitcherWhereNewTab": "新标签页",
     "bookmarkSwitcherWhereNewTabDesc": "在新建的前台标签页中打开",
-    "bookmarkSwitcherWherePlaceholder": "选择打开位置……"
+    "bookmarkSwitcherWherePlaceholder": "选择打开位置……",
+    "listLabel": "Commands",
+    "resultsCount": "{{count}} commands found",
+    "shortcutLabel": "@{{prefix}}",
+    "shortcutWithArgsLabel": "@{{prefix}} {{args}}",
+    "searchShortcutDescription": "Search \"{{query}}\"",
+    "shortcuts": {
+      "reservedTabSearch": "Search Open Tabs",
+      "reservedBookmarkSearch": "Search Bookmarks",
+      "reservedHistorySearch": "Search History"
+    }
   },
-  "commandPaletteReadings": {}
+  "commandPaletteReadings": {},
+  "tabA11y": {
+    "sleeping": "Sleeping tab (reloads when selected)",
+    "privateContainer": "Private container tab (history not recorded)",
+    "audioPlaying": "Audio playing",
+    "audioMuted": "Audio muted",
+    "sharingActive": "Device sharing active",
+    "mutedAnnouncement": "Tab audio muted",
+    "unmutedAnnouncement": "Tab audio unmuted"
+  },
+  "tabStacks": {
+    "tablist": "Tab stack tabs",
+    "closeTab": "Close tab {{title}}",
+    "reloadTab": "Reload tab {{title}}",
+    "scrollLeft": "Scroll tabs left",
+    "scrollRight": "Scroll tabs right",
+    "newTab": "New tab in stack"
+  },
+  "tabSleepExclusion": {
+    "tabDescription": "Sleep protected"
+  },
+  "firefoxSidebar": {
+    "edgeToggle": "Open or pin the Firefox sidebar",
+    "resize": "Resize Firefox sidebar"
+  },
+  "reverseSidebar": {
+    "label": "Reverse Sidebar Position",
+    "tooltiptext": "Move sidebar to the other side of the window",
+    "movedRight": "Sidebar moved to right side",
+    "movedLeft": "Sidebar moved to left side",
+    "moveToLeft": "Move sidebar to left",
+    "moveToRight": "Move sidebar to right"
+  }
 }

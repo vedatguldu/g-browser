@@ -33,7 +33,7 @@ export function getKeyboardShortcutPlatform(): string {
       ).AppConstants.platform;
     }
   } catch (error) {
-    console.error("Failed to read AppConstants.platform", error);
+    console.error("Failed to read AppConstants.platform status message:", error);
   }
 
   return typeof navigator !== "undefined" &&
@@ -58,7 +58,7 @@ export const useKeyboardShortcutConfig = () => {
           const result = await rpc.getBoolPref(KEYBOARD_SHORTCUT_ENABLED_PREF);
           enabled = result === null ? true : result;
         } catch (e) {
-          console.error("Failed to get enabled state", e);
+          console.error("Failed to get enabled state status message:", e);
           enabled = true;
         }
 
@@ -84,7 +84,7 @@ export const useKeyboardShortcutConfig = () => {
           }
           setConfig(loadedConfig);
         } catch (parseError) {
-          console.error("Failed to load configuration", parseError);
+          console.error("Failed to load configuration status message:", parseError);
           setConfig(
             createDefaultKeyboardShortcutConfig(
               enabled,
@@ -93,7 +93,7 @@ export const useKeyboardShortcutConfig = () => {
           );
         }
       } catch (error) {
-        console.error("Failed to load configuration", error);
+        console.error("Failed to load configuration status message:", error);
       } finally {
         setLoading(false);
       }
@@ -120,7 +120,7 @@ export const useKeyboardShortcutConfig = () => {
       setConfig(normalizedConfig);
       return true;
     } catch (error) {
-      console.error("Failed to save configuration", error);
+      console.error("Failed to save configuration status message:", error);
       return false;
     }
   };

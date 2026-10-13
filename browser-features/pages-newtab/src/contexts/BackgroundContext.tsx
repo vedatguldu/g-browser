@@ -59,7 +59,7 @@ export function BackgroundProvider(
         setSlideshowEnabled(settings.background.slideshowEnabled ?? false);
         setSlideshowInterval(settings.background.slideshowInterval ?? 30);
       } catch (e) {
-        console.error("Failed to load background settings:", e);
+        console.error("Failed to load background settings status message:", e);
       } finally {
         setIsInitialized(true);
       }
@@ -79,7 +79,7 @@ export function BackgroundProvider(
       });
       setType(newType);
     } catch (e) {
-      console.error("Failed to save background type:", e);
+      console.error("Failed to save background type status message:", e);
       throw e;
     }
   }, []);
@@ -101,7 +101,7 @@ export function BackgroundProvider(
         setCustomImage(image);
         setFileName(newFileName);
       } catch (e) {
-        console.error("Failed to save custom image:", e);
+        console.error("Failed to save custom image status message:", e);
         throw e;
       }
     },
@@ -122,7 +122,7 @@ export function BackgroundProvider(
       setType("folderPath");
       setFolderPath(path);
     } catch (e) {
-      console.error("Failed to save folder path:", e);
+      console.error("Failed to save folder path status message:", e);
       throw e;
     }
   }, []);
@@ -142,7 +142,7 @@ export function BackgroundProvider(
         setType("floorp");
         setSelectedFloorp(imageName);
       } catch (e) {
-        console.error("Failed to save selected Floorp image:", e);
+        console.error("Failed to save selected Floorp image status message:", e);
         throw e;
       }
     },
@@ -178,7 +178,7 @@ export function BackgroundProvider(
       });
       setSlideshowInterval(interval);
     } catch (e) {
-      console.error("Failed to save slideshow interval:", e);
+      console.error("Failed to save slideshow interval status message:", e);
       throw e;
     }
   }, []);

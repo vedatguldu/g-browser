@@ -38,6 +38,7 @@ export function ActionsSettings({
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [editingMode, setEditingMode] = useState<"new" | "edit" | "duplicate">("new");
     const [editingIndex, setEditingIndex] = useState<number | null>(null);
+    const [announcement, setAnnouncement] = useState("");
     const availableActions = useAvailableActions();
 
     const isPatternDuplicate = (pattern: GestureDirection[], currentIndex: number | null): boolean => {
@@ -80,7 +81,14 @@ export function ActionsSettings({
     };
 
     const handleDeleteAction = async (actionIndex: number) => {
-        await deleteAction(actionIndex);
+        const target = config.actions[actionIndex];
+        const targetName = target
+            ? (availableActions.find((a) => a.id === target.action)?.name || target.action)
+            : "";
+        const deleted = await deleteAction(actionIndex);
+        if (deleted && targetName) {
+            setAnnouncement(t("mouseGesture.deletedNamed", { name: targetName }));
+        }
     };
 
     const handleSaveAction = async (action: GestureAction) => {
@@ -112,6 +120,9 @@ export function ActionsSettings({
                 </CardDescription>
             </CardHeader>
             <CardContent>
+                <div className="sr-only" role="status" aria-live="polite" aria-atomic="true">
+                    {announcement}
+                </div>
                 <div className={styles.toolbar}>
                     <Button
                         type="button"
@@ -124,20 +135,23 @@ export function ActionsSettings({
                     </Button>
                 </div>
                 <div className="overflow-x-auto">
-                    <table className={`floorp-table ${styles.table}`}>
+                    <table className={`floorp-table ${styles.table}`} aria-label={t("mouseGesture.actionsSettings")}>
                         <thead>
                             <tr>
-                                <th className="text-base-content/70">{t("mouseGesture.action")}</th>
-                                <th className="text-base-content/70">{t("mouseGesture.pattern")}</th>
-                                <th className="text-base-content/70 w-[140px]" />
+                                <th scope="col" className="text-base-content/70">{t("mouseGesture.action")}</th>
+                                <th scope="col" className="text-base-content/70">{t("mouseGesture.pattern")}</th>
+                                <th scope="col" className="text-base-content/70 w-[140px]">
+                                    <span className="sr-only">{t("mouseGesture.actionsHeading")}</span>
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
-                            {config.actions.map((action, index) => (
+                            {config.actions.map((action, index) => {
+                                const actionName = availableActions.find((a) => a.id === action.action)?.name || action.action;
+                                return (
                                 <tr key={index} className="hover:bg-base-200/50">
-                                    <td>
-                                        {availableActions.find((a) => a.id === action.action)
-                                            ?.name || action.action}
+                                    <td className="font-medium">
+                                        {actionName}
                                     </td>
                                     <td className="font-mono">
                                         <div className="flex flex-wrap gap-1">
@@ -147,7 +161,8 @@ export function ActionsSettings({
                                                     className="floorp-tag"
                                                     title={direction}
                                                 >
-                                                    {patternToString([direction])}
+                                                    <span aria-hidden="true">{patternToString([direction])}</span>
+                                                    <span className="sr-only">{t(`mouseGesture.direction.${direction}`)}</span>
                                                 </span>
                                             ))}
                                         </div>
@@ -159,6 +174,7 @@ export function ActionsSettings({
                                                 variant="ghost"
                                                 onClick={() => editAction(action, index)}
                                                 title={t("mouseGesture.edit")}
+                                                aria-label={t("mouseGesture.editNamed", { name: actionName })}
                                             >
                                                 <Edit className="size-4" />
                                             </Button>
@@ -167,6 +183,7 @@ export function ActionsSettings({
                                                 variant="ghost"
                                                 onClick={() => duplicateAction(action)}
                                                 title={t("mouseGesture.duplicate")}
+                                                aria-label={t("mouseGesture.duplicateNamed", { name: actionName })}
                                             >
                                                 <Copy className="size-4" />
                                             </Button>
@@ -175,13 +192,14 @@ export function ActionsSettings({
                                                 variant="ghost"
                                                 onClick={() => handleDeleteAction(index)}
                                                 title={t("mouseGesture.delete")}
+                                                aria-label={t("mouseGesture.deleteNamed", { name: actionName })}
                                             >
                                                 <Trash2 className="size-4" />
                                             </Button>
                                         </div>
                                     </td>
                                 </tr>
-                            ))}
+                            );})}
                             {config.actions.length === 0 && (
                                 <tr>
                                     <td colSpan={3} className="text-center py-4 text-base-content/60">

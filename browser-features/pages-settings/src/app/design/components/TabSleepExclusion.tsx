@@ -34,7 +34,7 @@ export function TabSleepExclusion() {
         const loaded = await getTabSleepExclusionSettings();
         setSettings(loaded);
       } catch (error) {
-        console.error("Failed to load tab sleep exclusion settings:", error);
+        console.error("Failed to load tab sleep exclusion settings status message:", error);
       } finally {
         setIsLoading(false);
       }
@@ -49,7 +49,7 @@ export function TabSleepExclusion() {
       try {
         await saveTabSleepExclusionSettings(newSettings);
       } catch (error) {
-        console.error("Failed to save tab sleep exclusion settings:", error);
+        console.error("Failed to save tab sleep exclusion settings status message:", error);
       }
     },
     [],
@@ -134,6 +134,8 @@ export function TabSleepExclusion() {
           className={`space-y-4 transition-opacity duration-200 ${
             settings.enabled ? "" : "opacity-50 pointer-events-none"
           }`}
+          inert={!settings.enabled}
+          aria-hidden={!settings.enabled ? true : undefined}
         >
           <div>
             <h3 className="text-base font-medium mb-1">
@@ -151,6 +153,7 @@ export function TabSleepExclusion() {
               aria-label={t("design.tabSleepExclusion.patterns")}
               placeholder={t("design.tabSleepExclusion.patternPlaceholder")}
               value={newPattern}
+              disabled={!settings.enabled}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 setNewPattern(e.target.value)}
               onKeyDown={handleKeyDown}
@@ -159,10 +162,10 @@ export function TabSleepExclusion() {
             <Button
               type="button"
               onClick={handleAddPattern}
-              disabled={!newPattern.trim()}
+              disabled={!settings.enabled || !newPattern.trim()}
               variant="secondary" className="px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 transition-colors"
             >
-              <Plus className="size-4" />
+              <Plus className="size-4" aria-hidden="true" />
               {t("design.tabSleepExclusion.add")}
             </Button>
           </div>
@@ -175,7 +178,7 @@ export function TabSleepExclusion() {
               setShowExamples((e.target as HTMLDetailsElement).open)}
           >
             <summary className="flex items-center gap-2 text-sm text-muted-foreground cursor-pointer hover:text-foreground transition-colors select-none">
-              <ChevronDown className="size-4 transition-transform group-open:rotate-180" />
+              <ChevronDown className="size-4 transition-transform group-open:rotate-180" aria-hidden="true" />
               {t("design.tabSleepExclusion.examples")}
             </summary>
             <div className="mt-3 bg-muted/30 rounded-lg p-4 space-y-3">
@@ -216,16 +219,17 @@ export function TabSleepExclusion() {
                     className="group flex items-center justify-between bg-muted/40 hover:bg-muted/60 px-3 py-2.5 rounded-md transition-colors"
                   >
                     <div className="flex items-center gap-2.5">
-                      <Globe className="size-4 text-muted-foreground shrink-0" />
+                      <Globe className="size-4 text-muted-foreground shrink-0" aria-hidden="true" />
                       <code className="text-sm font-mono">{pattern}</code>
                     </div>
                     <Button
                       type="button"
                       onClick={() => handleRemovePattern(pattern)}
+                      disabled={!settings.enabled}
                       variant="secondary" className="opacity-60 hover:opacity-100 text-destructive p-1 rounded hover:bg-destructive/10 transition-all"
-                      aria-label={t("design.tabSleepExclusion.remove")}
+                      aria-label={`${t("design.tabSleepExclusion.remove")}: ${pattern}`}
                     >
-                      <X className="size-4" />
+                      <X className="size-4" aria-hidden="true" />
                     </Button>
                   </div>
                 ))}
@@ -233,7 +237,7 @@ export function TabSleepExclusion() {
             )
             : (
               <div className="flex items-center gap-3 py-4 px-3 border border-dashed border-muted-foreground/30 rounded-md">
-                <Globe className="size-5 text-muted-foreground/50 shrink-0" />
+                <Globe className="size-5 text-muted-foreground/50 shrink-0" aria-hidden="true" />
                 <p className="text-sm text-muted-foreground">
                   {t("design.tabSleepExclusion.noPatterns")}
                 </p>

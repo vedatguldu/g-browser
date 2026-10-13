@@ -133,6 +133,7 @@ export function WorkspaceDemo() {
                       type="radio"
                       name={groupName}
                       value={String(index)}
+                      aria-label={`${t("featureDemo.workspaces.workspace", { defaultValue: "Workspace" })} ${index + 1}`}
                       checked={workspace === String(index)}
                       onChange={() => {
                         setWorkspace(String(index));

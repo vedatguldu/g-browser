@@ -10,7 +10,7 @@ export function I18nProvider({ children }: PropsWithChildren) {
       try {
         await initializeI18n();
       } catch (e) {
-        console.error("[I18nProvider] initialization failed:", e);
+        console.error("[I18nProvider] initialization failed status message:", e);
       }
       if (mounted) setReady(true);
     })();

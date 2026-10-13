@@ -43,7 +43,8 @@
             "noResults": "No results found",
             "open": "Open \"{{title}}\"",
             "matchedText": "Matched Text",
-            "results": "Search Results"
+            "results": "Search Results",
+            "resultCount": "{{count}} results found for \"{{query}}\""
         },
         "commandPalette": "Command Palette"
     },
@@ -487,7 +488,13 @@
             "invalidWidth": "Width must be at least 100 pixels"
         },
         "save": "Save",
-        "cancel": "Cancel"
+        "cancel": "Cancel",
+        "dragToReorder": "Drag to reorder {{name}}",
+        "moveUpNamed": "Move {{name}} up",
+        "moveDownNamed": "Move {{name}} down",
+        "editNamed": "Edit {{name}}",
+        "deleteNamed": "Delete {{name}}",
+        "movedPosition": "{{name}} moved to position {{position}} of {{total}}"
     },
     "progressiveWebApp": {
         "title": "Web Apps",
@@ -545,7 +552,8 @@
             "enabledBadge": "Enabled",
             "disabledBadge": "Disabled",
             "serverToken": "Server Token",
-            "copyToken": "Copy"
+            "copyToken": "Copy",
+            "tokenCopied": "Server token copied to clipboard"
         },
         "controlsCard": {
             "title": "Controls",
@@ -566,7 +574,8 @@
             "enable": "Failed to enable {{productName}} OS.",
             "disable": "Failed to disable {{productName}} OS.",
             "enableAction": "Error enabling {{productName}} OS: {{reason}}",
-            "disableAction": "Error disabling {{productName}} OS: {{reason}}"
+            "disableAction": "Error disabling {{productName}} OS: {{reason}}",
+            "copyFailed": "Failed to copy token to clipboard"
         }
     },
     "mouseGesture": {
@@ -726,7 +735,26 @@
         "copy": "Copy",
         "defaultName": "New Gesture",
         "emptyPatternError": "Please set a gesture pattern",
-        "duplicatePatternError": "This gesture pattern already exists"
+        "duplicatePatternError": "This gesture pattern already exists",
+        "actionsHeading": "Actions",
+        "directionAdded": "Direction {{direction}} added",
+        "directionRemoved": "Direction {{direction}} removed",
+        "patternReset": "Gesture pattern reset",
+        "removeDirection": "Remove {{direction}} at position {{position}}",
+        "editNamed": "Edit {{name}} gesture",
+        "duplicateNamed": "Duplicate {{name}} gesture",
+        "deleteNamed": "Delete {{name}} gesture",
+        "deletedNamed": "{{name}} gesture deleted",
+        "direction": {
+            "upLeft": "Up-Left",
+            "up": "Up",
+            "upRight": "Up-Right",
+            "left": "Left",
+            "right": "Right",
+            "downLeft": "Down-Left",
+            "down": "Down",
+            "downRight": "Down-Right"
+        }
     },
     "contextMenu": {
         "description": "Reorder or hide browser context-menu items. Menus supplied by websites are not changed.",
@@ -854,7 +882,11 @@
         "preview": "Preview",
         "pressKey": "Press any key...",
         "recording": "Recording...",
+        "recordedKey": "Recorded key: {{key}}",
         "key": "Key",
+        "editActionNamed": "Edit {{name}} shortcut",
+        "addActionNamed": "Add {{name}} shortcut",
+        "deleteActionNamed": "Delete {{name}} shortcut",
         "modal": {
             "title": "Edit Shortcut",
             "description": "Enter the key you want to use and select the modifier keys to combine them.",
@@ -999,6 +1031,10 @@
         "priorityModalReset": "Reset to Default",
         "priorityModalClose": "Close",
         "dragToReorder": "Drag to reorder {{displayName}}",
+        "moveUp": "Move {{displayName}} up",
+        "moveDown": "Move {{displayName}} down",
+        "categoryMoved": "{{displayName}} moved to priority {{position}} of {{total}}",
+        "priorityReset": "Category priority reset to default",
         "shortcuts": {
             "title": "Shortcuts",
             "description": "Type @prefix in the command palette to instantly run a command.",
@@ -1009,6 +1045,9 @@
             "uncategorized": "Other",
             "add": "Add",
             "remove": "Remove",
+            "addedNamed": "Shortcut @{{prefix}} for {{command}} added",
+            "removedNamed": "Shortcut @{{prefix}} for {{command}} removed",
+            "removeNamed": "Remove shortcut @{{prefix}} for {{command}}",
             "errorEmpty": "Enter a prefix.",
             "errorAt": "\"@\" cannot be used in a prefix.",
             "errorDuplicate": "This prefix is already used.",
@@ -1025,5 +1064,10 @@
             "errorReserved": "This prefix is reserved and cannot be used.",
             "errorWhitespace": "The prefix cannot contain spaces or other whitespace."
         }
+    },
+    "common": {
+        "loading": "Loading...",
+        "close": "Close",
+        "opensInNewWindow": "opens in a new tab"
     }
 }

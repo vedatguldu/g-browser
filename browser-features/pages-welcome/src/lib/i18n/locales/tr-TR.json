@@ -1,22 +1,22 @@
 {
   "setupRich": {
     "selected": "Seçilen",
-    "languageActive": "Used for menus and settings",
-    "palettePreview": "Color preview",
-    "searchDestination": "Address bar search provider",
-    "enlarge": "Enlarge the {{feature}} screenshot",
-    "enlargeShort": "View larger",
-    "closePreview": "Close preview",
-    "actualScreenshot": "An actual Floorp screenshot. Appearance varies with your version and settings."
+    "languageActive": "Menüler ve ayarlar için kullanılır",
+    "palettePreview": "Renk önizlemesi",
+    "searchDestination": "Adres çubuğu arama motoru",
+    "enlarge": "{{feature}} ekran görüntüsünü büyüt",
+    "enlargeShort": "Büyük görüntüle",
+    "closePreview": "Önizlemeyi kapat",
+    "actualScreenshot": "Gerçek Floorp ekran görüntüsü. Görünüm, sürümünüze ve ayarlarınıza göre farklılık gösterebilir."
   },
   "setupV5": {
     "back": "Geri",
     "supportLabels": {
-      "disabled": "Do not open automatically",
-      "blocking": "Open with my blocker settings",
-      "support": "Allow ads to support Floorp"
+      "disabled": "Otomatik olarak açma",
+      "blocking": "Engelleyici ayarlarımla aç",
+      "support": "Floorp'u desteklemek için reklamlara izin ver"
     },
-    "supportNotice": "This is a draft choice. It takes effect when you press “Start using Floorp” on the next page. Closing setup before then keeps your current settings.",
+    "supportNotice": "Bu bir taslak seçimdir. Bir sonraki sayfadaki “Floorp'u Kullanmaya Başla” düğmesine bastığınızda yürürlüğe girer. Kurulumu bundan önce kapatırsanız mevcut ayarlarınız korunur.",
     "steps": [
       "Hoş Geldiniz",
       "Dil",
@@ -63,7 +63,7 @@
         "hint": "You can still change your settings later."
       }
     ],
-    "startTitle": "Before you begin",
+    "startTitle": "Başlamadan Önce",
     "startItems": [
       {
         "title": "Check your display language",
@@ -78,14 +78,14 @@
         "description": "Review your choices before starting."
       }
     ],
-    "changeLater": "You can change these settings later.",
-    "languageTitle": "Display language",
-    "languageLabel": "Floorp display language",
-    "languageHint": "Used for menus and settings.",
-    "languageNotice": "Some add-ons may not support changing languages.",
-    "languageCurrent": "Using {{language}}",
-    "featuresTitle": "Explore the features",
-    "hubTitle": "Find what you want to adjust",
+    "changeLater": "Bu ayarları daha sonra dilediğiniz zaman değiştirebilirsiniz.",
+    "languageTitle": "Görüntüleme Dili",
+    "languageLabel": "Floorp arayüz dili",
+    "languageHint": "Menüler ve ayarlar sayfasında kullanılır.",
+    "languageNotice": "Bazı eklentiler dil değişimini desteklemeyebilir.",
+    "languageCurrent": "Seçili dil: {{language}}",
+    "featuresTitle": "Özellikleri Keşfedin",
+    "hubTitle": "Özelleştirmek İstediğiniz Alanı Seçin",
     "hubItems": [
       {
         "title": "Tabs and appearance",
@@ -101,55 +101,55 @@
       }
     ],
     "openHub": "Floorp Hub'ı aç",
-    "openPreferences": "Open Firefox Settings",
-    "newTab": "Opens in a new tab.",
-    "hubAddress": "You can also enter about:hub in the address bar.",
-    "customizeTitle": "Your first settings",
-    "searchHint": "Used when searching from the address bar.",
-    "supportTitle": "Release notes after updates",
-    "scopeTitle": "Scope when allowing advertising",
-    "summaryTitle": "Review your settings",
+    "openPreferences": "Firefox Ayarlarını Aç",
+    "newTab": "Yeni sekmede açılır.",
+    "hubAddress": "Ayrıca adres çubuğuna about:hub yazarak da erişebilirsiniz.",
+    "customizeTitle": "İlk Tercihleriniz",
+    "searchHint": "Adres çubuğundan doğrudan arama yaparken kullanılır.",
+    "supportTitle": "Güncelleme Sonrası Sürüm Notları",
+    "scopeTitle": "Reklamlara izin verildiğindeki kapsam",
+    "summaryTitle": "Ayarlarınızı Gözden Geçirin",
     "change": "Değiştir",
-    "defaultTitle": "Make Floorp your everyday browser",
-    "defaultHint": "Set links to open in Floorp.",
-    "getStarted": "Start using Floorp",
-    "finishNotice": "“Start using Floorp” confirms your release notes choice."
+    "defaultTitle": "Floorp'u varsayılan tarayıcınız yapın",
+    "defaultHint": "Tüm web bağlantılarının doğrudan Floorp ile açılmasını sağlar.",
+    "getStarted": "Floorp'u Kullanmaya Başla",
+    "finishNotice": "“Floorp'u Kullanmaya Başla” düğmesine tıkladığınızda sürüm notları tercihiniz onaylanacaktır."
   },
   "releaseNotes": {
     "prompt": {
-      "title": "A new choice.\nSupport what comes next.",
-      "description": "Advertising revenue supports Floorp development and operation. You can now choose how release notes open and how blockers work on the Floorp blog.",
-      "hint": "Your settings stay as they are until you save a selection. You can change it later in Updates & Experiments.",
-      "choiceTitle": "Choose how release notes open",
-      "choiceDescription": "Choose automatic display after updates and how your blockers work on the Floorp blog.",
-      "dismiss": "Not now"
+      "title": "Yeni bir tercih.\nGeleceği birlikte inşa edelim.",
+      "description": "Reklam gelirleri Floorp'un kesintisiz geliştirilmesini ve sunucu maliyetlerini destekler. Sürüm notlarının nasıl açılacağını ve engelleyicilerin Floorp blogunda nasıl davranacağını seçebilirsiniz.",
+      "hint": "Bir seçim kaydedilene kadar ayarlarınız değişmeden kalır. Bunu daha sonra Güncellemeler ve Deneyler bölümünden değiştirebilirsiniz.",
+      "choiceTitle": "Sürüm notlarının nasıl açılacağını seçin",
+      "choiceDescription": "Güncellemelerden sonra otomatik gösterimi ve Floorp blogunda engelleyicilerin nasıl çalışacağını belirleyin.",
+      "dismiss": "Şimdi değil"
     },
-    "learnMore": "Read about our funding and this setting (Japanese)",
-    "title": "Release notes and supporting Floorp",
-    "description": "Advertising revenue supports Floorp development and operation. Choose how to open release notes after updates. You can change this later in Settings → Updates & Experiments.",
+    "learnMore": "Finansmanımız ve bu ayar hakkında bilgi edinin (Japonca)",
+    "title": "Sürüm Notları ve Floorp'u Destekleme",
+    "description": "Reklam gelirleri Floorp'un geliştirilmesini ve devamlılığını destekler. Güncellemelerden sonra sürüm notlarının nasıl açılacağını belirleyin. Bu ayarı daha sonra Ayarlar → Güncellemeler ve Deneyler altından değiştirebilirsiniz.",
     "disabled": {
-      "label": "Do not open automatically",
-      "description": "Do not open release notes after updates. Keep your blocker settings when visiting the blog."
+      "label": "Otomatik olarak açma",
+      "description": "Güncellemelerden sonra sürüm notlarını açmaz. Blogu ziyaret ettiğinizde engelleyici ayarlarınız korunur."
     },
     "blocking": {
-      "label": "Open with your blocker settings",
-      "description": "Keep your extensions working as configured. This does not install or enable an ad blocker."
+      "label": "Kendi engelleyici ayarlarımla aç",
+      "description": "Eklentilerinizin mevcut yapılandırmasını korur. Yeni bir reklam engelleyici yüklemez veya etkinleştirmez."
     },
     "support": {
-      "label": "Allow ads to support Floorp (recommended)",
-      "description": "Restrict uBlock Origin, AdGuard, Adblock Plus, AdBlock and Ghostery on the Floorp blog."
+      "label": "Floorp'u desteklemek için reklamlara izin ver (önerilen)",
+      "description": "Floorp blogunda uBlock Origin, AdGuard, Adblock Plus, AdBlock ve Ghostery filtrelerini devre dışı bırakır."
     },
-    "scope": "The restriction applies to all HTTPS pages on blog.floorp.app, including manually opened pages, and affects tracking protection and custom filters as well as ad blocking. Other extensions are not restricted by this setting. Ads may still be blocked by other protection tools. Reload open blog pages after changing the setting.",
-    "currentSetting": "Current setting: {{mode}}",
-    "applyOnConfirm": "Your selection takes effect only when you confirm. Closing this page keeps your current setting.",
-    "changeSelection": "Change selection",
-    "applyOnFinish": "This is a draft selection. It takes effect when you finish setup on the next screen. Closing setup before then keeps your current setting.",
-    "confirm": "Save selection",
-    "dismiss": "Keep current setting",
-    "error": "Could not load or save your selection. Please reopen this page and try again."
+    "scope": "Bu kısıtlama, doğrudan açılan sayfalar dahil blog.floorp.app üzerindeki tüm HTTPS sayfaları için geçerlidir; reklam engellemenin yanı sıra izleme koruması ve özel filtreleri de kapsar. Diğer eklentiler bu ayardan etkilenmez. Harici güvenlik araçları reklamları engellemeye devam edebilir. Ayarı değiştirdikten sonra açık blog sayfalarını yenileyin.",
+    "currentSetting": "Mevcut ayar: {{mode}}",
+    "applyOnConfirm": "Seçiminiz yalnızca onayladığınızda geçerli olur. Bu sayfayı kapatırsanız mevcut ayarınız korunur.",
+    "changeSelection": "Seçimi değiştir",
+    "applyOnFinish": "Bu bir taslak seçimdir. Sonraki ekranda kurulumu tamamladığınızda geçerli olur. Kurulumu kapatırsanız mevcut ayarınız kalır.",
+    "confirm": "Seçimi kaydet",
+    "dismiss": "Mevcut ayarı koru",
+    "error": "Seçiminiz yüklenemedi veya kaydedilemedi. Lütfen sayfayı yeniden açıp deneyin."
   },
   "navigation": {
-    "support": "Support Floorp",
+    "support": "Floorp'u Destekle",
     "welcome": "Hoş Geldiniz",
     "language": "Dil",
     "languageSupport": "Dil Desteği",
@@ -220,24 +220,24 @@
   },
   "setupGuide": {
     "welcome": "Floorp'a Hoş Geldiniz.",
-    "description": "Make your browser work the way you do.",
-    "introduction": "This guide introduces Floorp's features and helps you choose your first settings.",
-    "start": "Start setup",
-    "next": "Next, check your display language.",
-    "progress": "Setup {{current}} / {{total}}",
-    "title": "What this guide covers",
-    "subtitle": "Explore the features and choose settings that suit you.",
+    "description": "Tarayıcınızı tam istediğiniz gibi özelleştirin.",
+    "introduction": "Bu rehber Floorp'un benzersiz özelliklerini tanıtır ve ilk ayarlarınızı kolayca yapmanızı sağlar.",
+    "start": "Kuruluma Başla",
+    "next": "Sırada görüntüleme dili kontrolü var.",
+    "progress": "Kurulum Adımı {{current}} / {{total}}",
+    "title": "Bu rehberin içeriği",
+    "subtitle": "Özellikleri keşfedin ve size en uygun ayarları belirleyin.",
     "discover": {
-      "title": "Discover Floorp's features",
-      "description": "Explore ways to organize tabs and customize your browser."
+      "title": "Floorp'un Özelliklerini Keşfedin",
+      "description": "Sekmeleri düzenlemenin ve tarayıcınızı özelleştirmenin yollarını keşfedin."
     },
     "personalize": {
-      "title": "Choose your settings",
-      "description": "Adjust the appearance and controls to your preferences."
+      "title": "Ayarlarınızı Belirleyin",
+      "description": "Görünümü ve kontrolleri tercihlerinize göre uyarlayın."
     },
     "finish": {
-      "title": "Get ready to browse",
-      "description": "Review your choices and start browsing."
+      "title": "Gezintiye Hazırsınız",
+      "description": "Seçimlerinizi gözden geçirin ve web'i keşfetmeye başlayın."
     }
   },
   "welcomePage": {
@@ -319,7 +319,8 @@
     "getStarted": "Floorp ile Başlayın",
     "hint": "Daha detaylı ayarlar için, sağ üstteki menü düğmesindeki Ayarlar kısmını kullanabilirsiniz.",
     "resourcesLabel": "Kaynaklar",
-    "defaultBrowserSuccess": "Floorp varsayılan tarayıcınız olarak ayarlandı!"
+    "defaultBrowserSuccess": "Floorp varsayılan tarayıcınız olarak ayarlandı!",
+    "opensInNewWindow": "yeni pencerede açılır"
   },
   "whatsNew": {
     "title": "Floorp {{version}} sürümüne hoş geldiniz!",
@@ -333,34 +334,34 @@
     },
     "footer": {
       "follow": "Takip Et",
-      "terms": "Terms of Service",
-      "privacy": "Privacy Policy",
+      "terms": "Kullanım Koşulları",
+      "privacy": "Gizlilik Politikası",
       "about": "Floorp Hakkında",
       "copyright": "© {{year}} Floorp Projesi. Tüm hakları saklıdır."
     }
   },
   "ui": {
-    "retry": "Try again",
-    "loadError": "Could not load these settings. Please try again.",
-    "skipToContent": "Skip to content",
+    "retry": "Yeniden Dene",
+    "loadError": "Ayarlar yüklenemedi. Lütfen tekrar deneyin.",
+    "skipToContent": "İçeriğe Atla",
     "loading": "Yükleniyor…",
-    "setupProgress": "Setup progress",
-    "stepNavigation": "Setup navigation",
-    "settingsNavigation": "Settings navigation",
-    "openNavigation": "Open navigation",
-    "closeNavigation": "Close navigation",
-    "saveError": "Could not save. Please try again."
+    "setupProgress": "Kurulum ilerlemesi",
+    "stepNavigation": "Kurulum adımları",
+    "settingsNavigation": "Ayar menüsü",
+    "openNavigation": "Menüyü Aç",
+    "closeNavigation": "Menüyü Kapat",
+    "saveError": "Kaydedilemedi. Lütfen tekrar deneyin."
   },
   "featureDemo": {
-    "label": "Interactive demo",
-    "close": "Close panel",
+    "label": "Etkileşimli demo",
+    "close": "Paneli Kapat",
     "cancel": "Vazgeç",
-    "reset": "Reset demo",
-    "play": "Watch the gesture",
-    "replay": "Watch again",
+    "reset": "Demoyu Sıfırla",
+    "play": "Hareketi İzle",
+    "replay": "Yeniden İzle",
     "workspaces": {
-      "title": "Switch workspaces",
-      "instruction": "Open the workspace button at the upper left, then choose a workspace.",
+      "title": "Çalışma Alanları Arasında Geçiş Yapın",
+      "instruction": "Sol üstteki çalışma alanı düğmesini açın, ardından bir alan seçin.",
       "names": [
         "Work",
         "Personal",
@@ -383,13 +384,13 @@
           "Kaynaklar"
         ]
       ],
-      "result": "Showing tabs for {{name}}.",
-      "benefit": "Switch between your work and personal tabs as a group.",
-      "guideOpen": "Open the Work button.",
-      "guideSelect": "Choose Personal.",
-      "guideDone": "The tabs above have switched together.",
-      "openHint": "1 Open here",
-      "selectHint": "2 Choose Personal",
+      "result": "{{name}} için sekmeler gösteriliyor.",
+      "benefit": "İş ve kişisel sekmeleriniz arasında grup olarak tek tıkla geçiş yapın.",
+      "guideOpen": "İş düğmesini açın.",
+      "guideSelect": "Kişisel'i seçin.",
+      "guideDone": "Yukarıdaki sekmeler hep birlikte değişti.",
+      "openHint": "1 Buradan açın",
+      "selectHint": "2 Kişisel alanını seçin",
       "pages": [
         {
           "category": "Team work",
@@ -424,47 +425,47 @@
       ]
     },
     "panelSidebar": {
-      "title": "Open a site alongside your page",
-      "instruction": "Use the music icon on the right to open or close the saved site.",
-      "article": "Keep exploring",
+      "title": "Sayfanızın Yanında Başka Bir Site Açın",
+      "instruction": "Kaydedilen siteyi açmak veya kapatmak için sağdaki müzik simgesini kullanın.",
+      "article": "Gezinmeye Devam Et",
       "music": "Müzik",
-      "favorites": "Favorites",
+      "favorites": "Favoriler",
       "tracks": [
         "Moonlit",
         "Blue hour",
         "Gentle breeze"
       ],
-      "play": "Try playback (no audio)",
-      "stop": "Stop playback",
-      "toggle": "Toggle music panel",
-      "open": "Your page and saved site appear side by side.",
-      "closed": "Open the panel again using the music icon on the right.",
-      "benefit": "Open another site alongside the page you are viewing."
+      "play": "Oynatmayı dene (sessiz)",
+      "stop": "Oynatmayı durdur",
+      "toggle": "Müzik panelini aç/kapat",
+      "open": "Sayfanız ve kayıtlı web sitesi yan yana görünür.",
+      "closed": "Paneli sağdaki müzik simgesine tıklayarak tekrar açabilirsiniz.",
+      "benefit": "İzlediğiniz veya okuduğunuz sayfanın yanına başka bir siteyi kolayca sabitleyin."
     },
     "pwa": {
-      "title": "Turn a favorite site into an app",
-      "instruction": "Try installing from the icon on the right of the address bar.",
-      "icon": "Open web app installation menu",
-      "open": "Open app",
+      "title": "Favori Sitenizi Uygulamaya Dönüştürün",
+      "instruction": "Adres çubuğunun sağındaki simgeden yüklemeyi deneyin.",
+      "icon": "Web uygulaması yükleme menüsünü aç",
+      "open": "Uygulamayı Aç",
       "install": "Uygulamayı yükle",
-      "calendar": "Calendar",
-      "result": "Example of a standalone app window",
-      "benefit": "Open a site as an app in a separate window.",
-      "tab": "Web apps"
+      "calendar": "Takvim",
+      "result": "Bağımsız bir uygulama penceresi örneği",
+      "benefit": "Herhangi bir web sitesini ayrı bir uygulama gibi bağımsız pencerede kullanın.",
+      "tab": "Web Uygulamaları"
     },
     "mouseGesture": {
-      "title": "Navigate with a mouse gesture",
+      "title": "Fare Hareketi ile Gezinin",
       "steps": [
         "Hold the right button",
         "Move left",
         "Release the button"
       ],
-      "previous": "Previous page",
-      "current": "Current page",
-      "result": "← Returned to the previous page (demo)",
-      "hint": "An example of the default Back gesture.",
-      "enable": "Enable mouse gestures in Settings to use this feature.",
-      "benefit": "Hold the right mouse button and move the mouse to perform actions such as Back."
+      "previous": "Önceki Sayfa",
+      "current": "Mevcut Sayfa",
+      "result": "← Önceki sayfaya dönüldü (demo)",
+      "hint": "Varsayılan Geri gitme hareketinin canlı bir örneği.",
+      "enable": "Bu özelliği kullanmak için Ayarlar'dan fare hareketlerini etkinleştirin.",
+      "benefit": "Farenin sağ tuşuna basılı tutup sürükleyerek Geri, İleri ve Sekme Kapatma gibi eylemleri hızla yapın."
     }
   },
   "welcomeMotion": {
@@ -478,10 +479,10 @@
       "Choose a theme and search engine.",
       "Review your choices and start using Floorp."
     ],
-    "replay": "Watch again"
+    "replay": "Yeniden İzle"
   },
   "demoPlayback": {
-    "pause": "Pause",
-    "play": "Play / resume"
+    "pause": "Duraklat",
+    "play": "Oynat / Devam Et"
   }
 }

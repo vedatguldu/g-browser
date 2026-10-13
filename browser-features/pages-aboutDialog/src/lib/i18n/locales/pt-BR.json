@@ -41,6 +41,8 @@
       "terms": "Termos de serviço",
       "privacy": "Política de privacidade"
     },
-    "trademark": "O nome Floorp é uma marca registrada no Japão."
+    "trademark": "O nome Floorp é uma marca registrada no Japão.",
+    "opensExternal": "opens external link",
+    "opensInNewWindow": "opens in new window"
   }
 }

@@ -183,7 +183,7 @@ const MenuItemContent = memo(function MenuItemContent({
           </span>
           {item.nativeHidden && (
             <span className="floorp-tag gap-1 text-xs text-warning">
-              <EyeOff className="size-3" />
+              <EyeOff className="size-3" aria-hidden="true" />
               {t("contextMenu.nativeHidden")}
             </span>
           )}
@@ -215,7 +215,7 @@ const MenuItemContent = memo(function MenuItemContent({
               aria-label={t("contextMenu.moveItemUp", { label })}
               title={t("contextMenu.moveUp")}
             >
-              <ChevronUp className="size-4" />
+              <ChevronUp className="size-4" aria-hidden="true" />
             </Button>
             <Button
               type="button"
@@ -227,7 +227,7 @@ const MenuItemContent = memo(function MenuItemContent({
               aria-label={t("contextMenu.moveItemDown", { label })}
               title={t("contextMenu.moveDown")}
             >
-              <ChevronDown className="size-4" />
+              <ChevronDown className="size-4" aria-hidden="true" />
             </Button>
           </div>
           {!placementActive && (
@@ -258,7 +258,7 @@ const MenuItemContent = memo(function MenuItemContent({
           aria-label={t("contextMenu.openSubmenu", { label })}
         >
           {t("contextMenu.editSubmenu")}
-          <ChevronRight className="size-4" />
+          <ChevronRight className="size-4" aria-hidden="true" />
         </Button>
       )}
 
@@ -349,7 +349,7 @@ function SortableMenuItem({
         {...attributes}
         {...listeners}
       >
-        <GripVertical className="size-4" />
+        <GripVertical className="size-4" aria-hidden="true" />
       </Button>
       <MenuItemContent
         item={item}
@@ -404,6 +404,7 @@ function PlacementGap({
   return (
     <button
       ref={buttonRef}
+      aria-label={label}
       data-context-menu-placement-gap="true"
       type="button"
       className="group flex min-h-11 w-full items-center gap-3 bg-primary/5 px-3 text-xs font-medium text-primary transition-colors hover:bg-primary/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary disabled:opacity-50"
@@ -412,7 +413,6 @@ function PlacementGap({
       onClick={onClick}
       onFocus={onFocus}
       onKeyDown={onKeyDown}
-      aria-label={label}
     >
       <span className="h-px flex-1 bg-primary/35 group-hover:bg-primary" />
       <span>{label}</span>
@@ -939,6 +939,7 @@ export function ContextMenuEditor({
           >
             <RefreshCw
               className={`mr-2 size-4 ${refreshing ? "animate-spin" : ""}`}
+              aria-hidden="true"
             />
             {t("contextMenu.refreshCatalog")}
           </Button>
@@ -1033,7 +1034,7 @@ export function ContextMenuEditor({
                       selectedProfile.key,
                     )}
                 >
-                  <Undo2 className="mr-2 size-4" />
+                  <Undo2 className="mr-2 size-4" aria-hidden="true" />
                   {t("contextMenu.resetProfile")}
                 </Button>
                 <Switch
@@ -1176,7 +1177,7 @@ export function ContextMenuEditor({
             </div>
 
             <label className="flex w-full items-center gap-2">
-              <Search className="size-4 text-base-content/50" />
+              <Search className="size-4 text-base-content/50" aria-hidden="true" />
               <Input
                 type="search"
                 className="min-w-0 grow"

@@ -88,7 +88,7 @@ export function Settings({
       await setCustomImage(processedImageData, file.name);
       setCurrentFileName(file.name);
     } catch (error) {
-      console.error("Failed to load image:", error);
+      console.error("Failed to load image status message:", error);
     } finally {
       setIsSubmitting(false);
     }
@@ -111,7 +111,7 @@ export function Settings({
     try {
       await setSelectedFloorp(imageName);
     } catch (error) {
-      console.error("Failed to select Floorp image:", error);
+      console.error("Failed to select Floorp image status message:", error);
     } finally {
       setIsSubmitting(false);
     }
@@ -127,7 +127,7 @@ export function Settings({
       // Only change the type, preserve existing image data
       await setBackgroundType(type);
     } catch (error) {
-      console.error("Failed to change background type:", error);
+      console.error("Failed to change background type status message:", error);
     } finally {
       setIsSubmitting(false);
     }
@@ -148,7 +148,7 @@ export function Settings({
       });
       setBlockedSites(newBlockedSites);
     } catch (error) {
-      console.error("Failed to unblock site:", error);
+      console.error("Failed to unblock site status message:", error);
     } finally {
       setIsSubmitting(false);
     }
@@ -161,13 +161,14 @@ export function Settings({
       title={t("settings.newTabSettings")}
     >
       <div className="space-y-6">
-        <section>
-          <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">
+        <fieldset className="border-none p-0 m-0">
+          <legend className="text-lg font-medium text-gray-900 dark:text-white mb-4">
             {t("settings.displayComponents")}
-          </h3>
+          </legend>
           <div className="space-y-4">
-            <label className="flex items-center space-x-3">
+            <label htmlFor="newtab-setting-top-sites" className="flex items-center space-x-3 cursor-pointer">
               <input
+                id="newtab-setting-top-sites"
                 type="checkbox"
                 checked={components.topSites}
                 onChange={() => toggleComponent("topSites")}
@@ -178,8 +179,9 @@ export function Settings({
                 {t("settings.topSites")}
               </span>
             </label>
-            <label className="flex items-center space-x-3">
+            <label htmlFor="newtab-setting-clock" className="flex items-center space-x-3 cursor-pointer">
               <input
+                id="newtab-setting-clock"
                 type="checkbox"
                 checked={components.clock}
                 onChange={() => toggleComponent("clock")}
@@ -190,8 +192,9 @@ export function Settings({
                 {t("settings.clock")}
               </span>
             </label>
-            <label className="flex items-center space-x-3">
+            <label htmlFor="newtab-setting-search-bar" className="flex items-center space-x-3 cursor-pointer">
               <input
+                id="newtab-setting-search-bar"
                 type="checkbox"
                 checked={components.searchBar}
                 onChange={() => toggleComponent("searchBar")}
@@ -202,8 +205,9 @@ export function Settings({
                 {t("settings.searchBar")}
               </span>
             </label>
-            <label className="flex items-center space-x-3">
+            <label htmlFor="newtab-setting-firefox-layout" className="flex items-center space-x-3 cursor-pointer">
               <input
+                id="newtab-setting-firefox-layout"
                 type="checkbox"
                 checked={components.firefoxLayout}
                 onChange={() => toggleComponent("firefoxLayout")}
@@ -215,15 +219,16 @@ export function Settings({
               </span>
             </label>
           </div>
-        </section>
+        </fieldset>
 
-        <section>
-          <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">
+        <fieldset className="border-none p-0 m-0">
+          <legend className="text-lg font-medium text-gray-900 dark:text-white mb-4">
             {t("settings.floorpStart")}
-          </h3>
+          </legend>
           <div className="space-y-2">
-            <label className="flex items-start space-x-3">
+            <label htmlFor="newtab-setting-disable-floorp-start" className="flex items-start space-x-3 cursor-pointer">
               <input
+                id="newtab-setting-disable-floorp-start"
                 type="checkbox"
                 checked={disableFloorpStart}
                 onChange={async (e) => {
@@ -252,7 +257,7 @@ export function Settings({
               </span>
             </label>
           </div>
-        </section>
+        </fieldset>
 
         <section>
           <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">
@@ -276,6 +281,7 @@ export function Settings({
                       type="button"
                       onClick={() => unblockSite(url)}
                       disabled={isSubmitting}
+                      aria-label={`${t("settings.unblock", "Unblock")}: ${url}`}
                       className="btn btn-sm btn-ghost text-primary hover:bg-primary/10"
                     >
                       {t("settings.unblock", "Unblock")}
@@ -291,13 +297,14 @@ export function Settings({
           </div>
         </section>
 
-        <section>
-          <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">
+        <fieldset className="border-none p-0 m-0">
+          <legend className="text-lg font-medium text-gray-900 dark:text-white mb-4">
             {t("settings.backgroundSettings")}
-          </h3>
-          <div className="space-y-4">
-            <label className="flex items-center space-x-3">
+          </legend>
+          <div className="space-y-4" role="radiogroup" aria-label={t("settings.backgroundSettings")}>
+            <label htmlFor="newtab-bg-none" className="flex items-center space-x-3 cursor-pointer">
               <input
+                id="newtab-bg-none"
                 type="radio"
                 name="background"
                 value="none"
@@ -310,8 +317,9 @@ export function Settings({
                 {t("settings.noBackground")}
               </span>
             </label>
-            <label className="flex items-center space-x-3">
+            <label htmlFor="newtab-bg-random" className="flex items-center space-x-3 cursor-pointer">
               <input
+                id="newtab-bg-random"
                 type="radio"
                 name="background"
                 value="random"
@@ -324,8 +332,9 @@ export function Settings({
                 {t("settings.randomImage")}
               </span>
             </label>
-            <label className="flex items-center space-x-3">
+            <label htmlFor="newtab-bg-custom" className="flex items-center space-x-3 cursor-pointer">
               <input
+                id="newtab-bg-custom"
                 type="radio"
                 name="background"
                 value="custom"
@@ -339,8 +348,9 @@ export function Settings({
               </span>
             </label>
 
-            <label className="flex items-center space-x-3">
+            <label htmlFor="newtab-bg-folder" className="flex items-center space-x-3 cursor-pointer">
               <input
+                id="newtab-bg-folder"
                 type="radio"
                 name="background"
                 value="folderPath"
@@ -354,8 +364,9 @@ export function Settings({
               </span>
             </label>
 
-            <label className="flex items-center space-x-3">
+            <label htmlFor="newtab-bg-floorp" className="flex items-center space-x-3 cursor-pointer">
               <input
+                id="newtab-bg-floorp"
                 type="radio"
                 name="background"
                 value="floorp"
@@ -379,6 +390,7 @@ export function Settings({
                 <input
                   type="file"
                   accept="image/*"
+                  aria-label={t("settings.uploadImage", { defaultValue: "Upload custom image" })}
                   onChange={handleFileChange}
                   disabled={isSubmitting}
                   className="file-input block w-full text-sm text-gray-500 dark:text-gray-400
@@ -416,8 +428,9 @@ export function Settings({
             {(backgroundType === "random" ||
               backgroundType === "folderPath") && (
               <div className="mt-4 pl-8 space-y-4">
-                <label className="flex items-center space-x-3">
+                <label htmlFor="newtab-setting-slideshow" className="flex items-center space-x-3 cursor-pointer">
                   <input
+                    id="newtab-setting-slideshow"
                     type="checkbox"
                     checked={slideshowEnabled}
                     onChange={(e) => setSlideshowEnabled(e.target.checked)}
@@ -429,9 +442,11 @@ export function Settings({
                   </span>
                 </label>
                 {slideshowEnabled && (
-                  <label className="flex items-center space-x-3">
+                  <label htmlFor="newtab-setting-slideshow-interval" className="flex items-center space-x-3 cursor-pointer">
                     <input
+                      id="newtab-setting-slideshow-interval"
                       type="number"
+                      aria-label={t("settings.slideshowInterval")}
                       value={slideshowInterval}
                       onChange={(e) =>
                         setSlideshowInterval(Number(e.target.value))}
@@ -449,12 +464,27 @@ export function Settings({
 
             {backgroundType === "floorp" && (
               <div className="mt-4 pl-8">
-                <div className="grid grid-cols-3 gap-4">
+                <div
+                  className="grid grid-cols-3 gap-4"
+                  role="radiogroup"
+                  aria-label={t("settings.floorpImages")}
+                >
                   {floorpImages.map((image) => (
                     <div
                       key={image.name}
+                      role="radio"
+                      tabIndex={0}
+                      aria-checked={selectedFloorp === image.name}
+                      aria-label={image.name}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                          e.preventDefault();
+                          handleFloorpImageSelect(image.name);
+                        }
+                      }}
                       className={`
                         relative cursor-pointer rounded-lg overflow-hidden border-2
+                        focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2
                         ${
                         selectedFloorp === image.name
                           ? "border-primary"
@@ -465,7 +495,8 @@ export function Settings({
                     >
                       <img
                         src={image.url}
-                        alt={image.name}
+                        alt=""
+                        aria-hidden="true"
                         className="w-full h-auto aspect-video object-cover"
                       />
                       {selectedFloorp === image.name && (
@@ -481,7 +512,7 @@ export function Settings({
               </div>
             )}
           </div>
-        </section>
+        </fieldset>
       </div>
     </Modal>
   );

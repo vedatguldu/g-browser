@@ -35,6 +35,9 @@ export default function HubIntroPage() {
       <div className={styles.links}>
         <a href="about:preferences" target="_blank" rel="noopener noreferrer">
           {t("setupV5.openPreferences")}
+          <span className="sr-only">
+            {" "}({t("finishPage.opensInNewWindow", { defaultValue: "opens in a new tab" })})
+          </span>
           <ExternalLink size={16} aria-hidden="true" />
         </a>
       </div>

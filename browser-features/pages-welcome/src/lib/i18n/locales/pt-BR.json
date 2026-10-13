@@ -319,7 +319,8 @@
     "getStarted": "Comece a usar o Floorp",
     "hint": "Para obter configurações mais detalhadas, você pode personalizá-las por meio da opção Configurações no botão de menu no canto superior direito.",
     "resourcesLabel": "Recursos",
-    "defaultBrowserSuccess": "O Floorp foi definido como seu navegador padrão!"
+    "defaultBrowserSuccess": "O Floorp foi definido como seu navegador padrão!",
+    "opensInNewWindow": "opens in new window"
   },
   "whatsNew": {
     "title": "Bem-vindo ao Floorp {{version}}!",

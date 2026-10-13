@@ -41,6 +41,8 @@
       "terms": "利用規約",
       "privacy": "プライバシーポリシー"
     },
-    "trademark": "Floorp の名称は日本国における商標です。"
+    "trademark": "Floorp の名称は日本国における商標です。",
+    "opensExternal": "外部リンクを開きます",
+    "opensInNewWindow": "新しいウィンドウで開きます"
   }
 }

@@ -22,7 +22,9 @@ export function SearchBar() {
       >
         <div className="relative flex-1">
           <input
+            id="newtab-search-bar-input"
             type="text"
+            aria-label={t("searchBar.searchOrEnterUrl")}
             placeholder={t("searchBar.searchOrEnterUrl")}
             className="w-full bg-transparent border-none outline-none px-2 py-1 text-gray-100 cursor-pointer group-hover:text-white transition-colors"
             readOnly

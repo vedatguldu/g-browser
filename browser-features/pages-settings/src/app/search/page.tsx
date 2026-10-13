@@ -197,10 +197,20 @@ export default function SearchPage() {
           )}
       </div>
 
+      <div role="status" aria-live="polite" className="sr-only">
+        {hasQuery
+          ? t("pages.search.resultCount", {
+              count: results.length,
+              query,
+              defaultValue: `${results.length} results found for "${query}"`,
+            })
+          : ""}
+      </div>
+
       <div className="space-y-3">
         {results.length === 0 && hasQuery
           ? (
-            <div className="pl-6 text-sm text-base-content/70">
+            <div role="status" className="pl-6 text-sm text-base-content/70">
               {t("pages.search.noResults")}
             </div>
           )
@@ -217,7 +227,6 @@ export default function SearchPage() {
                   <Link
                     key={document.id}
                     to={document.route}
-                    aria-label={openLabel}
                     className={cn(
                       "group block focus:outline-none focus-visible:ring-2",
                       "focus-visible:ring-primary/60 focus-visible:ring-offset-2 rounded-lg",
@@ -236,6 +245,7 @@ export default function SearchPage() {
                         <CardTitle className="flex-1 text-base md:text-lg">
                           {highlightText(document.title, hasQuery ? query : "")}
                         </CardTitle>
+                        <span className="sr-only"> ({openLabel})</span>
                         <ArrowUpRight
                           className="size-4 text-base-content/60"
                           aria-hidden

@@ -48,7 +48,7 @@ export function BasicSettings() {
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <Command className="size-5" />
+            <Command className="size-5" aria-hidden="true" />
             {t("commandPalette.basicSettings")}
           </CardTitle>
           <CardDescription>
@@ -89,7 +89,7 @@ export function BasicSettings() {
           </div>
 
           <div className="flex items-start gap-2 rounded-lg border border-base-300/40 p-3 bg-base-200/40 dark:bg-base-700/30">
-            <Keyboard className="size-5 mt-0.5 shrink-0 text-base-content/70" />
+            <Keyboard className="size-5 mt-0.5 shrink-0 text-base-content/70" aria-hidden="true" />
             <div className="space-y-1">
               <p className="text-base font-medium">
                 {t("commandPalette.launchHintTitle")}

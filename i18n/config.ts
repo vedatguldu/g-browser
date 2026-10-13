@@ -82,10 +82,7 @@ export function initI18N(namespace: string[], defaultNamespace: string) {
             // Keep changeLanguage robust: don't allow throwing from provider
             // registration to break initialization. Log and re-throw so
             // callers can still handle the rejection if they expect it.
-            try {
-              console.error("Failed to change language", e);
-            // deno-lint-ignore no-empty
-            } catch {}
+            console?.error?.("Failed to change language status message", e);
             throw e;
           }
         },
@@ -93,13 +90,10 @@ export function initI18N(namespace: string[], defaultNamespace: string) {
       });
     } catch (e) {
       // Keep initialization robust: don't throw if registration fails.
-      try {
-        console.error(
-          "Failed to register translation provider on I18nUtils",
-          e,
-        );
-      // deno-lint-ignore no-empty
-      } catch {}
+      console?.error?.(
+        "Failed to register translation provider on I18nUtils status message",
+        e,
+      );
     }
   });
 }

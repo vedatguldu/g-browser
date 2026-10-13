@@ -73,7 +73,7 @@ export async function getPanelsList(): Promise<Panels | null> {
     const data = JSON.parse(result);
     return data.data || [];
   } catch (e) {
-    console.error("Failed to parse panel sidebar data:", e);
+    console.error("Failed to parse panel sidebar data status message:", e);
     return null;
   }
 }
@@ -176,13 +176,13 @@ export function getContainers(): Promise<Container[]> {
                   containerId = Number.parseInt(container.id, 10);
                   if (isNaN(containerId)) {
                     console.error(
-                      `Invalid container ID: ${container.id}, using original string`,
+                      `Invalid container ID: ${container.id}, using original string status message`,
                     );
                     containerId = container.id;
                   }
                 } catch (error) {
                   console.error(
-                    `Error parsing container ID: ${container.id}`,
+                    `Error parsing container ID status message: ${container.id}`,
                     error,
                   );
                   containerId = container.id;
@@ -205,7 +205,7 @@ export function getContainers(): Promise<Container[]> {
 
           resolve(formattedData);
         } catch (error) {
-          console.error("Failed to parse containers data:", error);
+          console.error("Failed to parse containers data status message:", error);
           fetchState.isGettingContainers = false;
           resolve([]);
         }
@@ -215,7 +215,7 @@ export function getContainers(): Promise<Container[]> {
       (window as any).NRGetContainerContexts(callback);
     });
   } catch (error) {
-    console.error("Failed to get containers:", error);
+    console.error("Failed to get containers status message:", error);
     fetchState.isGettingContainers = false;
     return Promise.resolve([]);
   }
@@ -273,7 +273,7 @@ export function getStaticPanels(): Promise<StaticPanel[]> {
 
           resolve(formattedData);
         } catch (error) {
-          console.error("Failed to parse static panels data:", error);
+          console.error("Failed to parse static panels data status message:", error);
           fetchState.isGettingStaticPanels = false;
           resolve([]);
         }
@@ -283,7 +283,7 @@ export function getStaticPanels(): Promise<StaticPanel[]> {
       (window as any).NRGetStaticPanels(callback);
     });
   } catch (error) {
-    console.error("Failed to get static panels:", error);
+    console.error("Failed to get static panels status message:", error);
     fetchState.isGettingStaticPanels = false;
     return Promise.resolve([]);
   }
@@ -311,7 +311,7 @@ export function getExtensionPanels(): Promise<ExtensionPanel[]> {
 
   // deno-lint-ignore no-explicit-any
   if (typeof (window as any).NRGetExtensionPanels !== "function") {
-    console.error("NRGetExtensionPanels is not available");
+    console.error("NRGetExtensionPanels is not available status message");
     fetchState.isGettingExtensionPanels = false;
     return Promise.resolve([]);
   }
@@ -319,7 +319,7 @@ export function getExtensionPanels(): Promise<ExtensionPanel[]> {
   try {
     return new Promise<ExtensionPanel[]>((resolve) => {
       const timeoutId = setTimeout(() => {
-        console.error("Extension panels fetch timed out");
+        console.error("Extension panels fetch timed out status message");
         fetchState.isGettingExtensionPanels = false;
         resolve([]);
       }, 5000);
@@ -343,7 +343,7 @@ export function getExtensionPanels(): Promise<ExtensionPanel[]> {
 
           resolve(formattedData);
         } catch (error) {
-          console.error("Failed to parse extension panels data:", error);
+          console.error("Failed to parse extension panels data status message:", error);
           fetchState.isGettingExtensionPanels = false;
           resolve([]);
         }
@@ -353,7 +353,7 @@ export function getExtensionPanels(): Promise<ExtensionPanel[]> {
       (window as any).NRGetExtensionPanels(callback);
     });
   } catch (error) {
-    console.error("Failed to get extension panels:", error);
+    console.error("Failed to get extension panels status message:", error);
     fetchState.isGettingExtensionPanels = false;
     return Promise.resolve([]);
   }

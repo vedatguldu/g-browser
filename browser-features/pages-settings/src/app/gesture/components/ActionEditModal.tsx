@@ -24,6 +24,7 @@ export function ActionEditModal({
   const [action, setAction] = useState<GestureAction>(initialAction);
   const [error, setError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
+  const [announcement, setAnnouncement] = useState("");
   const availableActions = useAvailableActions();
 
   const updatePattern = (direction: GestureDirection) => {
@@ -40,6 +41,11 @@ export function ActionEditModal({
       ...action,
       pattern: [...action.pattern, direction],
     });
+    setAnnouncement(
+      t("mouseGesture.directionAdded", {
+        direction: t(`mouseGesture.direction.${direction}`),
+      }),
+    );
   };
 
   const resetPattern = () => {
@@ -49,17 +55,26 @@ export function ActionEditModal({
       ...action,
       pattern: [],
     });
+    setAnnouncement(t("mouseGesture.patternReset"));
   };
 
   const removeDirection = (index: number) => {
     setError(null);
 
+    const removedDir = action.pattern[index];
     const newPattern = [...action.pattern];
     newPattern.splice(index, 1);
     setAction({
       ...action,
       pattern: newPattern,
     });
+    if (removedDir) {
+      setAnnouncement(
+        t("mouseGesture.directionRemoved", {
+          direction: t(`mouseGesture.direction.${removedDir}`),
+        }),
+      );
+    }
   };
 
   const handleSave = async () => {
@@ -81,7 +96,7 @@ export function ActionEditModal({
     try {
       if (!await onSave(finalAction)) setError(t("ui.saveError"));
     } catch (error) {
-      console.error("[MouseGesture] Could not save action", error);
+      console.error("[MouseGesture] Could not save action status message", error);
       setError(t("ui.saveError"));
     } finally {
       setSaving(false);
@@ -147,6 +162,9 @@ export function ActionEditModal({
       </div>
 
       <div className="py-4 space-y-4">
+        <div className="sr-only" role="status" aria-live="polite" aria-atomic="true">
+          {announcement}
+        </div>
         <div className="floorp-field w-full">
           <label className="mb-2">
             <span className="text-base-content/90">
@@ -159,13 +177,20 @@ export function ActionEditModal({
                 key={index}
                 className="floorp-tag font-mono gap-1"
               >
-                {patternToString([direction])}
+                <span aria-hidden="true">{patternToString([direction])}</span>
+                <span className="sr-only">
+                  {t(`mouseGesture.direction.${direction}`)}
+                </span>
                 <Button
                   type="button"
                   variant="ghost"
                   onClick={() => removeDirection(index)}
+                  aria-label={t("mouseGesture.removeDirection", {
+                    direction: t(`mouseGesture.direction.${direction}`),
+                    position: index + 1,
+                  })}
                 >
-                  ×
+                  <span aria-hidden="true">×</span>
                 </Button>
               </div>
             ))}
@@ -180,62 +205,70 @@ export function ActionEditModal({
               <Button
                 type="button"
                 variant="secondary"
+                aria-label={t("mouseGesture.direction.upLeft")}
                 onClick={() =>
                   updatePattern("upLeft")}
               >
-                ↖
+                <span aria-hidden="true">↖</span>
               </Button>
               <Button
                 type="button"
                 variant="secondary"
+                aria-label={t("mouseGesture.direction.up")}
                 onClick={() =>
                   updatePattern("up")}
               >
-                ↑
+                <span aria-hidden="true">↑</span>
               </Button>
               <Button
                 type="button"
                 variant="secondary"
+                aria-label={t("mouseGesture.direction.upRight")}
                 onClick={() =>
                   updatePattern("upRight")}
               >
-                ↗
+                <span aria-hidden="true">↗</span>
               </Button>
               <Button
                 type="button"
                 variant="secondary"
+                aria-label={t("mouseGesture.direction.left")}
                 onClick={() => updatePattern("left")}
               >
-                ←
+                <span aria-hidden="true">←</span>
               </Button>
               <div />
               <Button
                 type="button"
                 variant="secondary"
+                aria-label={t("mouseGesture.direction.right")}
                 onClick={() => updatePattern("right")}
               >
-                →
+                <span aria-hidden="true">→</span>
               </Button>
               <Button
                 type="button"
                 variant="secondary"
+                aria-label={t("mouseGesture.direction.downLeft")}
                 onClick={() => updatePattern("downLeft")}
               >
-                ↙
+                <span aria-hidden="true">↙</span>
               </Button>
               <Button
                 type="button"
                 variant="secondary"
+                aria-label={t("mouseGesture.direction.down")}
                 onClick={() => updatePattern("down")}
               >
-                ↓
+                <span aria-hidden="true">↓</span>
               </Button>
               <Button
                 type="button"
                 variant="secondary"
+                aria-label={t("mouseGesture.direction.downRight")}
                 onClick={() => updatePattern("downRight")}
               >
-                ↘
+                <span aria-hidden="true">↘</span>
               </Button>
             </div>
             <div>

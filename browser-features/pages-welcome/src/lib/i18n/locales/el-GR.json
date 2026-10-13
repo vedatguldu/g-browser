@@ -319,7 +319,8 @@
     "getStarted": "Ξεκινήστε με το Floorp",
     "hint": "Για πιο λεπτομερείς ρυθμίσεις, μπορείτε να τις προσαρμόσετε μέσω της επιλογής Ρυθμίσεις στο κουμπί μενού πάνω δεξιά.",
     "resourcesLabel": "Πόροι",
-    "defaultBrowserSuccess": "Το Floorp έχει οριστεί ως προεπιλεγμένο πρόγραμμα περιήγησης!"
+    "defaultBrowserSuccess": "Το Floorp έχει οριστεί ως προεπιλεγμένο πρόγραμμα περιήγησης!",
+    "opensInNewWindow": "opens in new window"
   },
   "whatsNew": {
     "title": "Καλώς ήλθατε στο Floorp {{version}}!",

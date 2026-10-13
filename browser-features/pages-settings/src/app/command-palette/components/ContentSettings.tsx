@@ -42,6 +42,9 @@ export function ContentSettings() {
             variant="secondary"
             size="sm"
             disabled={isDisabled}
+            aria-haspopup="dialog"
+            aria-expanded={isPriorityModalOpen}
+            aria-pressed={isPriorityModalOpen}
             onClick={() => setIsPriorityModalOpen(true)}
           >
             {t("commandPalette.prioritySettingsButton")}

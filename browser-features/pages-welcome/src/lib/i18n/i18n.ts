@@ -20,7 +20,7 @@ export const initializeI18n = async () => {
   try {
     osLocale = await globalThis.NRI18n.getOperatingSystemLocale();
   } catch (e) {
-    console.error("Failed to get OS locale from NRI18n, falling back to en-US", e);
+    console.error("Failed to get OS locale from NRI18n status message, falling back to en-US", e);
   }
 
   await i18n

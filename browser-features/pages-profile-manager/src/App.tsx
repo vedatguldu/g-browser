@@ -21,6 +21,7 @@ type ProfileItem = {
 function App() {
   const [profiles, setProfiles] = useState<ProfileItem[]>([]);
   const [loading, setLoading] = useState(false);
+  const [statusMessage, setStatusMessage] = useState("");
   const { t } = useTranslation();
 
   async function loadAll() {
@@ -33,8 +34,15 @@ function App() {
       ]);
       const profilesArray = Array.isArray(p) ? (p as ProfileItem[]) : [];
       setProfiles(profilesArray);
+      setStatusMessage(
+        t("profileManager.status.loaded", {
+          count: profilesArray.length,
+          defaultValue: `${profilesArray.length} profiles loaded.`,
+        }),
+      );
     } catch (err) {
-      console.error("[App] loadAll: failed to load data", err);
+      console.error("[App] loadAll status message: failed to load data", err);
+      setStatusMessage(t("profileManager.loading", { defaultValue: "Error loading profiles." }));
     } finally {
       setLoading(false);
     }
@@ -57,6 +65,11 @@ function App() {
   return (
     <div className="min-h-screen p-6 bg-base-200">
       <div className="container mx-auto">
+        {/* Screen Reader Live Region */}
+        <div role="status" aria-live="polite" className="sr-only" aria-atomic="true">
+          {statusMessage}
+        </div>
+
         <div className="flex flex-row sm:flex-row sm:items-center justify-between gap-2 mb-4">
           <h1 className="text-lg font-semibold">{t("profileManager.title")}</h1>
           <button
@@ -66,7 +79,7 @@ function App() {
             className="ml-auto btn btn-primary btn-sm flex items-center gap-2"
             onClick={handleCreate}
           >
-            <Plus size={16} />
+            <Plus size={16} aria-hidden="true" />
             <span>{t("profileManager.buttons.create")}</span>
           </button>
 
@@ -77,7 +90,7 @@ function App() {
             className="btn btn-secondary btn-sm flex items-center gap-2"
             onClick={loadAll}
           >
-            <RefreshCw size={16} />
+            <RefreshCw size={16} aria-hidden="true" />
             <span>{t("profileManager.buttons.refresh")}</span>
           </button>
         </div>
@@ -85,43 +98,58 @@ function App() {
         <div className="flex-1 mt-6 overflow-auto space-y-3 min-h-[60vh]">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {loading && (
-              <div className="col-span-full">{t("profileManager.loading")}</div>
+              <div className="col-span-full" role="status" aria-live="polite">
+                {t("profileManager.loading")}
+              </div>
             )}
             {!loading && profiles.length === 0 && (
-              <div className="col-span-full">
+              <div className="col-span-full" role="status" aria-live="polite">
                 {t("profileManager.noProfiles")}
               </div>
             )}
 
-            {profiles.map((p) => (
-              <div
-                key={p.name}
-                className={`card card-compact bg-base-100 shadow`}
-              >
-                <div className="card-body p-3  flex flex-row justify-between">
-                  <h2 className="card-title items-center gap-2 text-sm">
-                    <span className="truncate text-sm">{p.name}</span>
-                    {p.isCurrentProfile
-                      ? (
-                        <span className="badge badge-accent text-xs">
+            {profiles.map((p) => {
+              const openProfileLabel = t("profileManager.actions.openProfile", {
+                name: p.name,
+                defaultValue: `Launch ${p.name} profile`,
+              });
+
+              return (
+                <div
+                  key={p.name}
+                  className={`card card-compact bg-base-100 shadow`}
+                  aria-current={p.isCurrentProfile ? "true" : undefined}
+                >
+                  <div className="card-body p-3 flex flex-row justify-between">
+                    <h2 className="card-title items-center gap-2 text-sm">
+                      <span className="truncate text-sm">{p.name}</span>
+                      {p.isCurrentProfile ? (
+                        <span
+                          className="badge badge-accent text-xs"
+                          aria-label={t("profileManager.actions.currentProfileNotice", {
+                            defaultValue: "Currently active profile",
+                          })}
+                        >
                           {t("profileManager.current")}
                         </span>
-                      )
-                      : null}
-                  </h2>
-                  <div className="card-actions flex flex-col justify-end gap-1">
-                    <button
-                      type="button"
-                      className="btn btn-sm btn-primary w-full"
-                      onClick={() => handleOpenProfile(p.name)}
-                    >
-                      <ShareIcon size={16} />
-                      {t("profileManager.actions.open")}
-                    </button>
+                      ) : null}
+                    </h2>
+                    <div className="card-actions flex flex-col justify-end gap-1">
+                      <button
+                        type="button"
+                        className="btn btn-sm btn-primary w-full"
+                        aria-label={openProfileLabel}
+                        title={openProfileLabel}
+                        onClick={() => handleOpenProfile(p.name)}
+                      >
+                        <ShareIcon size={16} aria-hidden="true" />
+                        <span>{t("profileManager.actions.open")}</span>
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>

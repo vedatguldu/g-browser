@@ -34,6 +34,8 @@ const Switch = forwardRef<HTMLInputElement, SwitchProps>(
         )}
       >
         <input
+          id={props.id}
+          aria-label={props["aria-label"]}
           type="checkbox"
           className="peer sr-only"
           ref={ref}

@@ -36,6 +36,7 @@ export function BasicSettings() {
       setInitializeStatus(success ? "success" : "error");
     } catch (error) {
       console.error("Failed to initialize workspaces:", error);
+      // update error status message for user alert
       setInitializeStatus("error");
     } finally {
       setIsInitializing(false);
@@ -108,22 +109,32 @@ export function BasicSettings() {
             href="https://docs.floorp.app/docs/features/workspaces"
             target="_blank"
             rel="noopener noreferrer"
+            aria-describedby="workspace-help-newtab"
             className={styles.help}
           >
             {t("workspaceRefresh.help")}
             <ExternalLink size={16} aria-hidden="true" />
+            <span id="workspace-help-newtab" className="sr-only">
+              {" "}({t("common.opensInNewWindow", { defaultValue: "opens in a new tab" })})
+            </span>
           </a>
         </CardHeader>
         <CardContent className="space-y-3">
           <div className={styles.row}>
-            <label htmlFor="close-popup" className="flex flex-col gap-1.5">
-              <span>{t("workspaces.closePopupWhenSelectingWorkspace")}</span>
-              <span className="font-normal text-sm text-base-content/70">
+            <div className="flex flex-col gap-1.5">
+              <label htmlFor="close-popup" className="font-semibold">
+                {t("workspaces.closePopupWhenSelectingWorkspace")}
+              </label>
+              <span
+                id="close-popup-desc"
+                className="font-normal text-sm text-base-content/70"
+              >
                 {t("workspaces.closePopupWhenSelectingWorkspaceDescription")}
               </span>
-            </label>
+            </div>
             <Switch
               id="close-popup"
+              aria-describedby="close-popup-desc"
               checked={!!getValues("closePopupAfterClick")}
               onChange={(e) =>
                 setValue("closePopupAfterClick", e.target.checked)}
@@ -131,7 +142,7 @@ export function BasicSettings() {
           </div>
 
           <div className={styles.row}>
-            <label htmlFor="show-name">
+            <label htmlFor="show-name" className="font-semibold">
               {t("workspaces.showWorkspaceNameOnToolbar")}
             </label>
             <Switch
@@ -143,7 +154,7 @@ export function BasicSettings() {
           </div>
 
           <div className={styles.row}>
-            <label htmlFor="exit-on-last-tab-close">
+            <label htmlFor="exit-on-last-tab-close" className="font-semibold">
               {t("workspaces.exitOnLastTabClose")}
             </label>
             <Switch
@@ -154,14 +165,20 @@ export function BasicSettings() {
           </div>
 
           <div className={styles.row}>
-            <label htmlFor="manage-bms" className="flex flex-col gap-1.5">
-              <span>{t("workspaces.manageOnBms")}</span>
-              <span className="font-normal text-sm text-base-content/70">
+            <div className="flex flex-col gap-1.5">
+              <label htmlFor="manage-bms" className="font-semibold">
+                {t("workspaces.manageOnBms")}
+              </label>
+              <span
+                id="manage-bms-desc"
+                className="font-normal text-sm text-base-content/70"
+              >
                 {t("workspaces.manageOnBmsDescription")}
               </span>
-            </label>
+            </div>
             <Switch
               id="manage-bms"
+              aria-describedby="manage-bms-desc"
               checked={!!getValues("manageOnBms")}
               onChange={(e) => setValue("manageOnBms", e.target.checked)}
             />
@@ -179,13 +196,21 @@ export function BasicSettings() {
             </p>
             {initializeStatus === "success"
               ? (
-                <p className="text-sm text-green-600 dark:text-green-400">
+                <p
+                  role="status"
+                  aria-live="polite"
+                  className="text-sm text-green-600 dark:text-green-400"
+                >
                   {t("workspaces.initializeSuccess")}
                 </p>
               )
               : initializeStatus === "error"
               ? (
-                <p className="text-sm text-red-600 dark:text-red-400">
+                <p
+                  role="alert"
+                  aria-live="assertive"
+                  className="text-sm text-red-600 dark:text-red-400"
+                >
                   {t("workspaces.initializeFailure")}
                 </p>
               )

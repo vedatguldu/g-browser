@@ -40,10 +40,15 @@ export function Preferences() {
             <a
               href="https://docs.floorp.app/docs/features/webapps"
               target="_blank"
+              rel="noopener noreferrer"
+              aria-describedby="pwa-help-newtab"
               className={`${styles.link} mt-3 text-sm`}
             >
               {t("progressiveWebApp.learnMore")}
-              <ExternalLink className="size-4" />
+              <span id="pwa-help-newtab" className="sr-only">
+                {" "}({t("common.opensInNewWindow", { defaultValue: "opens in a new tab" })})
+              </span>
+              <ExternalLink className="size-4" aria-hidden="true" />
             </a>
           </div>
         </CardHeader>

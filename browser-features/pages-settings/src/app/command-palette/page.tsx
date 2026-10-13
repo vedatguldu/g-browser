@@ -27,6 +27,8 @@ export default function Page() {
   // serialize saves so an older snapshot can never finish after a newer one.
   const initialLoadDoneRef = React.useRef(false);
   const saveChainRef = React.useRef<Promise<void>>(Promise.resolve());
+  const [loadError, setLoadError] = React.useState(false);
+  const [saveError, setSaveError] = React.useState(false);
 
   React.useEffect(() => {
     const fetchDefaultValues = async () => {
@@ -85,8 +87,10 @@ export default function Page() {
         setValue("maxTabsResults", values.maxTabsResults, {
           shouldValidate: true,
         });
+        setLoadError(false);
       } catch (error) {
-        console.error("[command-palette] Failed to load settings:", error);
+        console.error("[command-palette] Failed to load settings status message:", error);
+        setLoadError(true);
       } finally {
         initialLoadDoneRef.current = true;
       }
@@ -107,9 +111,11 @@ export default function Page() {
     saveChainRef.current = saveChainRef.current
       .then(async () => {
         await saveCommandPaletteSettings(snapshot);
+        setSaveError(false);
       })
       .catch((error: unknown) => {
         console.error("[command-palette] Failed to save settings:", error);
+        setSaveError(true);
       });
   }, [watchAll]);
 
@@ -121,6 +127,12 @@ export default function Page() {
         </h1>
         <p className="text-sm mb-8">{t("commandPalette.description")}</p>
       </div>
+
+      {(loadError || saveError) && (
+        <div role="alert" className="floorp-notice floorp-notice-error pl-6 mb-4">
+          <span>{loadError ? t("ui.loadError") : t("ui.saveError")}</span>
+        </div>
+      )}
 
       <FormProvider {...methods}>
         <form

@@ -23,12 +23,12 @@ export default function useI18nInit() {
           await i18n.changeLanguage(locale);
         }
       } catch (e) {
-        console.error("Failed to get browser locale or initialize i18n:", e);
+        console.error("Failed to get browser locale or initialize i18n status message:", e);
         try {
           const i18n = (await import("@/lib/i18n/i18n.ts")).default;
           await i18n.changeLanguage("en-US");
         } catch (e2) {
-          console.error("Failed to apply fallback language:", e2);
+          console.error("Failed to apply fallback language status message:", e2);
         }
       }
     })();

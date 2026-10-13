@@ -54,23 +54,27 @@ export function Accounts({ accountAndProfileData }: AccountsProps) {
         <a
           href="https://accounts.firefox.com/signin"
           target="_blank"
+          rel="noopener noreferrer"
+          aria-describedby="accounts-mozilla-newtab"
           className={styles.link}
         >
           {t("accounts.manageMozillaAccount")}
-          <ExternalLink className="size-4" />
+          <span id="accounts-mozilla-newtab" className="sr-only">
+            {" "}({t("common.opensInNewWindow", { defaultValue: "opens in a new tab" })})
+          </span>
+          <ExternalLink className="size-4" aria-hidden="true" />
         </a>
 
-        <a
-          href="#"
-          onClick={(e) => {
-            e.preventDefault();
+        <button
+          type="button"
+          onClick={() => {
             globalThis.NRAddTab("about:preferences#sync");
           }}
           className={styles.link}
         >
           {t("accounts.manageFirefoxFeatureSync")}
-          <ExternalLink className="size-4" />
-        </a>
+          <ExternalLink className="size-4" aria-hidden="true" />
+        </button>
       </CardContent>
     </Card>
   );

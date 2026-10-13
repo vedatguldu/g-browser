@@ -13,7 +13,7 @@ export async function initializeI18n() {
     }
   } catch (e) {
     console.error(
-      "[i18n:init] Failed to get/apply locale, falling back to en-US",
+      "[i18n:init] Failed to get/apply locale status message, falling back to en-US",
       e,
     );
     try {

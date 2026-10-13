@@ -81,7 +81,7 @@ export async function getCurrentProfile(): Promise<
       const profileName = profileDir.leafName;
       return { profileName, profilePath };
     } catch (e) {
-      console.error("[profileDataManager] getCurrentProfile (privileged):", e);
+      console.error("[profileDataManager] getCurrentProfile (privileged) status message:", e);
       return null;
     }
   }
@@ -105,7 +105,7 @@ export async function getCurrentProfile(): Promise<
               resolve(parsed as { profileName: string; profilePath: string });
             } catch (err) {
               console.error(
-                "[profileDataManager] getCurrentProfile: JSON parse failed",
+                "[profileDataManager] getCurrentProfile: JSON parse failed status message",
                 err,
               );
               resolve(null);
@@ -118,7 +118,7 @@ export async function getCurrentProfile(): Promise<
         resolve(null);
       }
     } catch (e) {
-      console.error("[profileDataManager] getCurrentProfile: exception", e);
+      console.error("[profileDataManager] getCurrentProfile: exception status message", e);
       resolve(null);
     }
   });
@@ -157,6 +157,7 @@ export async function getProfiles(): Promise<unknown[]> {
             const lock = profile.lock({});
             lock.unlock();
           } catch (err) {
+            // Profile lock test failed; status indicates profile is currently in use
             // deno-lint-ignore no-explicit-any
             const r = (err as any)?.result;
             if (
@@ -182,7 +183,7 @@ export async function getProfiles(): Promise<unknown[]> {
 
       return profiles;
     } catch (e) {
-      console.error("[profileDataManager] getProfiles (privileged):", e);
+      console.error("[profileDataManager] getProfiles (privileged) status message:", e);
       return [];
     }
   }
@@ -198,7 +199,7 @@ export async function getProfiles(): Promise<unknown[]> {
               parsed = JSON.parse(res);
             } catch (err) {
               console.error(
-                "[profileDataManager] getProfiles: failed to parse string response",
+                "[profileDataManager] getProfiles: failed to parse string response status message",
                 err,
               );
               resolve([]);
@@ -216,7 +217,7 @@ export async function getProfiles(): Promise<unknown[]> {
         resolve([]);
       }
     } catch (e) {
-      console.error("[profileDataManager] getProfiles: exception", e);
+      console.error("[profileDataManager] getProfiles: exception status message", e);
       resolve([]);
     }
   });
@@ -236,7 +237,7 @@ export async function getFxAccountsInfo(): Promise<unknown | null> {
       const info = await FxAccounts.getSignedInUser();
       return info;
     } catch (e) {
-      console.error("[profileDataManager] getFxAccountsInfo (privileged):", e);
+      console.error("[profileDataManager] getFxAccountsInfo (privileged) status message:", e);
       return null;
     }
   }
@@ -254,7 +255,7 @@ export async function getFxAccountsInfo(): Promise<unknown | null> {
               return;
             } catch (err) {
               console.error(
-                "[profileDataManager] getFxAccountsInfo: failed to parse string",
+                "[profileDataManager] getFxAccountsInfo: failed to parse string status message",
                 err,
               );
               resolve(null);
@@ -267,7 +268,7 @@ export async function getFxAccountsInfo(): Promise<unknown | null> {
         resolve(null);
       }
     } catch (e) {
-      console.error("[profileDataManager] getFxAccountsInfo: exception", e);
+      console.error("[profileDataManager] getFxAccountsInfo: exception status message", e);
       resolve(null);
     }
   });
@@ -292,7 +293,7 @@ export function openUrl(url: string): void {
       }
       return;
     } catch (e) {
-      console.error("[profileDataManager] openUrl (privileged):", e);
+      console.error("[profileDataManager] openUrl (privileged) status message:", e);
     }
   }
 
@@ -301,10 +302,10 @@ export function openUrl(url: string): void {
     if (typeof openUrlFn === "function") {
       openUrlFn(url);
     } else {
-      console.warn("NROpenUrl not available");
+      console.warn("NROpenUrl not available status message");
     }
   } catch (e) {
-    console.error(e);
+    console.error("[profileDataManager] openUrl status message error:", e);
   }
 }
 
@@ -339,7 +340,7 @@ export function openProfile(profileIdentifier: string): void {
       }
       return;
     } catch (e) {
-      console.error("[profileDataManager] openProfile (privileged):", e);
+      console.error("[profileDataManager] openProfile (privileged) status message:", e);
     }
   }
 
@@ -349,7 +350,7 @@ export function openProfile(profileIdentifier: string): void {
       openProfileFn(profileIdentifier);
     }
   } catch (e) {
-    console.error(e);
+    console.error("[profileDataManager] openProfile status message error:", e);
   }
 }
 
@@ -379,7 +380,7 @@ export function createProfileWizard(): void {
               if (result && typeof result.catch === "function") {
                 result.catch((err: unknown) => {
                   console.error(
-                    "[profileDataManager] asyncFlush failed after CreateProfile",
+                    "[profileDataManager] asyncFlush status message error after CreateProfile:",
                     err,
                   );
                 });
@@ -388,7 +389,7 @@ export function createProfileWizard(): void {
               profileService.flush();
             }
           } catch (err) {
-            console.error("[profileDataManager] persistProfiles failed", err);
+            console.error("[profileDataManager] persistProfiles status message error:", err);
           }
         };
 
@@ -402,7 +403,7 @@ export function createProfileWizard(): void {
               profileService.defaultProfile = profile;
             } catch (err) {
               console.error(
-                "[profileDataManager] setting default profile failed",
+                "[profileDataManager] setting default profile status message error:",
                 err,
               );
             }
@@ -422,7 +423,7 @@ export function createProfileWizard(): void {
       return;
     } catch (e) {
       console.error(
-        "[profileDataManager] createProfileWizard (privileged):",
+        "[profileDataManager] createProfileWizard (privileged) status message error:",
         e,
       );
     }
@@ -434,7 +435,7 @@ export function createProfileWizard(): void {
       createWizardFn();
     }
   } catch (e) {
-    console.error(e);
+    console.error("[profileDataManager] createProfileWizard status message error:", e);
   }
 }
 
@@ -454,7 +455,7 @@ export function flushProfiles(): void {
       profileService.flush();
       return;
     } catch (e) {
-      console.error("[profileDataManager] flushProfiles (privileged):", e);
+      console.error("[profileDataManager] flushProfiles (privileged) status message error:", e);
     }
   }
 
@@ -464,7 +465,7 @@ export function flushProfiles(): void {
       flushFn();
     }
   } catch (e) {
-    console.error(e);
+    console.error("[profileDataManager] flushProfiles status message error:", e);
   }
 }
 
@@ -502,7 +503,7 @@ export async function removeProfile(
           return true;
         } catch (err) {
           console.error(
-            "[profileDataManager] removeProfile (privileged) error:",
+            "[profileDataManager] removeProfile (privileged) status message error:",
             err,
           );
           return false;
@@ -510,7 +511,7 @@ export async function removeProfile(
       }
       return false;
     } catch (e) {
-      console.error(e);
+      console.error("[profileDataManager] removeProfile privileged status message error:", e);
       return false;
     }
   }
@@ -528,10 +529,56 @@ export async function removeProfile(
         resolve(false);
       }
     } catch (e) {
-      console.error(e);
+      console.error("[profileDataManager] removeProfile status message error:", e);
       resolve(false);
     }
   });
+}
+
+/**
+ * Removes a profile and announces the result to assistive technologies (WCAG 3.3.4 & 4.1.3).
+ */
+export async function removeProfileWithAnnouncement(
+  profileIdentifier: string,
+  deleteFiles = true,
+  announcer?: (message: string) => void,
+  customMessage?: { success?: string; failure?: string },
+): Promise<boolean> {
+  const success = await removeProfile(profileIdentifier, deleteFiles);
+  const msg = success
+    ? (customMessage?.success || `Profile "${profileIdentifier}" was permanently deleted.`)
+    : (customMessage?.failure || `Failed to remove profile "${profileIdentifier}".`);
+  if (typeof announcer === "function") {
+    try {
+      announcer(msg);
+    } catch (err) {
+      console.error("[profileDataManager] Announcer status message error:", err);
+    }
+  }
+  return success;
+}
+
+/**
+ * Renames a profile and announces the result to assistive technologies.
+ */
+export async function renameProfileWithAnnouncement(
+  profileIdentifier: string,
+  newName: string,
+  announcer?: (message: string) => void,
+  customMessage?: { success?: string; failure?: string },
+): Promise<boolean> {
+  const success = await renameProfile(profileIdentifier, newName);
+  const msg = success
+    ? (customMessage?.success || `Profile "${profileIdentifier}" was renamed to "${newName}".`)
+    : (customMessage?.failure || `Failed to rename profile "${profileIdentifier}".`);
+  if (typeof announcer === "function") {
+    try {
+      announcer(msg);
+    } catch (err) {
+      console.error("[profileDataManager] Announcer status message error:", err);
+    }
+  }
+  return success;
 }
 
 export async function renameProfile(
@@ -568,7 +615,7 @@ export async function renameProfile(
           return true;
         } catch (err) {
           console.error(
-            "[profileDataManager] renameProfile (privileged) error:",
+            "[profileDataManager] renameProfile (privileged) status message error:",
             err,
           );
           return false;
@@ -576,7 +623,7 @@ export async function renameProfile(
       }
       return false;
     } catch (e) {
-      console.error(e);
+      console.error("[profileDataManager] renameProfile privileged status message error:", e);
       return false;
     }
   }
@@ -594,7 +641,7 @@ export async function renameProfile(
         resolve(false);
       }
     } catch (e) {
-      console.error(e);
+      console.error("[profileDataManager] renameProfile status message error:", e);
       resolve(false);
     }
   });
@@ -633,7 +680,7 @@ export async function setDefaultProfile(
           return true;
         } catch (err) {
           console.error(
-            "[profileDataManager] setDefaultProfile (privileged) error:",
+            "[profileDataManager] setDefaultProfile (privileged) status message error:",
             err,
           );
           return false;
@@ -641,7 +688,7 @@ export async function setDefaultProfile(
       }
       return false;
     } catch (e) {
-      console.error(e);
+      console.error("[profileDataManager] setDefaultProfile privileged status message error:", e);
       return false;
     }
   }
@@ -658,7 +705,7 @@ export async function setDefaultProfile(
         resolve(false);
       }
     } catch (e) {
-      console.error(e);
+      console.error("[profileDataManager] setDefaultProfile status message error:", e);
       resolve(false);
     }
   });
@@ -803,7 +850,7 @@ export function restart(
         return;
       }
     } catch (e) {
-      console.error("[profileDataManager] restart (privileged):", e);
+      console.error("[profileDataManager] restart (privileged) status message error:", e);
     }
   }
 
@@ -815,6 +862,6 @@ export function restart(
       restartFn(safeMode);
     }
   } catch (e) {
-    console.error(e);
+    console.error("[profileDataManager] restart fallback status message error:", e);
   }
 }

@@ -319,7 +319,8 @@
     "getStarted": "Erste Schritte mit Floorp",
     "hint": "Weitere Anpassungen findest du über das Menü oben rechts unter „Einstellungen“.",
     "resourcesLabel": "Ressourcen",
-    "defaultBrowserSuccess": "Floorp wurde als dein Standardbrowser festgelegt!"
+    "defaultBrowserSuccess": "Floorp wurde als dein Standardbrowser festgelegt!",
+    "opensInNewWindow": "opens in new window"
   },
   "whatsNew": {
     "title": "Willkommen bei Floorp {{version}}!",

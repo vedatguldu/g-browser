@@ -43,6 +43,7 @@ export function ReleaseNotesSettings() {
   }, []);
 
   async function changeMode(value: Mode) {
+    if (saving || !ready) return;
     setSaving(true);
     setError(false);
     try {
@@ -65,14 +66,16 @@ export function ReleaseNotesSettings() {
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
-        <fieldset disabled={!ready || saving} className="space-y-3">
+        <fieldset disabled={!ready} aria-busy={saving} aria-disabled={saving} className="space-y-3">
           <legend className="sr-only">{t("updates.releaseNotes.title")}</legend>
           {MODES.map((value) => (
             <label
               key={value}
+              htmlFor={`release-notes-mode-${value}`}
               className="flex items-start gap-3 cursor-pointer"
             >
               <input
+                id={`release-notes-mode-${value}`}
                 type="radio"
                 name="release-notes-mode"
                 value={value}
@@ -101,6 +104,7 @@ export function ReleaseNotesSettings() {
           href={RELEASE_NOTES_SUPPORT_URL}
           target="_blank"
           rel="noopener noreferrer"
+          aria-label={`${t("updates.releaseNotes.learnMore")} (${t("common.opensInNewWindow", { defaultValue: "opens in a new tab" })})`}
           className="text-primary underline underline-offset-4 text-sm"
         >
           {t("updates.releaseNotes.learnMore")}

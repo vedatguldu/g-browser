@@ -127,7 +127,7 @@ export async function saveNewTabSettings(
 
     await savePromise;
   } catch (e) {
-    console.error("Failed to save newtab settings:", e);
+    console.error("Failed to save newtab settings status message:", e);
     throw e;
   } finally {
     savePromise = null;
@@ -165,7 +165,7 @@ export async function getNewTabSettings(): Promise<NewTabSettings> {
 
     return mergedSettings;
   } catch (e) {
-    console.error("Failed to load newtab settings:", e);
+    console.error("Failed to load newtab settings status message:", e);
     return DEFAULT_SETTINGS;
   }
 }
@@ -183,7 +183,7 @@ export async function getFolderPathFromDialog(): Promise<FolderPathResult> {
       },
     );
   } catch (e) {
-    console.error("Failed to get folder path from dialog:", e);
+    console.error("Failed to get folder path from dialog status message:", e);
     return { path: null, success: false };
   }
 }
@@ -207,7 +207,7 @@ export async function getRandomImageFromFolder(
       },
     );
   } catch (e) {
-    console.error("Failed to get random image from folder:", e);
+    console.error("Failed to get random image from folder status message:", e);
     return { image: null, fileName: null, success: false };
   }
 }

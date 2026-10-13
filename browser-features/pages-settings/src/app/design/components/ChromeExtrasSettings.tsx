@@ -59,7 +59,7 @@ export function ChromeExtrasSettings({ onClose }: ChromeExtrasSettingsProps) {
         setLoaded(true);
       } catch (error) {
         if (!active) return;
-        console.error("[ChromeExtras] Failed to load settings:", error);
+        console.error("[ChromeExtras] Failed to load settings status message:", error);
         setLoadError(true);
       }
     };
@@ -134,8 +134,12 @@ export function ChromeExtrasSettings({ onClose }: ChromeExtrasSettingsProps) {
           <Button
             type="button"
             variant="secondary"
-            disabled={saving}
-            onClick={() => persistSettings(latestSettingsRef.current)}
+            aria-disabled={saving}
+            aria-busy={saving}
+            onClick={() => {
+              if (saving) return;
+              persistSettings(latestSettingsRef.current);
+            }}
           >
             {t("ui.retry")}
           </Button>
@@ -159,6 +163,9 @@ export function ChromeExtrasSettings({ onClose }: ChromeExtrasSettingsProps) {
         aria-busy={!loaded || saving}
         className="space-y-6"
       >
+        <legend className="sr-only">
+          {t("design.chrome-extras.title")}
+        </legend>
         {/* Auto-hide Settings */}
         <Card>
           <CardHeader>

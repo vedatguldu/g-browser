@@ -46,7 +46,7 @@ export function InstalledApps() {
       setError("");
     } catch (e) {
       setError(t("progressiveWebApp.errorFetchingApps"));
-      console.error("Error fetching apps:", e);
+      console.error("Error fetching apps status message:", e);
     }
   };
 
@@ -55,7 +55,7 @@ export function InstalledApps() {
       const list = await getContainers();
       setContainers(list);
     } catch (e) {
-      console.error("Error fetching containers:", e);
+      console.error("Error fetching containers status message:", e);
     }
   };
 
@@ -120,7 +120,7 @@ export function InstalledApps() {
       }, 1000);
     } catch (e) {
       setError(t("progressiveWebApp.errorRenaming"));
-      console.error("Error renaming app:", e);
+      console.error("Error renaming app status message:", e);
     }
   };
 
@@ -136,7 +136,7 @@ export function InstalledApps() {
       }, 1000);
     } catch (e) {
       setError(t("progressiveWebApp.errorUninstalling"));
-      console.error("Error uninstalling app:", e);
+      console.error("Error uninstalling app status message:", e);
     }
   };
 
@@ -172,7 +172,7 @@ export function InstalledApps() {
       <Card className={styles.section}>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <LayoutGrid className="size-5" />
+            <LayoutGrid className="size-5" aria-hidden="true" />
             {t("progressiveWebApp.installedApps")}
           </CardTitle>
         </CardHeader>
@@ -204,7 +204,8 @@ export function InstalledApps() {
                     >
                       <img
                         src={app.icon}
-                        alt={app.name}
+                        alt=""
+                        aria-hidden="true"
                         className="w-8 h-8 rounded"
                       />
                       <div className="flex-1 min-w-0">
@@ -227,6 +228,7 @@ export function InstalledApps() {
                                   type="button"
                                   variant="secondary"
                                   className="ml-1 text-xs underline"
+                                  aria-label={`${t("progressiveWebApp.resetContainer")}: ${app.name}`}
                                   onClick={async () => {
                                     await setSsbContainer(app.id, 0);
                                     fetchApps();
@@ -247,6 +249,7 @@ export function InstalledApps() {
                           <Button
                             type="button"
                             variant="secondary"
+                            aria-label={`${t("progressiveWebApp.container")}: ${app.name}`}
                             onClick={() => handleContainer(app)}
                           >
                             {t("progressiveWebApp.container")}
@@ -255,6 +258,7 @@ export function InstalledApps() {
                         <Button
                           type="button"
                           variant="secondary"
+                          aria-label={`${t("progressiveWebApp.renameApp")}: ${app.name}`}
                           onClick={() => handleRename(app)}
                         >
                           {t("progressiveWebApp.renameApp")}
@@ -262,6 +266,7 @@ export function InstalledApps() {
                         <Button
                           type="button"
                           variant="danger"
+                          aria-label={`${t("progressiveWebApp.uninstallApp")}: ${app.name}`}
                           onClick={() => handleUninstall(app)}
                         >
                           {t("progressiveWebApp.uninstallApp")}

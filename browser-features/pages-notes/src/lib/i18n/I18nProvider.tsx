@@ -22,7 +22,7 @@ export function I18nProvider({ children }: PropsWithChildren) {
         i18nInstance.on("languageChanged", handleLanguageChanged);
         cleanup = () => i18nInstance.off("languageChanged", handleLanguageChanged);
       } catch (e) {
-        console.error("[I18nProvider] initialization failed:", e);
+        console.error("[I18nProvider] initialization failed status message:", e);
       }
       if (mounted) setReady(true);
     })();

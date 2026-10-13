@@ -128,12 +128,13 @@ export function BasicSettings() {
               <label className="block text-sm font-medium leading-none">
                 {t("panelSidebar.position")}
               </label>
-              <div className={styles.actions}>
+              <div className={styles.actions} role="radiogroup" aria-label={t("panelSidebar.position")}>
                 <label className="flex items-center space-x-2">
                   <input
                     type="radio"
                     name="position"
                     value="end"
+                    aria-label={t("panelSidebar.positionLeft")}
                     checked={!watchAll.position_start}
                     onChange={() => setValue("position_start", false)}
                     className="floorp-radio"
@@ -145,6 +146,7 @@ export function BasicSettings() {
                     type="radio"
                     name="position"
                     value="start"
+                    aria-label={t("panelSidebar.positionRight")}
                     checked={!!watchAll.position_start}
                     onChange={() => setValue("position_start", true)}
                     className="floorp-radio"

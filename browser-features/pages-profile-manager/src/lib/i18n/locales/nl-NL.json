@@ -1,24 +1,32 @@
 {
-    "profileManager": {
-        "title": "Profielen",
-        "buttons": {
-            "refresh": "Refresh",
-            "create": "Maken"
-        },
-        "loading": "Laden…",
-        "noProfiles": "Geen profielen gevonden.",
-        "current": "Huidige",
-        "default": "Standaard",
-        "actions": {
-            "open": "Open",
-            "new": "Nieuwe",
-            "rename": "Hernoemen",
-            "remove": "Verwijderen",
-            "setDefault": "Standaard"
-        },
-        "prompts": {
-            "confirmRemove": "Weet u zeker dat u dit profiel wil verwijderen?",
-            "newName": "Nieuwe profiel naam:"
-        }
+  "profileManager": {
+    "title": "Profielen",
+    "buttons": {
+      "refresh": "Refresh",
+      "create": "Maken"
+    },
+    "loading": "Laden…",
+    "noProfiles": "Geen profielen gevonden.",
+    "current": "Huidige",
+    "default": "Standaard",
+    "actions": {
+      "open": "Open",
+      "new": "Nieuwe",
+      "rename": "Hernoemen",
+      "remove": "Verwijderen",
+      "setDefault": "Standaard",
+      "openProfile": "Launch {{name}} profile",
+      "removeProfile": "Remove {{name}} profile",
+      "currentProfileNotice": "Currently active profile"
+    },
+    "prompts": {
+      "confirmRemove": "Weet u zeker dat u dit profiel wil verwijderen?",
+      "newName": "Nieuwe profiel naam:"
+    },
+    "status": {
+      "loaded": "{{count}} profiles loaded.",
+      "removedSuccess": "Profile {{name}} was permanently deleted.",
+      "removeFailed": "Failed to remove profile {{name}}."
     }
+  }
 }

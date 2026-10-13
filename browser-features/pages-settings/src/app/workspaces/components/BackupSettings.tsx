@@ -14,7 +14,7 @@ export function BackupSettings() {
     <Card>
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          <SaveAll className="size-5" />
+          <SaveAll className="size-5" aria-hidden="true" />
           {t("workspaces.backup")}
         </CardTitle>
       </CardHeader>

@@ -20,14 +20,14 @@ export default function FinishPage() {
     try {
       setDefaultStatus(await setDefaultBrowser() ? "success" : "error");
     } catch (error) {
-      console.error("[Welcome] Default browser update failed", error);
+      console.error("[Welcome] Default browser update failed status message", error);
       setDefaultStatus("error");
     }
   }
   async function closeWelcomePage() {
     if (!await choice.confirm()) return;
     globalThis.open("about:newtab", "_blank");
-    setTimeout(() => globalThis.close(), 50);
+    setTimeout(() => globalThis.close(), 800);
   }
   if (!reviewed) return <Navigate to="/support" replace />;
   return (
@@ -39,8 +39,11 @@ export default function FinishPage() {
         <p className={styles.muted}>{t("setupV5.defaultHint")}</p>
         <Button
           variant="secondary"
-          disabled={defaultStatus === "saving"}
-          onClick={() => void setAsDefaultBrowser()}
+          aria-busy={defaultStatus === "saving"}
+          aria-disabled={defaultStatus === "saving"}
+          onClick={() => {
+            if (defaultStatus !== "saving") void setAsDefaultBrowser();
+          }}
         >
           {t("finishPage.defaultBrowser")}
         </Button>
@@ -55,6 +58,7 @@ export default function FinishPage() {
             href="https://docs.floorp.app/docs/features/"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label={`${t("finishPage.support")} (${t("finishPage.opensInNewWindow", { defaultValue: "opens in new window" })})`}
           >
             {t("finishPage.support")}
             <ExternalLink size={16} aria-hidden="true" />
@@ -63,6 +67,7 @@ export default function FinishPage() {
             href="https://github.com/Floorp-Projects/Floorp"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label={`GitHub (${t("finishPage.opensInNewWindow", { defaultValue: "opens in new window" })})`}
           >
             GitHub<ExternalLink size={16} aria-hidden="true" />
           </a>
@@ -70,6 +75,7 @@ export default function FinishPage() {
             href="https://twitter.com/floorp_browser"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label={`X (${t("finishPage.opensInNewWindow", { defaultValue: "opens in new window" })})`}
           >
             X<ExternalLink size={16} aria-hidden="true" />
           </a>
@@ -82,8 +88,11 @@ export default function FinishPage() {
       <Navigation
         finalAction={
           <Button
-            onClick={() => void closeWelcomePage()}
-            disabled={!choice.ready || choice.saving}
+            onClick={() => {
+              if (choice.ready && !choice.saving) void closeWelcomePage();
+            }}
+            aria-disabled={!choice.ready || choice.saving}
+            aria-busy={choice.saving}
           >
             {t("setupV5.getStarted")}
             <ArrowRight size={18} aria-hidden="true" />

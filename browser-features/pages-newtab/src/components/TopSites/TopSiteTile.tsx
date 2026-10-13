@@ -35,10 +35,24 @@ export function TopSiteTile(
     <a
       key={site.url}
       href={site.url}
-      className={`group flex flex-col items-center p-2 rounded-lg transition-all duration-200 hover:bg-gray-100/20 ${
+      className={`group flex flex-col items-center p-2 rounded-lg transition-all duration-200 hover:bg-gray-100/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ${
         isFirefoxMode ? "w-20 md:w-24" : "w-16"
       }`}
       onContextMenu={(e) => onContextMenu(e, site)}
+      onKeyDown={(e) => {
+        if (e.key === "ContextMenu" || (e.shiftKey && e.key === "F10")) {
+          e.preventDefault();
+          const rect = e.currentTarget.getBoundingClientRect();
+          onContextMenu(
+            {
+              preventDefault: () => {},
+              pageX: rect.left,
+              pageY: rect.bottom,
+            } as unknown as MouseEvent<HTMLAnchorElement>,
+            site,
+          );
+        }
+      }}
     >
       <div
         className={`relative mb-2 ${
@@ -54,14 +68,15 @@ export function TopSiteTile(
             ? (
               <img
                 src={faviconUrl}
-                alt={site.title}
+                alt=""
+                aria-hidden="true"
                 className={`${
                   isFirefoxMode ? "w-6 h-6 md:w-8 md:h-8" : "w-6 h-6"
                 } object-contain`}
               />
             )
             : (
-              <span className="text-lg font-semibold text-gray-300">
+              <span className="text-lg font-semibold text-gray-300" aria-hidden="true">
                 {(site.title || "?")[0]}
               </span>
             )}
@@ -69,7 +84,7 @@ export function TopSiteTile(
         {isPinnedSite && (
           <div className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2">
             <div className="w-5 h-5 rounded-full bg-gray-700 flex items-center justify-center">
-              <PinIcon className="w-3 h-3 text-white" />
+              <PinIcon className="w-3 h-3 text-white" aria-hidden="true" />
             </div>
           </div>
         )}

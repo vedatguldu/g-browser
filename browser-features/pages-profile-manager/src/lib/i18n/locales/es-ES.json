@@ -1,24 +1,32 @@
 {
-    "profileManager": {
-        "title": "Perfiles",
-        "buttons": {
-            "refresh": "Refresh",
-            "create": "Crear"
-        },
-        "loading": "Cargando…",
-        "noProfiles": "No se encontraron perfiles.",
-        "current": "Actual",
-        "default": "Predeterminado",
-        "actions": {
-            "open": "Open",
-            "new": "Nuevo",
-            "rename": "Renombrar",
-            "remove": "Eliminar",
-            "setDefault": "Predeterminado"
-        },
-        "prompts": {
-            "confirmRemove": "¿Está seguro de que desea eliminar este perfil?",
-            "newName": "Nuevo nombre de perfil:"
-        }
+  "profileManager": {
+    "title": "Perfiles",
+    "buttons": {
+      "refresh": "Refresh",
+      "create": "Crear"
+    },
+    "loading": "Cargando…",
+    "noProfiles": "No se encontraron perfiles.",
+    "current": "Actual",
+    "default": "Predeterminado",
+    "actions": {
+      "open": "Open",
+      "new": "Nuevo",
+      "rename": "Renombrar",
+      "remove": "Eliminar",
+      "setDefault": "Predeterminado",
+      "openProfile": "Launch {{name}} profile",
+      "removeProfile": "Remove {{name}} profile",
+      "currentProfileNotice": "Currently active profile"
+    },
+    "prompts": {
+      "confirmRemove": "¿Está seguro de que desea eliminar este perfil?",
+      "newName": "Nuevo nombre de perfil:"
+    },
+    "status": {
+      "loaded": "{{count}} profiles loaded.",
+      "removedSuccess": "Profile {{name}} was permanently deleted.",
+      "removeFailed": "Failed to remove profile {{name}}."
     }
+  }
 }

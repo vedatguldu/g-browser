@@ -319,7 +319,8 @@
     "getStarted": "Bắt đầu với Floorp",
     "hint": "Nếu cần cài đặt chi tiết hơn, hãy mở Cài đặt từ nút menu ở góc trên bên phải.",
     "resourcesLabel": "Tài nguyên",
-    "defaultBrowserSuccess": "Floorp đã được đặt làm trình duyệt mặc định của bạn!"
+    "defaultBrowserSuccess": "Floorp đã được đặt làm trình duyệt mặc định của bạn!",
+    "opensInNewWindow": "opens in new window"
   },
   "whatsNew": {
     "title": "Chào mừng tới Floorp {{version}}!",

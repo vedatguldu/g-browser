@@ -40,6 +40,7 @@ export const ShortcutEditor = ({
   const [error, setError] = useState<string | null>(null);
   const [saveError, setSaveError] = useState(false);
   const [saving, setSaving] = useState(false);
+  const [announcement, setAnnouncement] = useState("");
 
   const handleSave = async () => {
     if (saving || !shortcut.key || error) return;
@@ -49,7 +50,7 @@ export const ShortcutEditor = ({
       if (await onSave(shortcut)) onClose();
       else setSaveError(true);
     } catch (error) {
-      console.error("[KeyboardShortcut] Could not save shortcut", error);
+      console.error("[KeyboardShortcut] Could not save shortcut status message", error);
       setSaveError(true);
     } finally {
       setSaving(false);
@@ -86,6 +87,11 @@ export const ShortcutEditor = ({
         key: code,
       }));
       setIsRecording(false);
+      setAnnouncement(
+        t("keyboardShortcut.recordedKey", {
+          key: formatKeyCode(code).toUpperCase(),
+        }),
+      );
       checkDuplicate(code);
     };
 
@@ -96,7 +102,7 @@ export const ShortcutEditor = ({
     return () => {
       globalThis.removeEventListener("keydown", handleKeyDown);
     };
-  }, [isOpen, isRecording]);
+  }, [isOpen, isRecording, t]);
 
   const checkDuplicate = (key: string) => {
     const newShortcut = {
@@ -166,8 +172,12 @@ export const ShortcutEditor = ({
           </div>
         </div>
 
+        <div className="sr-only" role="status" aria-live="polite" aria-atomic="true">
+          {announcement}
+        </div>
+
         {(error || saveError) && (
-          <div role="alert" className="floorp-notice floorp-notice-error">
+          <div role="alert" id="shortcut-editor-error" className="floorp-notice floorp-notice-error">
             <span>{error || t("ui.saveError")}</span>
           </div>
         )}
@@ -235,15 +245,19 @@ export const ShortcutEditor = ({
             <Input aria-label={t("keyboardShortcut.key")}
               type="text"
               className="w-full"
-              aria-invalid={Boolean(error)}
+              aria-invalid={Boolean(error || saveError)}
+              aria-describedby={(error || saveError) ? "shortcut-editor-error" : undefined}
               value={formatKeyCode(shortcut.key)}
               readOnly
               placeholder={t("keyboardShortcut.pressKey")}
-              onFocus={() => setIsRecording(true)}
+              onFocus={() => {
+                setIsRecording(true);
+                setAnnouncement(t("keyboardShortcut.recording"));
+              }}
               onBlur={() => setIsRecording(false)}
             />
             {isRecording && (
-              <div className="absolute inset-0 flex items-center justify-center bg-base-200/50 rounded-lg">
+              <div aria-hidden="true" className="absolute inset-0 flex items-center justify-center bg-base-200/50 rounded-lg">
                 <span className="text-primary">
                   {t("keyboardShortcut.recording")}
                 </span>

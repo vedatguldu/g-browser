@@ -14,7 +14,8 @@
         "block": "Engelle",
         "blockTitle": "\"{{title}}\" engellensin mi?",
         "blockConfirm": "Bu site Sık Kullanılanlar'dan kaldırılacak ve bir daha önerilmeyecektir. Engellenen siteleri ayarlardan yönetebilirsiniz.",
-        "invalidUrl": "Geçersiz adres"
+        "invalidUrl": "Geçersiz adres",
+        "contextMenu": "Site seçenekleri"
     },
     "settings": {
         "newTabSettings": "Yeni Sekme Ayarları",
@@ -34,12 +35,16 @@
         "selectFolder": "Klasörü Seçin",
         "selected": "Seçilen",
         "enableSlideshow": "Slayt Gösterisini Etkinleştir",
-        "slideshowInterval": "Slideshow Interval",
+        "slideshowInterval": "Slayt Gösterisi Aralığı (saniye)",
         "floorpStart": "Floorp Başlangıç",
         "disableFloorpStart": "Floorp Başlangıç'ı devre dışı bırakın (klasik about:newtab kullanın)",
         "disableFloorpStartDescription": "Etkinleştirildiğinde, Floorp Başlangıç'ın yerini klasik Firefox yeni sekmesi / ana sayfası alacaktır.",
         "restartRequired": "Değişikliklerin tam olarak uygulanması için tarayıcının yeniden başlatılması gerekir.",
-        "firefoxLayout": "Eski Düzeni kullan (Firefox Anasayfa gibi)"
+        "firefoxLayout": "Eski Düzeni kullan (Firefox Anasayfa gibi)",
+        "blockedSites": "Engellenen Siteler",
+        "unblock": "Engeli Kaldır",
+        "noBlockedSites": "Engellenen site yok.",
+        "uploadImage": "Özel görsel yükle"
     },
     "searchBar": {
         "searchOrEnterUrl": "Arama yapın veya adres girin",

@@ -24,7 +24,10 @@
         "noteList": "メモの一覧",
         "search": "メモを検索",
         "clearSearch": "検索をクリア",
-        "noSearchResults": "条件に一致するメモがありません"
+        "noSearchResults": "条件に一致するメモがありません",
+        "searchResults": "{{count}} 件のメモが見つかりました",
+        "deleteSpecific": "メモ「{{title}}」を削除",
+        "reorderedAnnouncement": "メモ「{{title}}」を {{index}} 番目に移動しました"
     },
     "editor": {
         "bold": "太字",
@@ -50,7 +53,8 @@
         "alignment": "配置",
         "contentArea": "メモの内容",
         "placeholder": "書きましょう...",
-        "image": "画像を挿入"
+        "image": "画像を挿入",
+        "resizeImage": "画像のサイズを変更"
     },
     "common": {
         "close": "閉じる",

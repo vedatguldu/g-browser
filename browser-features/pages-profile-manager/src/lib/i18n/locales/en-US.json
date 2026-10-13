@@ -11,10 +11,18 @@
         "default": "Default",
         "actions": {
             "open": "Launch",
+            "openProfile": "Launch {{name}} profile",
             "new": "New",
             "rename": "Rename",
             "remove": "Remove",
+            "removeProfile": "Remove {{name}} profile",
+            "currentProfileNotice": "Currently active profile",
             "setDefault": "Default"
+        },
+        "status": {
+            "loaded": "{{count}} profiles loaded.",
+            "removedSuccess": "Profile {{name}} was permanently deleted.",
+            "removeFailed": "Failed to remove profile {{name}}."
         },
         "prompts": {
             "confirmRemove": "Are you sure you want to remove this profile?",

@@ -64,7 +64,7 @@ export const PanelEditModal: React.FC<PanelEditModalProps> = ({
         setExtensionPanels([]);
       }
     } catch (error) {
-      console.error("Failed to fetch panel data:", error);
+      console.error("Failed to fetch panel data status message:", error);
     } finally {
       setIsLoading(false);
     }
@@ -158,7 +158,7 @@ export const PanelEditModal: React.FC<PanelEditModalProps> = ({
         try {
           new URL(editedPanel.url);
         } catch (e) {
-          console.error("Invalid URL:", e);
+          console.error("Invalid URL status message:", e);
           newErrors.url = t("panelSidebar.errors.invalidUrl");
         }
       }
@@ -185,7 +185,7 @@ export const PanelEditModal: React.FC<PanelEditModalProps> = ({
       try {
         await onSave(editedPanel);
       } catch (error) {
-        console.error("[PanelSidebar] Failed to save panel", error);
+        console.error("[PanelSidebar] Failed to save panel status message", error);
         setSaveError(true);
       } finally {
         setSaving(false);
@@ -216,7 +216,7 @@ export const PanelEditModal: React.FC<PanelEditModalProps> = ({
     >
       <form onSubmit={handleSubmit} className="space-y-4">
         {saveError && <p role="alert" className="floorp-notice floorp-notice-error">{t("ui.saveError")}</p>}
-        <fieldset disabled={saving} className="space-y-4">
+        <fieldset aria-busy={saving} className="space-y-4">
         <div className="floorp-field">
           <label className="floorp-field-label" htmlFor="panel-type">
             <span className="floorp-field-text">{t("panelSidebar.panelType")}</span>
@@ -407,8 +407,9 @@ export const PanelEditModal: React.FC<PanelEditModalProps> = ({
             </div>
 
             <div className="floorp-field">
-              <label className="cursor-pointer floorp-field-label justify-start gap-2">
+              <label htmlFor="panel-edit-user-agent" className="cursor-pointer floorp-field-label justify-start gap-2">
                 <input
+                  id="panel-edit-user-agent"
                   type="checkbox"
                   name="userAgent"
                   checked={editedPanel.userAgent === true}
@@ -424,11 +425,23 @@ export const PanelEditModal: React.FC<PanelEditModalProps> = ({
         )}
 
         <div className="floorp-form-actions mt-6">
-          <Button type="button" onClick={onClose} variant="secondary">
+          <Button
+            type="button"
+            onClick={saving ? undefined : onClose}
+            variant="secondary"
+            aria-disabled={saving}
+          >
             {t("panelSidebar.cancel")}
           </Button>
-          <Button type="submit" variant="primary">
-            {t("panelSidebar.save")}
+          <Button
+            type="submit"
+            variant="primary"
+            aria-disabled={saving}
+            aria-busy={saving}
+          >
+            {saving
+              ? t("ui.saving", { defaultValue: "Saving..." })
+              : t("panelSidebar.save")}
           </Button>
         </div>
         </fieldset>

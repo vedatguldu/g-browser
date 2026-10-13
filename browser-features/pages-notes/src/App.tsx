@@ -97,7 +97,7 @@ function App() {
           setTitle(convertedNotes[0].title);
         }
       } catch (error) {
-        console.error("Failed to load note data:", error);
+        console.error("Failed to load note data status message:", error);
       } finally {
         setIsLoading(false);
       }
@@ -174,7 +174,7 @@ function App() {
           console.info("[Floorp Notes] Sync merge completed — no conflicts.");
         }
       } catch (err) {
-        console.error("[Floorp Notes] Failed to apply sync merge:", err);
+        console.error("[Floorp Notes] Failed to apply sync merge status message:", err);
       }
     };
 
@@ -231,7 +231,7 @@ function App() {
       // last server-delivered snapshot until Sync confirms newer remote data.
       setSaveStatus("saved");
     } catch (error) {
-      console.error("Failed to save note data:", error);
+      console.error("Failed to save note data status message:", error);
       setSaveStatus("error");
     } finally {
       isSavingRef.current = false;
@@ -421,7 +421,7 @@ function App() {
         dialogTitle: t("notes.export"),
       });
     } catch (error) {
-      console.error("[Floorp Notes] Failed to export note:", error);
+      console.error("[Floorp Notes] Failed to export note status message:", error);
       setExportError(true);
     }
   }, [selectedNote, title, t]);
@@ -470,6 +470,7 @@ function App() {
             className={`btn btn-xs ${
               isReorderMode ? "btn-secondary" : "btn-ghost"
             }`}
+            aria-pressed={isReorderMode}
             onClick={() => setIsReorderMode(!isReorderMode)}
           >
             {isReorderMode ? t("notes.done") : t("notes.reorder")}

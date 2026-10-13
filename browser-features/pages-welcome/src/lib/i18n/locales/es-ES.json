@@ -319,7 +319,8 @@
     "getStarted": "Empieza con Floorp",
     "hint": "For more detailed settings, you can customize via the Settings option in the menu button at the top right.",
     "resourcesLabel": "Recursos",
-    "defaultBrowserSuccess": "¡Floorp se ha establecido como tu navegador por defecto!"
+    "defaultBrowserSuccess": "¡Floorp se ha establecido como tu navegador por defecto!",
+    "opensInNewWindow": "opens in new window"
   },
   "whatsNew": {
     "title": "¡Bienvenido a Floorp {{version}}!",

@@ -41,6 +41,8 @@
       "terms": "Nutzungsbedingungen",
       "privacy": "Datenschutzerklärung"
     },
-    "trademark": "Der Name „Floorp“ ist in Japan eine eingetragene Marke."
+    "trademark": "Der Name „Floorp“ ist in Japan eine eingetragene Marke.",
+    "opensExternal": "opens external link",
+    "opensInNewWindow": "opens in new window"
   }
 }

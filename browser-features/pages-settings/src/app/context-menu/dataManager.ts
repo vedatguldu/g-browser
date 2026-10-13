@@ -183,7 +183,7 @@ export function useContextMenuSettings(): ContextMenuSettingsModel {
         } catch (error) {
           if (!catalogMountedRef.current) return;
           console.error(
-            "[ContextMenuSettings] Failed to load the catalog",
+            "[ContextMenuSettings] Failed to load the catalog status message:",
             error,
           );
           setCatalogError(true);
@@ -516,7 +516,7 @@ export function useContextMenuSettings(): ContextMenuSettingsModel {
       return false;
     } catch (error) {
       console.error(
-        "[ContextMenuSettings] Failed to repair the configuration",
+        "[ContextMenuSettings] Failed to repair the configuration status message:",
         error,
       );
       loadErrorKindRef.current = "read";

@@ -42,7 +42,7 @@ export function ThemeProvider({
           setTheme(themeFromPreference(themeValue));
         }
       } catch (error) {
-        console.error("テーマ設定の取得に失敗しました:", error);
+        console.error("テーマ設定の取得に失敗しました status message:", error);
       }
     };
 

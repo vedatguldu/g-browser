@@ -96,7 +96,7 @@ function updateLabel(
 // ─── Component ────────────────────────────────────────────────────────────────
 
 export function AboutDialog() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const [distroAbout, setDistroAbout] = useState("");
   const [distroId, setDistroId] = useState("");
@@ -226,8 +226,9 @@ export function AboutDialog() {
         updater.stop();
         globalThis.removeEventListener("keydown", onKeydown);
       };
-    // deno-lint-ignore no-empty
-    } catch {}
+    } catch (e) {
+      console.warn("[AboutDialog] Failed to initialize AppUpdater status message:", e);
+    }
     return () => globalThis.removeEventListener("keydown", onKeydown);
   }, [AppConstants]);
 
@@ -340,7 +341,7 @@ export function AboutDialog() {
     const { text, busy } = updateLabel(updateStatus, t);
     if (!text) return null;
     return (
-      <div class="ad-update-row" aria-busy={busy}>
+      <div class="ad-update-row" role="status" aria-live="polite" aria-busy={busy}>
         {busy && <div class="ad-spinner" />}
         <span
           class={
@@ -365,6 +366,9 @@ export function AboutDialog() {
 
   return (
     <main class="ad" role="dialog" aria-label={t("aboutDialog.ariaLabel")}>
+      <span id="opensInNewWindow" class="sr-only">
+        {t("aboutDialog.opensInNewWindow", { defaultValue: "opens in new window" })}
+      </span>
       {/* ── Two-column body ── */}
       <div class="ad-body">
         {/* ── Left: Brand + Update ── */}
@@ -393,54 +397,70 @@ export function AboutDialog() {
             <h2 class="ad-section-title">{t("aboutDialog.community.title")}</h2>
             <div class="ad-community-row">
               <a
-                href="#"
+                href="https://github.com/Floorp-Projects/Floorp"
+                target="_blank"
+                rel="noopener noreferrer"
                 class="ad-community-item"
+                aria-describedby="opensInNewWindow"
+                aria-label={`GitHub (${t("aboutDialog.opensExternal", { defaultValue: "opens external link" })})`}
                 onClick={(e) => {
                   e.preventDefault();
                   openExternalUrl("https://github.com/Floorp-Projects/Floorp");
                 }}
               >
                 <span class="ad-community-icon">
-                  <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z" /></svg>
+                  <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z" /></svg>
                 </span>
                 GitHub
               </a>
               <a
-                href="#"
+                href="https://floorp.app/discord"
+                target="_blank"
+                rel="noopener noreferrer"
                 class="ad-community-item"
+                aria-describedby="opensInNewWindow"
+                aria-label={`Discord (${t("aboutDialog.opensExternal", { defaultValue: "opens external link" })})`}
                 onClick={(e) => {
                   e.preventDefault();
                   openExternalUrl("https://floorp.app/discord");
                 }}
               >
                 <span class="ad-community-icon">
-                  <svg viewBox="0 0 16 16"><path d="M13.55 3.15A13.3 13.3 0 0010.23 2a9.5 9.5 0 00-.43.87 12.4 12.4 0 00-3.6 0A9.5 9.5 0 005.77 2a13.4 13.4 0 00-3.32 1.15C.35 6.4-.22 9.56.07 12.67A13.5 13.5 0 004.13 15a10 10 0 00.87-1.41 8.7 8.7 0 01-1.37-.66l.33-.26a9.6 9.6 0 008.08 0l.33.26c-.44.26-.9.48-1.37.66.25.5.54.97.87 1.41a13.4 13.4 0 004.06-2.33c.38-3.98-.65-7.1-2.98-10.52zM5.35 10.84c-.87 0-1.58-.82-1.58-1.82s.7-1.82 1.58-1.82 1.6.82 1.58 1.82c0 1-.7 1.82-1.58 1.82zm5.3 0c-.87 0-1.58-.82-1.58-1.82s.7-1.82 1.58-1.82 1.59.82 1.58 1.82c0 1-.7 1.82-1.58 1.82z" /></svg>
+                  <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M13.55 3.15A13.3 13.3 0 0010.23 2a9.5 9.5 0 00-.43.87 12.4 12.4 0 00-3.6 0A9.5 9.5 0 005.77 2a13.4 13.4 0 00-3.32 1.15C.35 6.4-.22 9.56.07 12.67A13.5 13.5 0 004.13 15a10 10 0 00.87-1.41 8.7 8.7 0 01-1.37-.66l.33-.26a9.6 9.6 0 008.08 0l.33.26c-.44.26-.9.48-1.37.66.25.5.54.97.87 1.41a13.4 13.4 0 004.06-2.33c.38-3.98-.65-7.1-2.98-10.52zM5.35 10.84c-.87 0-1.58-.82-1.58-1.82s.7-1.82 1.58-1.82 1.6.82 1.58 1.82c0 1-.7 1.82-1.58 1.82zm5.3 0c-.87 0-1.58-.82-1.58-1.82s.7-1.82 1.58-1.82 1.59.82 1.58 1.82c0 1-.7 1.82-1.58 1.82z" /></svg>
                 </span>
                 Discord
               </a>
               <a
-                href="#"
+                href="https://x.com/Floorp_Browser"
+                target="_blank"
+                rel="noopener noreferrer"
                 class="ad-community-item"
+                aria-describedby="opensInNewWindow"
+                aria-label={`X (${t("aboutDialog.opensExternal", { defaultValue: "opens external link" })})`}
                 onClick={(e) => {
                   e.preventDefault();
                   openExternalUrl("https://x.com/Floorp_Browser");
                 }}
               >
                 <span class="ad-community-icon">
-                  <svg viewBox="0 0 16 16"><path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865l8.875 11.633Z" /></svg>
+                  <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865l8.875 11.633Z" /></svg>
                 </span>
                 X
               </a>
               <a
-                href="#"
+                href="https://www.reddit.com/r/floorp/"
+                target="_blank"
+                rel="noopener noreferrer"
                 class="ad-community-item"
+                aria-describedby="opensInNewWindow"
+                aria-label={`Reddit (${t("aboutDialog.opensExternal", { defaultValue: "opens external link" })})`}
                 onClick={(e) => {
                   e.preventDefault();
                   openExternalUrl("https://www.reddit.com/r/floorp/");
                 }}
               >
                 <span class="ad-community-icon">
-                  <svg viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0Zm-3.828-1.165a1.09 1.09 0 0 0-1.086.025 1.09 1.09 0 0 0-.478.387c-.96-.6-2.12-.95-3.33-.99l.67-3.02 2.16.48a.77.77 0 1 0 .08-.39l-2.38-.53a.2.2 0 0 0-.24.15l-.74 3.34c-1.26.02-2.46.38-3.45 1a1.09 1.09 0 0 0-1.82.82 1.09 1.09 0 0 0 .43.87c-.03.15-.04.3-.04.46 0 2.27 2.65 4.12 5.92 4.12s5.92-1.85 5.92-4.12c0-.16-.01-.31-.04-.46a1.09 1.09 0 0 0 .36-1.14ZM5.35 9a.77.77 0 1 1 0 1.54.77.77 0 0 1 0-1.54Zm4.56 2.87c-.56.56-1.63.6-1.91.6s-1.35-.05-1.91-.6a.2.2 0 0 1 .28-.28c.35.35 1.1.48 1.63.48s1.28-.13 1.63-.48a.2.2 0 0 1 .28.28Zm-.15-1.33a.77.77 0 1 1 0-1.54.77.77 0 0 1 0 1.54Z" /></svg>
+                  <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0Zm-3.828-1.165a1.09 1.09 0 0 0-1.086.025 1.09 1.09 0 0 0-.478.387c-.96-.6-2.12-.95-3.33-.99l.67-3.02 2.16.48a.77.77 0 1 0 .08-.39l-2.38-.53a.2.2 0 0 0-.24.15l-.74 3.34c-1.26.02-2.46.38-3.45 1a1.09 1.09 0 0 0-1.82.82 1.09 1.09 0 0 0 .43.87c-.03.15-.04.3-.04.46 0 2.27 2.65 4.12 5.92 4.12s5.92-1.85 5.92-4.12c0-.16-.01-.31-.04-.46a1.09 1.09 0 0 0 .36-1.14ZM5.35 9a.77.77 0 1 1 0 1.54.77.77 0 0 1 0-1.54Zm4.56 2.87c-.56.56-1.63.6-1.91.6s-1.35-.05-1.91-.6a.2.2 0 0 1 .28-.28c.35.35 1.1.48 1.63.48s1.28-.13 1.63-.48a.2.2 0 0 1 .28.28Zm-.15-1.33a.77.77 0 1 1 0-1.54.77.77 0 0 1 0 1.54Z" /></svg>
                 </span>
                 Reddit
               </a>
@@ -450,8 +470,8 @@ export function AboutDialog() {
           <section>
             <h2 class="ad-section-title">{t("aboutDialog.help.title")}</h2>
             <div class="ad-help-row">
-              <a
-                href="#"
+              <button
+                type="button"
                 class="ad-help-link"
                 onClick={(e) => {
                   e.preventDefault();
@@ -462,10 +482,14 @@ export function AboutDialog() {
                 data-l10n-id="aboutdialog-help-user"
               >
                 {t("aboutDialog.links.help")}
-              </a>
+              </button>
               <a
-                href="#"
+                href="https://docs.floorp.app/docs/features/"
+                target="_blank"
+                rel="noopener noreferrer"
                 class="ad-help-link"
+                aria-describedby="opensInNewWindow"
+                aria-label={`${t("aboutDialog.help.support")} (${t("aboutDialog.opensExternal", { defaultValue: "opens external link" })})`}
                 onClick={(e) => {
                   e.preventDefault();
                   openExternalUrl("https://docs.floorp.app/docs/features/");
@@ -479,8 +503,12 @@ export function AboutDialog() {
           <section>
             <h2 class="ad-section-title">{t("aboutDialog.sponsor.title")}</h2>
             <a
-              href="#"
+              href="https://github.com/sponsors/Ryosuke-Asano"
+              target="_blank"
+              rel="noopener noreferrer"
               class="ad-btn ad-btn-outline"
+              aria-describedby="opensInNewWindow"
+              aria-label={`${t("aboutDialog.sponsor.button")} (${t("aboutDialog.opensExternal", { defaultValue: "opens external link" })})`}
               onClick={(e) => {
                 e.preventDefault();
                 openExternalUrl("https://github.com/sponsors/Ryosuke-Asano");
@@ -503,7 +531,11 @@ export function AboutDialog() {
         )}
         {releaseNotesUrl && (
           <a
-            href="#"
+            href={releaseNotesUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-describedby="opensInNewWindow"
+            aria-label={`${t("aboutDialog.links.releaseNotes")} (${t("aboutDialog.opensExternal", { defaultValue: "opens external link" })})`}
             onClick={(e) => {
               e.preventDefault();
               openExternalUrl(releaseNotesUrl!);
@@ -514,7 +546,11 @@ export function AboutDialog() {
           </a>
         )}
         <a
-          href="#"
+          href="about:license"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-describedby="opensInNewWindow"
+          aria-label={`${t("aboutDialog.links.licensing")} (${t("aboutDialog.opensExternal", { defaultValue: "opens external link" })})`}
           onClick={(e) => {
             e.preventDefault();
             openExternalUrl("about:license");
@@ -524,20 +560,36 @@ export function AboutDialog() {
           {t("aboutDialog.links.licensing")}
         </a>
         <a
-          href="#"
+          href={i18n.language?.startsWith("ja") ? "https://ja.floorp.app/privacy" : "https://floorp.app/privacy"}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-describedby="opensInNewWindow"
+          aria-label={`${t("aboutDialog.links.privacy")} (${t("aboutDialog.opensExternal", { defaultValue: "opens external link" })})`}
           onClick={(e) => {
             e.preventDefault();
-            openExternalUrl("https://ja.floorp.app/privacy");
+            openExternalUrl(
+              i18n.language?.startsWith("ja")
+                ? "https://ja.floorp.app/privacy"
+                : "https://floorp.app/privacy",
+            );
           }}
           data-l10n-id="bottom-links-privacy"
         >
           {t("aboutDialog.links.privacy")}
         </a>
         <a
-          href="#"
+          href={i18n.language?.startsWith("ja") ? "https://ja.floorp.app/terms" : "https://floorp.app/terms"}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-describedby="opensInNewWindow"
+          aria-label={`${t("aboutDialog.links.terms")} (${t("aboutDialog.opensExternal", { defaultValue: "opens external link" })})`}
           onClick={(e) => {
             e.preventDefault();
-            openExternalUrl("https://ja.floorp.app/terms");
+            openExternalUrl(
+              i18n.language?.startsWith("ja")
+                ? "https://ja.floorp.app/terms"
+                : "https://floorp.app/terms",
+            );
           }}
           data-l10n-id="bottom-links-terms"
         >

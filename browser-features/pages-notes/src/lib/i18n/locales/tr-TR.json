@@ -7,6 +7,7 @@
         "welcomeContent": "{{productName}} Notlar'a hoş geldiniz! İşte nasıl kullanacağınız:\n\n{{productName}} Notlar, cihazlarınız arasında senkronize edilebilen bir not alma özelliğidir. Senkronizasyonu etkinleştirmek için bir Mozilla hesabıyla {{productName}}'da oturum açmanız gerekir.\n{{productName}} Notlar {{productName}}'da saklanır ve Firefox Sync kullanılarak cihazlar arasında senkronize edilir. Firefox Sync, senkronizasyon içeriğini Mozilla hesap parolanızla şifreler, böylece başkaları içeriğinizi göremez.",
         "new": "Yeni Not",
         "reorder": "Yeniden sırala",
+        "export": "Markdown olarak dışa aktar",
         "done": "Bitti",
         "emptyTitle": "Başlıksız",
         "emptyContent": "İçerik yok",
@@ -15,15 +16,18 @@
         "titlePlaceholder": "Başlık",
         "loading": "Notlar yükleniyor...",
         "delete": "Sil",
-        "empty": "No notes yet. Click \"New Note\" to create one.",
-        "deleteConfirmTitle": "Delete Note",
-        "deleteConfirmMessage": "Are you sure you want to delete this note? This action cannot be undone.",
+        "empty": "Henüz not yok. Bir tane oluşturmak için \"Yeni Not\"a tıklayın.",
+        "deleteConfirmTitle": "Notu Sil",
+        "deleteConfirmMessage": "Bu notu silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.",
         "deleteConfirm": "Sil",
         "deleteCancel": "İptal Et",
-        "noteList": "Notes list",
-        "search": "Search notes",
-        "clearSearch": "Clear search",
-        "noSearchResults": "No notes match your search"
+        "noteList": "Not listesi",
+        "search": "Notlarda ara",
+        "clearSearch": "Aramayı temizle",
+        "noSearchResults": "Aramanızla eşleşen not bulunamadı",
+        "searchResults": "{{count}} not bulundu",
+        "deleteSpecific": "\"{{title}}\" notunu sil",
+        "reorderedAnnouncement": "\"{{title}}\" notu {{index}}. sıraya taşındı"
     },
     "editor": {
         "bold": "Kalın",
@@ -39,31 +43,33 @@
         "heading1": "Başlık 1",
         "heading2": "Başlık 2",
         "heading3": "Başlık 3",
-        "undo": "Undo",
-        "redo": "Redo",
+        "undo": "Geri Al",
+        "redo": "Yinele",
         "history": "Geçmiş",
-        "toolbar": "Formatting toolbar",
-        "headings": "Headings",
-        "textFormatting": "Text formatting",
-        "lists": "Lists",
-        "alignment": "Alignment",
-        "contentArea": "Note content",
-        "placeholder": "Start writing...",
-        "image": "Insert image"
+        "toolbar": "Biçimlendirme araç çubuğu",
+        "headings": "Başlıklar",
+        "textFormatting": "Metin biçimlendirme",
+        "lists": "Listeler",
+        "alignment": "Hizalama",
+        "contentArea": "Not içeriği",
+        "placeholder": "Yazmaya başlayın...",
+        "image": "Resim ekle",
+        "resizeImage": "Resmi boyutlandır"
     },
     "common": {
         "close": "Kapat",
-        "confirm": "Confirm",
+        "confirm": "Onayla",
         "cancel": "İptal Et"
     },
     "save": {
-        "saving": "Saving...",
-        "saved": "Saved",
-        "error": "Save failed"
+        "saving": "Kaydediliyor...",
+        "saved": "Kaydedildi",
+        "error": "Kaydetme başarısız"
     },
     "error": {
         "loadFailed": "Not verileri yüklenemedi",
         "saveFailed": "Not verileri kaydedilemedi",
+        "exportFailed": "Not dışa aktarılamadı",
         "indexOutOfRange": "Dizin {{index}} aralık dışında"
     }
 }

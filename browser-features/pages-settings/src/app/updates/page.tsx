@@ -90,7 +90,7 @@ export default function Page() {
       setActiveExperiments(experiments || []);
       setLastUpdated(new Date());
     } catch (e) {
-      console.error("Failed to load active experiments:", e);
+      console.error("Failed to load active experiments status message:", e);
     } finally {
       setExperimentsLoading(false);
     }
@@ -102,7 +102,7 @@ export default function Page() {
       const experiments = await experimentsRpc.getAllExperiments();
       setAllExperiments(experiments || []);
     } catch (e) {
-      console.error("Failed to load all experiments:", e);
+      console.error("Failed to load all experiments status message:", e);
     } finally {
       setAllExperimentsLoading(false);
     }
@@ -114,7 +114,7 @@ export default function Page() {
         const policy = await rpc.getStringPref(EXPERIMENTS_POLICY_PREF);
         setParticipationPolicy(policy || "default");
       } catch (e) {
-        console.error("Failed to load experiments participation policy:", e);
+        console.error("Failed to load experiments participation policy status message:", e);
       } finally {
         setLoading(false);
       }
@@ -136,7 +136,7 @@ export default function Page() {
       await loadExperiments();
       await loadAllExperiments();
     } catch (error) {
-      console.error("Failed to save experiments participation policy:", error);
+      console.error("Failed to save experiments participation policy status message:", error);
     }
   };
 
@@ -171,10 +171,10 @@ export default function Page() {
           if (result.success) {
             await loadExperiments();
           } else {
-            console.error("Failed to disable experiment:", result.error);
+            console.error("Failed to disable experiment status message:", result.error);
           }
         } catch (error) {
-          console.error("Failed to disable experiment:", error);
+          console.error("Failed to disable experiment status message:", error);
         }
       },
       t("updates.activeFlascos.disable"),
@@ -193,10 +193,10 @@ export default function Page() {
             await loadExperiments();
             await loadAllExperiments();
           } else {
-            console.error("Failed to enable experiment:", result.error);
+            console.error("Failed to enable experiment status message:", result.error);
           }
         } catch (error) {
-          console.error("Failed to enable experiment:", error);
+          console.error("Failed to enable experiment status message:", error);
         }
       },
       t("updates.activeFlascos.enable"),
@@ -217,10 +217,10 @@ export default function Page() {
             await loadExperiments();
             await loadAllExperiments();
           } else {
-            console.error("Failed to force enroll experiment:", result.error);
+            console.error("Failed to force enroll experiment status message:", result.error);
           }
         } catch (error) {
-          console.error("Failed to force enroll experiment:", error);
+          console.error("Failed to force enroll experiment status message:", error);
         }
       },
       t("updates.availableFlascos.forceEnroll"),
@@ -241,10 +241,10 @@ export default function Page() {
             await loadExperiments();
             await loadAllExperiments();
           } else {
-            console.error("Failed to remove force enrollment:", result.error);
+            console.error("Failed to remove force enrollment status message:", result.error);
           }
         } catch (error) {
-          console.error("Failed to remove force enrollment:", error);
+          console.error("Failed to remove force enrollment status message:", error);
         }
       },
       t("updates.availableFlascos.removeForceEnrollment"),
@@ -262,10 +262,10 @@ export default function Page() {
           if (result.success) {
             await loadExperiments();
           } else {
-            console.error("Failed to clear experiment cache:", result.error);
+            console.error("Failed to clear experiment cache status message:", result.error);
           }
         } catch (error) {
-          console.error("Failed to clear experiment cache:", error);
+          console.error("Failed to clear experiment cache status message:", error);
         }
       },
       t("updates.experiments.clearCache"),

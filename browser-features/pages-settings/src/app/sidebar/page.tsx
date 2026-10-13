@@ -28,7 +28,7 @@ export default function Page() {
         setReady(true);
         setError(false);
       } catch (error) {
-        console.error("[Settings:sidebar] Load failed", error);
+        console.error("[Settings:sidebar] Load failed status message", error);
         setError(true);
       }
     };

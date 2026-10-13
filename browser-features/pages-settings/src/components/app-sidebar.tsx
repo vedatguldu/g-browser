@@ -56,7 +56,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         if (mounted) setIsFloorpOSVisible(!hidden);
       } catch (e) {
         console.error(
-          "failed to get pref floorp.os.hidden",
+          "failed to get pref floorp.os.hidden status message",
           e,
         );
         if (mounted) setIsFloorpOSVisible(false);

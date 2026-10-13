@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { Search, X } from "lucide-react";
 
@@ -8,11 +9,13 @@ interface NoteSearchProps {
 
 export function NoteSearch({ value, onChange }: NoteSearchProps) {
   const { t } = useTranslation();
+  const inputRef = useRef<HTMLInputElement>(null);
 
   return (
-    <div className="relative px-2 pt-2" onMouseDown={(e) => e.preventDefault()}>
-      <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-base-content/50 mt-1" />
+    <div className="relative px-2 pt-2">
+      <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-base-content/50 mt-1" aria-hidden="true" />
       <input
+        ref={inputRef}
         type="search"
         data-testid="notes-search"
         className="input input-sm input-bordered w-full pl-8 pr-8"
@@ -20,17 +23,18 @@ export function NoteSearch({ value, onChange }: NoteSearchProps) {
         aria-label={t("notes.search")}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        onMouseDown={(e) => e.stopPropagation()}
       />
       {value && (
         <button
           type="button"
-          className="absolute right-4 top-1/2 -translate-y-1/2 mt-1"
-          onClick={() => onChange("")}
-          onMouseDown={(e) => e.stopPropagation()}
+          className="absolute right-4 top-1/2 -translate-y-1/2 mt-1 p-1 rounded hover:bg-base-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"
+          onClick={() => {
+            onChange("");
+            inputRef.current?.focus();
+          }}
           aria-label={t("notes.clearSearch")}
         >
-          <X className="h-3 w-3 text-base-content/50" />
+          <X className="h-3 w-3 text-base-content/50" aria-hidden="true" />
         </button>
       )}
     </div>

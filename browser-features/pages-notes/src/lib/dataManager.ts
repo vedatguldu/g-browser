@@ -54,7 +54,7 @@ export async function getNotes(t: (key: string) => string): Promise<NotesData> {
 
     return parsedNotes;
   } catch (e) {
-    console.error("Failed to load note data:", e);
+    console.error("Failed to load note data status message:", e);
     return getDefaultNotes(t);
   }
 }
@@ -63,7 +63,7 @@ export async function saveNotes(data: NotesData): Promise<void> {
   try {
     await rpc.setStringPref(NOTES_PREF_NAME, JSON.stringify(data));
   } catch (e) {
-    console.error("Failed to save note data:", e);
+    console.error("Failed to save note data status message:", e);
     throw e;
   }
 }
@@ -116,11 +116,11 @@ export async function loadSyncState(): Promise<SyncState> {
       return parsed as SyncState;
     }
     console.warn(
-      "[Floorp Notes] Sync state pref has unexpected shape, resetting to empty.",
+      "[Floorp Notes] Sync state pref has unexpected shape, resetting to empty status message.",
     );
     return emptySyncState();
   } catch (e) {
-    console.warn("[Floorp Notes] Failed to parse sync state, resetting:", e);
+    console.warn("[Floorp Notes] Failed to parse sync state status message, resetting:", e);
     return emptySyncState();
   }
 }
@@ -133,7 +133,7 @@ export async function saveSyncState(state: SyncState): Promise<void> {
       `[Floorp Notes] Saved sync state with ${Object.keys(state.lastSyncedSnapshots).length} snapshots`,
     );
   } catch (e) {
-    console.error("[Floorp Notes] Failed to save sync state:", e);
+    console.error("[Floorp Notes] Failed to save sync state status message:", e);
   }
 }
 

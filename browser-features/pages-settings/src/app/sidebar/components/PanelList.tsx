@@ -39,7 +39,7 @@ import type {
   Panels,
 } from "#features-chrome/common/panel-sidebar/utils/type.ts";
 import { PanelEditModal } from "./PanelEditModal.tsx";
-import { Edit, GripVertical, List, Plus, Trash2 } from "lucide-react";
+import { ChevronDown, ChevronUp, Edit, GripVertical, List, Plus, Trash2 } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -49,12 +49,20 @@ import {
 
 const SortablePanel = ({
   panel,
+  index,
+  total,
   onEdit,
   onDelete,
+  onMoveUp,
+  onMoveDown,
 }: {
   panel: Panel;
+  index: number;
+  total: number;
   onEdit: (panel: Panel) => void;
   onDelete: (id: string) => void;
+  onMoveUp?: (index: number) => void;
+  onMoveDown?: (index: number) => void;
 }) => {
   const { t } = useTranslation();
   const { attributes, listeners, setNodeRef, transform, transition } =
@@ -79,14 +87,16 @@ const SortablePanel = ({
       className="bg-base-100 hover:bg-base-200 p-4 flex items-center justify-between gap-3 transition-colors"
     >
       <div className="flex min-w-0 items-center gap-3">
-        <div
+        <button
+          type="button"
           {...attributes}
           {...listeners}
-          className="shrink-0 cursor-grab text-base-content/50 hover:text-base-content/70"
-          aria-label="Drag to reorder"
+          className="shrink-0 cursor-grab text-base-content/50 hover:text-base-content/70 p-1 rounded focus-visible:outline-2 focus-visible:outline-offset-2"
+          aria-label={t("panelSidebar.dragToReorder", { name: displayName })}
+          aria-roledescription="sortable"
         >
           <GripVertical size={20} />
-        </div>
+        </button>
         <div className="min-w-0">
           <div className="font-medium flex items-center gap-2">
             {panel.icon && (
@@ -106,12 +116,34 @@ const SortablePanel = ({
           </div>
         </div>
       </div>
-      <div className="flex shrink-0 gap-2">
+      <div className="flex shrink-0 items-center gap-1">
+        {onMoveUp && (
+          <Button
+            type="button"
+            onClick={() => onMoveUp(index)}
+            disabled={index === 0}
+            variant="ghost"
+            aria-label={t("panelSidebar.moveUpNamed", { name: displayName })}
+          >
+            <ChevronUp size={16} />
+          </Button>
+        )}
+        {onMoveDown && (
+          <Button
+            type="button"
+            onClick={() => onMoveDown(index)}
+            disabled={index === total - 1}
+            variant="ghost"
+            aria-label={t("panelSidebar.moveDownNamed", { name: displayName })}
+          >
+            <ChevronDown size={16} />
+          </Button>
+        )}
         <Button
           type="button"
           onClick={() => onEdit(panel)}
           variant="ghost"
-          aria-label={t("panelSidebar.editPanel")}
+          aria-label={t("panelSidebar.editNamed", { name: displayName })}
         >
           <Edit size={16} />
         </Button>
@@ -119,7 +151,7 @@ const SortablePanel = ({
           type="button"
           onClick={() => onDelete(panel.id)}
           variant="ghost"
-          aria-label={t("panelSidebar.delete")}
+          aria-label={t("panelSidebar.deleteNamed", { name: displayName })}
         >
           <Trash2 size={16} />
         </Button>
@@ -174,6 +206,7 @@ export const PanelList: React.FC = () => {
   const [activeId, setActiveId] = useState<string | null>(null);
   const [panelToDelete, setPanelToDelete] = useState<Panel | null>(null);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [announcement, setAnnouncement] = useState("");
 
   const sensors = useSensors(
     useSensor(PointerSensor, {
@@ -265,6 +298,46 @@ export const PanelList: React.FC = () => {
     setActiveId(event.active.id as string);
   };
 
+  const handleMoveUp = (index: number) => {
+    if (index <= 0) return;
+    setPanels((items) => {
+      const newItems = arrayMove(items, index, index - 1);
+      savePanelsList(newItems);
+      const moved = newItems[index - 1];
+      const name = moved.type === "static"
+        ? getStaticPanelDisplayName(moved.url as string, t)
+        : (moved.url || moved.extensionId || t("panelSidebar.untitled"));
+      setAnnouncement(
+        t("panelSidebar.movedPosition", {
+          name,
+          position: index,
+          total: newItems.length,
+        }),
+      );
+      return newItems;
+    });
+  };
+
+  const handleMoveDown = (index: number) => {
+    if (index >= panels.length - 1) return;
+    setPanels((items) => {
+      const newItems = arrayMove(items, index, index + 1);
+      savePanelsList(newItems);
+      const moved = newItems[index + 1];
+      const name = moved.type === "static"
+        ? getStaticPanelDisplayName(moved.url as string, t)
+        : (moved.url || moved.extensionId || t("panelSidebar.untitled"));
+      setAnnouncement(
+        t("panelSidebar.movedPosition", {
+          name,
+          position: index + 2,
+          total: newItems.length,
+        }),
+      );
+      return newItems;
+    });
+  };
+
   const handleDragEnd = (event: DragEndEvent) => {
     setActiveId(null);
     const { active, over } = event;
@@ -275,6 +348,17 @@ export const PanelList: React.FC = () => {
         const newIndex = items.findIndex((item) => item.id === over.id);
         const newItems = arrayMove(items, oldIndex, newIndex);
         savePanelsList(newItems);
+        const moved = newItems[newIndex];
+        const name = moved.type === "static"
+          ? getStaticPanelDisplayName(moved.url as string, t)
+          : (moved.url || moved.extensionId || t("panelSidebar.untitled"));
+        setAnnouncement(
+          t("panelSidebar.movedPosition", {
+            name,
+            position: newIndex + 1,
+            total: newItems.length,
+          }),
+        );
         return newItems;
       });
     }
@@ -302,6 +386,9 @@ export const PanelList: React.FC = () => {
         </CardTitle>
       </CardHeader>
       <CardContent>
+        <div className="sr-only" role="status" aria-live="polite" aria-atomic="true">
+          {announcement}
+        </div>
         <div className={styles.toolbar}>
           <Button
             type="button"
@@ -320,10 +407,16 @@ export const PanelList: React.FC = () => {
             </div>
           )
           : (
-            <DndContext
-              sensors={sensors}
-              collisionDetection={closestCenter}
-              onDragStart={handleDragStart}
+            <div
+              className="w-full"
+              onKeyDown={(e) => {
+                // KeyboardSensor configured in sensors handles accessible keyboard reordering
+              }}
+            >
+              <DndContext
+                sensors={sensors}
+                collisionDetection={closestCenter}
+                onDragStart={handleDragStart}
               onDragEnd={handleDragEnd}
               modifiers={[restrictToVerticalAxis, restrictToParentElement]}
             >
@@ -332,12 +425,16 @@ export const PanelList: React.FC = () => {
                 strategy={verticalListSortingStrategy}
               >
                 <div className="divide-y divide-base-300 rounded-lg overflow-hidden bg-base-200">
-                  {panels.map((panel) => (
+                  {panels.map((panel, index) => (
                     <SortablePanel
                       key={panel.id}
                       panel={panel}
+                      index={index}
+                      total={panels.length}
                       onEdit={handleEditPanel}
                       onDelete={() => handleShowDeleteModal(panel)}
+                      onMoveUp={handleMoveUp}
+                      onMoveDown={handleMoveDown}
                     />
                   ))}
                 </div>
@@ -349,6 +446,8 @@ export const PanelList: React.FC = () => {
                   ? (
                     <SortablePanel
                       panel={panels.find((p) => p.id === activeId)!}
+                      index={panels.findIndex((p) => p.id === activeId)}
+                      total={panels.length}
                       onEdit={handleEditPanel}
                       onDelete={() =>
                         handleShowDeleteModal(
@@ -359,7 +458,8 @@ export const PanelList: React.FC = () => {
                   : null}
               </DragOverlay>
             </DndContext>
-          )}
+          </div>
+        )}
       </CardContent>
 
       {isModalOpen && currentPanel && (

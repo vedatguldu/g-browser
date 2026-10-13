@@ -35,13 +35,23 @@ export const Toolbar = ({ editor }: ToolbarProps) => {
 
     useEffect(() => {
         if (!openMenu) return;
-        const handler = (e: MouseEvent) => {
+        const mouseHandler = (e: MouseEvent) => {
             if (toolbarRef.current && !toolbarRef.current.contains(e.target as Node)) {
                 setOpenMenu(null);
             }
         };
-        document.addEventListener("mousedown", handler);
-        return () => document.removeEventListener("mousedown", handler);
+        const keyHandler = (e: KeyboardEvent) => {
+            if (e.key === "Escape") {
+                e.stopPropagation();
+                setOpenMenu(null);
+            }
+        };
+        document.addEventListener("mousedown", mouseHandler);
+        document.addEventListener("keydown", keyHandler);
+        return () => {
+            document.removeEventListener("mousedown", mouseHandler);
+            document.removeEventListener("keydown", keyHandler);
+        };
     }, [openMenu]);
 
     if (!editor) return null;
@@ -129,28 +139,31 @@ export const Toolbar = ({ editor }: ToolbarProps) => {
                         type="button"
                         className={`btn btn-xs ${editor.isActive("heading") ? "btn-active" : "btn-ghost"} gap-0 pr-1`}
                         onClick={() => toggleMenu("heading")}
+                        aria-pressed={openMenu === "heading"}
                         aria-label={t("editor.headings")}
                         aria-expanded={openMenu === "heading"}
+                        aria-haspopup="menu"
+                        aria-controls="heading-menu-panel"
                     >
                         {activeHeadingIcon}
-                        <ChevronDown className="h-2.5 w-2.5" />
+                        <ChevronDown className="h-2.5 w-2.5" aria-hidden="true" />
                     </button>
                     {openMenu === "heading" && (
-                        <div className="absolute top-full left-0 mt-1 flex gap-0.5 p-1 bg-base-200 rounded-lg shadow-lg z-10">
-                            <button type="button" className={btnClass(editor.isActive("heading", { level: 1 }))}
+                        <div id="heading-menu-panel" role="menu" aria-label={t("editor.headings")} className="absolute top-full left-0 mt-1 flex gap-0.5 p-1 bg-base-200 rounded-lg shadow-lg z-10">
+                            <button type="button" role="menuitemradio" className={btnClass(editor.isActive("heading", { level: 1 }))}
                                 onClick={() => runAndClose(() => editor.chain().focus().toggleHeading({ level: 1 }).run())}
-                                aria-label={t("editor.heading1")} aria-pressed={editor.isActive("heading", { level: 1 })}>
-                                <Heading1 className="h-3.5 w-3.5" />
+                                aria-label={t("editor.heading1")} aria-checked={editor.isActive("heading", { level: 1 })}>
+                                <Heading1 className="h-3.5 w-3.5" aria-hidden="true" />
                             </button>
-                            <button type="button" className={btnClass(editor.isActive("heading", { level: 2 }))}
+                            <button type="button" role="menuitemradio" className={btnClass(editor.isActive("heading", { level: 2 }))}
                                 onClick={() => runAndClose(() => editor.chain().focus().toggleHeading({ level: 2 }).run())}
-                                aria-label={t("editor.heading2")} aria-pressed={editor.isActive("heading", { level: 2 })}>
-                                <Heading2 className="h-3.5 w-3.5" />
+                                aria-label={t("editor.heading2")} aria-checked={editor.isActive("heading", { level: 2 })}>
+                                <Heading2 className="h-3.5 w-3.5" aria-hidden="true" />
                             </button>
-                            <button type="button" className={btnClass(editor.isActive("heading", { level: 3 }))}
+                            <button type="button" role="menuitemradio" className={btnClass(editor.isActive("heading", { level: 3 }))}
                                 onClick={() => runAndClose(() => editor.chain().focus().toggleHeading({ level: 3 }).run())}
-                                aria-label={t("editor.heading3")} aria-pressed={editor.isActive("heading", { level: 3 })}>
-                                <Heading3 className="h-3.5 w-3.5" />
+                                aria-label={t("editor.heading3")} aria-checked={editor.isActive("heading", { level: 3 })}>
+                                <Heading3 className="h-3.5 w-3.5" aria-hidden="true" />
                             </button>
                         </div>
                     )}
@@ -162,33 +175,36 @@ export const Toolbar = ({ editor }: ToolbarProps) => {
                         type="button"
                         className={`btn btn-xs ${hasActiveStyle ? "btn-active" : "btn-ghost"} gap-0 pr-1`}
                         onClick={() => toggleMenu("style")}
+                        aria-pressed={openMenu === "style"}
                         aria-label={t("editor.textFormatting")}
                         aria-expanded={openMenu === "style"}
+                        aria-haspopup="true"
+                        aria-controls="style-menu-panel"
                     >
-                        <Type className="h-3.5 w-3.5" />
-                        <ChevronDown className="h-2.5 w-2.5" />
+                        <Type className="h-3.5 w-3.5" aria-hidden="true" />
+                        <ChevronDown className="h-2.5 w-2.5" aria-hidden="true" />
                     </button>
                     {openMenu === "style" && (
-                        <div className="absolute top-full left-0 mt-1 flex gap-0.5 p-1 bg-base-200 rounded-lg shadow-lg z-10">
+                        <div id="style-menu-panel" role="group" aria-label={t("editor.textFormatting")} className="absolute top-full left-0 mt-1 flex gap-0.5 p-1 bg-base-200 rounded-lg shadow-lg z-10">
                             <button type="button" className={btnClass(editor.isActive("bold"))}
                                 onClick={() => editor.chain().focus().toggleBold().run()}
                                 aria-label={t("editor.bold")} aria-pressed={editor.isActive("bold")}>
-                                <Bold className="h-3.5 w-3.5" />
+                                <Bold className="h-3.5 w-3.5" aria-hidden="true" />
                             </button>
                             <button type="button" className={btnClass(editor.isActive("italic"))}
                                 onClick={() => editor.chain().focus().toggleItalic().run()}
                                 aria-label={t("editor.italic")} aria-pressed={editor.isActive("italic")}>
-                                <Italic className="h-3.5 w-3.5" />
+                                <Italic className="h-3.5 w-3.5" aria-hidden="true" />
                             </button>
                             <button type="button" className={btnClass(editor.isActive("underline"))}
                                 onClick={toggleUnderline}
                                 aria-label={t("editor.underline")} aria-pressed={editor.isActive("underline")}>
-                                <Underline className="h-3.5 w-3.5" />
+                                <Underline className="h-3.5 w-3.5" aria-hidden="true" />
                             </button>
                             <button type="button" className={btnClass(editor.isActive("strike"))}
                                 onClick={toggleStrike}
                                 aria-label={t("editor.strikethrough")} aria-pressed={editor.isActive("strike")}>
-                                <Strikethrough className="h-3.5 w-3.5" />
+                                <Strikethrough className="h-3.5 w-3.5" aria-hidden="true" />
                             </button>
                         </div>
                     )}
@@ -205,7 +221,7 @@ export const Toolbar = ({ editor }: ToolbarProps) => {
                         aria-label={t("editor.bulletList")}
                         aria-pressed={editor.isActive("bulletList")}
                     >
-                        <List className="h-3.5 w-3.5" />
+                        <List className="h-3.5 w-3.5" aria-hidden="true" />
                     </button>
                     <button
                         type="button"
@@ -214,7 +230,7 @@ export const Toolbar = ({ editor }: ToolbarProps) => {
                         aria-label={t("editor.numberedList")}
                         aria-pressed={editor.isActive("orderedList")}
                     >
-                        <ListOrdered className="h-3.5 w-3.5" />
+                        <ListOrdered className="h-3.5 w-3.5" aria-hidden="true" />
                     </button>
                 </div>
 
@@ -226,28 +242,31 @@ export const Toolbar = ({ editor }: ToolbarProps) => {
                         type="button"
                         className="btn btn-xs btn-ghost gap-0 pr-1"
                         onClick={() => toggleMenu("align")}
+                        aria-pressed={openMenu === "align"}
                         aria-label={t("editor.alignment")}
                         aria-expanded={openMenu === "align"}
+                        aria-haspopup="menu"
+                        aria-controls="align-menu-panel"
                     >
                         {activeAlignIcon}
-                        <ChevronDown className="h-2.5 w-2.5" />
+                        <ChevronDown className="h-2.5 w-2.5" aria-hidden="true" />
                     </button>
                     {openMenu === "align" && (
-                        <div className="absolute top-full left-0 mt-1 flex gap-0.5 p-1 bg-base-200 rounded-lg shadow-lg z-10">
-                            <button type="button" className={btnClass(editor.isActive({ textAlign: "left" }))}
+                        <div id="align-menu-panel" role="menu" aria-label={t("editor.alignment")} className="absolute top-full left-0 mt-1 flex gap-0.5 p-1 bg-base-200 rounded-lg shadow-lg z-10">
+                            <button type="button" role="menuitemradio" className={btnClass(editor.isActive({ textAlign: "left" }))}
                                 onClick={() => runAndClose(() => editor.chain().focus().setTextAlign("left").run())}
-                                aria-label={t("editor.alignLeft")} aria-pressed={editor.isActive({ textAlign: "left" })}>
-                                <AlignLeft className="h-3.5 w-3.5" />
+                                aria-label={t("editor.alignLeft")} aria-checked={editor.isActive({ textAlign: "left" })}>
+                                <AlignLeft className="h-3.5 w-3.5" aria-hidden="true" />
                             </button>
-                            <button type="button" className={btnClass(editor.isActive({ textAlign: "center" }))}
+                            <button type="button" role="menuitemradio" className={btnClass(editor.isActive({ textAlign: "center" }))}
                                 onClick={() => runAndClose(() => editor.chain().focus().setTextAlign("center").run())}
-                                aria-label={t("editor.alignCenter")} aria-pressed={editor.isActive({ textAlign: "center" })}>
-                                <AlignCenter className="h-3.5 w-3.5" />
+                                aria-label={t("editor.alignCenter")} aria-checked={editor.isActive({ textAlign: "center" })}>
+                                <AlignCenter className="h-3.5 w-3.5" aria-hidden="true" />
                             </button>
-                            <button type="button" className={btnClass(editor.isActive({ textAlign: "right" }))}
+                            <button type="button" role="menuitemradio" className={btnClass(editor.isActive({ textAlign: "right" }))}
                                 onClick={() => runAndClose(() => editor.chain().focus().setTextAlign("right").run())}
-                                aria-label={t("editor.alignRight")} aria-pressed={editor.isActive({ textAlign: "right" })}>
-                                <AlignRight className="h-3.5 w-3.5" />
+                                aria-label={t("editor.alignRight")} aria-checked={editor.isActive({ textAlign: "right" })}>
+                                <AlignRight className="h-3.5 w-3.5" aria-hidden="true" />
                             </button>
                         </div>
                     )}
@@ -266,8 +285,10 @@ export const Toolbar = ({ editor }: ToolbarProps) => {
                 </button>
                 <input
                     ref={fileInputRef}
+                    id="note-editor-image-file-input"
                     type="file"
                     accept="image/*"
+                    aria-label={t("editor.image")}
                     className="hidden"
                     onChange={(e) => {
                         const file = e.target.files?.[0];

@@ -88,8 +88,12 @@ export default function ContextMenuSettings() {
               </div>
               <Switch
                 checked={model.enabled}
-                disabled={model.loading || model.enabledUnavailable}
-                onChange={() => void model.toggleEnabled()}
+                aria-disabled={model.loading || model.enabledUnavailable}
+                aria-busy={model.loading}
+                onChange={() => {
+                  if (model.loading || model.enabledUnavailable) return;
+                  void model.toggleEnabled();
+                }}
                 aria-label={t("contextMenu.enable")}
               />
             </div>
@@ -195,7 +199,8 @@ export default function ContextMenuSettings() {
               <ContextMenuEditor
                 catalog={model.catalog}
                 config={model.config}
-                disabled={model.loading || model.loadError}
+                aria-busy={model.loading}
+                disabled={model.loadError}
                 refreshing={model.catalogLoading}
                 reloadCatalog={model.reloadCatalog}
                 moveItem={model.moveItem}

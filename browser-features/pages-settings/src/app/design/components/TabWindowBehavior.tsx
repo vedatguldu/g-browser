@@ -35,7 +35,7 @@ export function TabWindowBehavior() {
           setSettings(values);
         }
       } catch (error) {
-        console.error("Failed to load tab and window behavior settings", error);
+        console.error("Failed to load tab and window behavior settings status message", error);
       }
     };
 
@@ -59,7 +59,7 @@ export function TabWindowBehavior() {
     try {
       await setOpenNewWindow(value);
     } catch (error) {
-      console.error("Failed to save link opening behavior", error);
+      console.error("Failed to save link opening behavior status message", error);
       setSettings((current) =>
         current ? { ...current, openNewWindow: previous } : current
       );
@@ -77,7 +77,7 @@ export function TabWindowBehavior() {
     try {
       await setTaskbarPreviews(enabled);
     } catch (error) {
-      console.error("Failed to save taskbar preview behavior", error);
+      console.error("Failed to save taskbar preview behavior status message", error);
       setSettings((current) =>
         current ? { ...current, taskbarPreviews: previous } : current
       );

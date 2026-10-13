@@ -43,7 +43,8 @@
             "noResults": "何も見つかりませんでした",
             "open": "[{{title}}] を開く",
             "matchedText": "一致したテキスト",
-            "results": "検索結果"
+            "results": "検索結果",
+            "resultCount": "「{{query}}」の検索結果: {{count}} 件"
         },
         "commandPalette": "コマンドパレット"
     },
@@ -487,7 +488,13 @@
             "invalidWidth": "少なくとも 100 ピクセルの幅が必要です"
         },
         "save": "保存",
-        "cancel": "キャンセル"
+        "cancel": "キャンセル",
+        "dragToReorder": "{{name}} をドラッグして並べ替え",
+        "moveUpNamed": "{{name}} を上に移動",
+        "moveDownNamed": "{{name}} を下に移動",
+        "editNamed": "{{name}} を編集",
+        "deleteNamed": "{{name}} を削除",
+        "movedPosition": "{{name}} を {{total}} 件中 {{position}} 番目に移動しました"
     },
     "progressiveWebApp": {
         "title": "ウェブアプリ",
@@ -545,7 +552,8 @@
             "enabledBadge": "有効",
             "disabledBadge": "無効",
             "serverToken": "サーバートークン",
-            "copyToken": "コピー"
+            "copyToken": "コピー",
+            "tokenCopied": "サーバートークンをクリップボードにコピーしました"
         },
         "controlsCard": {
             "title": "制御",
@@ -566,7 +574,8 @@
             "enable": "{{productName}} OS を有効にできませんでした。",
             "disable": "{{productName}} OS を無効にできませんでした。",
             "enableAction": "{{productName}} OS の有効化でエラー: {{reason}}",
-            "disableAction": "{{productName}} OS の無効化でエラー: {{reason}}"
+            "disableAction": "{{productName}} OS の無効化でエラー: {{reason}}",
+            "copyFailed": "トークンのクリップボードへのコピーに失敗しました"
         }
     },
     "mouseGesture": {
@@ -726,7 +735,26 @@
         "copy": "コピー",
         "defaultName": "新しいジェスチャー",
         "emptyPatternError": "ジェスチャーパターンを設定してください",
-        "duplicatePatternError": "このジェスチャーパターンは既に存在します"
+        "duplicatePatternError": "このジェスチャーパターンは既に存在します",
+        "actionsHeading": "操作",
+        "directionAdded": "方向 {{direction}} を追加しました",
+        "directionRemoved": "方向 {{direction}} を削除しました",
+        "patternReset": "ジェスチャーパターンをリセットしました",
+        "removeDirection": "{{position}} 番目の方向 {{direction}} を削除",
+        "editNamed": "{{name}} ジェスチャーを編集",
+        "duplicateNamed": "{{name}} ジェスチャーを複製",
+        "deleteNamed": "{{name}} ジェスチャーを削除",
+        "deletedNamed": "{{name}} ジェスチャーを削除しました",
+        "direction": {
+            "upLeft": "左上",
+            "up": "上",
+            "upRight": "右上",
+            "left": "左",
+            "right": "右",
+            "downLeft": "左下",
+            "down": "下",
+            "downRight": "右下"
+        }
     },
     "contextMenu": {
         "description": "ブラウザーのコンテキストメニュー項目を並べ替えたり、非表示にしたりできます。ウェブサイトが独自に提供するメニューは変更しません。",
@@ -854,7 +882,11 @@
         "preview": "プレビュー",
         "pressKey": "何かキーを押してください...",
         "recording": "記録中...",
+        "recordedKey": "キーを記録しました: {{key}}",
         "key": "キー",
+        "editActionNamed": "{{name}} ショートカットを編集",
+        "addActionNamed": "{{name}} ショートカットを追加",
+        "deleteActionNamed": "{{name}} ショートカットを削除",
         "modal": {
             "title": "ショートカットを編集",
             "description": "使用するキーを入力してください。修飾キーは以下からお選びください。",
@@ -999,6 +1031,10 @@
         "priorityModalReset": "デフォルトに戻す",
         "priorityModalClose": "閉じる",
         "dragToReorder": "{{displayName}} をドラッグして並べ替える",
+        "moveUp": "{{displayName}} を上に移動",
+        "moveDown": "{{displayName}} を下に移動",
+        "categoryMoved": "{{displayName}} の優先度を {{total}} 件中 {{position}} 番目に移動しました",
+        "priorityReset": "カテゴリの優先度をデフォルトに戻しました",
         "shortcuts": {
             "title": "ショートカット",
             "description": "コマンドパレットで @prefix を入力すると、コマンドをすぐに実行できます。",
@@ -1009,6 +1045,9 @@
             "uncategorized": "その他",
             "add": "追加",
             "remove": "削除",
+            "addedNamed": "{{command}} のショートカット @{{prefix}} を追加しました",
+            "removedNamed": "{{command}} のショートカット @{{prefix}} を削除しました",
+            "removeNamed": "{{command}} のショートカット @{{prefix}} を削除",
             "errorEmpty": "プレフィックスを入力してください。",
             "errorAt": "プレフィックスに「@」は使用できません。",
             "errorDuplicate": "このプレフィックスは既に使用されています。",
@@ -1025,5 +1064,10 @@
             "errorReserved": "このプレフィックスは予約済みのため使用できません。",
             "errorWhitespace": "プレフィックスに空白を含めることはできません。"
         }
+    },
+    "common": {
+        "loading": "読み込み中...",
+        "close": "閉じる",
+        "opensInNewWindow": "新しいタブで開く"
     }
 }

@@ -1,24 +1,32 @@
 {
-    "profileManager": {
-        "title": "Обліковий запис",
-        "buttons": {
-            "refresh": "Оновити",
-            "create": "Створити"
-        },
-        "loading": "Завантаження…",
-        "noProfiles": "Профілів не знайдено.",
-        "current": "Поточний",
-        "default": "За замовчуванням",
-        "actions": {
-            "open": "Запустити",
-            "new": "Новий",
-            "rename": "Перейменувати",
-            "remove": "Видалити",
-            "setDefault": "За замовчуванням"
-        },
-        "prompts": {
-            "confirmRemove": "Ви впевнені, що хочете видалити цей профіль?",
-            "newName": "Нова назва профілю:"
-        }
+  "profileManager": {
+    "title": "Обліковий запис",
+    "buttons": {
+      "refresh": "Оновити",
+      "create": "Створити"
+    },
+    "loading": "Завантаження…",
+    "noProfiles": "Профілів не знайдено.",
+    "current": "Поточний",
+    "default": "За замовчуванням",
+    "actions": {
+      "open": "Запустити",
+      "new": "Новий",
+      "rename": "Перейменувати",
+      "remove": "Видалити",
+      "setDefault": "За замовчуванням",
+      "openProfile": "Launch {{name}} profile",
+      "removeProfile": "Remove {{name}} profile",
+      "currentProfileNotice": "Currently active profile"
+    },
+    "prompts": {
+      "confirmRemove": "Ви впевнені, що хочете видалити цей профіль?",
+      "newName": "Нова назва профілю:"
+    },
+    "status": {
+      "loaded": "{{count}} profiles loaded.",
+      "removedSuccess": "Profile {{name}} was permanently deleted.",
+      "removeFailed": "Failed to remove profile {{name}}."
     }
+  }
 }

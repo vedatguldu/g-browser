@@ -38,7 +38,7 @@ export function TabStacks({ vertical = false }: TabStacksProps) {
         }
       } catch (error) {
         console.error(
-          "[tab-stacks] Failed to load tab stacks settings:",
+          "[tab-stacks] Failed to load tab stacks settings status message:",
           error,
         );
       } finally {
@@ -65,7 +65,7 @@ export function TabStacks({ vertical = false }: TabStacksProps) {
       await setTabStacksEnabled(enabled);
       setShowRestartModal(true);
     } catch (error) {
-      console.error("[tab-stacks] Failed to save tab stacks settings:", error);
+      console.error("[tab-stacks] Failed to save tab stacks settings status message:", error);
       setSettings((current) => ({ ...current, enabled: previous }));
     }
   };

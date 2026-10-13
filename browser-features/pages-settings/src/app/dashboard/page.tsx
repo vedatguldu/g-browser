@@ -99,6 +99,9 @@ export default function Page() {
             <a key={key} href={href} target="_blank" rel="noopener noreferrer">
               <Icon size={24} aria-hidden="true" />
               <span>{t(`settingsHome.resources.${key}`)}</span>
+              <span className="sr-only">
+                {" "}({t("common.opensInNewWindow", { defaultValue: "opens in a new tab" })})
+              </span>
               <ExternalLink size={18} aria-hidden="true" />
             </a>
           ))}

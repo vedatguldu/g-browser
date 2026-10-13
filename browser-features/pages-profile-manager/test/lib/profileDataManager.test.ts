@@ -8,7 +8,9 @@ import {
   openProfile,
   openUrl,
   removeProfile,
+  removeProfileWithAnnouncement,
   renameProfile,
+  renameProfileWithAnnouncement,
   restart,
   type RestartDependencies,
   setDefaultProfile,
@@ -527,7 +529,52 @@ export async function runAllTests(): Promise<void> {
         );
       },
     },
+    {
+      name: "removeProfileWithAnnouncement calls announcer on failure",
+      fn: async () => {
+        (globalThis as Record<string, unknown>).NRRemoveProfile = undefined;
+        let announced = "";
+        const result = await removeProfileWithAnnouncement(
+          "test-profile",
+          true,
+          (msg) => {
+            announced = msg;
+          },
+        );
+        assertEquals(result, false, "should return false when profile is not found");
+        assertEquals(
+          announced,
+          'Failed to remove profile "test-profile".',
+          "should announce failure to screen reader",
+        );
+      },
+    },
+    {
+      name: "renameProfileWithAnnouncement calls announcer on failure",
+      fn: async () => {
+        (globalThis as Record<string, unknown>).NRRenameProfile = undefined;
+        let announced = "";
+        const result = await renameProfileWithAnnouncement(
+          "test-profile",
+          "new-name",
+          (msg) => {
+            announced = msg;
+          },
+        );
+        assertEquals(result, false, "should return false when profile is not found");
+        assertEquals(
+          announced,
+          'Failed to rename profile "test-profile".',
+          "should announce failure to screen reader",
+        );
+      },
+    },
   ];
 
   await runTests("profileDataManager.test.ts", tests);
 }
+
+Deno.test("profileDataManager - test suite", async () => {
+  await runAllTests();
+});
+

@@ -1,5 +1,6 @@
 import { Button } from "../../../../libs/ui/button.tsx";
 import { RadioCard } from "@chakra-ui/react";
+import { ExternalLink } from "lucide-react";
 import { FloorpBrand } from "../../../../libs/ui/brand.tsx";
 import { SelectionBadge, SetupInfo } from "./SetupControls.tsx";
 import styles from "../setup.module.css";
@@ -157,10 +158,13 @@ export function ReleaseNotesPrompt() {
               unstyled
               name="release-notes-choice"
               value={choice.mode}
-              disabled={!choice.ready || choice.saving}
+              disabled={!choice.ready}
+              aria-busy={choice.saving}
+              aria-disabled={choice.saving}
               aria-labelledby="release-notes-choice-title"
               className={styles.radioStack}
               onValueChange={({ value }) => {
+                if (!choice.ready || choice.saving) return;
                 const mode = RELEASE_NOTES_MODES.find((mode) => mode === value);
                 if (mode) choice.setMode(mode);
               }}
@@ -195,8 +199,11 @@ export function ReleaseNotesPrompt() {
                 href={RELEASE_NOTES_SUPPORT_URL}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label={`${t("releaseNotes.learnMore")} (${t("finishPage.opensInNewWindow", { defaultValue: "opens in new window" })})`}
+                className="inline-flex items-center gap-1"
               >
                 {t("releaseNotes.learnMore")}
+                <ExternalLink size={14} aria-hidden="true" />
               </a>
             </SetupInfo>
             <p className={styles.muted}>
@@ -221,15 +228,21 @@ export function ReleaseNotesPrompt() {
               <Button
                 type="button"
                 variant="secondary"
-                disabled={choice.saving}
-                onClick={dismiss}
+                aria-busy={choice.saving}
+                aria-disabled={choice.saving}
+                onClick={() => {
+                  if (choice.saving) return;
+                  dismiss();
+                }}
               >
                 {t("releaseNotes.prompt.dismiss")}
               </Button>
               <Button
                 type="button"
-                disabled={!choice.ready || choice.saving}
+                aria-busy={choice.saving}
+                aria-disabled={!choice.ready || choice.saving}
                 onClick={async () => {
+                  if (!choice.ready || choice.saving) return;
                   if (await choice.confirm()) dismiss();
                 }}
               >

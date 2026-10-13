@@ -25,7 +25,7 @@ export function AppLifecycleSettings() {
         if (active && currentRequest === requestId) setSettings(value);
       } catch (error) {
         console.error(
-          "[Settings:pwa] Lifecycle capability query failed",
+          "[Settings:pwa] Lifecycle capability query failed status message",
           error,
         );
         if (active && currentRequest === requestId) setSettings(null);
@@ -46,7 +46,7 @@ export function AppLifecycleSettings() {
       await rpc.setBoolPref(KEEP_WEB_APPS_RUNNING_PREF, value);
       setSettings(await rpc.getWebAppLifecycleSettings());
     } catch (error) {
-      console.error("[Settings:pwa] Lifecycle setting save failed", error);
+      console.error("[Settings:pwa] Lifecycle setting save failed status message", error);
       setSaveError(true);
     } finally {
       setSaving(false);
@@ -73,8 +73,12 @@ export function AppLifecycleSettings() {
           id="keep-web-apps-running"
           aria-describedby="keep-web-apps-running-description"
           checked={settings.keepRunningAfterBrowserQuit}
-          disabled={saving}
-          onChange={(event) => void changeKeepRunning(event.target.checked)}
+          aria-disabled={saving}
+          aria-busy={saving}
+          onChange={(event) => {
+            if (saving) return;
+            void changeKeepRunning(event.target.checked);
+          }}
         />
       </div>
       {saveError ? <p role="alert">{t("ui.saveError")}</p> : null}

@@ -19,7 +19,11 @@ function NewTabContent() {
       <div className="relative w-full min-h-screen">
         {components.firefoxLayout ? <FirefoxNewTabLayout /> : <DefaultLayout />}
         <div className="fixed bottom-4 right-4">
-          <SettingsButton onClick={() => setIsSettingsOpen(true)} />
+          <SettingsButton
+            isOpen={isSettingsOpen}
+            aria-pressed={isSettingsOpen}
+            onClick={() => setIsSettingsOpen(true)}
+          />
           <Settings
             isOpen={isSettingsOpen}
             onClose={() => setIsSettingsOpen(false)}

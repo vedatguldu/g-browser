@@ -41,6 +41,8 @@
       "terms": "Gebruiksvoorwaarden",
       "privacy": "Privacy Beleid"
     },
-    "trademark": "Floorp is een handelsmerk in Japan."
+    "trademark": "Floorp is een handelsmerk in Japan.",
+    "opensExternal": "opens external link",
+    "opensInNewWindow": "opens in new window"
   }
 }

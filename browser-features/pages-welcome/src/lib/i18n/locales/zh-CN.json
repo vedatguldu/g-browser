@@ -319,7 +319,8 @@
     "getStarted": "开始使用 Floorp",
     "hint": "要进行更详细的设置，可以通过右上角菜单按钮中的选项进行自定义。",
     "resourcesLabel": "资源",
-    "defaultBrowserSuccess": "Floorp 已被设置为您的默认浏览器！"
+    "defaultBrowserSuccess": "Floorp 已被设置为您的默认浏览器！",
+    "opensInNewWindow": "opens in new window"
   },
   "whatsNew": {
     "title": "欢迎访问 Floorp {{version}}！",

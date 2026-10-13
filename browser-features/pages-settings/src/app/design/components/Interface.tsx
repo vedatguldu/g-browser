@@ -31,6 +31,7 @@ export function Interface() {
             <label
               key={option.value}
               className={styles.choice}
+              aria-selected={design === option.value}
               data-selected={design === option.value}
             >
               <span className={styles.choiceMedia}>
@@ -42,6 +43,7 @@ export function Interface() {
                   className={styles.srOnly}
                   name="design"
                   value={option.value}
+                  aria-label={option.title}
                   checked={design === option.value}
                   onChange={() => setValue("design", option.value)}
                 />

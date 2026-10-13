@@ -7,6 +7,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, ...props }, ref) => {
     return (
       <input
+        id={props.id}
+        aria-label={props["aria-label"]}
         type={type}
         className={cn(
           "flex h-10 w-full rounded-md border border-base-300/50 bg-base-100/50",

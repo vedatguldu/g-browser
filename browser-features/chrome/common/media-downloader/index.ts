@@ -19,6 +19,11 @@ export const detectedMediaItems = mediaItems;
 
 export function scanCurrentTabMedia(): void {
   try {
+    const Services = (globalThis as unknown as { Services?: { prefs?: { getBoolPref?: (p: string, d?: boolean) => boolean } } }).Services;
+    if (Services?.prefs?.getBoolPref && !Services.prefs.getBoolPref("floorp.mediadownloader.enabled", true)) {
+      setMediaItems([]);
+      return;
+    }
     const gBrowser = (globalThis as unknown as { gBrowser?: { selectedBrowser?: { contentDocument?: Document } } }).gBrowser;
     const doc = gBrowser?.selectedBrowser?.contentDocument;
     if (doc) {
@@ -74,11 +79,17 @@ export default class MediaDownloader extends NoraComponentBase {
       if (!gBrowser?.tabContainer) return;
 
       gBrowser.tabContainer.addEventListener("TabSelect", () => {
+        const Services = (globalThis as unknown as { Services?: { prefs?: { getBoolPref?: (p: string, d?: boolean) => boolean } } }).Services;
+        if (Services?.prefs?.getBoolPref && !Services.prefs.getBoolPref("floorp.mediadownloader.auto_scan", true)) return;
         scanCurrentTabMedia();
       });
 
       // Periodic check while page media might be lazy-loaded
-      setTimeout(() => scanCurrentTabMedia(), 1500);
+      setTimeout(() => {
+        const Services = (globalThis as unknown as { Services?: { prefs?: { getBoolPref?: (p: string, d?: boolean) => boolean } } }).Services;
+        if (Services?.prefs?.getBoolPref && !Services.prefs.getBoolPref("floorp.mediadownloader.auto_scan", true)) return;
+        scanCurrentTabMedia();
+      }, 1500);
     } catch {
       // Safe fallback
     }

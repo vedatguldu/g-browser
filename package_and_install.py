@@ -82,6 +82,11 @@ pref("privacy.query_stripping.enabled", true);
 pref("privacy.query_stripping.strip_list", "__hsfp __hssc __hstc __s _hsenc _openstat dclid fbclid gbraid gclid hsCtsTracking igshid mc_eid ml_subscriber mkt_tok msclkid oft_c oft_ck oft_d oft_id oft_ids oft_k oft_lk oft_sk oly_anon_id oly_enc_id rb_clickid s_cid twclid vero_conv vero_id wbraid wickedid yclid");
 pref("floorp.adshield.enabled", true);
 pref("floorp.mediadownloader.enabled", true);
+pref("floorp.mediadownloader.auto_scan", true);
+pref("floorp.mediadownloader.detect.video", true);
+pref("floorp.mediadownloader.detect.audio", true);
+pref("floorp.mediadownloader.detect.stream", true);
+pref("floorp.mediadownloader.notify.detected", true);
 ''')
 
 print("[2] Compiling uninstall.exe from tools/native/uninstall.cs...")

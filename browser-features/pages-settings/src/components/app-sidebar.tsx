@@ -6,6 +6,7 @@ import {
   Briefcase,
   Command,
   Cpu,
+  Download,
   Gauge,
   Grip,
   House,
@@ -16,6 +17,7 @@ import {
   PencilRuler,
   RefreshCw,
   Settings,
+  ShieldCheck,
   UserRoundPen,
 } from "lucide-react";
 import { NavHeader } from "@/components/nav-header.tsx";
@@ -120,6 +122,16 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       title: t("pages.performance"),
       url: "/features/performance",
       icon: Gauge,
+    },
+    {
+      title: t("pages.privacySecurity", { defaultValue: "Privacy & Security" }),
+      url: "/features/privacy",
+      icon: ShieldCheck,
+    },
+    {
+      title: t("pages.mediaDownloader", { defaultValue: "Media Downloader" }),
+      url: "/features/downloader",
+      icon: Download,
     },
     {
       title: t("pages.profileAndAccount"),

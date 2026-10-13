@@ -46,7 +46,9 @@
       "resultCount": "{{count}} results found for \"{{query}}\""
     },
     "contextMenu": "Context Menus",
-    "commandPalette": "Command Palette"
+    "commandPalette": "Command Palette",
+    "privacySecurity": "Confidentialité et sécurité",
+    "mediaDownloader": "Téléchargeur de médias"
   },
   "home": {
     "welcome": "Bienvenue, {{name}}👋",
@@ -1066,5 +1068,67 @@
       "errorReserved": "This prefix is reserved and cannot be used.",
       "errorWhitespace": "The prefix cannot contain spaces or other whitespace."
     }
+  },
+  "navigation": {
+    "privacy": "Confidentialité et sécurité",
+    "downloader": "Téléchargeur de médias"
+  },
+  "privacy": {
+    "pageTitle": "Privacy, Security & Network Protection",
+    "pageDescription": "Configure built-in AdShield blocker, DNS-over-HTTPS (DoH), Encrypted Client Hello (ECH), and advanced tracking protection.",
+    "adshield": {
+      "title": "Built-in Ad & Tracker Shield (AdShield)",
+      "description": "Provides native ad, tracker, and privacy protection operating directly within the browser engine without requiring third-party extensions.",
+      "masterEnable": "Enable AdShield Protection",
+      "masterEnableDesc": "Cleans banners, video pre-roll ads, and intrusive popups at the DOM level across webpages.",
+      "cookieIsolation": "Total Cookie Protection",
+      "cookieIsolationDesc": "Creates a separate cookie jar for each website to prevent ad networks from tracking you across domains.",
+      "queryStripping": "URL Tracking Parameter Stripping",
+      "queryStrippingDesc": "Automatically strips surveillance tokens (fbclid, gclid, utm_*, etc.) from URL links in the address bar.",
+      "fingerprintProtection": "Fingerprinting & Font Analysis Protection",
+      "fingerprintProtectionDesc": "Blocks scripts attempting to profile your unique hardware configuration and installed fonts.",
+      "cryptomining": "Cryptomining Protection",
+      "cryptominingDesc": "Blocks unauthorized background scripts that consume your CPU for cryptocurrency mining."
+    },
+    "dns": {
+      "title": "Secure DNS (DoH) & Network Acceleration",
+      "description": "Encrypts your DNS queries to protect them from ISP and network surveillance, bypassing censorship and DNS poisoning.",
+      "mode": "Secure DNS Operating Mode",
+      "modeOff": "Off (Standard System DNS)",
+      "modeOffDesc": "Uses your operating system's default network DNS server.",
+      "modeFirst": "DoH Preferred (Recommended)",
+      "modeFirstDesc": "Uses encrypted DNS over HTTPS first, with seamless fallback to standard DNS if unreachable.",
+      "modeExclusive": "Strict DoH Only",
+      "modeExclusiveDesc": "Mandates encrypted DNS for all requests; connections fail if the DoH server is unreachable.",
+      "provider": "Secure DNS Provider",
+      "customProvider": "Custom DoH Server (URL)",
+      "customProviderDesc": "Enter your custom RFC 8484 compliant DoH resolver endpoint.",
+      "echTitle": "Encrypted Client Hello (ECH)",
+      "echDesc": "Encrypts the Server Name Indication (SNI) during TLS handshakes to conceal visited domain names from eavesdroppers and ISPs.",
+      "http3Title": "HTTP/3 & QUIC Protocol Support",
+      "http3Desc": "Uses the modern UDP-based HTTP/3 protocol to minimize page load latencies and packet-loss delays."
+    }
+  },
+  "downloader": {
+    "pageTitle": "Media & Video Downloader",
+    "pageDescription": "Detect and download video, audio, and live streaming media directly from web pages to your local device.",
+    "title": "Built-in Media & Video Downloader",
+    "description": "Natively detects video, audio, and streaming media from visited web pages. Save media directly to your system without third-party extensions or ad-ridden websites.",
+    "masterEnable": "Enable Media Downloader",
+    "masterEnableDesc": "Displays the download button in the address bar and lists detected media items.",
+    "autoScan": "Automatic Media Scanning",
+    "autoScanDesc": "Silently scans for media resources in the background when pages load and tabs change.",
+    "badgeCount": "Address Bar Count Badge",
+    "badgeCountDesc": "Displays a numeric counter badge on the address bar icon when downloadable media is detected.",
+    "typesTitle": "Detectable Media Categories",
+    "typesDesc": "Choose which types of media Floorp should capture. All supported items can be downloaded directly to your native Downloads folder.",
+    "detectVideo": "Video Files (MP4, WebM, MKV, M4V)",
+    "detectVideoDesc": "Detects HTML5 video elements and direct video links.",
+    "detectAudio": "Audio Files (MP3, WAV, OGG, FLAC, AAC)",
+    "detectAudioDesc": "Detects audio players, podcast files, and direct audio links.",
+    "detectStream": "HLS & Live Streams (M3U8)",
+    "detectStreamDesc": "Captures HLS playlist streams with options to copy stream URLs or save locally.",
+    "privacyNoticeTitle": "100% Local & Privacy-Preserving Architecture",
+    "privacyNoticeText": "Floorp Media Downloader performs all detection and downloading directly on your device via Gecko's native download service (Downloads.sys.mjs). No URLs or media data are ever sent to remote servers."
   }
 }

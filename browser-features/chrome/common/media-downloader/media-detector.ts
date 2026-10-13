@@ -13,13 +13,32 @@ export interface MediaItem {
 
 const MEDIA_EXTENSIONS = /\.(mp4|webm|mkv|m4v|ogv|m3u8|mp3|wav|ogg|m4a|aac|flac)(\?.*)?$/i;
 
+function getBoolPrefSafe(pref: string, defVal = true): boolean {
+  try {
+    const Services = (globalThis as unknown as { Services?: { prefs?: { getBoolPref?: (p: string, d?: boolean) => boolean } } }).Services;
+    if (Services?.prefs?.getBoolPref) {
+      return Services.prefs.getBoolPref(pref, defVal);
+    }
+  } catch {
+    // fallback
+  }
+  return defVal;
+}
+
 export function extractMediaFromDocument(doc: Document | null): MediaItem[] {
   if (!doc) return [];
   const items: MediaItem[] = [];
   const seenUrls = new Set<string>();
 
+  const detectVideo = getBoolPrefSafe("floorp.mediadownloader.detect.video", true);
+  const detectAudio = getBoolPrefSafe("floorp.mediadownloader.detect.audio", true);
+  const detectStream = getBoolPrefSafe("floorp.mediadownloader.detect.stream", true);
+
   const addItem = (url: string, type: "video" | "audio" | "stream", label?: string) => {
     if (!url || url.startsWith("blob:") || url.startsWith("javascript:") || seenUrls.has(url)) return;
+    if (type === "video" && !detectVideo) return;
+    if (type === "audio" && !detectAudio) return;
+    if (type === "stream" && !detectStream) return;
     seenUrls.add(url);
 
     let format = "MP4";

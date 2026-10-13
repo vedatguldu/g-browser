@@ -46,7 +46,9 @@
       "resultCount": "「{{query}}」の検索結果: {{count}} 件"
     },
     "contextMenu": "Context Menus",
-    "commandPalette": "Command Palette"
+    "commandPalette": "Command Palette",
+    "privacySecurity": "プライバシーとセキュリティ",
+    "mediaDownloader": "メディアダウンローダー"
   },
   "home": {
     "welcome": "ようこそ、 {{name}} さん 👋",
@@ -1065,5 +1067,67 @@
       "extension": "Extension",
       "unknown": "Other"
     }
+  },
+  "navigation": {
+    "privacy": "プライバシーとセキュリティ",
+    "downloader": "メディアダウンローダー"
+  },
+  "privacy": {
+    "pageTitle": "プライバシー、セキュリティおよびネットワーク保護",
+    "pageDescription": "内蔵AdShield広告ブロッカー、DNS-over-HTTPS (DoH)、暗号化クライアントHello (ECH)、高度なトラッキング防止を設定します。",
+    "adshield": {
+      "title": "内蔵広告およびトラッカーシールド (AdShield)",
+      "description": "外部拡張機能を必要とせず、ブラウザエンジン内で直接動作するネイティブな広告・トラッカー防止およびプライバシー保護機能を提供します。",
+      "masterEnable": "AdShieldシールドを有効にする",
+      "masterEnableDesc": "Webページ上のバナー広告、プレロール動画広告、ポップアップをDOMレベルで除去します。",
+      "cookieIsolation": "Cookie完全分離 (Total Cookie Protection)",
+      "cookieIsolationDesc": "Webサイトごとに独立したCookieコンテナを作成し、広告ネットワークによるクロスサイトトラッキングを防ぎます。",
+      "queryStripping": "URLトラッキングパラメータ除去",
+      "queryStrippingDesc": "アドレスバーのリンクから追跡パラメータ (fbclid, gclid, utm_* など) を自動的に除去します。",
+      "fingerprintProtection": "フィンガープリントおよびフォント分析保護",
+      "fingerprintProtectionDesc": "デバイス構成やフォント情報から端末を特定しようとするスクリプトをブロックします。",
+      "cryptomining": "暗号通貨マイニング防止",
+      "cryptominingDesc": "CPUリソースを無断で使用するバックグラウンドマイニングスクリプトを遮断します。"
+    },
+    "dns": {
+      "title": "セキュアDNS (DoH) およびネットワークアクセラレーション",
+      "description": "DNSクエリを暗号化してプロバイダやネットワークによる監視を防ぎ、検閲を回避します。",
+      "mode": "セキュアDNS動作モード",
+      "modeOff": "オフ (標準システムDNS)",
+      "modeOffDesc": "システムのデフォルトDNSサーバーを使用します。",
+      "modeFirst": "DoH優先 (推奨)",
+      "modeFirstDesc": "暗号化されたHTTPS経由のDNSを優先し、応答がない場合は安全にシステムDNSにフォールバックします。",
+      "modeExclusive": "DoHのみ (厳格)",
+      "modeExclusiveDesc": "すべてのDNSクエリで暗号化を必須とします。",
+      "provider": "セキュアDNSプロバイダー",
+      "customProvider": "カスタムDoHサーバー (URL)",
+      "customProviderDesc": "RFC 8484準拠のカスタムDoHエンドポイントを入力します。",
+      "echTitle": "暗号化クライアントHello (ECH)",
+      "echDesc": "TLSハンドシェイク中のServer Name Indication (SNI) を暗号化し、訪問先のドメイン名を秘匿します。",
+      "http3Title": "HTTP/3 & QUICプロトコルサポート",
+      "http3Desc": "高速なUDPベースのHTTP/3プロトコルを使用してページの読み込み遅延を削減します。"
+    }
+  },
+  "downloader": {
+    "pageTitle": "メディア＆動画ダウンローダー",
+    "pageDescription": "Webページ内の動画、音声、ライブストリーミングを検出し、ローカル端末に直接ダウンロードします。",
+    "title": "内蔵メディア＆動画ダウンローダー",
+    "description": "閲覧中のWebページからメディアを自動検出し、外部拡張機能なしで安全に保存します。",
+    "masterEnable": "メディアダウンローダーを有効にする",
+    "masterEnableDesc": "アドレスバーにダウンロードボタンを表示し、検出されたメディアをリスト表示します。",
+    "autoScan": "自動メディアスキャン",
+    "autoScanDesc": "ページ読み込み時およびタブ切り替え時にバックグラウンドでメディアをスキャンします。",
+    "badgeCount": "アドレスバー検出バッジ",
+    "badgeCountDesc": "ダウンロード可能なメディアが検出された際、アイコン上に件数を表示します。",
+    "typesTitle": "検出するメディアの種類",
+    "typesDesc": "ブラウザが検出するメディアの種類を選択します。直接ダウンロードフォルダに保存可能です。",
+    "detectVideo": "動画ファイル (MP4, WebM, MKV, M4V)",
+    "detectVideoDesc": "HTML5動画タグおよび直接リンクを検出します。",
+    "detectAudio": "音声ファイル (MP3, WAV, OGG, FLAC, AAC)",
+    "detectAudioDesc": "オーディオプレーヤーやポッドキャスト音声を検出します。",
+    "detectStream": "HLSおよびライブストリーム (M3U8)",
+    "detectStreamDesc": "ストリーミング配信のプレイリストを検出します。",
+    "privacyNoticeTitle": "完全ローカル＆プライバシー重視の設計",
+    "privacyNoticeText": "メディアの検出およびダウンロードはすべてGeckoのネイティブ機能で行われます。外部サーバーにデータは送信されません。"
   }
 }

@@ -46,7 +46,9 @@
       "results": "Arama Sonuçları",
       "resultCount": "\"{{query}}\" için {{count}} sonuç bulundu"
     },
-    "commandPalette": "Komut Paleti"
+    "commandPalette": "Komut Paleti",
+    "privacySecurity": "Gizlilik ve Güvenlik",
+    "mediaDownloader": "Ortam İndirici"
   },
   "home": {
     "welcome": "Hoş Geldin {{name}}👋",
@@ -1065,5 +1067,67 @@
       "errorReserved": "Bu önek ayrılmıştır ve kullanılamaz.",
       "errorWhitespace": "Önek boşluk veya diğer beyaz boşluk karakterleri içeremez."
     }
+  },
+  "navigation": {
+    "privacy": "Gizlilik ve Güvenlik",
+    "downloader": "Ortam İndirici"
+  },
+  "privacy": {
+    "pageTitle": "Gizlilik, Güvenlik ve Ağ Koruması",
+    "pageDescription": "Dahili AdShield reklam kalkanı, DNS-over-HTTPS (DoH), şifreli istemci selamlama (ECH) ve gelişmiş izleme koruması ayarlarını yapılandırın.",
+    "adshield": {
+      "title": "Dahili Reklam ve İzleyici Kalkanı (AdShield)",
+      "description": "Herhangi bir harici eklentiye ihtiyaç duymadan, doğrudan tarayıcı çekirdeğinde çalışan yerel reklam, izleyici ve gizlilik koruması sağlar.",
+      "masterEnable": "AdShield Kalkanını Etkinleştir",
+      "masterEnableDesc": "Web sayfalarındaki bannerları, video öncesi reklamları ve rahatsız edici bildirimleri DOM düzeyinde temizler.",
+      "cookieIsolation": "Toplam Çerez İzolasyonu (Total Cookie Protection)",
+      "cookieIsolationDesc": "Her web sitesi için ayrı bir çerez kavanozu oluşturur; reklam ağlarının siteler arasında sizi izlemesini engeller.",
+      "queryStripping": "URL İzleme Parametresi Temizleme",
+      "queryStrippingDesc": "Adres çubuğundaki bağlantılardan gözetleme kodlarını (fbclid, gclid, utm_* vb.) otomatik temizler.",
+      "fingerprintProtection": "Parmak İzi ve Font Analiz Koruması",
+      "fingerprintProtectionDesc": "Cihaz donanımınız ve sistem fontlarınız üzerinden kimliğinizi tespit etmeye çalışan scriptleri durdurur.",
+      "cryptomining": "Kripto Para Madenciliği Koruması",
+      "cryptominingDesc": "İzniniz olmadan işlemcinizi kripto madencilik amacıyla kullanan arka plan scriptlerini bloke eder."
+    },
+    "dns": {
+      "title": "Güvenli DNS (DoH) ve Ağ Hızlandırma",
+      "description": "DNS sorgularınızı şifreleyerek internet servis sağlayıcınız veya ağ yöneticiniz tarafından izlenmesini engeller, sansür ve engellemeleri aşar.",
+      "mode": "Güvenli DNS Çalışma Modu",
+      "modeOff": "Kapalı (Standart Sistem DNS)",
+      "modeOffDesc": "Sisteminizin varsayılan ağ DNS sunucusunu kullanır.",
+      "modeFirst": "DoH Tercihli (Önerilen)",
+      "modeFirstDesc": "Önce şifreli HTTPS üzerinden DNS kullanır, sunucu yanıt vermezse standart DNS'e geçer.",
+      "modeExclusive": "Yalnızca DoH (Katı Güvenlik)",
+      "modeExclusiveDesc": "Tüm DNS sorgularını mutlaka şifreli gönderir; DoH sunucusu çalışmazsa bağlantı kesilir.",
+      "provider": "Güvenli DNS Sağlayıcısı",
+      "customProvider": "Özel DoH Sunucusu (URL)",
+      "customProviderDesc": "Kendi RFC 8484 uyumlu DoH bitiş noktanızı girin.",
+      "echTitle": "Şifreli İstemci Selamlama (ECH - Encrypted Client Hello)",
+      "echDesc": "TLS el sıkışması sırasında ziyaret ettiğiniz web sitesinin alan adını (SNI) üçüncü şahıslardan ve internet servis sağlayıcılarından tamamen şifreler.",
+      "http3Title": "HTTP/3 ve QUIC Protokol Desteği",
+      "http3Desc": "UDP tabanlı yeni nesil yüksek hızlı HTTP/3 protokolünü kullanarak sayfa yükleme gecikmelerini en aza indirir."
+    }
+  },
+  "downloader": {
+    "pageTitle": "Ortam ve Video İndirici",
+    "pageDescription": "Ziyaret ettiğiniz sayfalardaki video, ses ve canlı yayın ortamlarını algılayıp doğrudan cihazınıza indirin.",
+    "title": "Dahili Ortam ve Video İndirici",
+    "description": "Ziyaret ettiğiniz web sayfalarındaki video, ses ve canlı yayın akışlarını tarayıcının yerel çekirdeği ile tespit eder. Harici uzantılara, reklamlı üçüncü parti indirme sitelerine veya ek yazılımlara gerek kalmadan doğrudan güvenli indirme sağlar.",
+    "masterEnable": "Ortam İndiriciyi Etkinleştir",
+    "masterEnableDesc": "Adres çubuğunda indirme butonunu görüntüler ve sayfalardaki medya içeriklerini listeler.",
+    "autoScan": "Otomatik Medya Taraması",
+    "autoScanDesc": "Sayfa yüklendiğinde ve sekmeler arasında geçiş yapıldığında arka planda ortam içeriklerini sessizce tara.",
+    "badgeCount": "Adres Çubuğu Sayaç Rozeti",
+    "badgeCountDesc": "Sayfada indirilebilir video veya ses içeriği tespit edildiğinde simge üzerinde bulunan dosya adedini göster.",
+    "typesTitle": "Algılanacak Medya Türleri",
+    "typesDesc": "Tarayıcının hangi ortam dosyalarını yakalayacağını seçin. Seçilen tüm formatlar tek tıkla doğrudan işletim sisteminin yerel indirme klasörüne kaydedilebilir.",
+    "detectVideo": "Video Dosyaları (MP4, WebM, MKV, M4V)",
+    "detectVideoDesc": "HTML5 video etiketlerini ve doğrudan video bağlantılarını tespit eder.",
+    "detectAudio": "Ses Dosyaları (MP3, WAV, OGG, FLAC, AAC)",
+    "detectAudioDesc": "Müzik çalarları, podcast ses dosyalarını ve ses bağlantılarını tespit eder.",
+    "detectStream": "HLS ve Canlı Yayın Akışları (M3U8)",
+    "detectStreamDesc": "Canlı yayın ve parçalı akış oynatma listelerini yakalar, doğrudan akış adresini kopyalama veya kaydetme imkanı sunar.",
+    "privacyNoticeTitle": "Tamamen Yerel ve Güvenli Çalışma Mantığı",
+    "privacyNoticeText": "Floorp Ortam İndirici, tarama ve indirme işlemlerini doğrudan Gecko yerel indirme motoru (Downloads.sys.mjs) ile cihazınızda gerçekleştirir. Hiçbir URL veya ortam verisi harici sunuculara veya üçüncü parti servislere iletilmez."
   }
 }

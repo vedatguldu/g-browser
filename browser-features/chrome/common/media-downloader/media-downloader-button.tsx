@@ -24,35 +24,55 @@ export function MediaDownloaderPageActionButton() {
     );
   });
 
+  const isEnabled = () => {
+    try {
+      const Services = (globalThis as unknown as { Services?: { prefs?: { getBoolPref?: (p: string, d?: boolean) => boolean } } }).Services;
+      return Services?.prefs?.getBoolPref?.("floorp.mediadownloader.enabled", true) ?? true;
+    } catch {
+      return true;
+    }
+  };
+
+  const showBadge = () => {
+    try {
+      const Services = (globalThis as unknown as { Services?: { prefs?: { getBoolPref?: (p: string, d?: boolean) => boolean } } }).Services;
+      return Services?.prefs?.getBoolPref?.("floorp.mediadownloader.notify.detected", true) ?? true;
+    } catch {
+      return true;
+    }
+  };
+
   const count = () => detectedMediaItems().length;
   const tooltipText = () =>
     count() > 0 ? `${baseTooltip()} (${count()} medya bulundu)` : baseTooltip();
 
   return (
-    <xul:hbox
-      id="MediaDownloaderPageAction"
-      class="urlbar-page-action"
-      style={{
-        "list-style-image": `url("${downloadIcon}")`,
-      }}
-      data-found={count() > 0 ? "true" : "false"}
-      title={tooltipText()}
-      role="button"
-      tabindex="0"
-      aria-label={tooltipText()}
-      popup="media-downloader-panel"
-    >
-      <xul:image
-        id="MediaDownloaderPageAction-image"
-        class="urlbar-icon"
-        role="presentation"
-        aria-hidden="true"
-      />
-      <Show when={count() > 0}>
-        <span class="media-downloader-badge" aria-hidden="true">
-          {count()}
-        </span>
-      </Show>
-    </xul:hbox>
+    <Show when={isEnabled()}>
+      <xul:hbox
+        id="MediaDownloaderPageAction"
+        class="urlbar-page-action"
+        style={{
+          "list-style-image": `url("${downloadIcon}")`,
+        }}
+        data-found={count() > 0 ? "true" : "false"}
+        title={tooltipText()}
+        role="button"
+        tabindex="0"
+        aria-label={tooltipText()}
+        popup="media-downloader-panel"
+      >
+        <xul:image
+          id="MediaDownloaderPageAction-image"
+          class="urlbar-icon"
+          role="presentation"
+          aria-hidden="true"
+        />
+        <Show when={showBadge() && count() > 0}>
+          <span class="media-downloader-badge" aria-hidden="true">
+            {count()}
+          </span>
+        </Show>
+      </xul:hbox>
+    </Show>
   );
 }

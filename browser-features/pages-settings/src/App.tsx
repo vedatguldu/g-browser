@@ -30,6 +30,8 @@ const KeyboardShortcut = lazy(() => import("@/app/keyboard-shortcut/page.tsx"));
 const ContextMenuSettings = lazy(() => import("@/app/context-menu/page.tsx"));
 const Updates = lazy(() => import("@/app/updates/page.tsx"));
 const Performance = lazy(() => import("@/app/performance/page.tsx"));
+const Privacy = lazy(() => import("@/app/privacy/page.tsx"));
+const Downloader = lazy(() => import("@/app/downloader/page.tsx"));
 const ChromeExtrasSettings = lazy(() =>
   import("@/app/design/components/ChromeExtrasSettings.tsx").then((module) => ({
     default: module.ChromeExtrasSettings,
@@ -83,6 +85,10 @@ function SettingsApp() {
       pageTitle = t("navigation.contextMenu", { defaultValue: "Context Menu" });
     } else if (path.includes("performance")) {
       pageTitle = t("navigation.performance", { defaultValue: "Performance" });
+    } else if (path.includes("privacy")) {
+      pageTitle = t("navigation.privacy", { defaultValue: "Privacy & Security" });
+    } else if (path.includes("downloader")) {
+      pageTitle = t("navigation.downloader", { defaultValue: "Media Downloader" });
     } else if (path.includes("about")) {
       pageTitle = t("navigation.about", { defaultValue: "About" });
     } else if (path.includes("updates")) {
@@ -173,6 +179,14 @@ function SettingsApp() {
                   <Route
                     path="/features/performance"
                     element={<Performance />}
+                  />
+                  <Route
+                    path="/features/privacy"
+                    element={<Privacy />}
+                  />
+                  <Route
+                    path="/features/downloader"
+                    element={<Downloader />}
                   />
                   <Route path="/about/browser" element={<About />} />
                   <Route path="/about/updates" element={<Updates />} />

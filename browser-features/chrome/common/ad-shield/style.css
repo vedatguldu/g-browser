@@ -1,0 +1,127 @@
+/* -*- indent-tabs-mode: nil; js-indent-level: 2 -*-
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+#AdShieldPageAction {
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#AdShieldPageAction:hover {
+  background-color: var(--button-hover-bgcolor, rgba(0, 0, 0, 0.08));
+}
+
+#AdShieldPageAction:focus-visible {
+  outline: 2px solid var(--floorp-focus-ring-color, #0061e0) !important;
+  outline-offset: 1px !important;
+}
+
+#AdShieldPageAction[data-active="true"] {
+  fill: #10b981 !important;
+  color: #10b981 !important;
+}
+
+#AdShieldPageAction[data-active="false"] {
+  fill: #9ca3af !important;
+  color: #9ca3af !important;
+  opacity: 0.7;
+}
+
+#adshield-panel {
+  --panel-width: 320px;
+}
+
+.adshield-box {
+  width: var(--panel-width);
+  padding: 12px;
+  background-color: var(--arrowpanel-background, #ffffff);
+  color: var(--arrowpanel-color, #1e293b);
+}
+
+.adshield-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.adshield-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--arrowpanel-color, #1e293b);
+}
+
+.adshield-status-badge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 12px;
+  background-color: rgba(16, 185, 129, 0.15);
+  color: #059669;
+}
+
+.adshield-status-badge[data-active="false"] {
+  background-color: rgba(156, 163, 175, 0.15);
+  color: #6b7280;
+}
+
+.adshield-separator {
+  margin: 8px 0;
+  border-bottom: 1px solid var(--panel-separator-color, rgba(0, 0, 0, 0.1));
+}
+
+.adshield-description {
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--text-color-deemphasized, #64748b);
+  margin-bottom: 12px;
+}
+
+.adshield-features-list {
+  font-size: 12px;
+  line-height: 1.6;
+  margin-bottom: 12px;
+  padding-left: 4px;
+}
+
+.adshield-feature-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--arrowpanel-color, #334155);
+}
+
+.adshield-toggle-btn {
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  background-color: var(--button-primary-bgcolor, #2563eb);
+  color: #ffffff;
+  border: none;
+  transition: background-color 0.15s ease;
+}
+
+.adshield-toggle-btn:hover {
+  background-color: var(--button-primary-hover-bgcolor, #1d4ed8);
+}
+
+.adshield-toggle-btn:focus-visible {
+  outline: 2px solid var(--floorp-focus-ring-color, #0061e0) !important;
+  outline-offset: 1px !important;
+}
+
+.adshield-toggle-btn[data-active="false"] {
+  background-color: #64748b;
+}
+
+.adshield-toggle-btn[data-active="false"]:hover {
+  background-color: #475569;
+}

@@ -678,5 +678,9 @@
     "movedLeft": "Sidebar moved to left side",
     "moveToLeft": "Move sidebar to left",
     "moveToRight": "Move sidebar to right"
-  }
+  },
+  "adshield-title": "AdShield Privacy Guard",
+  "adshield-tooltip": "AdShield: Ad and Tracker Blocker",
+  "media-downloader-title": "Downloadable Media",
+  "media-downloader-tooltip": "Media and Video Downloader"
 }

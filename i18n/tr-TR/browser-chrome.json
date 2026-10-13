@@ -679,5 +679,9 @@
       "reservedHistorySearch": "Geçmişte Ara"
     }
   },
-  "commandPaletteReadings": {}
+  "commandPaletteReadings": {},
+  "adshield-title": "AdShield Gizlilik Kalkanı",
+  "adshield-tooltip": "AdShield: Reklam ve İzleyici Kalkanı",
+  "media-downloader-title": "İndirilebilir Medyalar",
+  "media-downloader-tooltip": "Medya ve Video İndirici"
 }

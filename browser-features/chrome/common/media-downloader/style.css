@@ -1,0 +1,195 @@
+/* -*- indent-tabs-mode: nil; js-indent-level: 2 -*-
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+#MediaDownloaderPageAction {
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+#MediaDownloaderPageAction:hover {
+  background-color: var(--button-hover-bgcolor, rgba(0, 0, 0, 0.08));
+}
+
+#MediaDownloaderPageAction:focus-visible {
+  outline: 2px solid var(--floorp-focus-ring-color, #0061e0) !important;
+  outline-offset: 1px !important;
+}
+
+#MediaDownloaderPageAction[data-found="true"] {
+  fill: #2563eb !important;
+  color: #2563eb !important;
+}
+
+#MediaDownloaderPageAction[data-found="false"] {
+  opacity: 0.6;
+}
+
+.media-downloader-badge {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  background-color: #2563eb;
+  color: #ffffff;
+  font-size: 9px;
+  font-weight: 700;
+  border-radius: 8px;
+  padding: 0 4px;
+  min-width: 14px;
+  height: 14px;
+  line-height: 14px;
+  text-align: center;
+  pointer-events: none;
+}
+
+#media-downloader-panel {
+  --panel-width: 380px;
+}
+
+.media-panel-box {
+  width: var(--panel-width);
+  max-height: 480px;
+  padding: 12px;
+  background-color: var(--arrowpanel-background, #ffffff);
+  color: var(--arrowpanel-color, #1e293b);
+  display: flex;
+  flex-direction: column;
+}
+
+.media-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.media-panel-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--arrowpanel-color, #1e293b);
+}
+
+.media-panel-count {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 12px;
+  background-color: rgba(37, 99, 235, 0.12);
+  color: #2563eb;
+}
+
+.media-panel-separator {
+  margin: 8px 0;
+  border-bottom: 1px solid var(--panel-separator-color, rgba(0, 0, 0, 0.1));
+}
+
+.media-panel-list {
+  max-height: 340px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.media-panel-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px;
+  border-radius: 6px;
+  background-color: var(--button-hover-bgcolor, rgba(0, 0, 0, 0.04));
+  border: 1px solid var(--panel-separator-color, rgba(0, 0, 0, 0.06));
+}
+
+.media-item-info {
+  display: flex;
+  flex-direction: column;
+  max-width: 220px;
+  overflow: hidden;
+}
+
+.media-item-title {
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--arrowpanel-color, #1e293b);
+}
+
+.media-item-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  color: var(--text-color-deemphasized, #64748b);
+  margin-top: 2px;
+}
+
+.media-format-pill {
+  font-weight: 700;
+  padding: 1px 4px;
+  border-radius: 4px;
+  background-color: rgba(37, 99, 235, 0.1);
+  color: #2563eb;
+}
+
+.media-item-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.media-btn-download {
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  background-color: #2563eb;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.media-btn-download:hover {
+  background-color: #1d4ed8;
+}
+
+.media-btn-download:focus-visible {
+  outline: 2px solid var(--floorp-focus-ring-color, #0061e0) !important;
+  outline-offset: 1px !important;
+}
+
+.media-btn-copy {
+  padding: 5px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 500;
+  background-color: transparent;
+  color: var(--arrowpanel-color, #475569);
+  border: 1px solid var(--panel-separator-color, rgba(0, 0, 0, 0.2));
+  cursor: pointer;
+}
+
+.media-btn-copy:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.media-btn-copy:focus-visible {
+  outline: 2px solid var(--floorp-focus-ring-color, #0061e0) !important;
+  outline-offset: 1px !important;
+}
+
+.media-empty-state {
+  padding: 24px 12px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-color-deemphasized, #64748b);
+}

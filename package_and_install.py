@@ -48,6 +48,42 @@ src_manifest = os.path.join(DIST_DIR, "noraneko.manifest")
 if os.path.exists(src_manifest):
     shutil.copy2(src_manifest, os.path.join(DEVDIR_IN_PACKAGE, "noraneko.manifest"))
 
+print("[1.5] Syncing default preferences (DoH, Privacy, AdShield, MediaDownloader)...")
+pref_dir = os.path.join(PACKAGE_DIR, "browser", "defaults", "preferences")
+os.makedirs(pref_dir, exist_ok=True)
+with open(os.path.join(pref_dir, "zzz-floorp.js"), "w", encoding="utf-8") as f:
+    f.write('''// Crucial Floorp runtime overrides loaded last
+pref("security.allow_parent_unrestricted_js_loads", true);
+pref("security.disallow_privileged_https_script_loads", false);
+pref("nora.dev.allow_http_loader", false);
+pref("layers.gpu-process.enabled", false);
+pref("browser.newtabpage.enabled", true);
+
+// Secure DNS (DoH) & Network Acceleration
+pref("network.trr.mode", 2);
+pref("network.trr.uri", "https://cloudflare-dns.com/dns-query");
+pref("network.trr.custom_uri", "https://cloudflare-dns.com/dns-query");
+pref("network.trr.bootstrapAddress", "1.1.1.1");
+pref("network.dns.echconfig.enabled", true);
+pref("network.dns.use_https_rr_as_alpn", true);
+pref("network.http.http3.enable", true);
+pref("network.ssl_tokens_cache_enabled", true);
+pref("network.tcp.keepalive.enabled", true);
+pref("network.notify.IPv6", false);
+
+// Native Tracking Protection, Total Cookie Protection & AdShield
+pref("privacy.trackingprotection.enabled", true);
+pref("privacy.trackingprotection.pbmode.enabled", true);
+pref("privacy.trackingprotection.cryptomining.enabled", true);
+pref("privacy.trackingprotection.fingerprinting.enabled", true);
+pref("privacy.trackingprotection.socialtracking.enabled", true);
+pref("network.cookie.cookieBehavior", 5);
+pref("privacy.query_stripping.enabled", true);
+pref("privacy.query_stripping.strip_list", "__hsfp __hssc __hstc __s _hsenc _openstat dclid fbclid gbraid gclid hsCtsTracking igshid mc_eid ml_subscriber mkt_tok msclkid oft_c oft_ck oft_d oft_id oft_ids oft_k oft_lk oft_sk oly_anon_id oly_enc_id rb_clickid s_cid twclid vero_conv vero_id wbraid wickedid yclid");
+pref("floorp.adshield.enabled", true);
+pref("floorp.mediadownloader.enabled", true);
+''')
+
 print("[2] Compiling uninstall.exe from tools/native/uninstall.cs...")
 uninstall_out = os.path.join(PACKAGE_DIR, "uninstall.exe")
 csc_uninstall_cmd = [

@@ -241,6 +241,7 @@ export class NotificationCustomizer {
       warning.remove();
     }
 
+    notification.removeAttribute("aria-describedby");
     notification.removeAttribute("data-cws-customized");
   }
 
@@ -268,7 +269,7 @@ export class NotificationCustomizer {
       badge.setAttribute("value", texts.chromeBadge);
       badge.setAttribute("class", "chrome-extension-badge");
       (badge as XULElement & { style: CSSStyleDeclaration }).style.cssText =
-        "color: #4285f4; font-weight: bold; margin-inline-start: 8px; font-size: 0.9em;";
+        "color: var(--badge-color, #1a73e8); font-weight: bold; margin-inline-start: 8px; font-size: 0.9em;";
       nameElement.parentElement?.appendChild(badge);
     }
   }
@@ -283,11 +284,15 @@ export class NotificationCustomizer {
 
     const texts = this.texts();
     const warning = document!.createXULElement("description") as XULElement;
+    const warningId = "floorp-cws-compatibility-warning";
+    warning.id = warningId;
     warning.setAttribute("class", "chrome-extension-warning");
+    warning.setAttribute("role", "note");
     (warning as XULElement & { style: CSSStyleDeclaration }).style.cssText =
-      "color: #f9ab00; font-size: 1.0em; margin-top: 8px; padding: 4px 8px; background: rgba(249, 171, 0, 0.1); border-radius: 4px;";
+      "color: var(--warning-color, #9a5b00); font-size: 1.0em; margin-top: 8px; padding: 4px 8px; background: rgba(154, 91, 0, 0.1); border-radius: 4px; border: 1px solid currentColor;";
     warning.textContent = texts.compatibilityWarning;
 
     body.appendChild(warning);
+    notification.setAttribute("aria-describedby", warningId);
   }
 }

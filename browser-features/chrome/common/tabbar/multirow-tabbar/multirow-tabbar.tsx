@@ -16,6 +16,32 @@ declare const window: Window & {
   getComputedStyle(element: Element): CSSStyleDeclaration;
 };
 
+function announceA11y(text: string): void {
+  try {
+    const doc = globalThis.document;
+    if (!doc) return;
+    let announcer = doc.getElementById("floorp-a11y-live-announcer");
+    if (!announcer) {
+      announcer = doc.createElement("div");
+      announcer.id = "floorp-a11y-live-announcer";
+      announcer.setAttribute("role", "status");
+      announcer.setAttribute("aria-live", "polite");
+      announcer.setAttribute("aria-atomic", "true");
+      (announcer as HTMLElement).style.cssText =
+        "position: absolute !important; width: 1px !important; height: 1px !important; padding: 0 !important; margin: -1px !important; overflow: hidden !important; clip: rect(0, 0, 0, 0) !important; white-space: nowrap !important; border: 0 !important;";
+      (doc.body ?? doc.documentElement)?.appendChild(announcer);
+    }
+    announcer.textContent = "";
+    globalThis.setTimeout(() => {
+      if (announcer) {
+        announcer.textContent = text;
+      }
+    }, 50);
+  } catch (err) {
+    console.warn("[MultirowTabbar] announce status message failed:", err);
+  }
+}
+
 export class MultirowTabbarClass {
   private readonly pinnedTabs = new PinnedTabController(resolveTabsContainer);
   private readonly dragDropManager = new TabDragDropManager(
@@ -66,11 +92,13 @@ export class MultirowTabbarClass {
     getTabsToolbar()?.setAttribute("multibar", "true");
     this.injectCSS(arrowScrollbox);
     this.dragDropManager.install(arrowScrollbox);
+    window?.addEventListener("keydown", this.handleKeyDown, true);
     this.isEnabled = true;
   }
 
   private disableMultiRowTabs(): void {
     getTabsToolbar()?.removeAttribute("multibar");
+    window?.removeEventListener("keydown", this.handleKeyDown, true);
 
     // Remove injected style
     if (this.styleElement && this.styleElement.parentNode) {
@@ -95,12 +123,108 @@ export class MultirowTabbarClass {
         }
         this.agentSheetUri = null;
       } catch (e) {
-        console.error("Failed to unregister sheet:", e);
+        console.error("Failed to unregister sheet status message:", e);
       }
     }
 
     this.isEnabled = false;
   }
+
+  private handleKeyDown = (e: KeyboardEvent): void => {
+    if (e.key !== "ArrowDown" && e.key !== "ArrowUp") return;
+    const isMoveCommand = (e.ctrlKey || e.metaKey) && e.shiftKey;
+    if (!isMoveCommand && (e.altKey || e.ctrlKey || e.metaKey)) return;
+
+    const focused = document?.activeElement;
+    const currentTab = focused?.closest?.(".tabbrowser-tab") as HTMLElement | null;
+    if (!currentTab) return;
+
+    const tabsToolbar = getTabsToolbar();
+    if (!tabsToolbar || tabsToolbar.getAttribute("multibar") !== "true") return;
+
+    const allTabs = Array.from(
+      document.querySelectorAll<HTMLElement>("#tabbrowser-tabs .tabbrowser-tab:not([hidden])"),
+    );
+    if (allTabs.length <= 1) return;
+
+    const currentRect = currentTab.getBoundingClientRect();
+    const currentCenter = currentRect.left + currentRect.width / 2;
+
+    let bestTab: HTMLElement | null = null;
+    let bestDist = Infinity;
+
+    if (e.key === "ArrowDown") {
+      let minRowTop = Infinity;
+      const belowTabs: HTMLElement[] = [];
+      for (const tab of allTabs) {
+        const rect = tab.getBoundingClientRect();
+        if (rect.top >= currentRect.bottom - 2) {
+          if (rect.top < minRowTop) {
+            minRowTop = rect.top;
+          }
+          belowTabs.push(tab);
+        }
+      }
+      for (const tab of belowTabs) {
+        const rect = tab.getBoundingClientRect();
+        if (Math.abs(rect.top - minRowTop) <= 10) {
+          const center = rect.left + rect.width / 2;
+          const dist = Math.abs(center - currentCenter);
+          if (dist < bestDist) {
+            bestDist = dist;
+            bestTab = tab;
+          }
+        }
+      }
+    } else if (e.key === "ArrowUp") {
+      let maxRowBottom = -Infinity;
+      const aboveTabs: HTMLElement[] = [];
+      for (const tab of allTabs) {
+        const rect = tab.getBoundingClientRect();
+        if (rect.bottom <= currentRect.top + 2) {
+          if (rect.bottom > maxRowBottom) {
+            maxRowBottom = rect.bottom;
+          }
+          aboveTabs.push(tab);
+        }
+      }
+      for (const tab of aboveTabs) {
+        const rect = tab.getBoundingClientRect();
+        if (Math.abs(rect.bottom - maxRowBottom) <= 10) {
+          const center = rect.left + rect.width / 2;
+          const dist = Math.abs(center - currentCenter);
+          if (dist < bestDist) {
+            bestDist = dist;
+            bestTab = tab;
+          }
+        }
+      }
+    }
+
+    if (bestTab) {
+      e.preventDefault();
+      e.stopPropagation();
+      // deno-lint-ignore no-explicit-any
+      const gBrowser = (window as any).gBrowser;
+      if (isMoveCommand) {
+        if (gBrowser) {
+          const allTabsList = Array.from(gBrowser.tabs as HTMLElement[]);
+          const targetIndex = allTabsList.indexOf(bestTab);
+          if (targetIndex >= 0) {
+            gBrowser.moveTabTo(currentTab, targetIndex);
+            currentTab.focus();
+            const dir = e.key === "ArrowUp" ? "üst" : "alt";
+            announceA11y(`Sekme ${dir} satıra taşındı. Yeni sıra: ${targetIndex + 1}`);
+          }
+        }
+        return;
+      }
+      bestTab.focus();
+      if (gBrowser && !e.shiftKey) {
+        gBrowser.selectedTab = bestTab;
+      }
+    }
+  };
 
   private updateMaxRowsCSS(
     _arrowScrollbox: XULElement,
@@ -116,7 +240,7 @@ export class MultirowTabbarClass {
           sss.unregisterSheet(this.agentSheetUri, sss.AGENT_SHEET!);
         }
       } catch (e) {
-        console.error("Failed to unregister sheet:", e);
+        console.error("Failed to unregister sheet status message:", e);
       }
     }
 
@@ -167,7 +291,7 @@ export class MultirowTabbarClass {
         this.disableMultiRowTabs();
       } catch (e) {
         console.error(
-          "[MultirowTabbar] Failed to disable multi-row tabs during cleanup:",
+          "[MultirowTabbar] Failed to disable multi-row tabs during cleanup status message:",
           e,
         );
       }
@@ -181,7 +305,7 @@ export class MultirowTabbarClass {
           sss.unregisterSheet(this.agentSheetUri, sss.AGENT_SHEET!);
         }
       } catch (e) {
-        console.error("Failed to cleanup sheet:", e);
+        console.error("Failed to cleanup sheet status message:", e);
       }
     }
   }

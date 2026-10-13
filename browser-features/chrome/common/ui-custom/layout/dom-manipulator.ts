@@ -82,7 +82,7 @@ function mirrorRecordToTarget(
     );
   } catch (error) {
     console.warn(
-      `${DOM_LAYOUT_MANAGER_DEBUG_PREFIX} Failed to mirror listener for ${record.type}`,
+      `${DOM_LAYOUT_MANAGER_DEBUG_PREFIX} Failed to mirror listener for  status message:${record.type}`,
       error,
     );
   }
@@ -109,7 +109,7 @@ function unmirrorRecordFromTarget(
     );
   } catch (error) {
     console.warn(
-      `${DOM_LAYOUT_MANAGER_DEBUG_PREFIX} Failed to remove mirrored listener for ${record.type}`,
+      `${DOM_LAYOUT_MANAGER_DEBUG_PREFIX} Failed to remove mirrored listener for  status message:${record.type}`,
       error,
     );
   }
@@ -421,7 +421,7 @@ function handleStarButtonClick(
     }
   } catch (err) {
     console.warn(
-      `${DOM_LAYOUT_MANAGER_DEBUG_PREFIX} Failed to call bookmarkPage() for star-button`,
+      `${DOM_LAYOUT_MANAGER_DEBUG_PREFIX} Failed to call bookmarkPage() for star-button status message:`,
       err,
     );
   }
@@ -549,7 +549,7 @@ function forwardEventToNavigatorToolbox(
               forwardEventToNavigatorToolbox(commandEvent, toolbox);
             } catch (err) {
               console.warn(
-                `${DOM_LAYOUT_MANAGER_DEBUG_PREFIX} Failed to generate command event for XUL button`,
+                `${DOM_LAYOUT_MANAGER_DEBUG_PREFIX} Failed to generate command event for XUL button status message:`,
                 err,
               );
             }
@@ -571,7 +571,7 @@ function forwardEventToNavigatorToolbox(
     toolbox.dispatchEvent(clone);
   } catch (error) {
     console.warn(
-      `${DOM_LAYOUT_MANAGER_DEBUG_PREFIX} Failed to forward ${clone.type} event to navigator-toolbox`,
+      `${DOM_LAYOUT_MANAGER_DEBUG_PREFIX} Failed to forward ${clone.type} event to navigator-toolbox status message:`,
       error,
     );
   }
@@ -782,7 +782,7 @@ export function loadBookmarkURI(
     return true;
   } catch (err) {
     console.warn(
-      `${DOM_LAYOUT_MANAGER_DEBUG_PREFIX} Failed to load bookmark URI`,
+      `${DOM_LAYOUT_MANAGER_DEBUG_PREFIX} Failed to load bookmark URI status message:`,
       err,
     );
     return false;
@@ -904,7 +904,7 @@ export class DOMLayoutManager {
         }
       } catch (error: unknown) {
         console.error(
-          `${DOMLayoutManager.DEBUG_PREFIX} Error in navbar position setup:`,
+          `${DOMLayoutManager.DEBUG_PREFIX} Error in navbar position setup status message:`,
           error,
         );
       }
@@ -975,7 +975,7 @@ export class DOMLayoutManager {
       urlbar.removeAttribute("popover");
     } catch (error) {
       console.error(
-        `${DOMLayoutManager.DEBUG_PREFIX} Failed to remove popover attribute from urlbar`,
+        `${DOMLayoutManager.DEBUG_PREFIX} Failed to remove popover attribute from urlbar status message:`,
         error,
       );
     }
@@ -1056,7 +1056,7 @@ export class DOMLayoutManager {
         }
       } catch (error: unknown) {
         console.warn(
-          `${DOMLayoutManager.DEBUG_PREFIX} Failed to hide floorp tabbar manage container`,
+          `${DOMLayoutManager.DEBUG_PREFIX} Failed to hide floorp tabbar manage container status message:`,
           error,
         );
       }
@@ -1065,7 +1065,7 @@ export class DOMLayoutManager {
       this.scheduleFixUrlbarInputContainer();
     } catch (error: unknown) {
       console.error(
-        `${DOMLayoutManager.DEBUG_PREFIX} Error in moveNavbarToBottom:`,
+        `${DOMLayoutManager.DEBUG_PREFIX} Error in moveNavbarToBottom status message:`,
         error,
       );
     }
@@ -1112,7 +1112,7 @@ export class DOMLayoutManager {
       }
     } catch (error: unknown) {
       console.warn(
-        `${DOMLayoutManager.DEBUG_PREFIX} Failed to restore floorp tabbar manage container style`,
+        `${DOMLayoutManager.DEBUG_PREFIX} Failed to restore floorp tabbar manage container style status message:`,
         error,
       );
     } finally {
@@ -1167,7 +1167,7 @@ export class DOMLayoutManager {
               win.gSync.toggleAccountPanel(element, event);
             } catch (error) {
               console.warn(
-                `${DOM_LAYOUT_MANAGER_DEBUG_PREFIX} Fallback gSync.toggleAccountPanel failed`,
+                `${DOM_LAYOUT_MANAGER_DEBUG_PREFIX} Fallback gSync.toggleAccountPanel failed status message:`,
                 error,
               );
             }
@@ -1179,7 +1179,7 @@ export class DOMLayoutManager {
               win.gUnifiedExtensions.togglePanel(event);
             } catch (error) {
               console.warn(
-                `${DOM_LAYOUT_MANAGER_DEBUG_PREFIX} Fallback gUnifiedExtensions.togglePanel failed`,
+                `${DOM_LAYOUT_MANAGER_DEBUG_PREFIX} Fallback gUnifiedExtensions.togglePanel failed status message:`,
                 error,
               );
             }
@@ -1214,7 +1214,7 @@ export class DOMLayoutManager {
               win.gSync.toggleAccountPanel(element, event);
             } catch (error) {
               console.warn(
-                `${DOM_LAYOUT_MANAGER_DEBUG_PREFIX} Fallback gSync.toggleAccountPanel failed`,
+                `${DOM_LAYOUT_MANAGER_DEBUG_PREFIX} Fallback gSync.toggleAccountPanel failed status message:`,
                 error,
               );
             }
@@ -1226,7 +1226,7 @@ export class DOMLayoutManager {
               win.gUnifiedExtensions.togglePanel(event);
             } catch (error) {
               console.warn(
-                `${DOM_LAYOUT_MANAGER_DEBUG_PREFIX} Fallback gUnifiedExtensions.togglePanel failed`,
+                `${DOM_LAYOUT_MANAGER_DEBUG_PREFIX} Fallback gUnifiedExtensions.togglePanel failed status message:`,
                 error,
               );
             }
@@ -1251,7 +1251,7 @@ export class DOMLayoutManager {
         navbar.addEventListener(entry.type, entry.listener, entry.options);
       } catch (error) {
         console.warn(
-          `${DOM_LAYOUT_MANAGER_DEBUG_PREFIX} Failed to attach fallback listener for ${entry.type}`,
+          `${DOM_LAYOUT_MANAGER_DEBUG_PREFIX} Failed to attach fallback listener for ${entry.type} status message:`,
           error,
         );
       }
@@ -1276,7 +1276,7 @@ export class DOMLayoutManager {
         );
       } catch (error) {
         console.warn(
-          `${DOM_LAYOUT_MANAGER_DEBUG_PREFIX} Failed to detach fallback listener for ${entry.type}`,
+          `${DOM_LAYOUT_MANAGER_DEBUG_PREFIX} Failed to detach fallback listener for ${entry.type} status message:`,
           error,
         );
       }
@@ -1330,7 +1330,7 @@ export class DOMLayoutManager {
           urlbarView.after(urlbarInputContainer);
         } catch (error: unknown) {
           console.error(
-            `${DOMLayoutManager.DEBUG_PREFIX} Error moving urlbar input container:`,
+            `${DOMLayoutManager.DEBUG_PREFIX} Error moving urlbar input container status message:`,
             error,
           );
         }
@@ -1415,7 +1415,7 @@ export class DOMLayoutManager {
       });
     } catch (e) {
       console.warn(
-        `${DOMLayoutManager.DEBUG_PREFIX} Failed to start MutationObserver`,
+        `${DOMLayoutManager.DEBUG_PREFIX} Failed to start MutationObserver status message:`,
         e,
       );
     }
@@ -1434,7 +1434,7 @@ export class DOMLayoutManager {
       return true;
     } catch (e) {
       console.error(
-        `${DOMLayoutManager.DEBUG_PREFIX} ensureUrlbarOrder failed`,
+        `${DOMLayoutManager.DEBUG_PREFIX} ensureUrlbarOrder failed status message:`,
         e,
       );
       return false;
@@ -1465,7 +1465,7 @@ export class DOMLayoutManager {
       urlbarView.before(urlbarInputContainer);
     } catch (error: unknown) {
       console.error(
-        `${DOMLayoutManager.DEBUG_PREFIX} Error restoring urlbar input container:`,
+        `${DOMLayoutManager.DEBUG_PREFIX} Error restoring urlbar input container status message:`,
         error,
       );
     }
@@ -1499,7 +1499,7 @@ export class DOMLayoutManager {
               return;
             } catch (error) {
               console.warn(
-                `${DOMLayoutManager.DEBUG_PREFIX} delayedStartupPromise rejected`,
+                `${DOMLayoutManager.DEBUG_PREFIX} delayedStartupPromise rejected status message:`,
                 error,
               );
             }
@@ -1508,7 +1508,7 @@ export class DOMLayoutManager {
           await this.waitForDelayedStartup(firefoxWindow);
         } catch (error) {
           console.warn(
-            `${DOMLayoutManager.DEBUG_PREFIX} waitForBrowserStartup failed`,
+            `${DOMLayoutManager.DEBUG_PREFIX} waitForBrowserStartup failed status message:`,
             error,
           );
         }
@@ -1582,7 +1582,7 @@ export class DOMLayoutManager {
             services.obs.removeObserver(observer, OBSERVER_TOPIC);
           } catch (error) {
             console.warn(
-              `${DOMLayoutManager.DEBUG_PREFIX} Failed to remove delayed-startup observer`,
+              `${DOMLayoutManager.DEBUG_PREFIX} Failed to remove delayed-startup observer status message:`,
               error,
             );
           }
@@ -1604,7 +1604,7 @@ export class DOMLayoutManager {
           services.obs.addObserver(observer, OBSERVER_TOPIC);
         } catch (error) {
           console.warn(
-            `${DOMLayoutManager.DEBUG_PREFIX} Failed to add delayed-startup observer`,
+            `${DOMLayoutManager.DEBUG_PREFIX} Failed to add delayed-startup observer status message:`,
             error,
           );
           observer = null;
@@ -1646,7 +1646,7 @@ export class DOMLayoutManager {
         }
       } catch (error: unknown) {
         console.error(
-          `${DOMLayoutManager.DEBUG_PREFIX} Error in bookmark bar position setup:`,
+          `${DOMLayoutManager.DEBUG_PREFIX} Error in bookmark bar position setup status message:`,
           error,
         );
       }
@@ -1728,7 +1728,7 @@ export class DOMLayoutManager {
       }
     } catch (error: unknown) {
       console.error(
-        `${DOMLayoutManager.DEBUG_PREFIX} Error in moveBookmarkBarToBottom:`,
+        `${DOMLayoutManager.DEBUG_PREFIX} Error in moveBookmarkBarToBottom status message:`,
         error,
       );
     }
@@ -1771,7 +1771,7 @@ export class DOMLayoutManager {
         this.originalBookmarkBarNextSibling = null;
       } catch (error: unknown) {
         console.error(
-          `${DOMLayoutManager.DEBUG_PREFIX} Error in moveBookmarkBarToTop:`,
+          `${DOMLayoutManager.DEBUG_PREFIX} Error in moveBookmarkBarToTop status message:`,
           error,
         );
       }
@@ -1830,7 +1830,7 @@ export class DOMLayoutManager {
         }
       } catch (error) {
         console.warn(
-          `${DOMLayoutManager.DEBUG_PREFIX} Failed to attach bookmark bar forwarder for ${type}`,
+          `${DOMLayoutManager.DEBUG_PREFIX} Failed to attach bookmark bar forwarder for ${type} status message:`,
           error,
         );
       }
@@ -1857,7 +1857,7 @@ export class DOMLayoutManager {
         }
       } catch (error) {
         console.warn(
-          `${DOMLayoutManager.DEBUG_PREFIX} Failed to detach bookmark bar forwarder for ${type}`,
+          `${DOMLayoutManager.DEBUG_PREFIX} Failed to detach bookmark bar forwarder for ${type} status message:`,
           error,
         );
       }

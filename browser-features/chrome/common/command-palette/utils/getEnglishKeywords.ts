@@ -76,7 +76,7 @@ export function getEnglishGestureKeywords(actionId: string): string[] {
 
     return keywords;
   } catch (err) {
-    console.error("[CommandPalette] getEnglishGestureKeywords error:", err);
+    console.error("[CommandPalette] getEnglishGestureKeywords error status message:", err);
     return [];
   }
 }
@@ -114,7 +114,7 @@ export function getEnglishStepCommandKeywords(
 
     return keywords;
   } catch (err) {
-    console.error("[CommandPalette] getEnglishStepCommandKeywords error:", err);
+    console.error("[CommandPalette] getEnglishStepCommandKeywords error status message:", err);
     return [];
   }
 }

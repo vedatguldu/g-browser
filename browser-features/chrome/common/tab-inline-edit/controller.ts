@@ -514,8 +514,13 @@ export class TabInlineEditController {
       "tabInlineEdit.inputLabel",
       "Tab URL",
     );
+    const description = this.deps.translate(
+      "tabInlineEdit.inputDescription",
+      "Press Enter to save, Escape to cancel",
+    );
     input.setAttribute("aria-label", label);
     input.setAttribute("placeholder", label);
+    input.setAttribute("aria-description", description);
   }
 
   private installEditorListeners(state: EditorState): void {
@@ -715,6 +720,32 @@ export class TabInlineEditController {
     void this.navigateFromInput(rawInput, targetTab, epoch);
   }
 
+  private announceError(message: string): void {
+    try {
+      const doc = this.win?.document;
+      if (!doc) return;
+      let announcer = doc.getElementById("floorp-a11y-live-announcer");
+      if (!announcer) {
+        announcer = doc.createElement("div");
+        announcer.id = "floorp-a11y-live-announcer";
+        announcer.setAttribute("role", "status");
+        announcer.setAttribute("aria-live", "polite");
+        announcer.setAttribute("aria-atomic", "true");
+        (announcer as HTMLElement).style.cssText =
+          "position: absolute !important; width: 1px !important; height: 1px !important; padding: 0 !important; margin: -1px !important; overflow: hidden !important; clip: rect(0, 0, 0, 0) !important; white-space: nowrap !important; border: 0 !important;";
+        (doc.body ?? doc.documentElement)?.appendChild(announcer);
+      }
+      announcer.textContent = "";
+      this.win.setTimeout(() => {
+        if (announcer) {
+          announcer.textContent = message;
+        }
+      }, 50);
+    } catch (err) {
+      console.warn("[TabInlineEdit] announce status message failed:", err);
+    }
+  }
+
   private async navigateFromInput(
     rawInput: string,
     targetTab: InlineTab,
@@ -728,6 +759,14 @@ export class TabInlineEditController {
         epoch !== this.navigationEpoch ||
         !this.canEditTab(targetTab)
       ) {
+        if (!fixed && !this.destroyed) {
+          this.announceError(
+            this.deps.translate(
+              "tabInlineEdit.invalidUrl",
+              "Invalid URL entered",
+            ),
+          );
+        }
         return;
       }
 
@@ -744,8 +783,14 @@ export class TabInlineEditController {
       this.deps.openTrustedLinkIn(fixed.url, "current", options);
     } catch (error) {
       console.error(
-        "[TabInlineEdit] Failed to navigate edited tab URL:",
+        "[TabInlineEdit] Failed to navigate edited tab URL status message:",
         error,
+      );
+      this.announceError(
+        this.deps.translate(
+          "tabInlineEdit.navigateFailed",
+          "Failed to navigate to URL",
+        ),
       );
     }
   }

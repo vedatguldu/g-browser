@@ -1,14 +1,29 @@
 import { Dialog, Portal } from "@chakra-ui/react";
+import { useLayoutEffect, useRef } from "react";
 import { Button } from "./button.tsx";
 import type { ModalProps } from "./types.ts";
 import styles from "./dialog.module.css";
 import { useStandardControls } from "./control-theme.ts";
 
 export function Modal(
-  { title, children, onClose, closeLabel, closeOnEscape = true, wide = false }:
-    ModalProps,
+  {
+    title,
+    children,
+    onClose,
+    closeLabel = "Close",
+    closeOnEscape = true,
+    wide = false,
+  }: ModalProps,
 ) {
   const standard = useStandardControls();
+  const openerRef = useRef<HTMLElement | null>(null);
+
+  useLayoutEffect(() => {
+    if (document.activeElement instanceof HTMLElement) {
+      openerRef.current = document.activeElement;
+    }
+  }, []);
+
   return (
     <Dialog.Root
       open
@@ -19,6 +34,8 @@ export function Modal(
       }}
       closeOnEscape={closeOnEscape}
       closeOnInteractOutside={false}
+      trapFocus={true}
+      finalFocusEl={() => openerRef.current}
     >
       <Portal>
         <Dialog.Backdrop className={standard ? undefined : styles.backdrop} />
@@ -39,8 +56,12 @@ export function Modal(
               <Dialog.Title className={standard ? undefined : styles.title}>
                 {title}
               </Dialog.Title>
-              <Button variant="ghost" aria-label={closeLabel} onClick={onClose}>
-                ×
+              <Button
+                variant="ghost"
+                aria-label={closeLabel || "Close"}
+                onClick={onClose}
+              >
+                <span aria-hidden="true">×</span>
               </Button>
             </Dialog.Header>
             <Dialog.Body className={standard ? undefined : styles.body}>

@@ -17,7 +17,13 @@ export function StepChoices(props: StepChoicesProps) {
 
     return (
         <Show when={choices().length > 0 || isLoading()}>
-            <div class="command-palette-step-choices" role="listbox">
+            <div
+                class="command-palette-step-choices"
+                role="listbox"
+                aria-label={i18next.t("commandPalette.stepIndicator", {
+                    defaultValue: "Options",
+                })}
+            >
                 <Show when={isLoading()}>
                     <div class="command-palette-step-choices-loading">
                         {i18next.t("commandPalette.loadingChoices", {

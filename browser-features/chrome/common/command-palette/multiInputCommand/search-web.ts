@@ -53,7 +53,7 @@ export async function loadSearchEngines(): Promise<CommandStepChoice[]> {
       }),
     );
   } catch (e) {
-    console.error("[command-palette] Failed to load search engines:", e);
+    console.error("[command-palette] Failed to load search engines status message:", e);
     return [];
   }
 }
@@ -265,7 +265,7 @@ export const searchWebCommand: PaletteCommand = {
           );
         });
     } catch (e) {
-      console.error("[command-palette] Synchronous error:", e);
+      console.error("[command-palette] Synchronous error status message:", e);
     }
   },
 };

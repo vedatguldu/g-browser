@@ -38,3 +38,9 @@
 #new-tab-button {
     display: none !important;
 }
+
+@media (forced-colors: active) {
+  #tabs-newtab-button {
+    forced-color-adjust: auto;
+  }
+}

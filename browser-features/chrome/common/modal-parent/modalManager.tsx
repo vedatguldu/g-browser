@@ -122,7 +122,26 @@ function defaultEnvironment(): ModalManagerEnvironment {
       );
     },
     getSize: modalSize,
-    setVisible: setModalVisible,
+    setVisible: (visible: boolean) => {
+      setModalVisible(visible);
+      try {
+        const container = document?.getElementById("modal-parent-container");
+        const mainWindow = document?.getElementById("main-window");
+        if (mainWindow && container) {
+          for (const child of Array.from(mainWindow.children)) {
+            if (child !== container && !child.contains(container)) {
+              if (visible) {
+                child.setAttribute("inert", "");
+              } else {
+                child.removeAttribute("inert");
+              }
+            }
+          }
+        }
+      } catch {
+        // Safe DOM inert fallback
+      }
+    },
     setSize: (size) => setModalSize(size),
     focusWindow: () => globalThis.focus(),
     notifyHidden: () => {
@@ -206,6 +225,7 @@ export class ModalManager {
   private pending: PendingModal | null = null;
   private epoch = 0;
   private disposed = false;
+  private previousActiveElement: Element | null = null;
 
   public readonly watchdogDelayMs: number;
   public readonly pingTimeoutMs: number;
@@ -240,6 +260,12 @@ export class ModalManager {
     const replaced = this.pending;
     if (replaced) {
       this.settleOnce(replaced, "replacement", null, true, false);
+    }
+
+    try {
+      this.previousActiveElement = document?.activeElement ?? null;
+    } catch {
+      this.previousActiveElement = null;
     }
 
     const epoch = ++this.epoch;
@@ -434,7 +460,20 @@ export class ModalManager {
   private hideOverlay(): void {
     this.environment.setVisible(false);
     this.environment.setSize({ width: 600, height: 800 });
-    this.environment.focusWindow();
+    if (
+      this.previousActiveElement &&
+      "focus" in this.previousActiveElement &&
+      typeof (this.previousActiveElement as HTMLElement).focus === "function"
+    ) {
+      try {
+        (this.previousActiveElement as HTMLElement).focus();
+      } catch {
+        this.environment.focusWindow();
+      }
+    } else {
+      this.environment.focusWindow();
+    }
+    this.previousActiveElement = null;
     this.environment.notifyHidden();
   }
 

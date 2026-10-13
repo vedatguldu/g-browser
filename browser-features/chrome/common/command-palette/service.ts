@@ -66,7 +66,7 @@ export class CommandPaletteService {
       setSelectableCommands(selectable);
     } catch (e) {
       console.error(
-        "[command-palette] Failed to cache selectable commands",
+        "[command-palette] Failed to cache selectable commands status message",
         e,
       );
     }

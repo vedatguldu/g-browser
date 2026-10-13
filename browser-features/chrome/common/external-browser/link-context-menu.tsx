@@ -22,8 +22,31 @@ export type ExternalBrowserLinkContextMenuOptions = {
   unloadTarget?: UnloadTarget;
 };
 
-// Helper function for i18n translation
-const t = (key: string): string => (i18next.t as (k: string) => string)(key);
+function announceA11y(text: string): void {
+  try {
+    const doc = globalThis.document;
+    if (!doc) return;
+    let announcer = doc.getElementById("floorp-a11y-live-announcer");
+    if (!announcer) {
+      announcer = doc.createElement("div");
+      announcer.id = "floorp-a11y-live-announcer";
+      announcer.setAttribute("role", "status");
+      announcer.setAttribute("aria-live", "polite");
+      announcer.setAttribute("aria-atomic", "true");
+      (announcer as HTMLElement).style.cssText =
+        "position: absolute !important; width: 1px !important; height: 1px !important; padding: 0 !important; margin: -1px !important; overflow: hidden !important; clip: rect(0, 0, 0, 0) !important; white-space: nowrap !important; border: 0 !important;";
+      (doc.body ?? doc.documentElement)?.appendChild(announcer);
+    }
+    announcer.textContent = "";
+    globalThis.setTimeout(() => {
+      if (announcer) {
+        announcer.textContent = text;
+      }
+    }, 50);
+  } catch (err) {
+    console.warn("[ExternalBrowserLinkContextMenu] announce status message failed:", err);
+  }
+}
 
 /**
  * Link context menu for opening links in external browser
@@ -60,7 +83,7 @@ export class ExternalBrowserLinkContextMenu {
     } catch (error) {
       const reason = error instanceof Error ? error : new Error(String(error));
       console.error(
-        "[ExternalBrowserLinkContextMenu] Failed to render link context menu.",
+        "[ExternalBrowserLinkContextMenu] Failed to render link context menu status message.",
         reason,
       );
       return;
@@ -112,7 +135,7 @@ export class ExternalBrowserLinkContextMenu {
       this.cachedBrowsers = await externalBrowserService.getInstalledBrowsers();
     } catch (error) {
       console.error(
-        "[ExternalBrowserLinkContextMenu] Failed to load browsers:",
+        "[ExternalBrowserLinkContextMenu] Failed to load browsers status message:",
         error,
       );
       this.cachedBrowsers = [];
@@ -166,7 +189,7 @@ export class ExternalBrowserLinkContextMenu {
     );
   }
 
-  private async populateMenu(): Promise<void> {
+  private populateMenu(): void {
     const popup = document?.getElementById(MENU_POPUP_ID) as XULElement | null;
     if (!popup) {
       return;
@@ -177,8 +200,8 @@ export class ExternalBrowserLinkContextMenu {
       popup.removeChild(popup.firstChild);
     }
 
-    // Refresh browsers list
-    await this.loadBrowsers();
+    // Refresh browsers list in background for subsequent openings
+    void this.loadBrowsers();
 
     // Get the link URL from context menu
     const url = globalThis.gContextMenu?.linkURL;
@@ -255,6 +278,12 @@ export class ExternalBrowserLinkContextMenu {
       return null;
     }
     menuitem.setAttribute("label", label);
+    if (label) {
+      const firstChar = label.trim().charAt(0).toUpperCase();
+      if (/^[A-Z0-9]$/.test(firstChar)) {
+        menuitem.setAttribute("accesskey", firstChar);
+      }
+    }
     if (contextMenuKey) {
       menuitem.setAttribute("data-floorp-context-menu-key", contextMenuKey);
     }
@@ -278,12 +307,14 @@ export class ExternalBrowserLinkContextMenu {
           "[ExternalBrowserLinkContextMenu] Failed to open URL:",
           result.error,
         );
+        announceA11y(t("externalBrowser.menu.launchFailed"));
       }
     } catch (error) {
       console.error(
-        "[ExternalBrowserLinkContextMenu] Error opening URL:",
+        "[ExternalBrowserLinkContextMenu] Error opening URL status message:",
         error,
       );
+      announceA11y(t("externalBrowser.menu.launchFailed"));
     }
   }
 }

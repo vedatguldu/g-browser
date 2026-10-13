@@ -8,6 +8,7 @@ import { TabOpenPosition } from "./openPosition";
 import { TabSizeSpecification } from "./sizeSpecification";
 import { TabDoubleClickClose } from "./doubleClickClose";
 import { TabPinnedTabCustomization } from "./pinnedTabCustomization";
+import { TabA11yManager } from "./tabA11yManager";
 import { noraComponent, NoraComponentBase } from "#features-chrome/utils/base";
 
 @noraComponent(import.meta.hot)
@@ -18,6 +19,7 @@ export default class Tab extends NoraComponentBase {
     new TabSizeSpecification();
     new TabDoubleClickClose();
     new TabPinnedTabCustomization();
+    new TabA11yManager();
     this.checkAndShowWelcomePage();
   }
 
@@ -45,7 +47,7 @@ export default class Tab extends NoraComponentBase {
         }
       }
     } catch (error) {
-      console.error("Failed to show welcome page:", error);
+      console.error("Failed to show welcome page status message:", error);
     }
   }
 }

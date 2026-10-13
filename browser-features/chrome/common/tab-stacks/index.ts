@@ -70,7 +70,7 @@ export function readGroupKinds(prefs?: PrefsLike): Record<string, GroupKind> {
     }
     return kinds;
   } catch (e) {
-    console.error("[tab-stacks] Failed to read group kinds pref:", e);
+    console.error("[tab-stacks] Failed to read group kinds pref status message:", e);
     return {};
   }
 }
@@ -94,7 +94,7 @@ export function setGroupKind(
     }
     target.setStringPref(GROUP_KINDS_PREF, JSON.stringify(kinds));
   } catch (e) {
-    console.error("[tab-stacks] Failed to save group kind:", e);
+    console.error("[tab-stacks] Failed to save group kind status message:", e);
   }
 }
 
@@ -391,7 +391,7 @@ export default class TabStacks extends NoraComponentBase {
             }
           }
         } catch (e) {
-          console.error("[tab-stacks] Failed to close stack:", e);
+          console.error("[tab-stacks] Failed to close stack status message:", e);
         }
         return;
       }
@@ -416,7 +416,7 @@ export default class TabStacks extends NoraComponentBase {
         try {
           gb.tabGroupMenu?.openEditModal(group);
         } catch (e) {
-          console.error("[tab-stacks] Failed to open group editor:", e);
+          console.error("[tab-stacks] Failed to open group editor status message:", e);
         }
         return;
       }
@@ -550,7 +550,7 @@ export default class TabStacks extends NoraComponentBase {
         try {
           for (const t of [...group.tabs]) gb.reloadTab?.(t);
         } catch (e) {
-          console.error("[tab-stacks] reload stack failed:", e);
+          console.error("[tab-stacks] reload stack failed status message:", e);
         }
       });
       makeItem(
@@ -572,7 +572,7 @@ export default class TabStacks extends NoraComponentBase {
           group.addTabs([tab]);
           gb.selectedTab = tab;
         } catch (e) {
-          console.error("[tab-stacks] new tab in stack failed:", e);
+          console.error("[tab-stacks] new tab in stack failed status message:", e);
         }
       });
       makeItem("floorp.tab-stacks.manage", "Manage Stack…", "Manage Group…", () => {
@@ -608,7 +608,7 @@ export default class TabStacks extends NoraComponentBase {
         try {
           for (const t of [...group.tabs]) gb.ungroupTab(t);
         } catch (e) {
-          console.error("[tab-stacks] ungroup stack failed:", e);
+          console.error("[tab-stacks] ungroup stack failed status message:", e);
         }
       });
       const closeSeparator = createXULElement("menuseparator");
@@ -629,7 +629,7 @@ export default class TabStacks extends NoraComponentBase {
             }
           }
         } catch (e) {
-          console.error("[tab-stacks] close stack failed:", e);
+          console.error("[tab-stacks] close stack failed status message:", e);
         }
       });
       popupSet.appendChild(kindMenu);
@@ -729,7 +729,7 @@ export default class TabStacks extends NoraComponentBase {
           gb.moveTabBefore?.(tab, group as unknown as StackTab);
         }
       } catch (e) {
-        console.error("[tab-stacks] drop-outside eject failed:", e);
+        console.error("[tab-stacks] drop-outside eject failed status message:", e);
       }
     };
     // Deliberate join: dropping a row-1 tab ON the chip adds it to the
@@ -781,7 +781,7 @@ export default class TabStacks extends NoraComponentBase {
           bumpStacksVersion();
           if (adopted[0]) scrollProxyIntoView(adopted[0]);
         } catch (e) {
-          console.error("[tab-stacks] chip drop join failed:", e);
+          console.error("[tab-stacks] chip drop join failed status message:", e);
         }
       }, 0);
     };
@@ -860,7 +860,7 @@ export default class TabStacks extends NoraComponentBase {
           );
           proxy?.scrollIntoView({ block: "nearest", inline: "nearest" });
         } catch (e) {
-          console.error("[tab-stacks] scroll-into-view failed:", e);
+          console.error("[tab-stacks] scroll-into-view failed status message:", e);
         }
       }, 30);
     };
@@ -1095,7 +1095,7 @@ export default class TabStacks extends NoraComponentBase {
         bumpStacksVersion();
         scrollProxyIntoView(tab);
       } catch (e) {
-        console.error("[tab-stacks] proxy drop failed:", e);
+        console.error("[tab-stacks] proxy drop failed status message:", e);
       }
     };
 
@@ -1275,7 +1275,7 @@ export default class TabStacks extends NoraComponentBase {
           boundSetSucc(tab, null);
         }
       } catch (e) {
-        console.error("[tab-stacks] close successor:", e);
+        console.error("[tab-stacks] close successor status message:", e);
       }
     };
     // TabClose re-picks after a closing neighbour was spliced out of the

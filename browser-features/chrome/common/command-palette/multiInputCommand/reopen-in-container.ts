@@ -61,7 +61,7 @@ export async function loadContainers(): Promise<CommandStepChoice[]> {
 
     return [noContainer, ...containerChoices];
   } catch (err) {
-    console.error("[ReopenInContainer]", "reopenInContainer loader failed", err);
+    console.error("[ReopenInContainer]", "reopenInContainer loader failed status message", err);
     return [];
   }
 }
@@ -148,7 +148,7 @@ export const reopenInContainerCommand: PaletteCommand = {
         ) as nsIPrincipal;
       } catch (error) {
         console.error(
-          "[ReopenInContainer] Failed to deserialize tab state/principal",
+          "[ReopenInContainer] Failed to deserialize tab state/principal status message",
           error,
         );
         return;
@@ -209,7 +209,7 @@ export const reopenInContainerCommand: PaletteCommand = {
       globalThis.gBrowser.removeTab(tab);
     } catch (error) {
       console.error(
-        "[ReopenInContainer] Failed to reopen tab in container",
+        "[ReopenInContainer] Failed to reopen tab in container status message",
         error,
       );
     }

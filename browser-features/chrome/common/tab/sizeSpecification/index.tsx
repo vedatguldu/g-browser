@@ -21,8 +21,10 @@ export class TabSizeSpecification {
     let validatedMinH = minH;
     let validatedMinW = minW;
 
+    const ABSOLUTE_MIN_TAB_HEIGHT = 28;
+
     if (
-      typeof validatedMinH !== "number" || validatedMinH < 20 ||
+      typeof validatedMinH !== "number" || validatedMinH < ABSOLUTE_MIN_TAB_HEIGHT ||
       validatedMinH > 100
     ) {
       console.warn(
@@ -30,7 +32,7 @@ export class TabSizeSpecification {
           String(minH)
         }) provided. Falling back to default: ${DEFAULT_MIN_H}px`,
       );
-      validatedMinH = DEFAULT_MIN_H;
+      validatedMinH = Math.max(ABSOLUTE_MIN_TAB_HEIGHT, DEFAULT_MIN_H);
     }
 
     if (
@@ -67,7 +69,7 @@ export class TabSizeSpecification {
     } catch (error) {
       const reason = error instanceof Error ? error : new Error(String(error));
       console.error(
-        "[TabSizeSpecification] Failed to render tab size style element.",
+        "[TabSizeSpecification] Failed to render tab size style element status message.",
         reason,
       );
     }
@@ -87,7 +89,7 @@ export class TabSizeSpecification {
     } catch (error) {
       const reason = error instanceof Error ? error : new Error(String(error));
       console.error(
-        "[TabSizeSpecification] Failed to render base style element.",
+        "[TabSizeSpecification] Failed to render base style element status message.",
         reason,
       );
       return;

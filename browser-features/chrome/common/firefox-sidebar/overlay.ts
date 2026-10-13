@@ -115,7 +115,7 @@ export class FirefoxSidebarOverlayController {
     trigger.id = "floorp-firefox-sidebar-edge-toggle";
     trigger.type = "button";
     trigger.setAttribute("aria-controls", "sidebar-box");
-    trigger.setAttribute("aria-pressed", "false");
+    trigger.setAttribute("aria-expanded", "false");
     browser.appendChild(trigger);
     this.trigger = trigger;
 
@@ -152,6 +152,13 @@ export class FirefoxSidebarOverlayController {
         if (!this.contains((event as MouseEvent).relatedTarget)) this.leave();
       });
     }
+    this.listen(trigger, "keydown", (event) => {
+      const key = event as KeyboardEvent;
+      if (key.key === " ") {
+        key.preventDefault();
+        trigger.click();
+      }
+    });
     this.listen(trigger, "click", (event) => {
       if (
         !this.settings.hover ||
@@ -163,9 +170,7 @@ export class FirefoxSidebarOverlayController {
       this.setState(pinned || this.hovered, pinned);
       if (pinned) void this.showPanel();
       else {
-        if (
-          (event as MouseEvent).detail > 0 && document.activeElement === trigger
-        ) {
+        if (document.activeElement === trigger) {
           (globalThis as unknown as {
             gBrowser?: { selectedBrowser: { focus(): void } };
           })
@@ -188,7 +193,14 @@ export class FirefoxSidebarOverlayController {
         }
       } else this.scheduleClose();
     }, true);
-    this.listen(document, "focusout", () => this.scheduleClose(), true);
+    this.listen(document, "focusout", (event) => {
+      const focusEvent = event as FocusEvent;
+      if (focusEvent.relatedTarget && this.contains(focusEvent.relatedTarget)) {
+        this.clearCloseTimer();
+        return;
+      }
+      this.scheduleClose();
+    }, true);
     const nativeShowStarted = () => {
       if (this.invokingNativeShow) return;
       // Explicit native commands take ownership even when hover is disabled.
@@ -464,7 +476,6 @@ export class FirefoxSidebarOverlayController {
       "aria-expanded",
       String(expanded && this.native.isOpen),
     );
-    this.trigger?.setAttribute("aria-pressed", String(pinned));
     this.scheduleGeometry();
   }
 
@@ -547,7 +558,7 @@ export class FirefoxSidebarOverlayController {
       this.scheduleClose();
       this.scheduleGeometry();
     } catch (error) {
-      if (!request.cancelled) console.error("[FirefoxSidebar]", error);
+      if (!request.cancelled) console.error("[FirefoxSidebar] Request status message:", error);
     } finally {
       if (this.opening === request) this.opening = undefined;
       if (

@@ -100,7 +100,7 @@ function getConditionalPanels(): StaticPanelData {
       };
     }
   } catch (_e) {
-    console.error("Failed to get conditional panels:", _e);
+    console.error("Failed to get conditional panels status message:", _e);
   }
 
   return conditionalPanels;

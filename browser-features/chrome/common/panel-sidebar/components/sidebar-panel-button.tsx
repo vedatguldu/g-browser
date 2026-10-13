@@ -89,10 +89,29 @@ export function PanelSidebarButton(props: {
     return null;
   }
 
+  const reorderPanel = (direction: "up" | "down") => {
+    const panels = [...panelSidebarData()];
+    const currentIndex = panels.findIndex((p) => p.id === props.panel.id);
+    if (currentIndex === -1) return;
+    const targetIndex = direction === "up" ? currentIndex - 1 : currentIndex + 1;
+    if (targetIndex >= 0 && targetIndex < panels.length) {
+      const [moved] = panels.splice(currentIndex, 1);
+      panels.splice(targetIndex, 0, moved);
+      setPanelSidebarData(panels);
+    }
+  };
+
   return (
     <div
       draggable
       onDragStart={handleDragStart}
+      onKeyDown={(event: KeyboardEvent) => {
+        if ((event.altKey || event.ctrlKey) && (event.key === "ArrowUp" || event.key === "ArrowDown")) {
+          event.preventDefault();
+          event.stopPropagation();
+          reorderPanel(event.key === "ArrowUp" ? "up" : "down");
+        }
+      }}
       onDragEnd={handleDragEnd}
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
@@ -115,6 +134,10 @@ export function PanelSidebarButton(props: {
           if (event.key === "Enter" || event.key === " ") {
             event.preventDefault();
             gPanelSidebar.changePanel(props.panel.id);
+          } else if ((event.altKey || event.ctrlKey) && (event.key === "ArrowUp" || event.key === "ArrowDown")) {
+            event.preventDefault();
+            event.stopPropagation();
+            reorderPanel(event.key === "ArrowUp" ? "up" : "down");
           }
         }}
         onClick={() => {
@@ -128,8 +151,8 @@ export function PanelSidebarButton(props: {
             : "none",
         }}
       >
-        <Suspense fallback={<div>I</div>}>
-          <img src={faviconURL()} width="16" height="16" />
+        <Suspense fallback={<div aria-hidden="true">I</div>}>
+          <img src={faviconURL()} width="16" height="16" alt="" aria-hidden="true" />
         </Suspense>
       </div>
     </div>

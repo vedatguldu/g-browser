@@ -90,6 +90,16 @@ export default class BrowserTabColor extends NoraComponentBase {
             color: var(--floorp-tabs-icons-fg-color) !important;
             fill: var(--floorp-tabs-icons-fg-color) !important;
           }
+
+          @media (forced-colors: active) {
+            .tab-label:not([selected]),
+            .tab-icon-stack > *,
+            #TabsToolbar-customization-target > *,
+            #tabs-newtab-button {
+              color: ButtonText !important;
+              fill: ButtonText !important;
+            }
+          }
         `;
         elem.textContent = styleSheet;
         elem.id = "floorp-toolbar-bgcolor";
@@ -106,12 +116,11 @@ async function getManifest() {
   }
   return await ManifestObtainer.browserObtainManifest(gBrowser.selectedBrowser);
 }
-function getTextColor(backgroundColor: string) {
-  if (chroma.valid(backgroundColor)) {
-    return chroma(backgroundColor).luminance() >= 0.5 ? "black" : "white";
-  } else {
-    throw Error(
-      "[nora@browser-tab-color] theme_color in manifest is not valid",
-    );
+export function getTextColor(backgroundColor: string): string {
+  if (!backgroundColor || !chroma.valid(backgroundColor)) {
+    return "CanvasText";
   }
+  const contrastBlack = chroma.contrast(backgroundColor, "#000000");
+  const contrastWhite = chroma.contrast(backgroundColor, "#ffffff");
+  return contrastBlack >= contrastWhite ? "#000000" : "#ffffff";
 }

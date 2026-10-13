@@ -53,7 +53,7 @@ export class ContextMenuRuntime {
       );
       this.refresh();
     } catch (error) {
-      console.error("[ContextMenuCustomizer] Failed to watch Flasco", error);
+      console.error("[ContextMenuCustomizer] Failed to watch Flasco status message", error);
       this.destroy();
     }
   }
@@ -108,7 +108,7 @@ export class ContextMenuRuntime {
         }
       }
     } catch (error) {
-      console.error("[ContextMenuCustomizer] Failed to read Flasco", error);
+      console.error("[ContextMenuCustomizer] Failed to read Flasco status message", error);
     }
 
     if (!enabled) {
@@ -120,7 +120,7 @@ export class ContextMenuRuntime {
       } catch (error) {
         this.stopController();
         console.error(
-          "[ContextMenuCustomizer] Failed to start customizer",
+          "[ContextMenuCustomizer] Failed to start customizer status message",
           error,
         );
       }

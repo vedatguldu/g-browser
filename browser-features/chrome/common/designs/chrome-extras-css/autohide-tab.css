@@ -14,13 +14,13 @@
  */
 
 /* leptonChrome.css:26140-26144 */
-.tabbrowser-tab:not([multiselected]) .tab-content:not(:hover):not([selected]) {
+.tabbrowser-tab:not([multiselected]) .tab-content:not(:hover):not(:focus-within):not([selected]) {
   margin-bottom: -64px;
 }
 
 /* leptonChrome.css:26155-26164 */
 @media (prefers-reduced-motion: no-preference) {
-  .tabbrowser-tab:not([multiselected]) .tab-content:not(:hover):not([selected]) {
+  .tabbrowser-tab:not([multiselected]) .tab-content:not(:hover):not(:focus-within):not([selected]) {
     transition-timing-function: var(--animation-easing-function);
     transition-duration: 0.2s;
     transition-delay: 600ms;
@@ -32,7 +32,7 @@
 
 /* leptonChrome.css:26165-26169 */
 @media (prefers-reduced-motion: no-preference) {
-  .tabbrowser-tab:not([multiselected]) .tab-content:not(:hover):not([selected]) {
+  .tabbrowser-tab:not([multiselected]) .tab-content:not(:hover):not(:focus-within):not([selected]) {
     transition-property: margin-bottom;
   }
 }

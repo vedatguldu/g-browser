@@ -360,7 +360,7 @@ export function getShortcutForAction(actionId: string): string | null {
       }
     }
   } catch (err) {
-    console.error("[CommandPalette]", "Failed to load keyboard shortcut config", err);
+    console.error("[CommandPalette]", "Failed to load keyboard shortcut config status message", err);
   }
   return null;
 }

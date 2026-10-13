@@ -32,7 +32,7 @@ export function loadClosedWindows(): Promise<CommandStepChoice[]> {
       };
     }));
   } catch (e) {
-    console.error("[ClosedWindowSwitcher] Failed to load closed windows", e);
+    console.error("[ClosedWindowSwitcher] Failed to load closed windows status message", e);
     return Promise.resolve([]);
   }
 }
@@ -76,7 +76,7 @@ export const closedWindowSwitcherCommand: PaletteCommand = {
       if (!globalThis.SessionStore?.undoCloseWindow) return;
       globalThis.SessionStore.undoCloseWindow(index);
     } catch (e) {
-      console.error("[ClosedWindowSwitcher] Failed to reopen window", e);
+      console.error("[ClosedWindowSwitcher] Failed to reopen window status message", e);
     }
   },
 };

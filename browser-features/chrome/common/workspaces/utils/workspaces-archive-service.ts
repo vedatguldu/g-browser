@@ -17,7 +17,7 @@ const ensureDirectory = async (path: string) => {
       await IOUtils.makeDirectory(path);
     }
   } catch (error) {
-    console.error("WorkspacesArchiveService: failed to ensure directory", {
+    console.error("WorkspacesArchiveService: failed to ensure directory status message", {
       path,
       error,
     });
@@ -91,7 +91,7 @@ const safeReadJSON = async <T>(path: string): Promise<T | null> => {
     const json = await IOUtils.readJSON(path);
     return json as T;
   } catch (error) {
-    console.error("WorkspacesArchiveService: failed to read JSON", {
+    console.error("WorkspacesArchiveService: failed to read JSON status message", {
       path,
       error,
     });
@@ -103,7 +103,7 @@ const safeWriteJSON = async (path: string, data: unknown) => {
   try {
     await IOUtils.writeJSON(path, data);
   } catch (error) {
-    console.error("WorkspacesArchiveService: failed to write JSON", {
+    console.error("WorkspacesArchiveService: failed to write JSON status message", {
       path,
       error,
     });
@@ -117,7 +117,7 @@ const safeRemoveFile = async (path: string) => {
       await IOUtils.remove(path);
     }
   } catch (error) {
-    console.error("WorkspacesArchiveService: failed to remove file", {
+    console.error("WorkspacesArchiveService: failed to remove file status message", {
       path,
       error,
     });
@@ -186,7 +186,7 @@ export class WorkspacesArchiveService {
     try {
       return decodeSnapshot(data);
     } catch (error) {
-      console.error("WorkspacesArchiveService: failed to decode snapshot", {
+      console.error("WorkspacesArchiveService: failed to decode snapshot status message", {
         archiveId,
         error,
       });
@@ -220,7 +220,7 @@ export class WorkspacesArchiveService {
         const summary = buildSummary(archiveId, snapshot, child);
         summaries.push(summary);
       } catch (error) {
-        console.error("WorkspacesArchiveService: skipping invalid archive", {
+        console.error("WorkspacesArchiveService: skipping invalid archive status message", {
           child,
           error,
         });
@@ -230,16 +230,39 @@ export class WorkspacesArchiveService {
     return summaries.sort((a, b) => b.capturedAt - a.capturedAt);
   }
 
-  public async clearAll(): Promise<void> {
+  public async clearAll(): Promise<number> {
     const archiveDirectory = getArchiveDirectory();
     const exists = await IOUtils.exists(archiveDirectory);
     if (!exists) {
-      return;
+      return 0;
     }
 
     const children = await IOUtils.getChildren(archiveDirectory);
+    let removedCount = 0;
     for (const child of filterJsonFiles(children)) {
-      await safeRemoveFile(child);
+      try {
+        await safeRemoveFile(child);
+        removedCount++;
+      } catch (error) {
+        console.error("WorkspacesArchiveService: failed to remove archive file status message", {
+          child,
+          error,
+        });
+      }
     }
+    return removedCount;
+  }
+
+  public async clearAllWithConfirmation(
+    confirmFn?: () => boolean | Promise<boolean>,
+  ): Promise<boolean> {
+    if (confirmFn) {
+      const confirmed = await confirmFn();
+      if (!confirmed) {
+        return false;
+      }
+    }
+    await this.clearAll();
+    return true;
   }
 }

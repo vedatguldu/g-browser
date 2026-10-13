@@ -62,7 +62,7 @@ export function cleanupOwnedDropIndicator(
     indicator.hidden = true;
   } catch (error) {
     console.error(
-      "[TabDragDropManager] Failed to hide the drop indicator:",
+      "[TabDragDropManager] Failed to hide the drop indicator status message:",
       error,
     );
   }
@@ -71,7 +71,7 @@ export function cleanupOwnedDropIndicator(
     indicator.style.removeProperty("transform");
   } catch (error) {
     console.error(
-      "[TabDragDropManager] Failed to clear the drop indicator transform:",
+      "[TabDragDropManager] Failed to clear the drop indicator transform status message:",
       error,
     );
   }
@@ -80,7 +80,7 @@ export function cleanupOwnedDropIndicator(
     indicator.style.removeProperty("margin-inline-start");
   } catch (error) {
     console.error(
-      "[TabDragDropManager] Failed to clear the drop indicator margin:",
+      "[TabDragDropManager] Failed to clear the drop indicator margin status message:",
       error,
     );
   }
@@ -172,7 +172,7 @@ export class TabDragDropManager {
       try {
         this.performTabDragOver(e as DragEvent);
       } catch (error) {
-        console.error("[TabDragDropManager] dragover failed:", error);
+        console.error("[TabDragDropManager] dragover failed status message:", error);
         this.deactivateDragSession();
       }
     };
@@ -186,7 +186,7 @@ export class TabDragDropManager {
       try {
         this.performTabDropEvent(dragEvent);
       } catch (error) {
-        console.error("[TabDragDropManager] drop failed:", error);
+        console.error("[TabDragDropManager] drop failed status message:", error);
       } finally {
         this.deactivateDragSession();
       }
@@ -314,7 +314,7 @@ export class TabDragDropManager {
       }
     } catch (error) {
       console.error(
-        "[TabDragDropManager] Failed to access the tab container during cleanup:",
+        "[TabDragDropManager] Failed to access the tab container during cleanup status message:",
         error,
       );
     } finally {
@@ -333,7 +333,7 @@ export class TabDragDropManager {
       restore();
     } catch (error) {
       console.error(
-        `[TabDragDropManager] Failed to restore ${name}:`,
+        `[TabDragDropManager] Failed to restore ${name} status message:`,
         error,
       );
     }

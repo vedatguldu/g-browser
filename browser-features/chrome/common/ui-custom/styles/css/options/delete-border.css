@@ -122,3 +122,16 @@ browser[type="content"] > html {
 #panel-sidebar-splitter {
   background-color: transparent !important;
 }
+
+@media (forced-colors: active), (prefers-contrast: more) {
+  #tabbrowser-tabs,
+  .tabbrowser-tab,
+  .splitview-controller,
+  .browserStack > *,
+  .browserContainer,
+  #navigator-toolbox,
+  #toolbar-items-verticaltabs {
+    border: 1px solid ButtonText !important;
+  }
+}
+

@@ -86,7 +86,9 @@ export default class ZenMode extends NoraComponentBase {
         toolbarNode = currentNode;
       }
 
+      toolbarNode?.setAttribute("role", "button");
       toolbarNode?.setAttribute("label", buttonLabel);
+      toolbarNode?.setAttribute("aria-label", buttonLabel);
 
       const popupSet = targetDocument.getElementById("mainPopupSet");
       if (!popupSet || !toolbarNode) {

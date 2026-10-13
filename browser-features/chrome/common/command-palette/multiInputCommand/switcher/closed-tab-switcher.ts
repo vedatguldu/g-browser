@@ -27,7 +27,7 @@ export function loadClosedTabs(): Promise<CommandStepChoice[]> {
 
     return Promise.resolve(choices);
   } catch (err) {
-    console.error("[ClosedTabSwitcher] Failed to load closed tabs", err);
+    console.error("[ClosedTabSwitcher] Failed to load closed tabs status message", err);
     return Promise.resolve([]);
   }
 }
@@ -77,7 +77,7 @@ export const closedTabSwitcherCommand: PaletteCommand = {
         }
       ).undoCloseTab(globalThis.window, index);
     } catch (err) {
-      console.error("[ClosedTabSwitcher] Failed to reopen closed tab", err);
+      console.error("[ClosedTabSwitcher] Failed to reopen closed tab status message", err);
     }
   },
 };

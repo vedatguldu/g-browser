@@ -64,7 +64,7 @@ async function queryHistory(
       description: row.getResultByName("url") || "",
     }));
   } catch (e) {
-    console.error("[HistorySwitcher] Failed to query history", e);
+    console.error("[HistorySwitcher] Failed to query history status message", e);
     return [];
   } finally {
     await conn?.close().catch(() => {});
@@ -120,7 +120,7 @@ function navigateToUrl(win: Window, url: string): void {
       triggeringPrincipal: principal,
     });
   } catch (e) {
-    console.error("[HistorySwitcher] Failed to navigate", e);
+    console.error("[HistorySwitcher] Failed to navigate status message", e);
   }
 }
 

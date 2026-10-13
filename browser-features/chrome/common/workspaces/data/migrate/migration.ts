@@ -76,7 +76,7 @@ export function migrateWorkspacesData(): Promise<void> {
                   console.debug("Workspaces migration: unicode conversion OK");
                 } catch (e: unknown) {
                   console.warn(
-                    "Workspaces migration: unicode conversion failed",
+                    "Workspaces migration: unicode conversion failed status message",
                     e,
                   );
                 }
@@ -155,7 +155,7 @@ export function migrateWorkspacesData(): Promise<void> {
                     Object.keys(oldData.windows ?? {}).length,
                   );
                 } catch (e) {
-                  console.error("Workspaces migration: invalid schema", e);
+                  console.error("Workspaces migration: invalid schema status message", e);
                   resolve();
                   return;
                 }
@@ -182,7 +182,7 @@ export function migrateWorkspacesData(): Promise<void> {
                     }
                   } catch (e: unknown) {
                     console.error(
-                      "Workspaces migration: error iterating windows",
+                      "Workspaces migration: error iterating windows status message",
                       e,
                     );
                   }
@@ -226,7 +226,7 @@ export function migrateWorkspacesData(): Promise<void> {
                         }
                       } catch (e: unknown) {
                         console.warn(
-                          "Workspaces migration: invalid preferences entry",
+                          "Workspaces migration: invalid preferences entry status message",
                           e,
                         );
                       }
@@ -320,14 +320,14 @@ export function migrateWorkspacesData(): Promise<void> {
                   );
                 } catch (e: unknown) {
                   console.warn(
-                    "Workspaces migration: failed to remove old Workspaces.json",
+                    "Workspaces migration: failed to remove old Workspaces.json status message",
                     e,
                   );
                 }
                 resolve();
               } catch (e: unknown) {
                 console.error(
-                  "Workspaces migration: unexpected error in asyncFetch callback",
+                  "Workspaces migration: unexpected error in asyncFetch callback status message",
                   e,
                 );
                 resolve();
@@ -335,7 +335,7 @@ export function migrateWorkspacesData(): Promise<void> {
             },
           );
         } catch (e: unknown) {
-          console.error("Workspaces migration: unexpected error", e);
+          console.error("Workspaces migration: unexpected error status message", e);
           reject(e);
         }
       });

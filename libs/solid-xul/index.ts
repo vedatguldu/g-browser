@@ -57,6 +57,10 @@ const {
   ): void => {
     if (node instanceof Element) {
       if (value === null || value === undefined) {
+        if (_prev && isEventListener(_prev)) {
+          const evName = name.slice(2).toLowerCase();
+          node.removeEventListener(evName, _prev as EventListener);
+        }
         node.removeAttribute(name);
         return;
       }
@@ -66,6 +70,9 @@ const {
         //? the eventListener name is on~~~
         //? so have to remove the `on`
         const evName = name.slice(2).toLowerCase();
+        if (_prev && isEventListener(_prev)) {
+          node.removeEventListener(evName, _prev as EventListener);
+        }
         node.addEventListener(evName, value as EventListener);
       } else if (resultStyleObject._tag === "Right") {
         let tmp = "";
@@ -193,7 +200,7 @@ export function disposeRoot(hotCtx: ViteHotContext): void {
       try {
         dispose();
       } catch (e) {
-        console.error("[nora@solid-xul] disposeRoot error:", e);
+        console.error("[nora@solid-xul] disposeRoot error status message:", e);
       }
     }
     hotCtxMap.delete(hotCtx);

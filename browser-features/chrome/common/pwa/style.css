@@ -71,3 +71,10 @@
 #ssb-installing-icon {
   margin: auto;
 }
+
+@media (forced-colors: active) {
+  #ssb-box,
+  #ssb-content-description {
+    forced-color-adjust: auto;
+  }
+}

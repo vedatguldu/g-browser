@@ -19,6 +19,7 @@ const { AppConstants } = ChromeUtils.importESModule(
 
 export class KeyboardShortcutController {
   private eventListenersAttached = false;
+  private isBypassMode = false;
   private pressedModifiers = {
     alt: false,
     ctrl: false,
@@ -28,6 +29,10 @@ export class KeyboardShortcutController {
 
   private targetWindow: Window;
   private remoteFocusStore: KeyboardShortcutFocusStoreReader | null;
+
+  public get isBypassModeActive(): boolean {
+    return this.isBypassMode;
+  }
 
   constructor(
     win: Window = globalThis as unknown as Window,
@@ -59,6 +64,7 @@ export class KeyboardShortcutController {
       this.targetWindow.removeEventListener("blur", this.handleBlur, true);
       this.eventListenersAttached = false;
     }
+    this.isBypassMode = false;
     this.resetState();
   }
 
@@ -69,6 +75,35 @@ export class KeyboardShortcutController {
       meta: false,
       shift: false,
     };
+  }
+
+  private announceBypassState(active: boolean): void {
+    try {
+      const doc = this.targetWindow?.document;
+      if (!doc) return;
+      let announcer = doc.getElementById("floorp-a11y-live-announcer");
+      if (!announcer) {
+        announcer = doc.createElement("div");
+        announcer.id = "floorp-a11y-live-announcer";
+        announcer.setAttribute("role", "status");
+        announcer.setAttribute("aria-live", "polite");
+        announcer.setAttribute("aria-atomic", "true");
+        (announcer as HTMLElement).style.cssText =
+          "position: absolute !important; width: 1px !important; height: 1px !important; padding: 0 !important; margin: -1px !important; overflow: hidden !important; clip: rect(0, 0, 0, 0) !important; white-space: nowrap !important; border: 0 !important;";
+        doc.documentElement.appendChild(announcer);
+      }
+      const msg = active
+        ? "Floorp shortcuts suspended (Screen reader bypass mode active)"
+        : "Floorp shortcuts restored";
+      announcer.textContent = "";
+      setTimeout(() => {
+        if (announcer) {
+          announcer.textContent = msg;
+        }
+      }, 50);
+    } catch (err) {
+      console.error("[KeyboardShortcutController] Failed to announce bypass state status message:", err);
+    }
   }
 
   private handleKeyDown = (event: KeyboardEvent): void => {
@@ -92,6 +127,25 @@ export class KeyboardShortcutController {
     // Synthetic events may lack a code; real key events always carry one.
     if (!code) return;
 
+    // Toggle screen reader bypass mode with Ctrl+Alt+P (or Cmd+Alt+P on macOS)
+    const isBypassToggle =
+      (this.platform === "macosx" ? event.metaKey && event.altKey : event.ctrlKey && event.altKey) &&
+      !event.shiftKey &&
+      code === "KeyP";
+
+    if (isBypassToggle) {
+      this.isBypassMode = !this.isBypassMode;
+      event.preventDefault();
+      event.stopPropagation();
+      this.announceBypassState(this.isBypassMode);
+      return;
+    }
+
+    // In bypass mode, all Floorp custom shortcuts are suspended to allow screen reader passthrough
+    if (this.isBypassMode) {
+      return;
+    }
+
     if (
       (isBarePrintableKeyEvent(event) ||
         (this.platform === "macosx" && event.altKey &&
@@ -105,13 +159,23 @@ export class KeyboardShortcutController {
       return;
     }
 
-    // Ignore pure modifier key presses. Using startsWith keeps this concise
+    // Ignore pure modifier key presses including CapsLock. Using startsWith keeps this concise
     // and handles location-specific variants like "AltLeft" / "AltRight".
     if (
       code.startsWith("Alt") ||
       code.startsWith("Control") ||
       code.startsWith("Meta") ||
-      code.startsWith("Shift")
+      code.startsWith("Shift") ||
+      code.startsWith("CapsLock")
+    ) {
+      return;
+    }
+
+    // Never intercept standard browser pane and AT navigation keys when un-modified:
+    // F6 (cycle panes), Tab (focus navigation), Escape (dismiss popup/dialog)
+    if (
+      !event.altKey && !event.ctrlKey && !event.metaKey &&
+      (code === "F6" || code === "Tab" || code === "Escape")
     ) {
       return;
     }
@@ -194,7 +258,7 @@ export class KeyboardShortcutController {
         }
       } catch (e) {
         console.error(
-          `[keyboard-shortcut] Action "${shortcut.action}" failed:`,
+          `[keyboard-shortcut] Action "${shortcut.action}" failed status message:`,
           e,
         );
       }
@@ -206,7 +270,7 @@ export class KeyboardShortcutController {
           fn(this.targetWindow);
         } catch (e) {
           console.error(
-            `[keyboard-shortcut] Action "${shortcut.action}" failed:`,
+            `[keyboard-shortcut] Action "${shortcut.action}" failed status message:`,
             e,
           );
         }

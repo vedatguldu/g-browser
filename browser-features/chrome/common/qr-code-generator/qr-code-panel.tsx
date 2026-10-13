@@ -21,12 +21,15 @@ export function QRCodePanel() {
     <xul:panel
       id="qrcode-panel"
       type="arrow"
+      role="dialog"
+      aria-labelledby="qrcode-title"
       position="bottomright topright"
       onPopupShowing={() => manager.handlePopupShowing()}
     >
       <xul:vbox id="qrcode-box">
         <xul:vbox class="panel-header qrcode-header">
           <xul:label
+            id="qrcode-title"
             class="qrcode-title"
           >
             {title()}
@@ -37,6 +40,8 @@ export function QRCodePanel() {
 
         <xul:vbox
           id="qrcode-img-vbox"
+          role="img"
+          aria-labelledby="qrcode-title"
         />
       </xul:vbox>
     </xul:panel>

@@ -123,3 +123,10 @@
 :root[uidensity] .tabbrowser-tab[context][class], .tabbrowser-tab[context][class] {
   min-width: -moz-available !important;
 }
+
+@media (forced-colors: active) {
+  #TabsToolbar,
+  .tabbrowser-tab {
+    forced-color-adjust: auto;
+  }
+}

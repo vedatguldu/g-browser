@@ -66,9 +66,11 @@ tab-group[data-floorp-stack] .floorp-stack-close {
   inset-inline-start: 6px;
   inset-block-start: 50%;
   transform: translateY(-50%);
-  width: 14px;
-  height: 14px;
-  padding: 1px;
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  min-height: 24px;
+  padding: 4px;
   border-radius: 3px;
   background-color: var(--tab-selected-bgcolor, rgba(70, 70, 75, 0.9));
   -moz-context-properties: fill;
@@ -96,11 +98,11 @@ tab-group[data-floorp-stack] .floorp-stack-icon {
   stroke: light-dark(var(--tab-group-color), var(--tab-group-color-invert));
 }
 
-tab-group[data-floorp-stack] .tab-group-label-container:hover .floorp-stack-icon {
+tab-group[data-floorp-stack] .tab-group-label-container:is(:hover, :focus-within) .floorp-stack-icon {
   display: none;
 }
 
-tab-group[data-floorp-stack] .tab-group-label-container:hover .floorp-stack-close {
+tab-group[data-floorp-stack] .tab-group-label-container:is(:hover, :focus-within) .floorp-stack-close {
   display: flex;
 }
 
@@ -422,16 +424,19 @@ tab-group[data-floorp-stack] .tab-group-label[data-floorp-count]::after {
 
 .floorp-stack-tab-close {
   display: none;
-  width: 14px;
-  height: 14px;
-  padding: 1px !important;
-  margin: 1px !important;
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  min-height: 24px;
+  padding: 4px !important;
+  margin: 0 !important;
+  box-sizing: border-box;
 
   /* The inner toolbarbutton icon renders at its natural 16px unless
      pinned — same 12px glyph as the top row's X. */
   & > .toolbarbutton-icon {
-    width: 12px !important;
-    height: 12px !important;
+    width: 16px !important;
+    height: 16px !important;
     padding: 0 !important;
   }
   border-radius: 3px;
@@ -448,11 +453,13 @@ tab-group[data-floorp-stack] .tab-group-label[data-floorp-count]::after {
   background-color: rgba(255, 255, 255, 0.2) !important;
 }
 
-.floorp-stack-tab:hover .floorp-stack-tab-icon {
+.floorp-stack-tab:hover .floorp-stack-tab-icon,
+.floorp-stack-tab:focus-within .floorp-stack-tab-icon {
   display: none;
 }
 
-.floorp-stack-tab:hover .floorp-stack-tab-close {
+.floorp-stack-tab:hover .floorp-stack-tab-close,
+.floorp-stack-tab:focus-within .floorp-stack-tab-close {
   display: flex;
 }
 
@@ -484,7 +491,7 @@ tab-group[data-floorp-stack] .tab-group-label[data-floorp-count]::after {
   transition: opacity 0.18s ease;
 }
 
-:root[floorp-hover-reload] .floorp-stack-tab:hover .floorp-stack-tab-refresh {
+:root[floorp-hover-reload] .floorp-stack-tab:is(:hover, :focus-within) .floorp-stack-tab-refresh {
   opacity: 1;
   pointer-events: auto;
 }
@@ -567,5 +574,32 @@ tab-group[data-floorp-stack] .tab-group-label[data-floorp-count]::after {
 @media (prefers-reduced-motion: reduce) {
   #floorp-stack-bar {
     animation: none;
+  }
+}
+
+.floorp-stack-tab:focus-visible,
+.floorp-stack-scrollbutton:focus-visible,
+#floorp-stack-newtab:focus-visible {
+  outline: 2px solid var(--focus-outline-color, #0a84ff) !important;
+  outline-offset: -2px !important;
+}
+
+.floorp-stack-tab-close:focus-visible,
+.floorp-stack-tab-refresh:focus-visible {
+  outline: 2px solid var(--focus-outline-color, #0a84ff) !important;
+  outline-offset: 1px !important;
+}
+
+@media (forced-colors: active) {
+  .floorp-stack-tab:focus-visible,
+  .floorp-stack-scrollbutton:focus-visible,
+  #floorp-stack-newtab:focus-visible,
+  .floorp-stack-tab-close:focus-visible,
+  .floorp-stack-tab-refresh:focus-visible {
+    outline: 2px solid Highlight !important;
+  }
+  .floorp-stack-tab[data-selected="true"] {
+    background: Highlight !important;
+    color: HighlightText !important;
   }
 }

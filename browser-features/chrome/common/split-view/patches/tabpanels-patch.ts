@@ -392,7 +392,7 @@ export function patchTabpanels(
       try {
         origRemoveTabsFromSplitview.call(this, tabs);
       } catch (e) {
-        logger.error(`[patch:removeTabsFromSplitview] original threw: ${e}`);
+        logger.error(`[patch:removeTabsFromSplitview] original threw status message: ${e}`);
       }
 
       // Direct cleanup of presentation state for dismissed panels.

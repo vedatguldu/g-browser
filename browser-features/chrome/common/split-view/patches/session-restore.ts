@@ -57,7 +57,7 @@ function initSessionStoreSplitPersistence(
         `[session-restore] persistTabAttribute("${SPLIT_VIEW_GROUP_ATTRIBUTE}", "${SPLIT_VIEW_PANE_INDEX_ATTRIBUTE}") registered`,
       );
     } catch (e) {
-      logger.error(`[session-restore] persistTabAttribute threw: ${e}`);
+      logger.error(`[session-restore] persistTabAttribute status message threw: ${e}`);
     }
     return;
   }
@@ -105,7 +105,7 @@ function setSplitViewGroupOnTab(
     try {
       ss.setCustomTabValue(el, SPLIT_VIEW_GROUP_SESSION_KEY, groupId);
     } catch (e) {
-      console.warn("[session-restore] setCustomTabValue failed", e);
+      console.warn("[session-restore] setCustomTabValue status message failed", e);
     }
   }
 }
@@ -153,7 +153,7 @@ function setPaneIndexOnTab(
         String(index),
       );
     } catch (e) {
-      console.warn("[session-restore] setCustomTabValue pane index failed", e);
+      console.warn("[session-restore] setCustomTabValue pane index status message failed", e);
     }
   }
 }
@@ -219,7 +219,7 @@ function readGroupLayoutStore() {
       Services.prefs.getStringPref(PREF_SPLIT_VIEW_SESSION_STATE, "{}"),
     );
   } catch (e) {
-    console.error("[session-restore] readGroupLayoutStore failed", e);
+    console.error("[session-restore] readGroupLayoutStore status message failed", e);
     return { groups: [] };
   }
 }
@@ -251,7 +251,7 @@ export function setPersistedGroupLayout(
       JSON.stringify(nextStore),
     );
   } catch (e) {
-    console.error("[session-restore] setPersistedGroupLayout failed", e);
+    console.error("[session-restore] setPersistedGroupLayout status message failed", e);
   }
 }
 
@@ -270,7 +270,7 @@ export function setPersistedGroupPaneSizes(
       JSON.stringify(nextStore),
     );
   } catch (e) {
-    console.error("[session-restore] setPersistedGroupPaneSizes failed", e);
+    console.error("[session-restore] setPersistedGroupPaneSizes status message failed", e);
   }
 }
 

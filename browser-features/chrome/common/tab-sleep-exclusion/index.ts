@@ -3,6 +3,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
+import i18next from "i18next";
 import { noraComponent, NoraComponentBase } from "#features-chrome/utils/base";
 import {
   DEFAULT_SETTINGS,
@@ -55,7 +56,7 @@ export default class TabSleepExclusion extends NoraComponentBase {
         };
       }
     } catch (error) {
-      console.error("[TabSleepExclusion] Failed to load settings:", error);
+      console.error("[TabSleepExclusion] Failed to load settings status message:", error);
       this.settings = { ...DEFAULT_SETTINGS };
     }
   }
@@ -95,9 +96,18 @@ export default class TabSleepExclusion extends NoraComponentBase {
 
     // Listen for tab URL changes
     const listener = {
-      onLocationChange: () => {
-        // Apply to all tabs on any location change
-        // This is simpler and more reliable than trying to get the specific tab
+      onLocationChange: (browser?: unknown) => {
+        if (browser) {
+          try {
+            const tab = gBrowser.getTabForBrowser(browser);
+            if (tab) {
+              this.updateTabDiscardability(tab);
+              return;
+            }
+          } catch {
+            // Fall back to applyToAllTabs if getTabForBrowser fails
+          }
+        }
         this.applyToAllTabs();
       },
     };
@@ -115,6 +125,41 @@ export default class TabSleepExclusion extends NoraComponentBase {
     }
   }
 
+  private setSleepDescription(tab: BrowserTab): void {
+    const desc = i18next.t("tabSleepExclusion.tabDescription", {
+      defaultValue: "Sleep protected",
+    });
+    const current = tab.getAttribute("aria-description");
+    if (!current) {
+      tab.setAttribute("aria-description", desc);
+    } else if (!current.includes(desc)) {
+      tab.setAttribute("aria-description", `${current}, ${desc}`);
+    }
+  }
+
+  private removeSleepDescription(tab: BrowserTab): void {
+    const desc = i18next.t("tabSleepExclusion.tabDescription", {
+      defaultValue: "Sleep protected",
+    });
+    const current = tab.getAttribute("aria-description");
+    if (!current) {
+      return;
+    }
+    if (current === desc) {
+      tab.removeAttribute("aria-description");
+    } else if (current.includes(desc)) {
+      const parts = current
+        .split(",")
+        .map((p) => p.trim())
+        .filter((p) => p !== desc && p.length > 0);
+      if (parts.length === 0) {
+        tab.removeAttribute("aria-description");
+      } else {
+        tab.setAttribute("aria-description", parts.join(", "));
+      }
+    }
+  }
+
   /**
    * Update the undiscardable attribute for a single tab.
    */
@@ -124,6 +169,7 @@ export default class TabSleepExclusion extends NoraComponentBase {
       if (tab.getAttribute("floorp-sleep-excluded") === "true") {
         tab.undiscardable = false;
         tab.removeAttribute("floorp-sleep-excluded");
+        this.removeSleepDescription(tab);
       }
       return;
     }
@@ -138,10 +184,12 @@ export default class TabSleepExclusion extends NoraComponentBase {
     if (shouldExclude) {
       tab.undiscardable = true;
       tab.setAttribute("floorp-sleep-excluded", "true");
+      this.setSleepDescription(tab);
     } else if (tab.getAttribute("floorp-sleep-excluded") === "true") {
       // Only remove our exclusion, don't override other exclusions
       tab.undiscardable = false;
       tab.removeAttribute("floorp-sleep-excluded");
+      this.removeSleepDescription(tab);
     }
   }
 

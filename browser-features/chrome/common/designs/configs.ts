@@ -132,7 +132,7 @@ export function getOldUICustomizationConfig() {
       chromeExtras: getOldChromeExtrasConfig(),
     };
   } catch (e) {
-    console.error("Failed to get UI customization config:", e);
+    console.error("Failed to get UI customization config status message:", e);
     return {
       navbar: {
         position: "top" as "bottom" | "top",
@@ -215,7 +215,7 @@ export function createDefaultOldObjectConfigs(): TFloorpDesignConfigs {
       uiCustomization: getOldUICustomizationConfig(),
     };
   } catch (e) {
-    console.error("Failed to create default old object configs:", e);
+    console.error("Failed to create default old object configs status message:", e);
     return {
       globalConfigs: {
         userInterface: "proton",
@@ -306,7 +306,7 @@ function createConfig(): [
     const mergedResult = zFloorpDesignConfigs.decode(merged);
     initialConfig = isRight(mergedResult) ? mergedResult.right : defaultConfig;
   } catch (e) {
-    console.error("Failed to parse initial design configs, using defaults:", e);
+    console.error("Failed to parse initial design configs status message, using defaults:", e);
   }
 
   const [config, setConfig] = createSignal(initialConfig);
@@ -331,7 +331,7 @@ function createConfig(): [
         setConfig(mergedResult.right);
       }
     } catch (e) {
-      console.error("Failed to parse design configs:", e);
+      console.error("Failed to parse design configs status message:", e);
     }
   }
 
@@ -342,7 +342,7 @@ function createConfig(): [
         JSON.stringify(config()),
       );
     } catch (e) {
-      console.error("Failed to save design configs:", e);
+      console.error("Failed to save design configs status message:", e);
     }
   });
 
@@ -356,11 +356,11 @@ function createConfig(): [
           updateConfigFromPref,
         );
       } catch (e) {
-        console.error("Failed to remove observer:", e);
+        console.error("Failed to remove observer status message:", e);
       }
     });
   } catch (e) {
-    console.error("Failed to add observer:", e);
+    console.error("Failed to add observer status message:", e);
   }
 
   return [config, setConfig];
@@ -387,7 +387,7 @@ function setGlobalDesignConfig<
     });
   } catch (e) {
     console.error(
-      `Failed to set global design config for key ${String(key)}:`,
+      `Failed to set global design config status message for key ${String(key)}:`,
       e,
     );
   }
@@ -411,7 +411,7 @@ export function setUICustomizationConfig<
     });
   } catch (e) {
     console.error(
-      `Failed to set UI customization config for category ${String(category)}:`,
+      `Failed to set UI customization config status message for category ${String(category)}:`,
       e,
     );
   }
@@ -440,7 +440,7 @@ export function updateUICustomizationSetting<
     });
   } catch (e) {
     console.error(
-      `Failed to update UI customization setting ${String(category)}.${String(
+      `Failed to update UI customization setting status message ${String(category)}.${String(
         setting,
       )}:`,
       e,
@@ -461,7 +461,7 @@ export function addUICustomizationCategory<T extends Record<string, unknown>>(
     });
   } catch (e) {
     console.error(
-      `Failed to add UI customization category ${categoryName}:`,
+      `Failed to add UI customization category status message ${categoryName}:`,
       e,
     );
   }
@@ -491,7 +491,7 @@ export function getUICustomizationSetting<T>(
     return defaultValue;
   } catch (e) {
     console.error(
-      `Error getting UI customization setting ${categoryName}.${settingName}:`,
+      `Error getting UI customization setting status message ${categoryName}.${settingName}:`,
       e,
     );
     return defaultValue;
@@ -546,7 +546,7 @@ export function updateChromeExtrasSetting(
     });
   } catch (e) {
     console.error(
-      `Failed to update chrome extras setting "${String(key)}":`,
+      `Failed to update chrome extras setting status message "${String(key)}":`,
       e,
     );
   }

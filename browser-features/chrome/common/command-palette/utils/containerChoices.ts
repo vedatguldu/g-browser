@@ -104,7 +104,7 @@ export async function loadContainerChoices(
       defaultIndex: 0,
     };
   } catch (e) {
-    console.error("[command-palette] Failed to load containers:", e);
+    console.error("[command-palette] Failed to load containers status message:", e);
     if (!workspaceSnapshotIsCurrent()) {
       return loadContainerChoices(targetWindow);
     }

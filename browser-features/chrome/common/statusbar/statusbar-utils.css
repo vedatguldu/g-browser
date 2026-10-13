@@ -32,3 +32,10 @@
 #toggle_nora-statusbar {
   display: none !important;
 }
+
+@media (forced-colors: active) {
+  #nora-statusbar {
+    forced-color-adjust: auto;
+    border-top: 1px solid ButtonText !important;
+  }
+}

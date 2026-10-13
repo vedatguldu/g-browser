@@ -213,7 +213,7 @@ function createConfig(): [
       );
       return normalizeConfig(parsed);
     } catch (e) {
-      console.error("Failed to parse mouse gesture config, using default", e);
+      console.error("Failed to parse mouse gesture config status message, using default", e);
       return defaultConfig;
     }
   };
@@ -242,7 +242,7 @@ function createConfig(): [
         ),
       );
     } catch (e) {
-      console.error("Failed to parse mouse gesture config:", e);
+      console.error("Failed to parse mouse gesture config status message:", e);
       setConfig(defaultConfig);
       Services.prefs.setStringPref(MOUSE_GESTURE_CONFIG_PREF, strDefaultConfig);
     }

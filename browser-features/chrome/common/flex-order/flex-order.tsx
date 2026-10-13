@@ -212,6 +212,9 @@ export namespace gFlexOrder {
     render(() => (
       <style id="floorp-flex-order-style" jsx>
         {`
+      #browser {
+        reading-flow: flex-visual;
+      }
       #${floorpSidebarId} {
         order: ${orders().floorpSidebar} !important;
       }

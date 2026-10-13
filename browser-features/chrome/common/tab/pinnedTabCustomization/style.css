@@ -5,7 +5,10 @@
 
 .tab-label-container[pinned] {
   width: unset !important;
-  max-width: 60px !important;
+  max-width: 14ch !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
 }
 
 .tab-throbber[pinned],
@@ -14,4 +17,20 @@
 .tab-sharing-icon-overlay[pinned],
 .tab-icon-overlay[pinned] {
   margin-inline-end: 5.5px !important;
+}
+
+@media (forced-colors: active) {
+  .tabbrowser-tab[pinned] {
+    outline: 1px solid ButtonBorder !important;
+  }
+  .tabbrowser-tab[pinned][selected="true"] {
+    outline: 2px solid Highlight !important;
+  }
+}
+
+@media (prefers-contrast: more) {
+  .tabbrowser-tab[pinned]:focus-visible {
+    outline: 2px solid Highlight !important;
+    outline-offset: -2px !important;
+  }
 }

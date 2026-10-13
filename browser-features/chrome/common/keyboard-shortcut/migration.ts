@@ -93,7 +93,7 @@ export function migrateLegacyConfig(): KeyboardShortcutConfig | null {
       shortcuts,
     };
   } catch (e) {
-    console.error("Failed to migrate legacy keyboard shortcut config:", e);
+    console.error("Failed to migrate legacy keyboard shortcut config status message:", e);
     return null;
   }
 }
@@ -104,6 +104,6 @@ export function clearLegacyConfig() {
       Services.prefs.clearUserPref(LEGACY_PREF);
     }
   } catch (e) {
-    console.error("Failed to clear legacy keyboard shortcut config:", e);
+    console.error("Failed to clear legacy keyboard shortcut config status message:", e);
   }
 }

@@ -50,12 +50,21 @@ browser[type="content"] > html {
 
 :root[privatebrowsingmode] #fxa-toolbar-menu-button {
   display: inherit !important;
-  background: linear-gradient(90deg, #9059ff 0%, #ff4aa2 52.08%, #ffbd4f 100%);
+  background: #592acb !important;
   margin: auto;
-  color: var(--toolbar-background-color, var(--toolbar-bgcolor)) !important;
-  fill: currentColor !important;
+  color: #ffffff !important;
+  fill: #ffffff !important;
   border-radius: 15px;
   max-height: 25px;
+}
+
+@media (forced-colors: active) {
+  :root[privatebrowsingmode] #fxa-toolbar-menu-button {
+    background: ButtonFace !important;
+    color: ButtonText !important;
+    fill: ButtonText !important;
+    border: 1px solid ButtonText !important;
+  }
 }
 
 :root[privatebrowsingmode] .private-text {
@@ -261,8 +270,28 @@ browser[type="content"] > html {
 #tabbrowser-tabbox {
   outline: none !important;
 
-  & * {
+  & *:not(:focus-visible) {
     outline: none !important;
+  }
+
+  & *:focus-visible {
+    outline: 2px solid currentColor !important;
+    outline-offset: 2px !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tabbrowser-tab[data-floorp-os-automated="true"],
+  .tabbrowser-tab[data-floorp-os-automated="true"]::before {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+@media (forced-colors: active) {
+  .tabbrowser-tab[data-floorp-os-automated="true"] {
+    border: 2px solid Highlight !important;
+    box-shadow: none !important;
   }
 }
 

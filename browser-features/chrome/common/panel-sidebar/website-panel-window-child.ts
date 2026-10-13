@@ -74,7 +74,7 @@ export class WebsitePanelWindowChild {
       return parsed.data ?? [];
     } catch (error) {
       console.error(
-        "[WebsitePanelWindowChild] Failed to read panel data:",
+        "[WebsitePanelWindowChild] Failed to read panel data status message:",
         error,
       );
       return [];
@@ -130,7 +130,7 @@ export class WebsitePanelWindowChild {
       await this.waitForRequiredElements();
       this.createWebpanelWindow();
     } catch (error) {
-      console.error("[WebsitePanelWindowChild] Failed to initialize:", error);
+      console.error("[WebsitePanelWindowChild] Failed to initialize status message:", error);
     }
   }
 

@@ -94,8 +94,14 @@
   border-radius: 2px;
 }
 
-.floorp-split-handle:hover::after {
+.floorp-split-handle:hover::after,
+.floorp-split-handle:focus-visible::after {
   opacity: 1;
+}
+
+.floorp-split-handle:focus-visible {
+  outline: 2px solid var(--focus-outline-color, Highlight) !important;
+  outline-offset: 1px !important;
 }
 
 /* Horizontal drag handle (between columns) */
@@ -146,8 +152,22 @@
   border-radius: 2px;
 }
 
-.floorp-grid-handle:hover::after {
+.floorp-grid-handle:hover::after,
+.floorp-grid-handle:focus-visible::after {
   opacity: 1;
+}
+
+.floorp-grid-handle:focus-visible {
+  outline: 2px solid var(--focus-outline-color, Highlight) !important;
+  outline-offset: 1px !important;
+}
+
+@media (forced-colors: active) {
+  .floorp-split-handle::after,
+  .floorp-grid-handle::after {
+    background: ButtonText !important;
+    opacity: 1 !important;
+  }
 }
 
 /* Vertical grid handle (column separator) */

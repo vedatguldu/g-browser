@@ -71,10 +71,53 @@ export class PanelSidebarElem {
             "--panel-sidebar-display",
             "flex",
           );
+          const announcer = document?.getElementById("floorp-a11y-live-announcer");
+          if (announcer) {
+            announcer.textContent = "";
+            setTimeout(() => {
+              announcer.textContent =
+                "Panel opened. Press F6 or Ctrl+Alt+W to return to browser tabs.";
+            }, 50);
+          }
         }
       });
     if (owner) runWithOwner(owner, execEffect);
     else createRoot(execEffect);
+
+    // WCAG 2.1.2: Panel Sidebar keyboard trap escape handler
+    const handlePanelKeyboardEscape = (e: KeyboardEvent) => {
+      if (!isPanelSidebarVisible()) return;
+
+      const panelBox = document?.getElementById("panel-sidebar-box");
+      if (!panelBox) return;
+
+      const activeEl = document?.activeElement;
+      const isInsidePanel =
+        panelBox.contains(activeEl) ||
+        activeEl?.closest?.("#panel-sidebar-box") != null;
+
+      const isEscapeKey =
+        e.code === "F6" ||
+        ((e.ctrlKey || e.metaKey) && e.altKey && e.code === "KeyW");
+
+      if (isEscapeKey && isInsidePanel) {
+        e.preventDefault();
+        e.stopPropagation();
+        const gBrowser = (globalThis as unknown as {
+          gBrowser?: {
+            selectedBrowser?: { focus?: () => void };
+            tabContainer?: { focus?: () => void };
+          };
+        }).gBrowser;
+        if (gBrowser?.selectedBrowser?.focus) {
+          gBrowser.selectedBrowser.focus();
+        } else if (gBrowser?.tabContainer?.focus) {
+          gBrowser.tabContainer.focus();
+        }
+      }
+    };
+
+    window?.addEventListener("keydown", handlePanelKeyboardEscape, true);
 
     const execEnabledEffect = () => {
       createEffect(

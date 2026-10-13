@@ -65,7 +65,7 @@ export function forceCleanupDragState(
   } catch (err) {
     // Never throw from a safety-net cleanup; log and continue.
     try {
-      logger?.error("[force-cleanup] unexpected error:", err);
+      logger?.error("[force-cleanup] unexpected error status message:", err);
     } catch {
       // ignore logger failures
     }

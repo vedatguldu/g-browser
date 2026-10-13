@@ -10,10 +10,11 @@ import { useStandardControls } from "./control-theme.ts";
 const StandardSwitch = forwardRef<HTMLInputElement, SwitchProps>(
   function StandardSwitch({ className = "", size = "md", ...props }, ref) {
     const [checked, setChecked] = useState(props.defaultChecked ?? false);
+    const isChecked = props.checked ?? checked;
     return (
       <ChakraSwitch.Root
         as="span"
-        checked={props.checked ?? checked}
+        checked={isChecked}
         disabled={props.disabled}
         readOnly={props.readOnly}
         className={`${styles.standardSwitch} ${className}`}
@@ -24,9 +25,13 @@ const StandardSwitch = forwardRef<HTMLInputElement, SwitchProps>(
       >
         <input
           {...props}
+          id={props.id}
+          aria-label={props["aria-label"]}
           ref={ref}
           type="checkbox"
           role="switch"
+          aria-checked={isChecked}
+          aria-disabled={props.disabled ? true : undefined}
           className={styles.switchInput}
           onChange={(event) => {
             setChecked(event.currentTarget.checked);
@@ -56,13 +61,18 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
       />
     );
   }
+  const isChecked = props.checked ?? props.defaultChecked ?? false;
   return (
     <span className={`${styles.switch} ${className}`}>
       <input
         {...props}
+        id={props.id}
+        aria-label={props["aria-label"]}
         ref={ref}
         type="checkbox"
         role="switch"
+        aria-checked={isChecked}
+        aria-disabled={props.disabled ? true : undefined}
         className={styles.switchInput}
       />
       <span className={styles.track} aria-hidden="true">

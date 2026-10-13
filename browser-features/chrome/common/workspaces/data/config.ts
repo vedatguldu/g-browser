@@ -141,7 +141,7 @@ function createConfig(): [
       }
     } catch (e) {
       console.error(
-        "Failed to parse workspace configuration from preferences:",
+        "Failed to parse workspace configuration from preferences status message:",
         e,
       );
     }

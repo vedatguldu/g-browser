@@ -55,7 +55,7 @@ function matchesAny(element: Element, selectors: readonly string[]): boolean {
       if (element.matches(selector)) return true;
     } catch (error) {
       console.error(
-        "[ContextMenuCustomizer] Ignoring invalid registry selector",
+        "[ContextMenuCustomizer] Ignoring invalid registry selector status message",
         selector,
         error,
       );

@@ -91,7 +91,7 @@ export class ProxyDragLifecycle {
       drag.controller._resetTabsAfterDrop(drag.tab);
       if (drag.tab._dragData === drag.data) delete drag.tab._dragData;
     } catch (error) {
-      console.error("[tab-stacks] Proxy drag recovery failed:", error);
+      console.error("[tab-stacks] Proxy drag recovery failed status message:", error);
     } finally {
       this.environment.finished();
     }

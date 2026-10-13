@@ -1,14 +1,19 @@
 export type { DropDownOption, DropDownProps } from "./types.ts";
 import type { DropDownProps } from "./types.ts";
-import { forwardRef } from "react";
+import { forwardRef, useId } from "react";
 import styles from "./controls.module.css";
 import type { SelectProps } from "./types.ts";
 import { NativeSelect } from "@chakra-ui/react";
 import { useStandardControls } from "./control-theme.ts";
 
 export const Select = forwardRef<HTMLSelectElement, SelectProps>(
-  function Select({ className = "", ...props }, ref) {
+  function Select({ className = "", label, labelId, id: explicitId, ...props }, ref) {
+    const generatedId = useId();
+    const id = explicitId || generatedId;
     const standard = useStandardControls();
+    const ariaLabel = props["aria-label"] || label;
+    const ariaLabelledBy = props["aria-labelledby"] || labelId;
+
     if (standard && !props.multiple && !props.size) {
       return (
         <NativeSelect.Root
@@ -17,7 +22,13 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           colorPalette="purple"
           minW="0"
         >
-          <NativeSelect.Field {...props} ref={ref} />
+          <NativeSelect.Field
+            {...props}
+            id={id}
+            aria-label={ariaLabel}
+            aria-labelledby={ariaLabelledBy}
+            ref={ref}
+          />
           <NativeSelect.Indicator />
         </NativeSelect.Root>
       );
@@ -25,6 +36,9 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     return (
       <select
         {...props}
+        id={id}
+        aria-label={ariaLabel}
+        aria-labelledby={ariaLabelledBy}
         ref={ref}
         className={`${styles.select} ${className}`}
       />
@@ -33,9 +47,14 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
 );
 
 export const DropDown = forwardRef<HTMLSelectElement, DropDownProps>(
-  function DropDown({ options, className = "", ...props }, ref) {
+  function DropDown({ options, className = "", label, labelId, id: explicitId, ...props }, ref) {
+    const generatedId = useId();
+    const id = explicitId || generatedId;
     const standard = useStandardControls();
     const icon = options.find((option) => option.value === props.value)?.icon;
+    const ariaLabel = props["aria-label"] || label;
+    const ariaLabelledBy = props["aria-labelledby"] || labelId;
+
     if (standard) {
       return (
         <div className={`${styles.selectWrapper} ${className}`}>
@@ -49,11 +68,14 @@ export const DropDown = forwardRef<HTMLSelectElement, DropDownProps>(
           >
             <NativeSelect.Field
               {...props}
+              id={id}
+              aria-label={ariaLabel}
+              aria-labelledby={ariaLabelledBy}
               ref={ref}
               paddingInlineStart={icon ? "10" : undefined}
             >
-              {options.map(({ value, label }) => (
-                <option key={value} value={value}>{label}</option>
+              {options.map(({ value, label: optLabel }) => (
+                <option key={value} value={value}>{optLabel}</option>
               ))}
             </NativeSelect.Field>
             <NativeSelect.Indicator />
@@ -68,12 +90,15 @@ export const DropDown = forwardRef<HTMLSelectElement, DropDownProps>(
         )}
         <select
           {...props}
+          id={id}
+          aria-label={ariaLabel}
+          aria-labelledby={ariaLabelledBy}
           ref={ref}
           className={`${styles.select} ${className}`}
           data-has-icon={!!icon}
         >
-          {options.map(({ value, label }) => (
-            <option key={value} value={value}>{label}</option>
+          {options.map(({ value, label: optLabel }) => (
+            <option key={value} value={value}>{optLabel}</option>
           ))}
         </select>
       </div>

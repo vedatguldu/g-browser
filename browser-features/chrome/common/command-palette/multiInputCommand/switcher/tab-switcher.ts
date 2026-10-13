@@ -74,7 +74,7 @@ export function loadTabs(): Promise<
 
     return Promise.resolve({ choices, defaultIndex });
   } catch (err) {
-    console.error("[TabSwitcher] Failed to load tabs", err);
+    console.error("[TabSwitcher] Failed to load tabs status message", err);
     return Promise.resolve([]);
   }
 }
@@ -122,7 +122,7 @@ export const tabSwitcherCommand: PaletteCommand = {
         gBrowser.selectedTab = tab;
       }
     } catch (err) {
-      console.error("[TabSwitcher] Failed to switch tab", err);
+      console.error("[TabSwitcher] Failed to switch tab status message", err);
     }
   },
 };

@@ -36,16 +36,29 @@ export namespace BrowserActionUtils {
       return;
     }
     (async () => {
+      let resolvedLabel: string | null = null;
+      if (l10nId) {
+        try {
+          resolvedLabel = (await document?.l10n?.formatValue(l10nId)) ?? null;
+        } catch {
+          resolvedLabel = null;
+        }
+      }
+
       CustomizableUI.createWidget({
         id: widgetId,
         type: "button",
-        tooltiptext: l10nId ? await document.l10n?.formatValue(l10nId) : null,
-        label: l10nId ? await document.l10n?.formatValue(l10nId) : null,
+        tooltiptext: resolvedLabel,
+        label: resolvedLabel,
         removable: true,
         onCommand: () => {
           onCommandFunc?.();
         },
         onCreated: (aNode: XULElement) => {
+          aNode.setAttribute("role", "button");
+          if (resolvedLabel) {
+            aNode.setAttribute("aria-label", resolvedLabel);
+          }
           onCreatedFunc?.(aNode);
         },
         defaultArea: area ?? undefined,
@@ -59,7 +72,7 @@ export namespace BrowserActionUtils {
         await (CustomizableUI.readyPromise ?? Promise.resolve());
       } catch (error) {
         console.error(
-          "Failed waiting for CustomizableUI readiness for",
+          "Failed waiting for CustomizableUI readiness status message for",
           widgetId,
           error,
         );
@@ -112,14 +125,32 @@ export namespace BrowserActionUtils {
 
     const owner = getOwner();
     (async () => {
+      let resolvedTooltip = "";
+      let resolvedLabel = "";
+      if (l10nId) {
+        try {
+          const val = await document?.l10n?.formatValue(l10nId);
+          if (typeof val === "string") {
+            resolvedTooltip = val;
+            resolvedLabel = val;
+          }
+        } catch {
+          // Fallback or ignore
+        }
+      }
+
       CustomizableUI.createWidget({
         id: widgetId,
         type: "view",
         viewId: targetViewId,
-        tooltiptext: document?.l10n?.formatValue(l10nId) ?? "",
-        label: document?.l10n?.formatValue(l10nId) ?? "",
+        tooltiptext: resolvedTooltip,
+        label: resolvedLabel,
         removable: true,
         onCreated: (aNode: XULElement) => {
+          aNode.setAttribute("role", "button");
+          if (resolvedLabel) {
+            aNode.setAttribute("aria-label", resolvedLabel);
+          }
           createRoot(() => onCreatedFunc?.(aNode), owner);
         },
         onViewShowing: (event: Event) => {
@@ -132,7 +163,7 @@ export namespace BrowserActionUtils {
         await (CustomizableUI.readyPromise ?? Promise.resolve());
       } catch (error) {
         console.error(
-          "Failed waiting for CustomizableUI readiness for",
+          "Failed waiting for CustomizableUI readiness status message for",
           widgetId,
           error,
         );

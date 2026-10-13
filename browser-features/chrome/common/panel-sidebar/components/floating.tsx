@@ -91,6 +91,8 @@ export class PanelSidebarFloating {
       this.applyStoredPositionToSidebarBox();
       document.removeEventListener("mousedown", this.handleOutsideClick, true);
       document.addEventListener("mousedown", this.handleOutsideClick, true);
+      document.removeEventListener("keydown", this.handleKeyDown, true);
+      document.addEventListener("keydown", this.handleKeyDown, true);
     });
   }
 
@@ -105,6 +107,11 @@ export class PanelSidebarFloating {
     document?.removeEventListener(
       "mousedown",
       this.handleOutsideClick,
+      true,
+    );
+    document?.removeEventListener(
+      "keydown",
+      this.handleKeyDown,
       true,
     );
     this.userResizedHeight = false;
@@ -167,6 +174,60 @@ export class PanelSidebarFloating {
     }
 
     header.style.setProperty("cursor", "move");
+    header.setAttribute("tabindex", "0");
+    header.setAttribute("role", "region");
+    header.setAttribute(
+      "aria-label",
+      "Floating panel header - Use arrow keys to move panel",
+    );
+
+    header.addEventListener("keydown", (e: KeyboardEvent) => {
+      const target = e.target as HTMLElement;
+      if (
+        target.tagName === "button" ||
+        target.tagName === "BUTTON" ||
+        target.closest(".panel-sidebar-actions")
+      ) {
+        return;
+      }
+
+      const step = e.shiftKey ? 50 : 15;
+      let deltaX = 0;
+      let deltaY = 0;
+
+      if (e.key === "ArrowLeft") deltaX = -step;
+      else if (e.key === "ArrowRight") deltaX = step;
+      else if (e.key === "ArrowUp") deltaY = -step;
+      else if (e.key === "ArrowDown") deltaY = step;
+      else return;
+
+      e.preventDefault();
+
+      const startLeft =
+        Number.parseInt(sidebarBox.style.getPropertyValue("left") || "0", 10) ||
+        sidebarBox.getBoundingClientRect().left;
+      const startTop =
+        Number.parseInt(sidebarBox.style.getPropertyValue("top") || "0", 10) ||
+        sidebarBox.getBoundingClientRect().top;
+
+      const browserW = document?.getElementById("browser")?.clientWidth ??
+        globalThis.innerWidth;
+      const browserH = document?.getElementById("browser")?.clientHeight ??
+        globalThis.innerHeight;
+
+      const newLeft = Math.max(
+        0,
+        Math.min(browserW - sidebarBox.clientWidth, startLeft + deltaX),
+      );
+      const newTop = Math.max(
+        0,
+        Math.min(browserH - sidebarBox.clientHeight, startTop + deltaY),
+      );
+
+      sidebarBox.style.setProperty("left", `${newLeft}px`);
+      sidebarBox.style.setProperty("top", `${newTop}px`);
+      this.savePosition();
+    });
 
     header.addEventListener("mousedown", (e: MouseEvent) => {
       if (this.isDraggingHeader) {
@@ -441,6 +502,29 @@ export class PanelSidebarFloating {
       !clickedElementIsWebTypeBrowser
     ) {
       setSelectedPanelId(null);
+    }
+  };
+
+  private handleKeyDown = (event: KeyboardEvent) => {
+    if (!isFloating()) {
+      return;
+    }
+
+    if (event.key === "Escape") {
+      const sidebarBox = document?.getElementById("panel-sidebar-box");
+      const activeElement = document?.activeElement;
+      if (
+        sidebarBox?.contains(activeElement) ||
+        activeElement === document?.body
+      ) {
+        event.preventDefault();
+        setSelectedPanelId(null);
+        const selectBox = document?.getElementById("panel-sidebar-select-box");
+        const activeBtn = selectBox?.querySelector(
+          "button, [role='button'], toolbarbutton",
+        ) as HTMLElement | null;
+        activeBtn?.focus();
+      }
     }
   };
 

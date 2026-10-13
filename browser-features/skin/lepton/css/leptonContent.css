@@ -380,8 +380,10 @@
     .top-site-outer .context-menu-button {
       top: 0px !important; /* Original: -20px */
       right: 0px !important;
-      width: 22px !important;
-      height: 22px !important;
+      width: 24px !important;
+      height: 24px !important;
+      min-width: 24px !important;
+      min-height: 24px !important;
     }
     .top-site-outer .context-menu {
       top: 16.75px !important; /* Original: 6.75px */
@@ -4132,8 +4134,10 @@
     .top-site-outer .context-menu-button {
       top: 0px !important; /* Original: -20px */
       right: 0px !important;
-      width: 22px !important;
-      height: 22px !important;
+      width: 24px !important;
+      height: 24px !important;
+      min-width: 24px !important;
+      min-height: 24px !important;
     }
     .top-site-outer .context-menu {
       top: 16.75px !important; /* Original: 6.75px */
@@ -7620,3 +7624,73 @@
     }
   }
 }
+
+/* Universal High Contrast & Reduced Motion layer for Content & In-Content Pages */
+@media (forced-colors: active) {
+  :root,
+  body,
+  dialog,
+  button,
+  input,
+  select,
+  textarea {
+    forced-color-adjust: auto !important;
+    background-color: Canvas !important;
+    color: CanvasText !important;
+    border-color: CanvasText !important;
+  }
+
+  button:hover,
+  button:focus-visible,
+  select:focus-visible,
+  input:focus-visible {
+    outline: 2px solid Highlight !important;
+    outline-offset: 1px !important;
+  }
+
+  a {
+    color: LinkText !important;
+  }
+
+  a:visited {
+    color: VisitedText !important;
+  }
+
+  a:active {
+    color: ActiveText !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Universal Accessible Keyboard Focus Indicators for Content Pages (WCAG 2.4.7 & 2.4.11 Level AA/AAA) */
+:root {
+  --floorp-focus-ring-color: #0061e0;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --floorp-focus-ring-color: #45a1ff;
+  }
+}
+
+button:focus-visible,
+select:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+a:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--floorp-focus-ring-color) !important;
+  outline-offset: 2px !important;
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--floorp-focus-ring-color) 35%, transparent) !important;
+}
+
+

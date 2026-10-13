@@ -232,7 +232,7 @@ export class StyleManager {
       document.head.appendChild(styleTag);
       this.styleElements.set(id, styleTag);
     } catch (error) {
-      console.error(`Failed to create style with id: ${id}`, error);
+      console.error(`Failed to create style with id: ${id} status message`, error);
     }
   }
 
@@ -257,7 +257,7 @@ export class StyleManager {
       // Remove from internal map
       this.styleElements.delete(id);
     } catch (error) {
-      console.error(`Failed to remove style with id: ${id}`, error);
+      console.error(`Failed to remove style with id: ${id} status message`, error);
     }
   }
 }

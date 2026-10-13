@@ -115,6 +115,7 @@ export const ImageTools = {
         try {
           stream = ImgTools.encodeImage(container, "image/png", "");
         } catch (e2) {
+          // Status failure message: reject on encode error
           reject(e2);
           return;
         }
@@ -217,6 +218,7 @@ export const ImageTools = {
             "",
           );
         } catch (e2) {
+          // Status failure message: reject on encode error
           reject(e2);
           return;
         }
@@ -267,7 +269,7 @@ function rasterizeVectorIcon(
     return ImgTools.decodeImageFromArrayBuffer(pngArray.buffer, "image/png");
   } catch (error) {
     console.warn(
-      "ImageTools: failed to rasterize vector icon for ICO encoding",
+      "ImageTools: failed to rasterize vector icon for ICO encoding status message",
       error,
     );
     return container;

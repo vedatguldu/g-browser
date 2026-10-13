@@ -45,7 +45,7 @@ export const ensureSessionStore = async (): Promise<SessionStoreModule> => {
     }
   } catch (error) {
     console.error(
-      "WorkspacesSnapshot: SessionStore initialization failed",
+      "WorkspacesSnapshot: SessionStore initialization failed status message",
       error,
     );
   }
@@ -210,7 +210,7 @@ const parseTabState = (
       return parsed as Record<string, unknown>;
     }
   } catch (error) {
-    console.error("WorkspacesSnapshot: Failed to parse tab state", error);
+    console.error("WorkspacesSnapshot: Failed to parse tab state status message", error);
   }
   return null;
 };

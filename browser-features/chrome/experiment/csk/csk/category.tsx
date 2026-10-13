@@ -14,7 +14,7 @@ export function category() {
       data-l10n-attrs="tooltiptext"
       align="center"
     >
-      <xul:image class="category-icon" />
+      <xul:image class="category-icon" aria-hidden="true" />
       <xul:label
         class="category-name"
         flex="1"

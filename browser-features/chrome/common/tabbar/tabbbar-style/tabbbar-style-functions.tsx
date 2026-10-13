@@ -91,6 +91,7 @@ export namespace gTabbarStyleFunctions {
     ) as XULElement;
 
     tabbarElement?.setAttribute("hidden", "true");
+    tabbarElement?.setAttribute("aria-hidden", "true");
     navbarElement?.appendChild(windowManageContainer);
     checkPaddingEnabled();
   }
@@ -122,6 +123,7 @@ export namespace gTabbarStyleFunctions {
 
     if (browserElement && tabbarElement) {
       browserElement.after(tabbarElement);
+      tabbarElement.setAttribute("aria-label", "Tabs toolbar (bottom)");
     }
 
     if (panelUIMenuButton) {

@@ -87,12 +87,16 @@ export function PopupToolbarElement(props: {
           <xul:toolbarbutton
             id={`workspace-${props.workspaceId}`}
             label={ws().name}
+            aria-label={ws().name}
+            tooltiptext={ws().name}
+            aria-pressed={props.isSelected ? "true" : "false"}
             context="workspaces-toolbar-item-context-menu"
             class="toolbarbutton-1 chromeclass-toolbar-additional workspaceButton"
             style={{
               "list-style-image": `url(${icon()})`,
             }}
             closemenu="none"
+            aria-selected={props.isSelected ? "true" : "false"}
             data-selected={props.isSelected}
             data-workspaceId={props.workspaceId}
             data-has-container={hasContainer() ? "true" : "false"}
@@ -103,6 +107,20 @@ export function PopupToolbarElement(props: {
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
             onDrop={handleDrop}
+            onKeyDown={(event: KeyboardEvent) => {
+              if (event.altKey && (event.key === "ArrowUp" || event.key === "ArrowDown")) {
+                event.preventDefault();
+                event.stopPropagation();
+                const order = workspacesDataStore.order;
+                const currentIndex = order.indexOf(props.workspaceId);
+                if (currentIndex !== -1) {
+                  const targetIndex = event.key === "ArrowUp" ? currentIndex - 1 : currentIndex + 1;
+                  if (targetIndex >= 0 && targetIndex < order.length) {
+                    props.ctx.reorderWorkspaceTo(props.workspaceId, targetIndex);
+                  }
+                }
+              }
+            }}
             onCommand={() => {
               props.ctx.changeWorkspace(props.workspaceId);
             }}

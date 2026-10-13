@@ -58,7 +58,7 @@ function segmentQuery(query: string): string[] {
       const segments = segmentJapaneseText(trimmed);
       if (segments.length > 1) return segments;
     } catch (error) {
-      console.error("[CommandPalette]", error);
+      console.error("[CommandPalette] Fuzzy matching status message:", error);
     }
   }
 

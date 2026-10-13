@@ -115,6 +115,11 @@ function testUpdateTabDiscardabilitySetsAndClearsMarker(): void {
     "true",
     "matched tab should have floorp-sleep-excluded marker",
   );
+  assertEquals(
+    tab.getAttribute("aria-description"),
+    "Sleep protected",
+    "matched tab should have aria-description",
+  );
 
   subject.settings = {
     enabled: false,
@@ -130,6 +135,11 @@ function testUpdateTabDiscardabilitySetsAndClearsMarker(): void {
     tab.getAttribute("floorp-sleep-excluded"),
     null,
     "disabled setting should clear marker",
+  );
+  assertEquals(
+    tab.getAttribute("aria-description"),
+    null,
+    "disabled setting should clear aria-description",
   );
 }
 
@@ -711,6 +721,11 @@ function testUpdateTabDiscardabilityClearsExclusionWhenNoLongerMatching(): void 
     tab.getAttribute("floorp-sleep-excluded"),
     null,
     "should clear marker when pattern no longer matches",
+  );
+  assertEquals(
+    tab.getAttribute("aria-description"),
+    null,
+    "should clear aria-description when pattern no longer matches",
   );
 }
 

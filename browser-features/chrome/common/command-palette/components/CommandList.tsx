@@ -117,7 +117,14 @@ export function CommandList(props: CommandListProps) {
         </div>
       }
     >
-      <div class="command-palette-list" role="listbox">
+      <div
+        id="command-palette-listbox"
+        class="command-palette-list"
+        role="listbox"
+        aria-label={i18next.t("commandPalette.listLabel", {
+          defaultValue: "Commands",
+        })}
+      >
         <For each={grouped()}>
           {(group, groupIdx) => (
             <>
@@ -130,6 +137,7 @@ export function CommandList(props: CommandListProps) {
                     getGlobalIndex(groupIdx(), itemIdx());
                   return (
                     <CommandItem
+                      id={`cp-item-${globalIdx()}`}
                       command={cmd}
                       isSelected={props.selectedIndex === globalIdx()}
                       query={props.query}

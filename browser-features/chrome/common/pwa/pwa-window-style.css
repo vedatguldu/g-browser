@@ -83,7 +83,12 @@
 
 /** Search bar & URL bar **/
 #identity-box,
-#permissions-granted-icon,
+#permissions-granted-icon {
+  z-index: 2;
+  pointer-events: auto !important;
+  margin-inline-end: 4px;
+}
+
 #tracking-protection-icon-container {
   display: none !important;
 }
@@ -148,6 +153,13 @@
 #ssb-container-indicator[data-container-color="gray"],
 #ssb-container-indicator[data-container-color="grey"] {
   border-left-color: var(--identity-color-gray, #9e9e9e);
+}
+
+@media (forced-colors: active) {
+  #ssb-container-indicator {
+    border-left: 4px solid Highlight !important;
+    outline: 1px solid ButtonBorder !important;
+  }
 }
 
 /* TaskBarTabs */

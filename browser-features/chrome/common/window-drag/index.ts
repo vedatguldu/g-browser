@@ -38,11 +38,29 @@ export default class WindowDrag extends NoraComponentBase {
 
     let session: DragSessionState = emptyDragSession();
 
-    const chordHeld = (e: MouseEvent): boolean =>
-      IS_MAC ? e.metaKey && e.altKey : e.ctrlKey && e.altKey;
+    const chordHeld = (e: MouseEvent): boolean => {
+      if (IS_MAC) {
+        return e.metaKey && e.altKey && !e.ctrlKey && !e.shiftKey;
+      }
+      // Windows / Linux: Ctrl + Alt without AltGraph, Shift, or Meta/OS
+      if (
+        typeof e.getModifierState === "function" &&
+        (e.getModifierState("AltGraph") || e.getModifierState("OS"))
+      ) {
+        return false;
+      }
+      return e.ctrlKey && e.altKey && !e.metaKey && !e.shiftKey;
+    };
 
     const onMouseDown = (e: MouseEvent) => {
       if (e.button !== 0 || !chordHeld(e)) return;
+      // Do not intercept events inside web content area to protect assistive technology navigation
+      if (
+        e.target instanceof Element &&
+        e.target.closest("#browser, #tabbrowser-tabpanels, browser[type='content']")
+      ) {
+        return;
+      }
       const result = reduceDragSession(session, {
         type: "down",
         screenX: e.screenX,

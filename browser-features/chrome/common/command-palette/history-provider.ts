@@ -16,7 +16,7 @@ function navigateToUrl(win: Window, url: string): void {
       triggeringPrincipal: principal,
     });
   } catch (e) {
-    console.error("[command-palette] History navigation failed", e);
+    console.error("[command-palette] History navigation failed status message", e);
   }
 }
 
@@ -64,7 +64,7 @@ export function searchHistory(
 
       resolve(commands);
     } catch (e) {
-      console.error("[command-palette] History search failed", e);
+      console.error("[command-palette] History search failed status message", e);
       resolve([]);
     }
   });

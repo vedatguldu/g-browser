@@ -66,7 +66,7 @@ function persistSeed(enabled: boolean): void {
   try {
     Services.prefs.setBoolPref(ZEN_MODE_PREF, enabled);
   } catch (error) {
-    console.error("[zen-mode] Failed to persist Zen mode seed:", error);
+    console.error("[zen-mode] Failed to persist Zen mode seed status message:", error);
   }
 }
 
@@ -138,7 +138,37 @@ export class ZenModeController {
 
     this.setLocalEnabled(enabled);
     persistSeed(enabled);
+    this.announceZenState(enabled);
     return enabled;
+  }
+
+  private announceZenState(enabled: boolean): void {
+    try {
+      const doc = this.document;
+      if (!doc) return;
+      let announcer = doc.getElementById("floorp-a11y-live-announcer");
+      if (!announcer) {
+        announcer = doc.createElement("div");
+        announcer.id = "floorp-a11y-live-announcer";
+        announcer.setAttribute("role", "status");
+        announcer.setAttribute("aria-live", "polite");
+        announcer.setAttribute("aria-atomic", "true");
+        (announcer as HTMLElement).style.cssText =
+          "position: absolute !important; width: 1px !important; height: 1px !important; padding: 0 !important; margin: -1px !important; overflow: hidden !important; clip: rect(0, 0, 0, 0) !important; white-space: nowrap !important; border: 0 !important;";
+        (doc.body ?? doc.documentElement)?.appendChild(announcer);
+      }
+      const message = enabled
+        ? i18next.t("zen-mode.enabled-announcement", { defaultValue: "Zen Mode enabled" })
+        : i18next.t("zen-mode.disabled-announcement", { defaultValue: "Zen Mode disabled" });
+      announcer.textContent = "";
+      this.targetWindow.setTimeout(() => {
+        if (announcer) {
+          announcer.textContent = message;
+        }
+      }, 50);
+    } catch {
+      // Ignored in non-DOM test environments
+    }
   }
 
   /** Toolbar customization is intentionally local and non-persistent. */
@@ -156,8 +186,8 @@ export class ZenModeController {
 
     this.targetWindow.removeEventListener("mousemove", this.handleMouseMove);
     this.targetWindow.removeEventListener("unload", this.handleWindowUnload);
-    this.document.removeEventListener("focusin", this.handleUrlbarFocusIn);
-    this.document.removeEventListener("focusout", this.handleUrlbarFocusOut);
+    this.document.removeEventListener("focusin", this.handleFocusIn);
+    this.document.removeEventListener("focusout", this.handleFocusOut);
 
     this.setCustomizationTarget(null);
 
@@ -192,8 +222,8 @@ export class ZenModeController {
     this.targetWindow.addEventListener("unload", this.handleWindowUnload, {
       once: true,
     });
-    this.document.addEventListener("focusin", this.handleUrlbarFocusIn);
-    this.document.addEventListener("focusout", this.handleUrlbarFocusOut);
+    this.document.addEventListener("focusin", this.handleFocusIn);
+    this.document.addEventListener("focusout", this.handleFocusOut);
 
     const ResizeObserverConstructor = this.targetWindow.ResizeObserver;
     if (typeof ResizeObserverConstructor === "function") {
@@ -461,13 +491,23 @@ export class ZenModeController {
     return urlbar !== null && (urlbar === node || urlbar.contains(node));
   }
 
+  private isFocusInside(elementId: string): boolean {
+    const el = this.document.getElementById(elementId);
+    const active = this.document.activeElement;
+    return Boolean(el && active && (el === active || el.contains(active)));
+  }
+
   private readonly tryHideTop = (): void => {
     if (!this.enabled() || this.destroyed) {
       this.topHideTimer = null;
       return;
     }
 
-    if (this.isOwnedTopPopupOpen() || this.isUrlbarOpen()) {
+    if (
+      this.isOwnedTopPopupOpen() ||
+      this.isUrlbarOpen() ||
+      this.isFocusInside("navigator-toolbox")
+    ) {
       this.topHideTimer = this.targetWindow.setTimeout(
         this.tryHideTop,
         ZEN_MODE_HIDE_DELAY_MS,
@@ -485,6 +525,41 @@ export class ZenModeController {
       this.tryHideTop,
       ZEN_MODE_HIDE_DELAY_MS,
     );
+  }
+
+  private scheduleBottomHide(): void {
+    this.clearBottomTimer();
+    this.bottomHideTimer = this.targetWindow.setTimeout(() => {
+      if (!this.enabled() || this.destroyed) {
+        this.bottomHideTimer = null;
+        return;
+      }
+      if (this.isFocusInside("nora-statusbar")) {
+        this.scheduleBottomHide();
+        return;
+      }
+      this.root.removeAttribute("zenmode-reveal-bottom");
+      this.bottomHideTimer = null;
+    }, ZEN_MODE_HIDE_DELAY_MS);
+  }
+
+  private scheduleSideHide(): void {
+    this.clearSideTimer();
+    this.sideHideTimer = this.targetWindow.setTimeout(() => {
+      if (!this.enabled() || this.destroyed) {
+        this.sideHideTimer = null;
+        return;
+      }
+      if (
+        this.isFocusInside("panel-sidebar-box") ||
+        this.isFocusInside("panel-sidebar-select-box")
+      ) {
+        this.scheduleSideHide();
+        return;
+      }
+      this.root.removeAttribute("zenmode-reveal-side");
+      this.sideHideTimer = null;
+    }, ZEN_MODE_HIDE_DELAY_MS);
   }
 
   private readonly handleMouseMove = (event: MouseEvent): void => {
@@ -514,11 +589,7 @@ export class ZenModeController {
     } else if (this.root.hasAttribute("zenmode-reveal-bottom")) {
       const statusbar = this.document.getElementById("nora-statusbar");
       if (!statusbar || clientY < statusbar.getBoundingClientRect().top) {
-        this.clearBottomTimer();
-        this.bottomHideTimer = this.targetWindow.setTimeout(() => {
-          this.root.removeAttribute("zenmode-reveal-bottom");
-          this.bottomHideTimer = null;
-        }, ZEN_MODE_HIDE_DELAY_MS);
+        this.scheduleBottomHide();
       } else {
         this.clearBottomTimer();
       }
@@ -541,30 +612,82 @@ export class ZenModeController {
       });
 
       if (!insideSidebar) {
-        this.clearSideTimer();
-        this.sideHideTimer = this.targetWindow.setTimeout(() => {
-          this.root.removeAttribute("zenmode-reveal-side");
-          this.sideHideTimer = null;
-        }, ZEN_MODE_HIDE_DELAY_MS);
+        this.scheduleSideHide();
       } else {
         this.clearSideTimer();
       }
     }
   };
 
-  private readonly handleUrlbarFocusIn = (event: FocusEvent): void => {
-    if (!this.enabled() || !this.isOrContainsUrlbar(event.target)) {
+  private readonly handleFocusIn = (event: FocusEvent): void => {
+    if (!this.enabled() || this.destroyed) {
       return;
     }
-    this.clearTopTimer();
-    this.root.setAttribute("zenmode-reveal-top", "");
+    const target = event.target as Node | null;
+    if (!target || target.ownerDocument !== this.document) {
+      return;
+    }
+
+    const toolbox = this.document.getElementById("navigator-toolbox");
+    if (toolbox && (toolbox === target || toolbox.contains(target))) {
+      this.clearTopTimer();
+      this.root.setAttribute("zenmode-reveal-top", "");
+    }
+
+    const statusbar = this.document.getElementById("nora-statusbar");
+    if (statusbar && (statusbar === target || statusbar.contains(target))) {
+      this.clearBottomTimer();
+      this.root.setAttribute("zenmode-reveal-bottom", "");
+    }
+
+    const panelSidebar = this.document.getElementById("panel-sidebar-box");
+    const panelSelectBox = this.document.getElementById(
+      "panel-sidebar-select-box",
+    );
+    if (
+      (panelSidebar && (panelSidebar === target || panelSidebar.contains(target))) ||
+      (panelSelectBox && (panelSelectBox === target || panelSelectBox.contains(target)))
+    ) {
+      this.clearSideTimer();
+      this.root.setAttribute("zenmode-reveal-side", "");
+    }
   };
 
-  private readonly handleUrlbarFocusOut = (event: FocusEvent): void => {
-    if (!this.enabled() || !this.isOrContainsUrlbar(event.target)) {
+  private readonly handleFocusOut = (event: FocusEvent): void => {
+    if (!this.enabled() || this.destroyed) {
       return;
     }
-    this.scheduleTopHide();
+    const relatedTarget = event.relatedTarget as Node | null;
+
+    if (this.root.hasAttribute("zenmode-reveal-top")) {
+      const toolbox = this.document.getElementById("navigator-toolbox");
+      const stillInTop = relatedTarget && toolbox && (toolbox === relatedTarget || toolbox.contains(relatedTarget));
+      if (!stillInTop) {
+        this.scheduleTopHide();
+      }
+    }
+
+    if (this.root.hasAttribute("zenmode-reveal-bottom")) {
+      const statusbar = this.document.getElementById("nora-statusbar");
+      const stillInBottom = relatedTarget && statusbar && (statusbar === relatedTarget || statusbar.contains(relatedTarget));
+      if (!stillInBottom) {
+        this.scheduleBottomHide();
+      }
+    }
+
+    if (this.root.hasAttribute("zenmode-reveal-side")) {
+      const panelSidebar = this.document.getElementById("panel-sidebar-box");
+      const panelSelectBox = this.document.getElementById(
+        "panel-sidebar-select-box",
+      );
+      const stillInSide = relatedTarget && (
+        (panelSidebar && (panelSidebar === relatedTarget || panelSidebar.contains(relatedTarget))) ||
+        (panelSelectBox && (panelSelectBox === relatedTarget || panelSelectBox.contains(relatedTarget)))
+      );
+      if (!stillInSide) {
+        this.scheduleSideHide();
+      }
+    }
   };
 
   private clearTopTimer(): void {
@@ -636,7 +759,7 @@ export function attachZenModeToWindow(win: Window): ZenModeController | null {
       }
     });
   } catch (error) {
-    console.error("[zen-mode] Failed to attach window controller:", error);
+    console.error("[zen-mode] Failed to attach window controller status message:", error);
     return null;
   }
 

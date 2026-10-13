@@ -415,7 +415,7 @@ export class WorkspacesService implements WorkspacesDataManagerBase {
       return true;
     } catch (error) {
       console.error(
-        "WorkspacesService: failed to delete archived workspace",
+        "WorkspacesService: failed to delete archived workspace status message",
         error,
       );
       return false;
@@ -495,7 +495,7 @@ export class WorkspacesService implements WorkspacesDataManagerBase {
       }
     } catch (error) {
       console.error(
-        "WorkspacesService: failed to reassign tabs on reset",
+        "WorkspacesService: failed to reassign tabs on reset status message",
         error,
       );
     }
@@ -553,7 +553,7 @@ export class WorkspacesService implements WorkspacesDataManagerBase {
           sessionStore.setTabState(tab, JSON.stringify(clonedState));
         } catch (error) {
           console.error(
-            "WorkspacesService: failed to restore tab state",
+            "WorkspacesService: failed to restore tab state status message",
             error,
           );
         }
@@ -566,7 +566,7 @@ export class WorkspacesService implements WorkspacesDataManagerBase {
                 .getSystemPrincipal(),
             });
         } catch (error) {
-          console.error("WorkspacesService: failed to load tab URL", error);
+          console.error("WorkspacesService: failed to load tab URL status message", error);
         }
       }
 
@@ -574,7 +574,7 @@ export class WorkspacesService implements WorkspacesDataManagerBase {
         try {
           globalThis.gBrowser.pinTab(tab);
         } catch (error) {
-          console.error("WorkspacesService: failed to pin restored tab", error);
+          console.error("WorkspacesService: failed to pin restored tab status message", error);
         }
       }
 

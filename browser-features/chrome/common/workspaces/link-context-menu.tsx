@@ -44,7 +44,7 @@ export class WorkspacesLinkContextMenu {
     } catch (error) {
       const reason = error instanceof Error ? error : new Error(String(error));
       console.error(
-        "[WorkspacesLinkContextMenu] Failed to render workspace link menu.",
+        "[WorkspacesLinkContextMenu] Failed to render workspace link menu status message.",
         reason,
       );
       return;
@@ -260,7 +260,7 @@ export class WorkspacesLinkContextMenu {
       );
     } catch (error) {
       console.error(
-        "[WorkspacesLinkContextMenu] Failed to open link in workspace",
+        "[WorkspacesLinkContextMenu] Failed to open link in workspace status message",
         error,
       );
       globalThis.gBrowser.removeTab(newTab);

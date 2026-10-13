@@ -19,6 +19,7 @@ import { configStore, enabled } from "../data/config.ts";
 import Workspaces from "../index.ts";
 import { selectedWorkspaceID, workspacesDataStore } from "../data/data.ts";
 import { getContainerColorName } from "../utils/container-color.ts";
+import i18next from "i18next";
 
 const { CustomizableUI } = ChromeUtils.importESModule(
   "moz-src:///browser/components/customizableui/CustomizableUI.sys.mjs",
@@ -107,6 +108,13 @@ export class WorkspacesToolbarButton {
         icon ? `url(${icon})` : `url("chrome://branding/content/icon32.png")`,
       );
 
+      const workspacesHeader = i18next.t("workspaces.shortcut.workspace", { defaultValue: "Workspaces" });
+      const fullWorkspaceLabel = workspace.name ? `${workspacesHeader}: ${workspace.name}` : workspacesHeader;
+
+      xulElement.setAttribute("role", "button");
+      xulElement.setAttribute("aria-label", fullWorkspaceLabel);
+      xulElement.setAttribute("tooltiptext", fullWorkspaceLabel);
+
       if (configStore.showWorkspaceNameOnToolbar) {
         xulElement.setAttribute("label", workspace.name);
       } else {
@@ -131,7 +139,7 @@ export class WorkspacesToolbarButton {
         containerColorName ?? "",
       );
     } catch (e) {
-      console.error("Error updating workspace toolbar button:", e);
+      console.error("Error updating workspace toolbar button status message:", e);
     }
   }
 }

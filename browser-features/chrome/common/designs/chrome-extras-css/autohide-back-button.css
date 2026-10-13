@@ -30,3 +30,9 @@
       margin-left 0.5s ease !important;
   }
 }
+
+@media (forced-colors: active) {
+  #back-button {
+    forced-color-adjust: auto;
+  }
+}

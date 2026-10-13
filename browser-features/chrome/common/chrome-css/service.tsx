@@ -72,7 +72,7 @@ export class ChromeCSSService {
     try {
       new PanelMenu(this);
     } catch (error) {
-      console.error("Failed to initialize PanelMenu:", error);
+      console.error("Failed to initialize PanelMenu status message:", error);
       // Fallback to the old approach if PanelMenu instantiation fails
       this.setupMenuTarget?.();
     }
@@ -215,11 +215,20 @@ export class ChromeCSSService {
               rebuildCompleteMsg;
           }
         } catch (error) {
-          console.debug("Status display not available:", error);
+          console.debug("Status message display not available:", error);
         }
       }
     } catch (error) {
-      console.error("Error rebuilding CSS files:", error);
+      console.error("Error rebuilding CSS files status message:", error);
+      try {
+        const errorMsg = i18next.t("chrome_css.rebuild_error") ??
+          "Error rebuilding CSS files";
+        if (typeof globalThis.StatusPanel !== "undefined") {
+          globalThis.StatusPanel._label = errorMsg;
+        }
+      } catch {
+        // Fallback
+      }
     }
   }
 
@@ -269,7 +278,14 @@ export class ChromeCSSService {
         this.updateCssFilesList();
       }, 50);
     } catch (error) {
-      console.error("Error toggling CSS:", error);
+      console.error("Error toggling CSS status message:", error);
+      try {
+        if (typeof globalThis.StatusPanel !== "undefined") {
+          globalThis.StatusPanel._label = `Error toggling CSS: ${fileName}`;
+        }
+      } catch {
+        // Fallback
+      }
     }
   }
 
@@ -301,7 +317,7 @@ export class ChromeCSSService {
 
       this.launchCSSFolder(cssFolder);
     } catch (error) {
-      console.error("Error opening CSS folder:", error);
+      console.error("Error opening CSS folder status message:", error);
       // Fallback: Try to use file.launch() regardless of platform
       try {
         const file = FileUtils.File(this.getCSSFolder());
@@ -324,7 +340,7 @@ export class ChromeCSSService {
       const path = PathUtils.join(this.getCSSFolder(), fileName);
       this.edit(path);
     } catch (error) {
-      console.error("Error editing user CSS:", error);
+      console.error("Error editing user CSS status message:", error);
     }
   }
 
@@ -446,7 +462,7 @@ export class ChromeCSSService {
           console.debug("which check failed", _e);
         }
       } catch (error) {
-        console.debug("Could not find editor using which command:", error);
+        console.debug("Could not find editor status using which command message:", error);
       }
     } else {
       // Linux and other Unix-like systems
@@ -519,7 +535,7 @@ export class ChromeCSSService {
       process.init(app);
       process.run(false, args, args.length);
     } catch (error) {
-      console.error("Error opening editor:", error);
+      console.error("Error opening editor status message:", error);
 
       // macOS fallback: try using 'open' command
       if (AppConstants.platform === "macosx") {
@@ -536,7 +552,7 @@ export class ChromeCSSService {
           openProcess.run(false, ["-e", filePath], 2);
         } catch (fallbackError) {
           console.error(
-            "macOS fallback editor open also failed:",
+            "macOS fallback editor open also failed status message:",
             fallbackError,
           );
         }
@@ -577,7 +593,7 @@ export class ChromeCSSService {
       const shiftJISString = decoder.decode(utf8Bytes);
       return shiftJISString;
     } catch (error) {
-      console.error("Error converting UTF-8 to Shift-JIS:", error);
+      console.error("Error converting UTF-8 to Shift-JIS status message:", error);
       return utf8String;
     }
   }
@@ -637,7 +653,7 @@ export class ChromeCSSService {
         this.alertCSSFileCreated(fileName);
       }
     } catch (error) {
-      console.error("Error creating CSS file:", error);
+      console.error("Error creating CSS file status message:", error);
     } finally {
       this.isCreating = false;
     }
@@ -778,7 +794,7 @@ const ChromeCSSMenuWrapper = (props: { service: ChromeCSSService }) => {
         document?.getElementById("appMenu-usercss-button"),
       );
     } catch (error) {
-      console.error("Failed to show usercss PanelUI subview:", error);
+      console.error("Failed to show usercss PanelUI subview status message:", error);
     }
   };
 
@@ -880,7 +896,7 @@ const CSSItem = (props: {
       try {
         onToggle();
       } catch (error) {
-        console.error("Error in toggle handler:", error);
+        console.error("Error in toggle handler status message:", error);
       }
     }, 0);
   };
@@ -904,7 +920,7 @@ const CSSItem = (props: {
         try {
           service.edit(PathUtils.join(service.getCSSFolder(), fileName));
         } catch (error) {
-          console.error("Error opening editor:", error);
+          console.error("Error opening editor status message:", error);
         }
       }, 0);
     }
@@ -916,7 +932,15 @@ const CSSItem = (props: {
       class={`usercssloader-item subviewbutton subviewbutton-iconic ${sheetType} ${
         enabled ? "enabled" : ""
       }`}
-      role="menuitem"
+      role="menuitemcheckbox"
+      aria-checked={enabled}
+      tabindex="0"
+      onKeyDown={(e: KeyboardEvent) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          safeToggle();
+        }
+      }}
       onClick={(e) => {
         // left click toggles
         e.stopPropagation();
@@ -929,6 +953,8 @@ const CSSItem = (props: {
         class="usercssloader-checkbox ctaMenuLogo toolbarbutton-icon"
         src={enabled ? "chrome://global/skin/icons/check.svg" : ""}
         style="fill: var(--toolbar-text-color); width: 16px; height: 16px;"
+        aria-hidden="true"
+        role="presentation"
       />
       <xul:label class="usercssloader-label">{fileName}</xul:label>
     </xul:hbox>

@@ -53,7 +53,7 @@ export class WorkspacesTabContextMenu {
     } catch (error) {
       const reason = error instanceof Error ? error : new Error(String(error));
       console.error(
-        "[WorkspacesTabContextMenu] Failed to render context menu.",
+        "[WorkspacesTabContextMenu] Failed to render context menu status message.",
         reason,
       );
     }

@@ -5,13 +5,27 @@
 
 import { manager } from "./";
 import statusbarUtilsStyle from "./statusbar-utils.css?inline";
+import i18next from "i18next";
+import { createSignal } from "solid-js";
+import { addI18nObserver } from "#i18n/config-browser-chrome.ts";
 
 export function StatusBarElem() {
+  const getLocalizedName = () =>
+    i18next.t("statusbar.toggle", { mark: "" }).trim() || "Status Bar";
+
+  const [label, setLabel] = createSignal(getLocalizedName());
+
+  addI18nObserver(() => {
+    setLabel(getLocalizedName());
+  });
+
   return (
     <>
       <xul:toolbar
         id="nora-statusbar"
-        toolbarname="Status bar"
+        toolbarname={label()}
+        role="toolbar"
+        aria-label={label()}
         customizable="true"
         class={`browser-toolbar`}
         style={{
@@ -27,6 +41,8 @@ export function StatusBarElem() {
       >
         <xul:hbox
           id="status-text"
+          role="status"
+          aria-live="polite"
           align="center"
           flex="1"
           class="status-text"

@@ -169,7 +169,7 @@ export class WorkspacesTabManager {
         const defaultWorkspaceId = this.dataManagerCtx.getDefaultWorkspaceID();
         this.changeWorkspace(defaultWorkspaceId);
       } catch (e) {
-        console.error("Failed to change workspace:", e);
+        console.error("Failed to change workspace status message:", e);
         // Fallback: create default workspace when store is empty or invalid
         try {
           const createdId = this.dataManagerCtx.createWorkspace("Workspace");
@@ -177,7 +177,7 @@ export class WorkspacesTabManager {
           this.changeWorkspace(createdId);
         } catch (createErr) {
           console.error(
-            "Failed to create and switch to default workspace:",
+            "Failed to create and switch to default workspace status message:",
             createErr,
           );
         }
@@ -546,7 +546,7 @@ export class WorkspacesTabManager {
       return hasOriginUserContextId(browser, expectedUserContextId);
     } catch (error) {
       console.error(
-        "[WorkspacesTabManager] Failed to inspect tab origin attributes",
+        "[WorkspacesTabManager] Failed to inspect tab origin attributes status message",
         error,
       );
       return false;
@@ -609,7 +609,7 @@ export class WorkspacesTabManager {
         try {
           globalThis.gBrowser.removeTab(tabsToRemove[i]);
         } catch (e) {
-          console.error("Error removing tab:", e);
+          console.error("Error removing tab status message:", e);
         }
       }
     } finally {
@@ -758,7 +758,7 @@ export class WorkspacesTabManager {
       this.dataManagerCtx.setCurrentWorkspaceID(workspaceId);
       this.updateTabsVisibility();
     } catch (e) {
-      console.error("Failed to change workspace:", e);
+      console.error("Failed to change workspace status message:", e);
 
       try {
         const defaultId = this.dataManagerCtx.getDefaultWorkspaceID();
@@ -773,7 +773,7 @@ export class WorkspacesTabManager {
           this.updateTabsVisibility();
         }
       } catch (innerError) {
-        console.error("Critical error handling workspace change:", innerError);
+        console.error("Critical error handling workspace change status message:", innerError);
 
         try {
           console.debug("gBrowser.addTab called in changeWorkspace");
@@ -784,7 +784,7 @@ export class WorkspacesTabManager {
           });
           globalThis.gBrowser.selectedTab = newTab;
         } catch (finalError) {
-          console.error("Fatal error creating new tab:", finalError);
+          console.error("Fatal error creating new tab status message:", finalError);
         }
       }
     }
@@ -808,7 +808,7 @@ export class WorkspacesTabManager {
         this.moveTabToWorkspace(workspaceId, tab);
         globalThis.gBrowser.selectedTab = tab;
       } catch (e) {
-        console.error("Failed to create tab for workspace:", e);
+        console.error("Failed to create tab for workspace status message:", e);
         const defaultWorkspaceId = this.dataManagerCtx.getDefaultWorkspaceID();
         if (defaultWorkspaceId !== workspaceId) {
           this.changeWorkspace(defaultWorkspaceId);

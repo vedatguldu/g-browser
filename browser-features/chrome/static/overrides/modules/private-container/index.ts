@@ -35,7 +35,7 @@ export const overrides = [
         }
       } catch (e) {
         console.error(
-          "[FloorpPrivateContainer] Error in createBrowser override:",
+          "[FloorpPrivateContainer] Error in createBrowser override status message:",
           e,
         );
       }

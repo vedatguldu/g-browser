@@ -144,7 +144,7 @@ export function acquireContextMenuStyle(
             );
           } catch (error) {
             console.error(
-              "[ContextMenuCustomizer] Failed to release document stylesheet",
+              "[ContextMenuCustomizer] Failed to release document stylesheet status message",
               error,
             );
           }

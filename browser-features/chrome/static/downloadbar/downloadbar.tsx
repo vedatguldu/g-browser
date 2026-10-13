@@ -134,11 +134,15 @@ export function DonwloadBar() {
                     oncommand="DownloadsPanel.showDownloadsHistory();"
                     class="toolbarbutton-1 subviewbutton"
                     id="downloadIcon"
+                    data-l10n-id="downloads-cmd-show-all-downloads"
+                    aria-label="Show All Downloads"
                   />
                   <xul:toolbarbutton
                     command="downloadsCmd_clearList"
                     class="toolbarbutton-1 subviewbutton"
                     id="closeIcon"
+                    data-l10n-id="downloads-cmd-clear-downloads"
+                    aria-label="Clear Downloads"
                   />
                 </div>
               </div>

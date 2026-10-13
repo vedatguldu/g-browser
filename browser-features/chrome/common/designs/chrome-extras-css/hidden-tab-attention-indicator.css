@@ -10,3 +10,9 @@
 #tabbrowser-tabs .tab-label[attention] {
   font-weight: inherit !important;
 }
+
+@media (forced-colors: active) {
+  #tabbrowser-tabs .tab-content {
+    forced-color-adjust: auto;
+  }
+}

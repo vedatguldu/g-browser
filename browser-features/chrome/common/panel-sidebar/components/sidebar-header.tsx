@@ -4,6 +4,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
 import { Show } from "solid-js";
+import i18next from "i18next";
 import {
   isFloating,
   selectedPanelId,
@@ -17,7 +18,14 @@ export function SidebarHeader(props: { ctx: CPanelSidebar }) {
   (PanelNavigator as { gPanelSidebar: CPanelSidebar }).gPanelSidebar =
     gPanelSidebar;
   return (
-    <xul:box id="panel-sidebar-header" align="center">
+    <xul:box
+      id="panel-sidebar-header"
+      align="center"
+      role="toolbar"
+      aria-label={i18next.t("panelSidebar.header.toolbar", {
+        defaultValue: "Panel sidebar controls",
+      })}
+    >
       <Show
         when={gPanelSidebar.getPanelData(selectedPanelId() ?? "")?.type ===
           "web"}
@@ -25,29 +33,87 @@ export function SidebarHeader(props: { ctx: CPanelSidebar }) {
         <xul:toolbarbutton
           id="panel-sidebar-back"
           class="panel-sidebar-actions toolbarbutton-1 chromeclass-toolbar-additional"
+          label={i18next.t("panelSidebar.header.back", {
+            defaultValue: "Back",
+          })}
+          tooltiptext={i18next.t("panelSidebar.header.back", {
+            defaultValue: "Back",
+          })}
+          aria-label={i18next.t("panelSidebar.header.back", {
+            defaultValue: "Back",
+          })}
           onCommand={() => PanelNavigator.back(selectedPanelId() ?? "")}
         />
         <xul:toolbarbutton
           id="panel-sidebar-forward"
-          onCommand={() => PanelNavigator.forward(selectedPanelId() ?? "")}
           class="panel-sidebar-actions"
+          label={i18next.t("panelSidebar.header.forward", {
+            defaultValue: "Forward",
+          })}
+          tooltiptext={i18next.t("panelSidebar.header.forward", {
+            defaultValue: "Forward",
+          })}
+          aria-label={i18next.t("panelSidebar.header.forward", {
+            defaultValue: "Forward",
+          })}
+          onCommand={() => PanelNavigator.forward(selectedPanelId() ?? "")}
         />
         <xul:toolbarbutton
           id="panel-sidebar-reload"
-          onCommand={() => PanelNavigator.reload(selectedPanelId() ?? "")}
           class="panel-sidebar-actions"
+          label={i18next.t("panelSidebar.header.reload", {
+            defaultValue: "Reload",
+          })}
+          tooltiptext={i18next.t("panelSidebar.header.reload", {
+            defaultValue: "Reload",
+          })}
+          aria-label={i18next.t("panelSidebar.header.reload", {
+            defaultValue: "Reload",
+          })}
+          onCommand={() => PanelNavigator.reload(selectedPanelId() ?? "")}
         />
         <xul:toolbarbutton
           id="panel-sidebar-go-index"
-          onCommand={() => PanelNavigator.goIndexPage(selectedPanelId() ?? "")}
           class="panel-sidebar-actions"
+          label={i18next.t("panelSidebar.header.goIndex", {
+            defaultValue: "Go to initial page",
+          })}
+          tooltiptext={i18next.t("panelSidebar.header.goIndex", {
+            defaultValue: "Go to initial page",
+          })}
+          aria-label={i18next.t("panelSidebar.header.goIndex", {
+            defaultValue: "Go to initial page",
+          })}
+          onCommand={() => PanelNavigator.goIndexPage(selectedPanelId() ?? "")}
         />
       </Show>
       <xul:spacer flex="1" />
       <xul:toolbarbutton
         id="panel-sidebar-float"
-        onCommand={() => setIsFloating(!isFloating())}
         class="panel-sidebar-actions"
+        label={isFloating()
+          ? i18next.t("panelSidebar.header.unfloat", {
+            defaultValue: "Dock panel",
+          })
+          : i18next.t("panelSidebar.header.float", {
+            defaultValue: "Float panel",
+          })}
+        tooltiptext={isFloating()
+          ? i18next.t("panelSidebar.header.unfloat", {
+            defaultValue: "Dock panel",
+          })
+          : i18next.t("panelSidebar.header.float", {
+            defaultValue: "Float panel",
+          })}
+        aria-label={isFloating()
+          ? i18next.t("panelSidebar.header.unfloat", {
+            defaultValue: "Dock panel",
+          })
+          : i18next.t("panelSidebar.header.float", {
+            defaultValue: "Float panel",
+          })}
+        aria-pressed={isFloating() ? "true" : "false"}
+        onCommand={() => setIsFloating(!isFloating())}
       />
       <Show
         when={gPanelSidebar.getPanelData(selectedPanelId() ?? "")?.type ===
@@ -55,15 +121,33 @@ export function SidebarHeader(props: { ctx: CPanelSidebar }) {
       >
         <xul:toolbarbutton
           id="panel-sidebar-open-in-main-window"
+          class="panel-sidebar-actions"
+          label={i18next.t("panelSidebar.header.openInMainWindow", {
+            defaultValue: "Open in main window",
+          })}
+          tooltiptext={i18next.t("panelSidebar.header.openInMainWindow", {
+            defaultValue: "Open in main window",
+          })}
+          aria-label={i18next.t("panelSidebar.header.openInMainWindow", {
+            defaultValue: "Open in main window",
+          })}
           onCommand={() =>
             gPanelSidebar.openInMainWindow(selectedPanelId() ?? "")}
-          class="panel-sidebar-actions"
         />
       </Show>
       <xul:toolbarbutton
         id="panel-sidebar-close"
-        onCommand={() => gPanelSidebar.closePanel()}
         class="panel-sidebar-actions"
+        label={i18next.t("panelSidebar.header.close", {
+          defaultValue: "Close panel",
+        })}
+        tooltiptext={i18next.t("panelSidebar.header.close", {
+          defaultValue: "Close panel",
+        })}
+        aria-label={i18next.t("panelSidebar.header.close", {
+          defaultValue: "Close panel",
+        })}
+        onCommand={() => gPanelSidebar.closePanel()}
       />
     </xul:box>
   );

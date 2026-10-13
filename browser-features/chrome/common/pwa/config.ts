@@ -44,7 +44,7 @@ class PwaConfig {
           return { ...defaultConfig, ...parsed };
         } catch (e) {
           console.error(
-            "Failed to parse PWA configuration JSON, using default",
+            "Failed to parse PWA configuration JSON status message, using default",
             e,
           );
           return JSON.parse(strDefaultConfig);

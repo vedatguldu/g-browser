@@ -82,7 +82,7 @@ export class CustomShortcutKey {
         })
       );
     } catch (e) {
-      console.error("[CustomShortcutKey]", "Could not initialize CSKData, falling back to empty config.", e);
+      console.error("[CustomShortcutKey]", "Could not initialize CSKData status message, falling back to empty config.", e);
       this.cskData = {};
     }
   }

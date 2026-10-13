@@ -381,7 +381,7 @@ export const commands: Commands = {
       try {
         gBrowser.addTabSplitView([newTab, gBrowser.selectedTab]);
       } catch (e) {
-        console.error("[SplitView]", e);
+        console.error("[SplitView] Open split view on left failed status message:", e);
         gBrowser.removeTab(newTab);
       }
     },
@@ -395,7 +395,7 @@ export const commands: Commands = {
       try {
         gBrowser.addTabSplitView([gBrowser.selectedTab, newTab]);
       } catch (e) {
-        console.error("[SplitView]", e);
+        console.error("[SplitView] Open split view on right failed status message:", e);
         gBrowser.removeTab(newTab);
       }
     },

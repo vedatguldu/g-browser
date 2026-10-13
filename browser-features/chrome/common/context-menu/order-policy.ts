@@ -116,7 +116,7 @@ export function mergeElementsIntoNativeSlots(
     }
     return { changed: true, originalOrder, originalSlots };
   } catch (error) {
-    console.error("[ContextMenuCustomizer] Native-slot merge failed", error);
+    console.error("[ContextMenuCustomizer] Native-slot merge failed status message", error);
     for (let index = 0; index < placeholders.length; index++) {
       const placeholder = placeholders[index];
       if (placeholder.parentNode === parent) {
@@ -490,7 +490,7 @@ export function restoreElementsToNativeSlots(
       }
     }
   } catch (error) {
-    console.error("[ContextMenuCustomizer] Native-slot restore failed", error);
+    console.error("[ContextMenuCustomizer] Native-slot restore failed status message", error);
     for (const slot of survivingSlots) {
       if (slot.element.parentElement !== parent) {
         parent.appendChild(slot.element);

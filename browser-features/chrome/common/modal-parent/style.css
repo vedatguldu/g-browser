@@ -23,3 +23,10 @@
   border-radius: var(--chakra-radii-md);
   background: transparent;
 }
+
+@media (forced-colors: active) {
+  #modal-parent-container {
+    background: Canvas;
+    outline: 2px solid ButtonText;
+  }
+}

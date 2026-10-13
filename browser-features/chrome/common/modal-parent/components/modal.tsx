@@ -17,6 +17,10 @@ export function Modal(props: ModalProps) {
     <Portal mount={props.targetParent}>
       <div
         id="modal-parent-container"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Modal Dialog"
+        tabindex="-1"
         data-visible={isModalVisible() ? "true" : undefined}
         onClick={(e) => props.onBackdropClick(e)}
       >

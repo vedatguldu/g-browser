@@ -12,8 +12,31 @@ const MENU_ID = "context_openInExternalBrowser";
 const MENU_POPUP_ID = "context_openInExternalBrowser_popup";
 const MARKER_ID = "context_moveTabOptions";
 
-// Helper function for i18n translation
-const t = (key: string): string => (i18next.t as (k: string) => string)(key);
+function announceA11y(text: string): void {
+  try {
+    const doc = globalThis.document;
+    if (!doc) return;
+    let announcer = doc.getElementById("floorp-a11y-live-announcer");
+    if (!announcer) {
+      announcer = doc.createElement("div");
+      announcer.id = "floorp-a11y-live-announcer";
+      announcer.setAttribute("role", "status");
+      announcer.setAttribute("aria-live", "polite");
+      announcer.setAttribute("aria-atomic", "true");
+      (announcer as HTMLElement).style.cssText =
+        "position: absolute !important; width: 1px !important; height: 1px !important; padding: 0 !important; margin: -1px !important; overflow: hidden !important; clip: rect(0, 0, 0, 0) !important; white-space: nowrap !important; border: 0 !important;";
+      (doc.body ?? doc.documentElement)?.appendChild(announcer);
+    }
+    announcer.textContent = "";
+    globalThis.setTimeout(() => {
+      if (announcer) {
+        announcer.textContent = text;
+      }
+    }, 50);
+  } catch (err) {
+    console.warn("[ExternalBrowserTabContextMenu] announce status message failed:", err);
+  }
+}
 
 /**
  * Tab context menu for opening current tab in external browser
@@ -39,7 +62,7 @@ export class ExternalBrowserTabContextMenu {
     } catch (error) {
       const reason = error instanceof Error ? error : new Error(String(error));
       console.error(
-        "[ExternalBrowserTabContextMenu] Failed to render context menu.",
+        "[ExternalBrowserTabContextMenu] Failed to render context menu status message.",
         reason,
       );
       return;
@@ -58,7 +81,7 @@ export class ExternalBrowserTabContextMenu {
       this.cachedBrowsers = await externalBrowserService.getInstalledBrowsers();
     } catch (error) {
       console.error(
-        "[ExternalBrowserTabContextMenu] Failed to load browsers:",
+        "[ExternalBrowserTabContextMenu] Failed to load browsers status message:",
         error,
       );
       this.cachedBrowsers = [];
@@ -87,7 +110,7 @@ export class ExternalBrowserTabContextMenu {
     );
   }
 
-  private async populateMenu(): Promise<void> {
+  private populateMenu(): void {
     const popup = document?.getElementById(MENU_POPUP_ID) as XULElement | null;
     if (!popup) {
       return;
@@ -98,8 +121,8 @@ export class ExternalBrowserTabContextMenu {
       popup.removeChild(popup.firstChild);
     }
 
-    // Refresh browsers list
-    await this.loadBrowsers();
+    // Refresh browsers list in background for subsequent openings
+    void this.loadBrowsers();
 
     // Get the URL of the context tab
     const contextTab = globalThis.TabContextMenu.contextTab;
@@ -178,6 +201,12 @@ export class ExternalBrowserTabContextMenu {
       return null;
     }
     menuitem.setAttribute("label", label);
+    if (label) {
+      const firstChar = label.trim().charAt(0).toUpperCase();
+      if (/^[A-Z0-9]$/.test(firstChar)) {
+        menuitem.setAttribute("accesskey", firstChar);
+      }
+    }
     if (contextMenuKey) {
       menuitem.setAttribute("data-floorp-context-menu-key", contextMenuKey);
     }
@@ -201,12 +230,14 @@ export class ExternalBrowserTabContextMenu {
           "[ExternalBrowserTabContextMenu] Failed to open URL:",
           result.error,
         );
+        announceA11y(t("externalBrowser.menu.launchFailed"));
       }
     } catch (error) {
       console.error(
-        "[ExternalBrowserTabContextMenu] Error opening URL:",
+        "[ExternalBrowserTabContextMenu] Error opening URL status message:",
         error,
       );
+      announceA11y(t("externalBrowser.menu.launchFailed"));
     }
   }
 }

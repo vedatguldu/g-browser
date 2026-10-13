@@ -48,6 +48,8 @@ export function CustomShortcutKeyPage() {
                   value.type === category ? (
                     <div style={{ display: "flex", "padding-top": "5px" }}>
                       <label
+                        id={`csk-label-${key}`}
+                        htmlFor={`csk-input-${key}`}
                         style={{ "flex-grow": "1" }}
                         data-l10n-id={
                           "floorp-custom-actions-" +
@@ -57,6 +59,8 @@ export function CustomShortcutKeyPage() {
                         {key}
                       </label>
                       <input
+                        id={`csk-input-${key}`}
+                        aria-labelledby={`csk-label-${key}`}
                         value={
                           currentFocus() === key && editingStatus() !== null
                             ? editingStatus()!

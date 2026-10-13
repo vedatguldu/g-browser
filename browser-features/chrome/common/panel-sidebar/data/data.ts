@@ -45,7 +45,7 @@ export function parsePanelSidebarData(stringData: string): Panels {
     );
   } catch (error) {
     console.warn(
-      "[PanelSidebar] Failed to parse panel data; restoring defaults.",
+      "[PanelSidebar] Failed to parse panel data status message; restoring defaults.",
       error,
     );
   }
@@ -143,7 +143,7 @@ function createPanelSidebarConfig(): [
     try {
       return JSON.parse(stringData);
     } catch (e) {
-      console.error("Failed to parse panel sidebar config:", e);
+      console.error("Failed to parse panel sidebar config status message:", e);
       return {};
     }
   }

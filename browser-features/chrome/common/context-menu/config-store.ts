@@ -63,7 +63,7 @@ export class ContextMenuConfigStore {
       this.#observing = true;
     } catch (error) {
       console.error(
-        "[ContextMenuCustomizer] Failed to observe preferences",
+        "[ContextMenuCustomizer] Failed to observe preferences status message",
         error,
       );
       this.stopObserving();
@@ -118,7 +118,7 @@ export class ContextMenuConfigStore {
       );
     } catch (error) {
       console.error(
-        "[ContextMenuCustomizer] Failed to read preferences",
+        "[ContextMenuCustomizer] Failed to read preferences status message",
         error,
       );
     }

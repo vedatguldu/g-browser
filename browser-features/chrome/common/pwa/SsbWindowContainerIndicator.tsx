@@ -23,6 +23,10 @@ export function SsbWindowContainerIndicator(props: {
       class="ssb-container-indicator"
       data-container-color={colorName()}
       crop="end"
+      role="status"
+      aria-label={i18next.t("ssb.window.container-tooltip", {
+        name: displayLabel(),
+      })}
       tooltiptext={i18next.t("ssb.window.container-tooltip", {
         name: displayLabel(),
       })}

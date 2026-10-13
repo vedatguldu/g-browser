@@ -37,3 +37,9 @@
   padding: 5px;
   scale: 1.2;
 }
+
+@media (forced-colors: active) {
+  .customization-target > #simple-tab-groups_drive4ik-browser-action > #simple-tab-groups_drive4ik-BAP {
+    forced-color-adjust: auto;
+  }
+}

@@ -31399,3 +31399,83 @@
     --menuitem-image: url("../icons/pwa-remove.svg");
   }
 }
+
+/* Universal High Contrast & Reduced Motion layer (WCAG 1.4.3, 1.4.6, 1.4.11, 2.3.3) */
+@media (forced-colors: active) {
+  :root,
+  #navigator-toolbox,
+  #TabsToolbar,
+  #nav-bar,
+  #PersonalToolbar,
+  .tabbrowser-tab,
+  toolbarbutton,
+  menupopup,
+  menuitem {
+    forced-color-adjust: auto !important;
+    background-color: Canvas !important;
+    color: CanvasText !important;
+    border-color: CanvasText !important;
+    fill: CanvasText !important;
+  }
+
+  .tabbrowser-tab[selected="true"],
+  toolbarbutton:hover,
+  menuitem:hover,
+  menuitem[_moz-menuactive="true"] {
+    background-color: Highlight !important;
+    color: HighlightText !important;
+    fill: HighlightText !important;
+  }
+
+  .tabbrowser-tab:focus-visible,
+  toolbarbutton:focus-visible,
+  input:focus-visible {
+    outline: 2px solid Highlight !important;
+    outline-offset: 1px !important;
+  }
+
+  #sidebar-splitter,
+  #panel-sidebar-splitter,
+  .splitview-controller {
+    border-color: ButtonText !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Universal Accessible Keyboard Focus Indicators (WCAG 2.4.7 & 2.4.11 Level AA/AAA) */
+:root {
+  --floorp-focus-ring-color: #0061e0;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --floorp-focus-ring-color: #45a1ff;
+  }
+}
+
+.tabbrowser-tab:focus-visible,
+toolbarbutton:focus-visible,
+.toolbarbutton-1:focus-visible,
+#workspaces-toolbar-button:focus-visible,
+#profile-manager-button:focus-visible,
+#zen-mode-button:focus-visible,
+#undo-closed-tab:focus-visible,
+#split-view-button:focus-visible,
+menulist:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--floorp-focus-ring-color) !important;
+  outline-offset: 1px !important;
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--floorp-focus-ring-color) 35%, transparent) !important;
+}
+
+

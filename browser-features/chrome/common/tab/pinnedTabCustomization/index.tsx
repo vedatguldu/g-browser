@@ -32,7 +32,7 @@ export class TabPinnedTabCustomization {
             ? error
             : new Error(String(error));
           console.error(
-            "[TabPinnedTabCustomization] Failed to render style element.",
+            "[TabPinnedTabCustomization] Failed to render style element status message.",
             reason,
           );
           return;

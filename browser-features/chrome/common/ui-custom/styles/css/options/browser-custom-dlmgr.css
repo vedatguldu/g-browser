@@ -42,3 +42,10 @@
     color: white !important;
   }
 }
+
+@media (forced-colors: active) {
+  .downloadButton,
+  .downloadDetails {
+    forced-color-adjust: auto;
+  }
+}

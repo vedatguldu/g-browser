@@ -83,10 +83,15 @@ export class StatusBarManager {
       appContent.appendChild(statusbarNode);
     }
 
-    // Set up button press handler
-    statusbarNode.addEventListener("mousedown", (event: MouseEvent) => {
+    // Set up button activation handler (supporting both mouse and keyboard command/activation)
+    let lastActivationTime = 0;
+    const handleButtonActivation = (event: Event) => {
       if (!event.target) {
-        // Event target is null
+        return;
+      }
+
+      const now = Date.now();
+      if (now - lastActivationTime < 100) {
         return;
       }
 
@@ -94,15 +99,24 @@ export class StatusBarManager {
       const toolbarButton = target.closest("toolbarbutton");
 
       if (!toolbarButton) {
-        // No button pressed
         return;
       }
+
+      lastActivationTime = now;
 
       try {
         const gThis = globalThis as StatusBarGlobals;
         switch (toolbarButton.id) {
           case "firefox-view-button":
-            gThis.FirefoxViewHandler?.openToolbarMouseEvent?.(event);
+            if (event instanceof MouseEvent) {
+              gThis.FirefoxViewHandler?.openToolbarMouseEvent?.(event);
+            } else {
+              if (typeof gThis.FirefoxViewHandler?.openTab === "function") {
+                gThis.FirefoxViewHandler.openTab();
+              } else {
+                gThis.FirefoxViewHandler?.openToolbarMouseEvent?.(event as unknown as MouseEvent);
+              }
+            }
             break;
           case "alltabs-button":
             gThis.gTabsPanel?.showAllTabsPanel?.(event, "alltabs-button");
@@ -117,7 +131,10 @@ export class StatusBarManager {
       } catch (e) {
         console.error("[StatusBarManager] Error handling button press:", e);
       }
-    });
+    };
+
+    statusbarNode.addEventListener("mousedown", handleButtonActivation);
+    statusbarNode.addEventListener("command", handleButtonActivation);
 
     createEffect(() => {
       const statuspanelLabel = document?.querySelector("#statuspanel-label");

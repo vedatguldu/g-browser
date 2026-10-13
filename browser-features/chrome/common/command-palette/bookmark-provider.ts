@@ -20,7 +20,7 @@ function navigateToUrl(win: Window, url: string): void {
       triggeringPrincipal: principal,
     });
   } catch (e) {
-    console.error("[command-palette] Bookmark navigation failed", e);
+    console.error("[command-palette] Bookmark navigation failed status message", e);
   }
 }
 
@@ -115,7 +115,7 @@ export async function searchBookmarks(
     );
     return commands;
   } catch (e) {
-    console.error("[command-palette/bookmark] Bookmark search failed:", e);
+    console.error("[command-palette/bookmark] Bookmark search failed status message:", e);
     return [];
   }
 }

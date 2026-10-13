@@ -106,7 +106,7 @@ export async function loadBookmarks(): Promise<
         : undefined,
     };
   } catch (err) {
-    console.error("[BookmarkSwitcher] Failed to load bookmarks", err);
+    console.error("[BookmarkSwitcher] Failed to load bookmarks status message", err);
     return [];
   }
 }
@@ -283,7 +283,7 @@ export const bookmarkSwitcherCommand: PaletteCommand = {
         }
       }
     } catch (e) {
-      console.error("[BookmarkSwitcher] Failed to open bookmark", e);
+      console.error("[BookmarkSwitcher] Failed to open bookmark status message", e);
     }
   },
 };

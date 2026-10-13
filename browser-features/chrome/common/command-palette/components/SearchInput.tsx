@@ -9,6 +9,8 @@ interface SearchInputProps {
   onInput: (value: string) => void;
   onBack?: () => void;
   state?: PaletteState;
+  activeItemId?: string;
+  commandCount?: number;
 }
 
 export function SearchInput(props: SearchInputProps) {
@@ -51,6 +53,21 @@ export function SearchInput(props: SearchInputProps) {
     props.onBack?.();
   };
 
+  const statusAnnouncement = () => {
+    if (props.state?.mode() === "command" && typeof props.commandCount === "number") {
+      if (props.commandCount === 0) {
+        return i18next.t("commandPalette.noResults", {
+          defaultValue: "No commands found",
+        });
+      }
+      return i18next.t("commandPalette.resultsCount", {
+        count: props.commandCount,
+        defaultValue: `${props.commandCount} commands found`,
+      });
+    }
+    return "";
+  };
+
   return (
     <div class="command-palette-search-wrapper">
       <Show when={isInputMode()}>
@@ -80,6 +97,14 @@ export function SearchInput(props: SearchInputProps) {
       <input
         id="command-palette-search"
         type="text"
+        role="combobox"
+        aria-autocomplete="list"
+        aria-expanded="true"
+        aria-haspopup="listbox"
+        aria-controls="command-palette-listbox"
+        aria-activedescendant={props.activeItemId}
+        aria-invalid={props.state?.stepError() ? "true" : undefined}
+        aria-describedby={props.state?.stepError() ? "command-palette-step-error-msg" : undefined}
         value={props.query}
         onInput={handleInput}
         placeholder={placeholder()}
@@ -87,6 +112,9 @@ export function SearchInput(props: SearchInputProps) {
         autocomplete="off"
         spellcheck={false}
       />
+      <div role="status" aria-live="polite" class="sr-only" aria-atomic="true">
+        {statusAnnouncement()}
+      </div>
     </div>
   );
 }

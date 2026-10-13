@@ -83,13 +83,13 @@ export default class Pwa extends NoraComponentBase {
           try {
             Services.prefs.clearUserPref("floorp.ssb.startup.id");
           } catch (e) {
-            console.error("Failed to clear floorp.ssb.startup.id", e);
+            console.error("Failed to clear floorp.ssb.startup.id status message", e);
           }
         }
       } catch (e) {
         // If the pref doesn't exist or any error occurs, ignore it so startup
         // proceeds normally.
-        console.debug("No startup SSB id or failed to start SSB:", e);
+        console.debug("No startup SSB id or failed to start SSB status message:", e);
       }
     })();
   }

@@ -36,7 +36,7 @@ export class WebsitePanel {
       const browser = this.getContentBrowser(webpanelId, window);
       browser.audioMuted = !browser.audioMuted;
     } catch (e) {
-      console.error("Failed to toggle mute for webpanel", e);
+      console.error("Failed to toggle mute for webpanel status message", e);
     }
   }
 
@@ -45,7 +45,7 @@ export class WebsitePanel {
       const browser = this.getContentBrowser(webpanelId, window);
       browser.reload?.();
     } catch (e) {
-      console.error("Failed to reload webpanel", e);
+      console.error("Failed to reload webpanel status message", e);
     }
   }
 
@@ -54,7 +54,7 @@ export class WebsitePanel {
       const browser = this.getContentBrowser(webpanelId, window);
       browser.goForward?.();
     } catch (e) {
-      console.error("Failed to go forward in webpanel", e);
+      console.error("Failed to go forward in webpanel status message", e);
     }
   }
 
@@ -63,7 +63,7 @@ export class WebsitePanel {
       const browser = this.getContentBrowser(webpanelId, window);
       browser.goBack?.();
     } catch (e) {
-      console.error("Failed to go back in webpanel", e);
+      console.error("Failed to go back in webpanel status message", e);
     }
   }
 
@@ -79,7 +79,7 @@ export class WebsitePanel {
       }
       loadUriInWebPanelBrowser(browser, uri);
     } catch (e) {
-      console.error("Failed to go to index page in webpanel", e);
+      console.error("Failed to go to index page in webpanel status message", e);
     }
   }
 
@@ -113,7 +113,7 @@ export class WebsitePanel {
     try {
       this.adjustZoom(webpanelId, (browser) => (browser.fullZoom ?? 1) * 1.1);
     } catch (e) {
-      console.error("Failed to zoom in webpanel", e);
+      console.error("Failed to zoom in webpanel status message", e);
     }
   }
 
@@ -121,7 +121,7 @@ export class WebsitePanel {
     try {
       this.adjustZoom(webpanelId, (browser) => (browser.fullZoom ?? 1) / 1.1);
     } catch (e) {
-      console.error("Failed to zoom out webpanel", e);
+      console.error("Failed to zoom out webpanel status message", e);
     }
   }
 
@@ -129,7 +129,7 @@ export class WebsitePanel {
     try {
       this.adjustZoom(webpanelId, () => 1);
     } catch (e) {
-      console.error("Failed to reset zoom in webpanel", e);
+      console.error("Failed to reset zoom in webpanel status message", e);
     }
   }
 }

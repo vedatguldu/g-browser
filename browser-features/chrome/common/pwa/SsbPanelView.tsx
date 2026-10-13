@@ -170,7 +170,7 @@ export class SsbPanelView {
         SsbPanelView.panelIsInstalled[1](installed);
       }
     } catch (error) {
-      console.error("[SsbPanelView] Could not check installed app:", error);
+      console.error("[SsbPanelView] Could not check installed app status message:", error);
     }
   }
 
@@ -221,6 +221,8 @@ export class SsbPanelView {
             id={`ssb-${app.id}`}
             class="subviewbutton ssb-app-info-button"
             label={SsbPanelView.formatAppLabel(app)}
+            tooltiptext={SsbPanelView.formatAppLabel(app)}
+            aria-label={SsbPanelView.formatAppLabel(app)}
             image={app.icon}
             data-ssbId={app.id}
             onCommand={() => {
@@ -241,6 +243,7 @@ export class SsbPanelView {
       installCurrent: i18next.t("ssb.menu.install-current"),
       openCurrent: i18next.t("ssb.menu.open-current"),
       openInstalled: i18next.t("ssb.menu.open-installed"),
+      manageApps: i18next.t("ssb.menu.manage-apps", { defaultValue: "Manage Apps" }),
     });
 
     addI18nObserver(() => {
@@ -249,6 +252,7 @@ export class SsbPanelView {
         installCurrent: i18next.t("ssb.menu.install-current"),
         openCurrent: i18next.t("ssb.menu.open-current"),
         openInstalled: i18next.t("ssb.menu.open-installed"),
+        manageApps: i18next.t("ssb.menu.manage-apps", { defaultValue: "Manage Apps" }),
       });
     });
 
@@ -261,6 +265,8 @@ export class SsbPanelView {
           id="appMenu-ssb-button"
           class="subviewbutton subviewbutton-nav"
           label={translations().webapps}
+          tooltiptext={translations().webapps}
+          aria-label={translations().webapps}
           closemenu="none"
           onCommand={() => SsbPanelView.showSsbPanelSubView()}
         />
@@ -282,6 +288,12 @@ export class SsbPanelView {
                   disabled: panelIsInstalled() === null ? "true" : undefined,
                 }}
                 label={panelIsInstalled()
+                  ? translations().openCurrent
+                  : translations().installCurrent}
+                tooltiptext={panelIsInstalled()
+                  ? translations().openCurrent
+                  : translations().installCurrent}
+                aria-label={panelIsInstalled()
                   ? translations().openCurrent
                   : translations().installCurrent}
                 onCommand={() => {
@@ -315,6 +327,9 @@ export class SsbPanelView {
           <xul:toolbarbutton
             id="PanelUI-openManageSsbPage"
             class="subviewbutton panel-subview-footer-button"
+            label={translations().manageApps}
+            tooltiptext={translations().manageApps}
+            aria-label={translations().manageApps}
             hidden
           />
         </xul:panelview>

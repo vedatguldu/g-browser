@@ -79,7 +79,7 @@ export class QRCodeManager {
         }
       }
     } catch (error) {
-      console.error("Failed to get current tab URL:", error);
+      console.error("Failed to get current tab URL status message:", error);
     }
   }
 
@@ -127,11 +127,16 @@ export class QRCodeManager {
           container.removeChild(container.firstChild);
         }
         this.qrCode.append(container);
+        container.setAttribute("role", "img");
+        container.setAttribute(
+          "aria-label",
+          `QR code for ${url}`,
+        );
       }
 
       return this.qrCode;
     } catch (error) {
-      console.error("Failed to load QRCodeStyling:", error);
+      console.error("Failed to load QRCodeStyling status message:", error);
       return null;
     }
   }

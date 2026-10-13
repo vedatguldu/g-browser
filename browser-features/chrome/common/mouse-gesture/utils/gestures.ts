@@ -36,7 +36,7 @@ export function executeGestureAction(name: string, targetWindow: Window): boolea
       action(targetWindow);
       return true;
     } catch (e) {
-      console.error(`[mouse-gesture] Action failed: ${name}`, e);
+      console.error(`[mouse-gesture] Action failed status message: ${name}`, e);
       return false;
     }
   }

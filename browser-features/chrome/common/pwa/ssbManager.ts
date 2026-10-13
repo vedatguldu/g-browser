@@ -111,7 +111,7 @@ export class SiteSpecificBrowserManager {
         const renamed = await this.renameSsb(request.id, request.newName ?? "");
         request.complete?.(renamed);
       } catch (error) {
-        console.error("[SiteSpecificBrowserManager] Rename failed:", error);
+        console.error("[SiteSpecificBrowserManager] Rename failed status message:", error);
         request.complete?.(false);
       }
     };
@@ -126,7 +126,7 @@ export class SiteSpecificBrowserManager {
         await this.uninstallById(request.id);
         request.complete?.(true);
       } catch (error) {
-        console.error("[SiteSpecificBrowserManager] Uninstall failed:", error);
+        console.error("[SiteSpecificBrowserManager] Uninstall failed status message:", error);
         request.complete?.(false);
       }
     };
@@ -617,7 +617,7 @@ export class SiteSpecificBrowserManager {
           );
         } catch (error) {
           console.warn(
-            "[SiteSpecificBrowserManager] Could not reconcile optional launcher metadata:",
+            "[SiteSpecificBrowserManager] Could not reconcile optional launcher metadata status message:",
             error,
           );
         }

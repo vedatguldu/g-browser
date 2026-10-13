@@ -295,10 +295,36 @@ export class CommandPaletteController {
   private focusSelectedItem(): void {
     this.targetWindow.setTimeout(() => {
       const selected = this.targetWindow.document?.querySelector(
-        '.command-palette-item[data-selected="true"]',
+        '.command-palette-item[data-selected="true"], .command-palette-item[aria-selected="true"]',
       );
       if (selected) (selected as HTMLElement).focus();
     }, 0);
+  }
+
+  private announceError(message: string): void {
+    try {
+      const doc = this.targetWindow.document;
+      if (!doc) return;
+      let announcer = doc.getElementById("floorp-a11y-live-announcer");
+      if (!announcer) {
+        announcer = doc.createElement("div");
+        announcer.id = "floorp-a11y-live-announcer";
+        announcer.setAttribute("role", "alert");
+        announcer.setAttribute("aria-live", "assertive");
+        announcer.setAttribute("aria-atomic", "true");
+        (announcer as HTMLElement).style.cssText =
+          "position: absolute !important; width: 1px !important; height: 1px !important; padding: 0 !important; margin: -1px !important; overflow: hidden !important; clip: rect(0, 0, 0, 0) !important; white-space: nowrap !important; border: 0 !important;";
+        (doc.body ?? doc.documentElement)?.appendChild(announcer);
+      }
+      announcer.textContent = "";
+      this.targetWindow.setTimeout(() => {
+        if (announcer) {
+          announcer.textContent = message;
+        }
+      }, 50);
+    } catch (err) {
+      console.warn("[CommandPalette] announce status message failed:", err);
+    }
   }
 
   private focusSearchInput(clear: boolean = true): void {
@@ -441,7 +467,8 @@ export class CommandPaletteController {
       try {
         cmd.fn(this.targetWindow);
       } catch (e) {
-        console.error(`[command-palette] Action failed: ${cmd.id}`, e);
+        console.error(`[command-palette] Action failed status message: ${cmd.id}`, e);
+        this.announceError(`Command failed: ${cmd.label || cmd.id}`);
       }
       return;
     }
@@ -457,7 +484,8 @@ export class CommandPaletteController {
     try {
       cmd.fn(this.targetWindow);
     } catch (e) {
-      console.error(`[command-palette] Action failed: ${cmd.id}`, e);
+      console.error(`[command-palette] Action failed status message: ${cmd.id}`, e);
+      this.announceError(`Command failed: ${cmd.label || cmd.id}`);
     }
   }
 
@@ -471,7 +499,7 @@ export class CommandPaletteController {
       return step.shouldInclude?.(args, this.targetWindow) ?? true;
     } catch (e) {
       console.error(
-        `[command-palette] Failed to evaluate step condition: ${step.id}`,
+        `[command-palette] Failed to evaluate step condition status message: ${step.id}`,
         e,
       );
       return true;
@@ -591,7 +619,7 @@ export class CommandPaletteController {
       try {
         choicesPromise = step.choicesLoader(targetWindow, args);
       } catch (e) {
-        console.error("[command-palette] Failed to load step choices:", e);
+        console.error("[command-palette] Failed to load step choices status message:", e);
         if (
           this.isStepChoicesRequestCurrent(
             generation,
@@ -661,7 +689,7 @@ export class CommandPaletteController {
               targetWindow,
             )
           ) {
-            console.error("[command-palette] Failed to load step choices:", e);
+            console.error("[command-palette] Failed to load step choices status message:", e);
             this.state.setStepChoicesBase([]);
             this.state.setFilteredStepChoices([]);
             this.state.setStepChoicesLoading(false);
@@ -899,7 +927,7 @@ export class CommandPaletteController {
     try {
       cmd.fn(this.targetWindow, args);
     } catch (e) {
-      console.error(`[command-palette] Action failed: ${cmd.id}`, e);
+      console.error(`[command-palette] Action failed status message: ${cmd.id}`, e);
     }
   }
 
@@ -1196,7 +1224,7 @@ export class CommandPaletteController {
             cmd.fn(win, args);
           } catch (e) {
             console.error(
-              "[command-palette] Shortcut action failed:",
+              "[command-palette] Shortcut action failed status message:",
               s.commandId,
               e,
             );
@@ -1273,7 +1301,7 @@ export class CommandPaletteController {
             cmd.fn(win, args);
           } catch (e) {
             console.error(
-              "[command-palette] Shortcut action failed:",
+              "[command-palette] Shortcut action failed status message:",
               s.commandId,
               e,
             );
@@ -1658,7 +1686,7 @@ export class CommandPaletteController {
             console.error(
               `[command-palette] ${
                 isBookmark ? "Bookmark" : "History"
-              } search failed:`,
+              } search failed status message:`,
               e,
             );
           }
@@ -1720,7 +1748,7 @@ export class CommandPaletteController {
               triggeringPrincipal: target.principal,
             });
           } catch (e) {
-            console.error("[command-palette] Navigation failed", e);
+            console.error("[command-palette] Navigation failed status message", e);
           }
         },
       });
@@ -1843,7 +1871,7 @@ export class CommandPaletteController {
                 );
               });
           } catch (e) {
-            console.error("[command-palette] Search fallback sync error:", e);
+            console.error("[command-palette] Search fallback sync error status message:", e);
           }
         },
       });
@@ -1900,7 +1928,7 @@ export class CommandPaletteController {
       if (generation !== this.searchGeneration) return;
       this.appendSuggestionResults(results, getCategoryPriority());
     } catch (e) {
-      console.error("[command-palette] History search failed:", e);
+      console.error("[command-palette] History search failed status message:", e);
     }
   }
 
@@ -1919,7 +1947,7 @@ export class CommandPaletteController {
       if (generation !== this.searchGeneration) return;
       this.appendSuggestionResults(results, getCategoryPriority());
     } catch (e) {
-      console.error("[command-palette] Bookmark search failed:", e);
+      console.error("[command-palette] Bookmark search failed status message:", e);
     }
   }
 

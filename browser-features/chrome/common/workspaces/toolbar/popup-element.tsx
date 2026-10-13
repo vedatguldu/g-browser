@@ -121,7 +121,7 @@ export function PopupElement(props: { ctx: WorkspacesService }) {
       const list = await props.ctx.listArchivedWorkspaces();
       setArchivedWorkspaces(list);
     } catch (error) {
-      console.error("WorkspacesPopup: failed to load archives", error);
+      console.error("WorkspacesPopup: failed to load archives status message", error);
       setRestoreError(texts().restoreError);
     } finally {
       setIsLoadingRestore(false);
@@ -150,7 +150,7 @@ export function PopupElement(props: { ctx: WorkspacesService }) {
         await loadArchivedWorkspaces();
       }
     } catch (error) {
-      console.error("WorkspacesPopup: failed to restore workspace", error);
+      console.error("WorkspacesPopup: failed to restore workspace status message", error);
       await loadArchivedWorkspaces();
       setRestoreError(texts().restoreError);
     }
@@ -171,7 +171,7 @@ export function PopupElement(props: { ctx: WorkspacesService }) {
         setRestoreError(texts().restoreError);
       }
     } catch (error) {
-      console.error("WorkspacesPopup: failed to delete archive", error);
+      console.error("WorkspacesPopup: failed to delete archive status message", error);
       setRestoreError(texts().restoreError);
     } finally {
       setIsLoadingRestore(false);
@@ -242,11 +242,22 @@ export function PopupElement(props: { ctx: WorkspacesService }) {
                                 class="workspaceRestoreItemButton"
                                 align="center"
                                 flex="1"
+                                role="button"
+                                tabindex="0"
+                                aria-label={`${item.name}, ${texts().restoreTabCount(item.tabCount)}, ${formatRelativeTime(item.capturedAt)}`}
+                                onKeyDown={(event: KeyboardEvent) => {
+                                  if (event.key === "Enter" || event.key === " ") {
+                                    event.preventDefault();
+                                    handleRestore(item.archiveId);
+                                  }
+                                }}
                                 onClick={() => handleRestore(item.archiveId)}
                               >
                                 <xul:image
                                   class="workspaceRestoreItemIcon"
                                   src={iconUrl()}
+                                  aria-hidden="true"
+                                  role="presentation"
                                 />
                                 <xul:vbox
                                   class="workspaceRestoreItemContent"
@@ -271,6 +282,8 @@ export function PopupElement(props: { ctx: WorkspacesService }) {
                               <xul:toolbarbutton
                                 class="toolbarbutton-1 workspaceRestoreDeleteButton"
                                 title={texts().restoreDeleteTooltip}
+                                tooltiptext={`${texts().restoreDeleteTooltip}: ${item.name}`}
+                                aria-label={`${texts().restoreDeleteTooltip}: ${item.name}`}
                                 closemenu="none"
                                 onClick={(event: MouseEvent) => {
                                   void handleDelete(item.archiveId, event);
@@ -314,9 +327,16 @@ export function PopupElement(props: { ctx: WorkspacesService }) {
               class={`toolbarbutton-1 chromeclass-toolbar-additional workspaceRestoreToggle${
                 isRestoreMode() ? " workspaceRestoreToggle-active" : ""
               }`}
-              title={isRestoreMode()
+              label={isRestoreMode()
                 ? texts().restoreCancel
                 : texts().restoreTooltip}
+              tooltiptext={isRestoreMode()
+                ? texts().restoreCancel
+                : texts().restoreTooltip}
+              aria-label={isRestoreMode()
+                ? texts().restoreCancel
+                : texts().restoreTooltip}
+              aria-pressed={isRestoreMode()}
               closemenu="none"
               onCommand={() => {
                 void toggleRestoreMode();

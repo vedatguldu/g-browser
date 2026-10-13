@@ -137,13 +137,12 @@
     background-color: unset !important;
   }
 
-  &[data-selected="true"] {
-    background-color: color-mix(
-      in srgb,
-      currentColor 20%,
-      transparent
-    ) !important;
+  &[data-selected="true"],
+  &[aria-selected="true"] {
+    background-color: var(--accent-color, #0061e0) !important;
+    color: #ffffff !important;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+    outline: 2px solid Highlight !important;
   }
 
   /* Container indicator - colored border on the left */
@@ -408,5 +407,14 @@
       transparent
     ) !important;
     border: 2px solid var(--toolbarbutton-active-background, rgba(0, 0, 0, 0.2));
+  }
+}
+
+@media (forced-colors: active) {
+  .workspaceButton[data-selected="true"],
+  .workspaceButton[aria-selected="true"] {
+    background-color: Highlight !important;
+    color: HighlightText !important;
+    border: 2px solid HighlightText !important;
   }
 }

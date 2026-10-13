@@ -68,9 +68,23 @@ export class CSSEntry {
         })
         .catch((error) => {
           console.error("Error checking CSS file:", error);
+          try {
+            if (typeof globalThis.StatusPanel !== "undefined") {
+              globalThis.StatusPanel._label = `CSS load error: ${this.leafName}`;
+            }
+          } catch {
+            // Fallback
+          }
         });
     } catch (error) {
-      console.error("Error setting CSS enabled state:", error);
+      console.error("Error setting CSS enabled state status message:", error);
+      try {
+        if (typeof globalThis.StatusPanel !== "undefined") {
+          globalThis.StatusPanel._label = `CSS error: ${this.leafName}`;
+        }
+      } catch {
+        // Fallback
+      }
     }
   }
 }

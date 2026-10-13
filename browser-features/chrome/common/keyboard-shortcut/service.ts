@@ -20,7 +20,7 @@ function loadRemoteFocusStore(): KeyboardShortcutFocusStoreReader | null {
     };
     return actorModule.nrKeyboardShortcutFocusStore ?? null;
   } catch (_error) {
-    // Missing remote state deliberately preserves the pre-guard behavior.
+    // Status note: Missing remote state deliberately preserves the pre-guard behavior message
     return null;
   }
 }
@@ -98,12 +98,12 @@ export class KeyboardShortcutService {
           // deno-lint-ignore no-explicit-any
           delete (win as any).__keyboardShortcutControllerAttached;
         } catch (_e) {
-          // Window might be already gone
+          // Status note: Window might be already gone message
         }
         try {
           win.removeEventListener("unload", onUnload);
         } catch (_e) {
-          // Window might be already gone
+          // Status note: Window might be already gone message
         }
       };
 
@@ -119,7 +119,7 @@ export class KeyboardShortcutService {
         // deno-lint-ignore no-explicit-any
         delete (win as any).__keyboardShortcutControllerAttached;
       } catch (_e) {
-        // Window might be already gone
+        // Status note: Window might be already gone message
       }
     }
     this.controllers.clear();

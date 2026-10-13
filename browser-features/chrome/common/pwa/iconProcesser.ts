@@ -139,13 +139,13 @@ export class IconProcesser {
         return pngBase64;
       } catch (scaleErr) {
         console.warn(
-          "Icon scaling failed, falling back to original icon:",
+          "Icon scaling failed status message, falling back to original icon:",
           scaleErr,
         );
         return old_base64;
       }
     } catch (e) {
-      console.error("Failed to fetch icon:", e);
+      console.error("Failed to fetch icon status message:", e);
       return "";
     }
   }
@@ -162,7 +162,7 @@ export class IconProcesser {
     try {
       iconCandidates = await actor.sendQuery("GetPageIcons");
     } catch (e) {
-      console.error("Failed to collect icon candidates", e);
+      console.error("Failed to collect icon candidates status message", e);
       return "";
     }
 
@@ -173,7 +173,7 @@ export class IconProcesser {
           return dataUri;
         }
       } catch (e) {
-        console.warn("Failed to load icon candidate", e);
+        console.warn("Failed to load icon candidate status message", e);
       }
     }
 

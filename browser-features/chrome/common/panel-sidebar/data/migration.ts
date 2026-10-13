@@ -71,12 +71,13 @@ export function commitMigratedPreferences(
     prefs.setStringPref(values.configPrefName, values.serializedConfig);
     prefs.clearUserPref(values.legacyPrefName);
   } catch (error) {
+    // Status rollback message: restore preferences on failure
     for (const [name, snapshot] of snapshots) {
       try {
         restoreStringPref(prefs, name, snapshot);
       } catch (rollbackError) {
         console.error(
-          `[PanelSidebar] Failed to roll back preference ${name}.`,
+          `[PanelSidebar] Failed to roll back preference ${name} status message.`,
           rollbackError,
         );
       }
@@ -145,7 +146,7 @@ export function migratePanelSidebarData() {
       });
     } catch (error) {
       console.warn(
-        "[PanelSidebar] Failed to migrate legacy panel data; using the current panel configuration.",
+        "[PanelSidebar] Failed to migrate legacy panel data status message; using the current panel configuration.",
         error,
       );
     }

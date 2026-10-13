@@ -40,7 +40,7 @@ export function getPanelDataById(panelId: string): Panel | null {
     const parsed = JSON.parse(raw) as { data?: Panel[] };
     return parsed.data?.find((panel) => panel.id === panelId) ?? null;
   } catch (error) {
-    console.error("[WebPanelBrowser] Failed to read panel data:", error);
+    console.error("[WebPanelBrowser] Failed to read panel data status message:", error);
     return null;
   }
 }
@@ -128,6 +128,6 @@ export function saveZoomLevel(webpanelId: string, zoomLevel: number): void {
       JSON.stringify(parsed),
     );
   } catch (error) {
-    console.error("[WebPanelBrowser] Failed to save zoom level:", error);
+    console.error("[WebPanelBrowser] Failed to save zoom level status message:", error);
   }
 }

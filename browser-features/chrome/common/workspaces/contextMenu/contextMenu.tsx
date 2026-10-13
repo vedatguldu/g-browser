@@ -13,6 +13,7 @@ const translationKeys = {
   moveUp: "workspaces.context-menu.move-up",
   moveDown: "workspaces.context-menu.move-down",
   delete: "workspaces.context-menu.delete",
+  deleteConfirm: "workspaces.context-menu.delete-confirm",
   manage: "workspaces.context-menu.manage",
   archive: "workspaces.context-menu.archive",
 };
@@ -26,6 +27,7 @@ const getTranslations = () => ({
   moveUp: translate(translationKeys.moveUp),
   moveDown: translate(translationKeys.moveDown),
   delete: translate(translationKeys.delete),
+  deleteConfirm: translate(translationKeys.deleteConfirm),
   manage: translate(translationKeys.manage),
   archive: translate(translationKeys.archive),
 });
@@ -64,7 +66,18 @@ export function ContextMenu(props: {
       <xul:menuitem
         data-floorp-context-menu-key="floorp.workspaces.delete"
         label={texts().delete}
-        onCommand={() => props.ctx.deleteWorkspace(props.contextWorkspaceId)}
+        onCommand={() => {
+          let confirmed = true;
+          const msg = texts().deleteConfirm;
+          if (typeof Services !== "undefined" && Services.prompt?.confirm) {
+            confirmed = Services.prompt.confirm(null, texts().delete, msg);
+          } else if (typeof globalThis.confirm === "function") {
+            confirmed = globalThis.confirm(msg);
+          }
+          if (confirmed) {
+            props.ctx.deleteWorkspace(props.contextWorkspaceId);
+          }
+        }}
       />
       <xul:menuitem
         data-floorp-context-menu-key="floorp.workspaces.manage"

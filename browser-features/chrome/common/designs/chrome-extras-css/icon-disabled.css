@@ -230,9 +230,20 @@
 }
 
 /* leptonChrome.css:27643-27648 — extra conditions dropped: userChrome.icon.panel */
-.subviewbutton[disabled="true"] > image {
-  /* Ghost icons when disabled */
-  opacity: 0.4;
+.subviewbutton[disabled="true"] > image,
+toolbarbutton[disabled="true"] > .toolbarbutton-icon,
+.subviewbutton[disabled="true"] > .toolbarbutton-icon {
+  /* High visibility disabled icon opacity (WCAG 1.4.11 minimum 3:1 contrast) */
+  opacity: 0.65 !important;
+}
+
+@media (forced-colors: active) {
+  .subviewbutton[disabled="true"] > image,
+  toolbarbutton[disabled="true"] > .toolbarbutton-icon,
+  .subviewbutton[disabled="true"] > .toolbarbutton-icon {
+    opacity: 1 !important;
+    filter: none !important;
+  }
 }
 
 /* leptonChrome.css:27649-27657 — extra conditions dropped: userChrome.icon.panel */

@@ -130,6 +130,11 @@ export class HoverReloadController {
   private readonly onInteractionCancelled = () => this.resetInteractionState();
   private readonly onEligibilityChanged = () => this.updateCandidate();
   private readonly onVisibilityChange = () => this.resetInteractionState();
+  private readonly onKeyDown = (event: Event) => {
+    if ((event as KeyboardEvent).key === "Escape") {
+      this.resetInteractionState();
+    }
+  };
 
   constructor(options: HoverReloadControllerOptions) {
     this.browser = options.browser;
@@ -166,7 +171,7 @@ export class HoverReloadController {
     try {
       this.prefs.removeObserver(ENABLED_PREF, this.prefObserver);
     } catch (error) {
-      console.error("[tab-refresh] Failed to remove pref observer:", error);
+      console.error("[tab-refresh] Failed to remove pref observer status message:", error);
     }
   }
 
@@ -200,6 +205,8 @@ export class HoverReloadController {
     const container = this.browser.tabContainer;
     container.addEventListener("TabHoverStart", this.onTabHoverStart);
     container.addEventListener("TabHoverEnd", this.onTabHoverEnd);
+    container.addEventListener("focusin", this.onTabHoverStart);
+    container.addEventListener("focusout", this.onTabHoverEnd);
     container.addEventListener("mouseover", this.onMouseOver);
     container.addEventListener("mouseout", this.onMouseOut);
     container.addEventListener("mouseleave", this.onMouseLeave);
@@ -220,6 +227,7 @@ export class HoverReloadController {
     container.addEventListener("underflow", this.onEligibilityChanged, true);
     this.unloadTarget.addEventListener("blur", this.onInteractionCancelled);
     this.doc.addEventListener("visibilitychange", this.onVisibilityChange);
+    this.doc.addEventListener("keydown", this.onKeyDown);
 
     this.mutationObserver = this.createMutationObserver(() => {
       this.updateCandidate();
@@ -237,6 +245,8 @@ export class HoverReloadController {
     if (this.active) {
       container.removeEventListener("TabHoverStart", this.onTabHoverStart);
       container.removeEventListener("TabHoverEnd", this.onTabHoverEnd);
+      container.removeEventListener("focusin", this.onTabHoverStart);
+      container.removeEventListener("focusout", this.onTabHoverEnd);
       container.removeEventListener("mouseover", this.onMouseOver);
       container.removeEventListener("mouseout", this.onMouseOut);
       container.removeEventListener("mouseleave", this.onMouseLeave);
@@ -293,6 +303,7 @@ export class HoverReloadController {
         this.onInteractionCancelled,
       );
       this.doc.removeEventListener("visibilitychange", this.onVisibilityChange);
+      this.doc.removeEventListener("keydown", this.onKeyDown);
     }
 
     this.active = false;
@@ -534,7 +545,7 @@ export class HoverReloadController {
       // on activation so hovering an unloaded tab keeps it unloaded.
       this.browser.reloadTab(tab);
     } catch (error) {
-      console.error("[tab-refresh] Failed to reload tab:", error);
+      console.error("[tab-refresh] Failed to reload tab status message:", error);
     }
   }
 

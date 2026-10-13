@@ -64,6 +64,12 @@ export class FloorpPrivateContainer {
         "context-openlink",
         () => {
           this.privateContainerMenuItem.hidden = this.openLinkMenuItem.hidden;
+          if (
+            this.privateContainerMenuItem &&
+            !this.privateContainerMenuItem.getAttribute("accesskey")
+          ) {
+            this.privateContainerMenuItem.setAttribute("accesskey", "P");
+          }
         },
         "floorp.private-container.open-link",
       );
@@ -112,6 +118,7 @@ export class FloorpPrivateContainer {
     tab.linkedBrowser.setAttribute("disableglobalhistory", "true");
     tab.setAttribute("historydisabled", "true");
     tab.setAttribute("floorp-disablehistory", "true");
+    tab.setAttribute("aria-description", "Private container tab (history not recorded)");
 
     const linkedBrowser = tab.linkedBrowser as unknown as {
       disableGlobalHistory?: () => void;
@@ -236,7 +243,7 @@ export class FloorpPrivateContainer {
       });
     } catch (error) {
       console.error(
-        "[FloorpPrivateContainer] Failed to load URL in private container tab",
+        "[FloorpPrivateContainer] Failed to load URL in private container tab status message",
         error,
       );
     }
@@ -271,7 +278,7 @@ export class FloorpPrivateContainer {
           ) as nsIPrincipal;
         } catch (error) {
           console.error(
-            "[FloorpPrivateContainer] Failed to deserialize tab principal",
+            "[FloorpPrivateContainer] Failed to deserialize tab principal status message",
             error,
           );
           continue;
@@ -336,7 +343,7 @@ export class FloorpPrivateContainer {
           );
         } catch (e) {
           console.error(
-            "[FloorpPrivateContainer] Failed to apply history disabling to reopened tab:",
+            "[FloorpPrivateContainer] Failed to apply history disabling to reopened tab status message:",
             e,
           );
         }

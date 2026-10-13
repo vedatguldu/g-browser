@@ -113,7 +113,7 @@ export function getPublicContainerOptions(): ContainerOption[] {
       });
     }
   } catch (error) {
-    console.error("[containerUtils] Failed to load container options:", error);
+    console.error("[containerUtils] Failed to load container options status message:", error);
   }
 
   return options;

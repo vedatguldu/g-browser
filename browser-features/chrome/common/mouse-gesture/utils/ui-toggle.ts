@@ -45,7 +45,7 @@ export function toggleUserInterface(doc: Document): void {
       }
     }
   } catch (e) {
-    console.error("[ui-toggle] Failed to toggle user interface:", e);
+    console.error("[ui-toggle] Failed to toggle user interface status message:", e);
   }
 }
 
@@ -56,7 +56,7 @@ export function toggleNavigationPanel(doc: Document): void {
     const current = styleDisplay(navBar);
     setStyleDisplay(navBar, current ? "" : "none");
   } catch (e) {
-    console.error("[ui-toggle] Failed to toggle navigation panel:", e);
+    console.error("[ui-toggle] Failed to toggle navigation panel status message:", e);
   }
 }
 
@@ -94,7 +94,7 @@ export function enableRestMode(win: Window): void {
       l10n.formatValueSync("rest-mode-description") ?? "",
     );
   } catch (e) {
-    console.error("[ui-toggle] Failed to enable rest mode:", e);
+    console.error("[ui-toggle] Failed to enable rest mode status message:", e);
   } finally {
     tag.remove();
     if (selectedTabLocation) {

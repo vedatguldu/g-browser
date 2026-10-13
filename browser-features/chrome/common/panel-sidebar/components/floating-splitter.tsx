@@ -361,18 +361,60 @@ export function FloatingSplitter() {
     }
   });
 
+  const onHorizontalKeyDown = (e: KeyboardEvent) => {
+    const sidebarBox = document?.getElementById("panel-sidebar-box") as unknown as XULElement;
+    if (!sidebarBox) return;
+    const isLeftSide = (e.target as HTMLElement)?.classList.contains("floating-splitter-left");
+    const step = e.shiftKey ? 50 : 15;
+    let delta = 0;
+    if (e.key === "ArrowLeft") delta = isLeftSide ? step : -step;
+    else if (e.key === "ArrowRight") delta = isLeftSide ? -step : step;
+    else return;
+
+    e.preventDefault();
+    const currentWidth = sidebarBox.getBoundingClientRect().width;
+    const newWidth = Math.max(225, currentWidth + delta);
+    sidebarBox.style.setProperty("width", `${newWidth}px`);
+  };
+
+  const onVerticalKeyDown = (e: KeyboardEvent) => {
+    const sidebarBox = document?.getElementById("panel-sidebar-box") as unknown as XULElement;
+    if (!sidebarBox) return;
+    const isTopSide = (e.target as HTMLElement)?.classList.contains("floating-splitter-top");
+    const step = e.shiftKey ? 50 : 15;
+    let delta = 0;
+    if (e.key === "ArrowUp") delta = isTopSide ? step : -step;
+    else if (e.key === "ArrowDown") delta = isTopSide ? -step : step;
+    else return;
+
+    e.preventDefault();
+    const currentHeight = sidebarBox.getBoundingClientRect().height;
+    const newHeight = Math.max(200, currentHeight + delta);
+    sidebarBox.style.setProperty("height", `${newHeight}px`);
+  };
+
   return (
     <>
       <xul:box
         id="floating-splitter-left"
         class="floating-splitter-side floating-splitter-left"
         part="floating-splitter-side"
+        tabindex="0"
+        role="separator"
+        aria-orientation="vertical"
+        aria-label="Panel left resize splitter"
+        onKeyDown={onHorizontalKeyDown}
         onMouseDown={onHorizontalMouseDown}
       />
       <xul:box
         id="floating-splitter-right"
         class="floating-splitter-side floating-splitter-right"
         part="floating-splitter-side"
+        tabindex="0"
+        role="separator"
+        aria-orientation="vertical"
+        aria-label="Panel right resize splitter"
+        onKeyDown={onHorizontalKeyDown}
         onMouseDown={onHorizontalMouseDown}
       />
 
@@ -380,12 +422,22 @@ export function FloatingSplitter() {
         id="floating-splitter-top"
         class="floating-splitter-vertical floating-splitter-top"
         part="floating-splitter-vertical"
+        tabindex="0"
+        role="separator"
+        aria-orientation="horizontal"
+        aria-label="Panel top resize splitter"
+        onKeyDown={onVerticalKeyDown}
         onMouseDown={onVerticalMouseDown}
       />
       <xul:box
         id="floating-splitter-bottom"
         class="floating-splitter-vertical floating-splitter-bottom"
         part="floating-splitter-vertical"
+        tabindex="0"
+        role="separator"
+        aria-orientation="horizontal"
+        aria-label="Panel bottom resize splitter"
+        onKeyDown={onVerticalKeyDown}
         onMouseDown={onVerticalMouseDown}
       />
 

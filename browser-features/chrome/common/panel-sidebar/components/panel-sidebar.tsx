@@ -128,7 +128,7 @@ export class CPanelSidebar {
       try {
         prevDispose();
       } catch (e) {
-        console.warn("panel dispose failed", e);
+        console.warn("panel dispose failed status message", e);
       }
       this.panelDisposers.delete(panel.id);
     }
@@ -278,7 +278,7 @@ export class CPanelSidebar {
       try {
         dispose();
       } catch (e) {
-        console.warn("panel dispose failed", e);
+        console.warn("panel dispose failed status message", e);
       }
       this.panelDisposers.delete(panelId);
     }

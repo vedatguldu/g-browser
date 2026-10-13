@@ -583,3 +583,17 @@
 .modal-error {
   color: var(--chakra-colors-red-500);
 }
+
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--chakra-colors-blue-500, Highlight) !important;
+  outline-offset: 2px;
+}
+
+@media (forced-colors: active) {
+  .modal,
+  .modal button {
+    forced-color-adjust: auto;
+    border: 1px solid ButtonText !important;
+  }
+}

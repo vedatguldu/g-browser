@@ -80,7 +80,7 @@ export class ProfileManagerService {
       // already exists and onCreated wasn't invoked.
       this.updateButtonIfNeeded();
     } catch (e) {
-      console.error("Failed to initialize ProfileManagerService:", e);
+      console.error("Failed to initialize ProfileManagerService status message:", e);
     }
   }
 
@@ -109,7 +109,9 @@ export class ProfileManagerService {
       addI18nObserver(() => {
         setTexts(getTranslatedTexts());
         // update attributes when language changes
+        aNode.setAttribute("role", "button");
         aNode.setAttribute("label", texts().label);
+        aNode.setAttribute("aria-label", texts().label);
         aNode.setAttribute("tooltiptext", texts().tooltipText);
         tooltip?.setAttribute("label", texts().tooltipText);
       });
@@ -117,7 +119,9 @@ export class ProfileManagerService {
       console.debug("Updating Profile Manager button texts");
 
       // initial set
+      aNode.setAttribute("role", "button");
       aNode.setAttribute("label", texts().label);
+      aNode.setAttribute("aria-label", texts().label);
       aNode.setAttribute("tooltiptext", texts().tooltipText);
       tooltip?.setAttribute("label", texts().tooltipText);
     }, import.meta.hot);

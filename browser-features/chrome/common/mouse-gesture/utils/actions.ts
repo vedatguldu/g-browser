@@ -28,7 +28,7 @@ const doCommandIfExists = (id: string, win?: Window) => {
   try {
     el?.doCommand?.();
   } catch (e) {
-    console.error(`[mouse-gesture] Failed to run command for ${id}:`, e);
+    console.error(`[mouse-gesture] Failed to run command for ${id} status message:`, e);
   }
 };
 
@@ -37,7 +37,7 @@ const clickIfExists = (id: string, win?: Window) => {
   try {
     el?.click?.();
   } catch (e) {
-    console.error(`[mouse-gesture] Failed to click ${id}:`, e);
+    console.error(`[mouse-gesture] Failed to click ${id} status message:`, e);
   }
 };
 
@@ -66,7 +66,7 @@ const sendScrollCommand = (
     );
     actor.sendAsyncMessage("MouseGestureScroll:Execute", { direction });
   } catch (e) {
-    console.error("[mouse-gesture] Failed to send scroll command:", e);
+    console.error("[mouse-gesture] Failed to send scroll command status message:", e);
   }
 };
 
@@ -593,7 +593,7 @@ export const actions: GestureActionRegistration[] = [
         try {
           activeSplitView.addTabs([newTab]);
         } catch (e) {
-          console.error("[MouseGestures] Failed to add tab to split view:", e);
+          console.error("[MouseGestures] Failed to add tab to split view status message:", e);
           gBrowser.removeTab(newTab);
           throw e;
         }
@@ -615,7 +615,7 @@ export const actions: GestureActionRegistration[] = [
       try {
         gBrowser.addTabSplitView([newTab, selectedTab]);
       } catch (e) {
-        console.error("[MouseGestures] Failed to create split view:", e);
+        console.error("[MouseGestures] Failed to create split view status message:", e);
         gBrowser.removeTab(newTab);
         throw e;
       }
@@ -660,7 +660,7 @@ export const actions: GestureActionRegistration[] = [
         try {
           activeSplitView.addTabs([newTab]);
         } catch (e) {
-          console.error("[MouseGestures] Failed to add tab to split view:", e);
+          console.error("[MouseGestures] Failed to add tab to split view status message:", e);
           gBrowser.removeTab(newTab);
           throw e;
         }
@@ -678,7 +678,7 @@ export const actions: GestureActionRegistration[] = [
       try {
         gBrowser.addTabSplitView([selectedTab, newTab]);
       } catch (e) {
-        console.error("[MouseGestures] Failed to create split view:", e);
+        console.error("[MouseGestures] Failed to create split view status message:", e);
         gBrowser.removeTab(newTab);
         throw e;
       }
@@ -724,7 +724,7 @@ export const actions: GestureActionRegistration[] = [
         try {
           activeSplitView.addTabs([newTab]);
         } catch (e) {
-          console.error("[MouseGestures] Failed to add tab to split view:", e);
+          console.error("[MouseGestures] Failed to add tab to split view status message:", e);
           gBrowser.removeTab(newTab);
           throw e;
         }
@@ -753,7 +753,7 @@ export const actions: GestureActionRegistration[] = [
       try {
         gBrowser.addTabSplitView([newTab, selectedTab]);
       } catch (e) {
-        console.error("[MouseGestures] Failed to create split view:", e);
+        console.error("[MouseGestures] Failed to create split view status message:", e);
         gBrowser.removeTab(newTab);
         throw e;
       }
@@ -814,7 +814,7 @@ export const actions: GestureActionRegistration[] = [
         try {
           activeSplitView.addTabs([newTab]);
         } catch (e) {
-          console.error("[MouseGestures] Failed to add tab to split view:", e);
+          console.error("[MouseGestures] Failed to add tab to split view status message:", e);
           gBrowser.removeTab(newTab);
           throw e;
         }
@@ -839,7 +839,7 @@ export const actions: GestureActionRegistration[] = [
       try {
         gBrowser.addTabSplitView([selectedTab, newTab]);
       } catch (e) {
-        console.error("[MouseGestures] Failed to create split view:", e);
+        console.error("[MouseGestures] Failed to create split view status message:", e);
         gBrowser.removeTab(newTab);
         throw e;
       }
@@ -1082,7 +1082,7 @@ export const actions: GestureActionRegistration[] = [
       try {
         activeSplitView.addTabs([newTab]);
       } catch (e) {
-        console.error("[MouseGestures] Failed to add tab to split view:", e);
+        console.error("[MouseGestures] Failed to add tab to split view status message:", e);
         gBrowser.removeTab(newTab);
         throw e;
       }

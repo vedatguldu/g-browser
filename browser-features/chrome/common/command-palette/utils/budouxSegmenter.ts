@@ -71,7 +71,7 @@ function getParser(category: LocaleCategory): Parser | null {
         break;
     }
   } catch (err) {
-    console.error("[CommandPalette] Failed to initialize Budoux parser:", err);
+    console.error("[CommandPalette] Failed to initialize Budoux parser status message:", err);
     parser = null;
   }
   parserCache.set(category, parser);
@@ -94,7 +94,7 @@ export function segmentJapaneseText(text: string): string[] {
   try {
     return parser.parse(text);
   } catch (err) {
-    console.error("[CommandPalette] Budoux segmentation error:", err);
+    console.error("[CommandPalette] Budoux segmentation error status message:", err);
     return [text];
   }
 }

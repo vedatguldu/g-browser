@@ -90,7 +90,7 @@ export function BrowserDesignElement() {
           tabColorSheetURI = uri;
         } catch (error) {
           console.error(
-            `[BrowserDesignElement] Failed to register tab color CSS:`,
+            `[BrowserDesignElement] Failed to register tab color CSS status message:`,
             error,
           );
         }
@@ -123,7 +123,7 @@ export function BrowserDesignElement() {
           }
         } catch (error) {
           console.error(
-            `[BrowserDesignElement] Failed to register raw CSS ${i + 1}:`,
+            `[BrowserDesignElement] Failed to register raw CSS ${i + 1} status message:`,
             error,
           );
         }
@@ -140,7 +140,7 @@ export function BrowserDesignElement() {
           }
         } catch (error) {
           console.error(
-            `[BrowserDesignElement] Failed to register CSS: ${styleUrl}`,
+            `[BrowserDesignElement] Failed to register CSS: ${styleUrl} status message`,
             error,
           );
         }
@@ -156,7 +156,7 @@ export function BrowserDesignElement() {
           }
         } catch (error) {
           console.error(
-            "[BrowserDesignElement] Failed to unregister CSS:",
+            "[BrowserDesignElement] Failed to unregister CSS status message:",
             error,
           );
         }

@@ -153,13 +153,31 @@ export function insertFlexHandles(
     const handle = document?.createXULElement("box");
     if (!handle) continue;
 
+    const currentPct = Math.round((ratios[i] ?? 0.5) * 100);
     handle.className = "floorp-split-handle";
     handle.setAttribute("data-orientation", orientation);
     handle.setAttribute("data-index", String(i));
+    handle.setAttribute("role", "separator");
+    handle.setAttribute("tabindex", "0");
+    handle.setAttribute("aria-orientation", orientation);
+    handle.setAttribute("aria-valuenow", String(currentPct));
+    handle.setAttribute("aria-valuemin", "10");
+    handle.setAttribute("aria-valuemax", "90");
+    handle.setAttribute("aria-label", "Split view resize handle");
     (handle as HTMLElement).style.setProperty("order", String(2 * i + 1));
 
     handle.addEventListener("mousedown", (e: Event) => {
       onFlexHandleMouseDown(e as MouseEvent, i, orderedIds, orientation);
+    });
+
+    handle.addEventListener("keydown", (e: Event) => {
+      onFlexHandleKeyDown(
+        e as KeyboardEvent,
+        i,
+        orderedIds,
+        orientation,
+        handle as HTMLElement,
+      );
     });
 
     panelEl.after(handle);
@@ -201,8 +219,18 @@ export function insertGridHandles(panelIds: string[]): void {
   if (colHandle) {
     colHandle.className = "floorp-grid-handle";
     colHandle.setAttribute("data-orientation", "grid-col");
+    colHandle.setAttribute("role", "separator");
+    colHandle.setAttribute("tabindex", "0");
+    colHandle.setAttribute("aria-orientation", "vertical");
+    colHandle.setAttribute("aria-valuenow", String(Math.round(sizes.gridColRatio * 100)));
+    colHandle.setAttribute("aria-valuemin", "15");
+    colHandle.setAttribute("aria-valuemax", "85");
+    colHandle.setAttribute("aria-label", "Grid column resize handle");
     colHandle.addEventListener("mousedown", (e: Event) => {
       onGridColHandleMouseDown(e as MouseEvent);
+    });
+    colHandle.addEventListener("keydown", (e: Event) => {
+      onGridHandleKeyDown(e as KeyboardEvent, "col", colHandle as HTMLElement);
     });
     tabpanels.appendChild(colHandle);
   }
@@ -211,8 +239,18 @@ export function insertGridHandles(panelIds: string[]): void {
   if (rowHandle) {
     rowHandle.className = "floorp-grid-handle";
     rowHandle.setAttribute("data-orientation", "grid-row");
+    rowHandle.setAttribute("role", "separator");
+    rowHandle.setAttribute("tabindex", "0");
+    rowHandle.setAttribute("aria-orientation", "horizontal");
+    rowHandle.setAttribute("aria-valuenow", String(Math.round(sizes.gridRowRatio * 100)));
+    rowHandle.setAttribute("aria-valuemin", "15");
+    rowHandle.setAttribute("aria-valuemax", "85");
+    rowHandle.setAttribute("aria-label", "Grid row resize handle");
     rowHandle.addEventListener("mousedown", (e: Event) => {
       onGridRowHandleMouseDown(e as MouseEvent);
+    });
+    rowHandle.addEventListener("keydown", (e: Event) => {
+      onGridHandleKeyDown(e as KeyboardEvent, "row", rowHandle as HTMLElement);
     });
     tabpanels.appendChild(rowHandle);
   }
@@ -221,6 +259,9 @@ export function insertGridHandles(panelIds: string[]): void {
   if (centerHandle) {
     centerHandle.className = "floorp-grid-handle";
     centerHandle.setAttribute("data-orientation", "grid-center");
+    centerHandle.setAttribute("role", "separator");
+    centerHandle.setAttribute("tabindex", "0");
+    centerHandle.setAttribute("aria-label", "Grid center resize handle");
     centerHandle.addEventListener("mousedown", (e: Event) => {
       onGridCenterHandleMouseDown(e as MouseEvent);
     });
@@ -265,8 +306,18 @@ export function insertThreePaneGridHandles(panelIds: string[]): void {
   if (colHandle) {
     colHandle.className = "floorp-grid-handle";
     colHandle.setAttribute("data-orientation", "grid-3pane-col");
+    colHandle.setAttribute("role", "separator");
+    colHandle.setAttribute("tabindex", "0");
+    colHandle.setAttribute("aria-orientation", "vertical");
+    colHandle.setAttribute("aria-valuenow", String(Math.round(sizes.gridColRatio * 100)));
+    colHandle.setAttribute("aria-valuemin", "15");
+    colHandle.setAttribute("aria-valuemax", "85");
+    colHandle.setAttribute("aria-label", "Grid 3-pane column resize handle");
     colHandle.addEventListener("mousedown", (e: Event) => {
       onGridColHandleMouseDown(e as MouseEvent);
+    });
+    colHandle.addEventListener("keydown", (e: Event) => {
+      onGridHandleKeyDown(e as KeyboardEvent, "col", colHandle as HTMLElement);
     });
     tabpanels.appendChild(colHandle);
   }
@@ -275,8 +326,18 @@ export function insertThreePaneGridHandles(panelIds: string[]): void {
   if (rowHandle) {
     rowHandle.className = "floorp-grid-handle";
     rowHandle.setAttribute("data-orientation", "grid-3pane-row");
+    rowHandle.setAttribute("role", "separator");
+    rowHandle.setAttribute("tabindex", "0");
+    rowHandle.setAttribute("aria-orientation", "horizontal");
+    rowHandle.setAttribute("aria-valuenow", String(Math.round(sizes.gridRowRatio * 100)));
+    rowHandle.setAttribute("aria-valuemin", "15");
+    rowHandle.setAttribute("aria-valuemax", "85");
+    rowHandle.setAttribute("aria-label", "Grid 3-pane row resize handle");
     rowHandle.addEventListener("mousedown", (e: Event) => {
       onGridRowHandleMouseDown(e as MouseEvent);
+    });
+    rowHandle.addEventListener("keydown", (e: Event) => {
+      onGridHandleKeyDown(e as KeyboardEvent, "row", rowHandle as HTMLElement);
     });
     tabpanels.appendChild(rowHandle);
   }
@@ -419,6 +480,144 @@ function onFlexHandleMouseDown(
   activeDragCleanup = cleanup;
   document?.addEventListener("mousemove", onMouseMove);
   document?.addEventListener("mouseup", onMouseUp);
+}
+
+// ===== Keyboard resizing handlers (WCAG 2.1.1 Keyboard Parity) =====
+
+function onFlexHandleKeyDown(
+  e: KeyboardEvent,
+  handleIndex: number,
+  panelIds: string[],
+  orientation: "horizontal" | "vertical",
+  handleEl: HTMLElement,
+): void {
+  const step = e.shiftKey ? 0.05 : 0.01;
+  let delta = 0;
+
+  if (orientation === "horizontal") {
+    if (e.key === "ArrowLeft") delta = -step;
+    else if (e.key === "ArrowRight") delta = step;
+  } else {
+    if (e.key === "ArrowUp") delta = -step;
+    else if (e.key === "ArrowDown") delta = step;
+  }
+
+  if (e.key === "Home" || e.key === "End") {
+    const fallback = 1 / panelIds.length;
+    const normalized = normalizeRatios(
+      panelIds.map(() => fallback),
+      panelIds.length,
+    );
+    for (let idx = 0; idx < panelIds.length; idx++) {
+      const el = document?.getElementById(panelIds[idx]!) as HTMLElement | null;
+      if (el) el.style.setProperty("flex", `${normalized[idx]} 1 0%`);
+    }
+    handleEl.setAttribute("aria-valuenow", String(Math.round(fallback * 100)));
+    const currentSizes = resolvePaneSizesForPanelIds(panelIds);
+    persistPaneSizesForPanelIds(panelIds, {
+      ...currentSizes,
+      flexRatios: normalized,
+    });
+    e.preventDefault();
+    return;
+  }
+
+  if (delta === 0) return;
+  e.preventDefault();
+
+  const panelBefore = document?.getElementById(panelIds[handleIndex]!) as
+    | HTMLElement
+    | null;
+  const panelAfter = document?.getElementById(panelIds[handleIndex + 1]!) as
+    | HTMLElement
+    | null;
+  if (!panelBefore || !panelAfter) return;
+
+  const currentFlexBefore = parseFloat(
+    panelBefore.style.getPropertyValue("flex") || "1",
+  );
+  const currentFlexAfter = parseFloat(
+    panelAfter.style.getPropertyValue("flex") || "1",
+  );
+  const pairTotal = currentFlexBefore + currentFlexAfter;
+
+  const newBefore = Math.max(
+    0.1,
+    Math.min(pairTotal - 0.1, currentFlexBefore + delta),
+  );
+  const newAfter = pairTotal - newBefore;
+
+  panelBefore.style.setProperty("flex", `${newBefore} 1 0%`);
+  panelAfter.style.setProperty("flex", `${newAfter} 1 0%`);
+
+  const newPct = Math.round((newBefore / pairTotal) * 100);
+  handleEl.setAttribute("aria-valuenow", String(newPct));
+
+  const ratios: number[] = [];
+  for (const id of panelIds) {
+    const el = document?.getElementById(id) as HTMLElement | null;
+    ratios.push(el ? parseFloat(el.style.getPropertyValue("flex") || "1") : 1);
+  }
+  const normalizedRatios = normalizeRatios(ratios, panelIds.length);
+  const currentSizes = resolvePaneSizesForPanelIds(panelIds);
+  persistPaneSizesForPanelIds(panelIds, {
+    ...currentSizes,
+    flexRatios: normalizedRatios,
+  });
+}
+
+function onGridHandleKeyDown(
+  e: KeyboardEvent,
+  axisType: "col" | "row",
+  handleEl: HTMLElement,
+): void {
+  const step = e.shiftKey ? 0.05 : 0.01;
+  let delta = 0;
+
+  if (axisType === "col") {
+    if (e.key === "ArrowLeft") delta = -step;
+    else if (e.key === "ArrowRight") delta = step;
+  } else {
+    if (e.key === "ArrowUp") delta = -step;
+    else if (e.key === "ArrowDown") delta = step;
+  }
+
+  if (e.key === "Home" || e.key === "End") {
+    const tabpanels = getTabpanels() as HTMLElement | null;
+    if (!tabpanels) return;
+    const panelIds = getCurrentGridPanelIds();
+    const currentSizes = resolvePaneSizesForPanelIds(panelIds);
+    const updated = {
+      ...currentSizes,
+      [axisType === "col" ? "gridColRatio" : "gridRowRatio"]: 0.5,
+    };
+    applyGridTemplate(tabpanels, updated.gridColRatio, updated.gridRowRatio);
+    handleEl.setAttribute("aria-valuenow", "50");
+    persistPaneSizesForPanelIds(panelIds, updated);
+    e.preventDefault();
+    return;
+  }
+
+  if (delta === 0) return;
+  e.preventDefault();
+
+  const tabpanels = getTabpanels() as HTMLElement | null;
+  if (!tabpanels) return;
+
+  const panelIds = getCurrentGridPanelIds();
+  const currentSizes = resolvePaneSizesForPanelIds(panelIds);
+  const currentRatio =
+    axisType === "col" ? currentSizes.gridColRatio : currentSizes.gridRowRatio;
+  const newRatio = Math.max(0.15, Math.min(0.85, currentRatio + delta));
+
+  const updated = {
+    ...currentSizes,
+    [axisType === "col" ? "gridColRatio" : "gridRowRatio"]: newRatio,
+  };
+
+  applyGridTemplate(tabpanels, updated.gridColRatio, updated.gridRowRatio);
+  handleEl.setAttribute("aria-valuenow", String(Math.round(newRatio * 100)));
+  persistPaneSizesForPanelIds(panelIds, updated);
 }
 
 // ===== Grid handle drag logic =====

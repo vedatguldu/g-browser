@@ -11,6 +11,7 @@ import {
   onMount,
   Show,
 } from "solid-js";
+import i18next from "i18next";
 import styles from "./styles.css?inline";
 import { proxyDragLifecycle } from "./proxy-drag.ts";
 import type {
@@ -223,6 +224,10 @@ function StackTabProxy(props: { tab: StackTab }) {
     <xul:hbox
       class="floorp-stack-tab"
       align="center"
+      role="tab"
+      tabindex={props.tab.selected ? 0 : -1}
+      aria-selected={selected() === "true" ? "true" : "false"}
+      aria-label={label()}
       data-selected={selected()}
       data-split-position={split()?.position}
       data-split-active={split()?.active ? "true" : undefined}
@@ -230,6 +235,15 @@ function StackTabProxy(props: { tab: StackTab }) {
       tooltiptext={label()}
       context="tabContextMenu"
       draggable="true"
+      onKeyDown={(event: KeyboardEvent) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          const gb = getGBrowser();
+          if (gb) {
+            gb.selectedTab = props.tab;
+          }
+        }
+      }}
       onDragStart={(event: DragEvent) => {
         // Use the same native entry point as the all-tabs list. Native tab
         // data MUST be the first flavor for cross-window drops and detach.
@@ -286,10 +300,21 @@ function StackTabProxy(props: { tab: StackTab }) {
       }}
     >
       <xul:hbox class="floorp-stack-tab-iconbox" align="center">
-        <xul:image class="floorp-stack-tab-icon" src={icon()} />
+        <xul:image class="floorp-stack-tab-icon" src={icon()} aria-hidden="true" />
         <xul:toolbarbutton
           class="floorp-stack-tab-close"
-          tooltiptext="Close tab"
+          label={i18next.t("tabStacks.closeTab", {
+            title: label(),
+            defaultValue: `Close tab ${label()}`,
+          })}
+          tooltiptext={i18next.t("tabStacks.closeTab", {
+            title: label(),
+            defaultValue: `Close tab ${label()}`,
+          })}
+          aria-label={i18next.t("tabStacks.closeTab", {
+            title: label(),
+            defaultValue: `Close tab ${label()}`,
+          })}
           onClick={(event: MouseEvent) => {
             event.stopPropagation();
             if (event.button !== 0) return;
@@ -303,7 +328,16 @@ function StackTabProxy(props: { tab: StackTab }) {
       <xul:image
         class="floorp-stack-tab-refresh"
         src="chrome://global/skin/icons/reload.svg"
-        tooltiptext="Reload tab"
+        role="button"
+        tabindex="0"
+        aria-label={i18next.t("tabStacks.reloadTab", {
+          title: label(),
+          defaultValue: `Reload tab ${label()}`,
+        })}
+        tooltiptext={i18next.t("tabStacks.reloadTab", {
+          title: label(),
+          defaultValue: `Reload tab ${label()}`,
+        })}
         onMouseDown={(event: MouseEvent) => {
           event.stopPropagation();
           event.preventDefault();
@@ -312,6 +346,13 @@ function StackTabProxy(props: { tab: StackTab }) {
           event.stopPropagation();
           if (event.button !== 0) return;
           getGBrowser()?.reloadTab?.(props.tab);
+        }}
+        onKeyDown={(event: KeyboardEvent) => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            event.stopPropagation();
+            getGBrowser()?.reloadTab?.(props.tab);
+          }
         }}
       />
     </xul:hbox>
@@ -340,13 +381,14 @@ function StackRow(props: { group: StackGroup }) {
       group.addTabs([tab]);
       gb.selectedTab = tab;
     } catch (e) {
-      console.error("[tab-stacks] Failed to add tab to group:", e);
+      console.error("[tab-stacks] Failed to add tab to group status message:", e);
     }
   };
 
   const scrollBy = (dir: number) => () => {
     const scroller = document?.getElementById("floorp-stack-scroller");
-    scroller?.scrollBy({ left: dir * SCROLL_STEP_PX, behavior: "smooth" });
+    const prefersReducedMotion = window?.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+    scroller?.scrollBy({ left: dir * SCROLL_STEP_PX, behavior: prefersReducedMotion ? "auto" : "smooth" });
   };
 
   // The scroller is overflow-x:auto with a hidden scrollbar; this single
@@ -394,22 +436,52 @@ function StackRow(props: { group: StackGroup }) {
   });
 
   return (
-    <xul:hbox id="floorp-stack-bar" align="center">
+    <xul:hbox
+      id="floorp-stack-bar"
+      align="center"
+      role="region"
+      aria-label={i18next.t("tabStacks.tablist", {
+        defaultValue: "Tab stack tabs",
+      })}
+    >
       <xul:toolbarbutton
         id="floorp-stack-scroll-up"
         class="floorp-stack-scrollbutton"
-        tooltiptext="Scroll tabs left"
+        label={i18next.t("tabStacks.scrollLeft", {
+          defaultValue: "Scroll tabs left",
+        })}
+        tooltiptext={i18next.t("tabStacks.scrollLeft", {
+          defaultValue: "Scroll tabs left",
+        })}
+        aria-label={i18next.t("tabStacks.scrollLeft", {
+          defaultValue: "Scroll tabs left",
+        })}
         onClick={scrollBy(-1)}
       />
       <xul:hbox id="floorp-stack-scroller">
-        <xul:hbox id="floorp-stack-items" align="center">
+        <xul:hbox
+          id="floorp-stack-items"
+          align="center"
+          role="tablist"
+          aria-label={i18next.t("tabStacks.tablist", {
+            defaultValue: "Tab stack tabs",
+          })}
+        >
           <For each={tabs()}>{(tab) => <StackTabProxy tab={tab} />}</For>
         </xul:hbox>
       </xul:hbox>
       <xul:toolbarbutton
         id="floorp-stack-scroll-down"
         class="floorp-stack-scrollbutton"
-        tooltiptext="Scroll tabs right"
+        label={i18next.t("tabStacks.scrollRight", {
+          defaultValue: "Scroll tabs right",
+        })}
+        tooltiptext={i18next.t("tabStacks.scrollRight", {
+          defaultValue: "Scroll tabs right",
+        })}
+        aria-label={i18next.t("tabStacks.scrollRight", {
+          defaultValue: "Scroll tabs right",
+        })}
         onClick={scrollBy(1)}
       />
       {
@@ -420,7 +492,15 @@ function StackRow(props: { group: StackGroup }) {
       }
       <xul:toolbarbutton
         id="floorp-stack-newtab"
-        tooltiptext="New tab in stack"
+        label={i18next.t("tabStacks.newTab", {
+          defaultValue: "New tab in stack",
+        })}
+        tooltiptext={i18next.t("tabStacks.newTab", {
+          defaultValue: "New tab in stack",
+        })}
+        aria-label={i18next.t("tabStacks.newTab", {
+          defaultValue: "New tab in stack",
+        })}
         onClick={addTabToActiveGroup}
       />
     </xul:hbox>

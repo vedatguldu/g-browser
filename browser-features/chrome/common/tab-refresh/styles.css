@@ -16,13 +16,14 @@
   -moz-box-flex: 0;
   flex: 0 0 auto;
   box-sizing: border-box;
-  width: 16px;
-  min-width: 16px;
-  height: 16px;
+  width: 24px;
+  min-width: 24px;
+  height: 24px;
+  min-height: 24px;
   margin-inline: 2px;
-  padding: 1px;
+  padding: 4px;
   border: 0;
-  border-radius: 3px;
+  border-radius: 4px;
   background: transparent;
   color: inherit;
   fill: currentColor;
@@ -64,5 +65,31 @@
     #tabbrowser-tabs#tabbrowser-tabs
     .floorp-tab-refresh {
     animation: none;
+  }
+}
+
+@media (forced-colors: active) {
+  :root[floorp-hover-reload]
+    #tabbrowser-tabs#tabbrowser-tabs
+    .tabbrowser-tab[floorp-show-refresh]
+    > .tab-stack
+    > .tab-content
+    > .floorp-tab-refresh {
+    forced-color-adjust: auto;
+    fill: ButtonText;
+  }
+  :root[floorp-hover-reload]
+    #tabbrowser-tabs#tabbrowser-tabs
+    .tabbrowser-tab[floorp-show-refresh]
+    > .tab-stack
+    > .tab-content
+    > .floorp-tab-refresh:hover,
+  :root[floorp-hover-reload]
+    #tabbrowser-tabs#tabbrowser-tabs
+    .tabbrowser-tab[floorp-show-refresh]
+    > .tab-stack
+    > .tab-content
+    > .floorp-tab-refresh:focus-visible {
+    outline: 2px solid Highlight;
   }
 }

@@ -11,3 +11,10 @@
 #main-window .titlebar-min {
   border-bottom-left-radius: 9px !important;
 }
+
+@media (forced-colors: active) {
+  #main-window,
+  #main-window #navigator-toolbox {
+    forced-color-adjust: auto;
+  }
+}

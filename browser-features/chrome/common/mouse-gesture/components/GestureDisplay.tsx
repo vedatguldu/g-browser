@@ -117,12 +117,17 @@ export class GestureDisplay {
     this.canvasEl.style.zIndex = "999998";
 
     this.labelEl = doc.createElementNS(HTML_NS, "div") as HTMLDivElement;
+    this.labelEl.setAttribute("role", "status");
+    this.labelEl.setAttribute("aria-live", "polite");
+    this.labelEl.setAttribute("aria-atomic", "true");
     this.labelEl.style.position = "fixed";
     this.labelEl.style.bottom = "50%";
     this.labelEl.style.left = "50%";
     this.labelEl.style.transform = "translateX(-50%)";
     this.labelEl.style.backgroundColor = "rgba(0, 0, 0, 0.7)";
     this.labelEl.style.color = "white";
+    this.labelEl.style.border = "2px solid CanvasText";
+    this.labelEl.style.borderRadius = "8px";
     this.labelEl.style.padding = "8px 16px";
     this.labelEl.style.fontWeight = "bold";
     this.labelEl.style.zIndex = "1000000";
@@ -217,24 +222,6 @@ export class GestureDisplay {
         idx % stride === 0 || idx === newPoints.length - 1
       );
     }
-
-    //TODO: Performance optimization
-    // if (newPoints.length > 100) {
-    //     const stride = Math.ceil(newPoints.length);
-    //     const optimizedPoints = [];
-    //
-    //     for (let i = 0; i < newPoints.length; i += stride) {
-    //         optimizedPoints.push(newPoints[i]);
-    //     }
-    //
-    //     if (optimizedPoints[optimizedPoints.length - 1] !== newPoints[newPoints.length - 1]) {
-    //         optimizedPoints.push(newPoints[newPoints.length - 1]);
-    //     }
-    //
-    //     this.trailSignal[1](optimizedPoints);
-    // } else {
-    //     this.trailSignal[1](newPoints);
-    // }
 
     this.trail = newPoints;
     this.draw();

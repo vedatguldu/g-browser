@@ -190,7 +190,7 @@ export const openUrlCommand: PaletteCommand = {
         }
       }
     } catch (e) {
-      console.error("[command-palette] Open URL failed", e);
+      console.error("[command-palette] Open URL failed status message", e);
     }
   },
 };

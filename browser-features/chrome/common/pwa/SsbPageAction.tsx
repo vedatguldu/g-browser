@@ -38,6 +38,7 @@ export class SsbPageAction {
     open: i18next.t("ssb.page-action.open"),
     cancel: i18next.t("ssb.page-action.cancel"),
     siteIcon: i18next.t("ssb.page-action.site-icon"),
+    installing: i18next.t("ssb.page-action.installing", { defaultValue: "Installing application…" }),
   });
 
   constructor(private pwaService: PwaService) {
@@ -67,6 +68,7 @@ export class SsbPageAction {
         open: i18next.t("ssb.page-action.open"),
         cancel: i18next.t("ssb.page-action.cancel"),
         siteIcon: i18next.t("ssb.page-action.site-icon"),
+        installing: i18next.t("ssb.page-action.installing", { defaultValue: "Installing application…" }),
       });
     });
 
@@ -120,6 +122,7 @@ export class SsbPageAction {
   };
 
   private onPopupShowing = async () => {
+    document?.getElementById("ssbPageAction")?.setAttribute("aria-expanded", "true");
     const selectedBrowser = globalThis.gBrowser.selectedBrowser as Browser;
 
     if (!this.containerSelectionInitialized) {
@@ -142,6 +145,7 @@ export class SsbPageAction {
   };
 
   private onPopupHiding = (event: Event) => {
+    document?.getElementById("ssbPageAction")?.setAttribute("aria-expanded", "false");
     const panel = event.currentTarget as XULElement;
     if (panel.id !== "ssb-panel") {
       return;
@@ -197,11 +201,30 @@ export class SsbPageAction {
           <xul:hbox
             id="ssbPageAction"
             class="urlbar-page-action"
+            role="button"
+            tabindex="0"
+            aria-haspopup="dialog"
+            aria-expanded="false"
+            aria-label={isInstalled() ? translations().open : translations().install}
+            tooltiptext={isInstalled() ? translations().open : translations().install}
             popup="ssb-panel"
+            onKeyDown={(e: KeyboardEvent) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                // deno-lint-ignore no-explicit-any
+                const panel = document?.getElementById("ssb-panel") as any;
+                const anchor = document?.getElementById("ssbPageAction");
+                if (panel && anchor) {
+                  panel.openPopup(anchor, "bottomright topright", 0, 0, false, false);
+                }
+              }
+            }}
           >
             <xul:image
               id="ssbPageAction-image"
               class={`urlbar-icon${isInstalled() ? " open-ssb" : ""}`}
+              aria-hidden="true"
+              role="presentation"
             />
             <xul:panel
               id="ssb-panel"
@@ -252,6 +275,7 @@ export class SsbPageAction {
                       <img
                         id="ssb-installing-icon"
                         src={iconUrlParser(INSTALLING_GIF)}
+                        alt={translations().installing}
                         width="48"
                         height="48"
                       />
@@ -266,12 +290,20 @@ export class SsbPageAction {
                         label={panelIsInstalled()
                           ? translations().open
                           : translations().install}
+                        tooltiptext={panelIsInstalled()
+                          ? translations().open
+                          : translations().install}
+                        aria-label={panelIsInstalled()
+                          ? translations().open
+                          : translations().install}
                       />
                       <xul:button
                         id="ssb-app-cancel-button"
                         class="panel-button ssb-install-buttons footer-button"
                         onClick={this.closePopup}
                         label={translations().cancel}
+                        tooltiptext={translations().cancel}
+                        aria-label={translations().cancel}
                       />
                     </>
                   )}

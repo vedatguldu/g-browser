@@ -182,7 +182,7 @@ function createEnabled(): [Accessor<boolean>, Setter<boolean>] {
     try {
       Services.prefs.setBoolPref(COMMAND_PALETTE_ENABLED_PREF, enabled());
     } catch (e) {
-      console.error("[command-palette] Failed to persist enabled pref", e);
+      console.error("[command-palette] Failed to persist enabled pref status message", e);
     }
   });
 
@@ -218,7 +218,7 @@ function createShowTabs(): [Accessor<boolean>, Setter<boolean>] {
     try {
       Services.prefs.setBoolPref(COMMAND_PALETTE_SHOW_TABS_PREF, showTabs());
     } catch (e) {
-      console.error("[command-palette] Failed to persist showTabs pref", e);
+      console.error("[command-palette] Failed to persist showTabs pref status message", e);
     }
   });
 
@@ -254,7 +254,7 @@ function createShowHistory(): [Accessor<boolean>, Setter<boolean>] {
     try {
       Services.prefs.setBoolPref(COMMAND_PALETTE_SHOW_HISTORY_PREF, showHistory());
     } catch (e) {
-      console.error("[command-palette] Failed to persist showHistory pref", e);
+      console.error("[command-palette] Failed to persist showHistory pref status message", e);
     }
   });
 
@@ -297,7 +297,7 @@ function createShowBookmarks(): [Accessor<boolean>, Setter<boolean>] {
       );
     } catch (e) {
       console.error(
-        "[command-palette] Failed to persist showBookmarks pref",
+        "[command-palette] Failed to persist showBookmarks pref status message",
         e,
       );
     }
@@ -346,7 +346,7 @@ function createRecentCommands(): [
         JSON.stringify(recent()),
       );
     } catch (e) {
-      console.error("[command-palette] Failed to persist recent commands", e);
+      console.error("[command-palette] Failed to persist recent commands status message", e);
     }
   });
 
@@ -394,7 +394,7 @@ function createCategoryPriority(): [
       );
     } catch (e) {
       console.error(
-        "[command-palette] Failed to persist categoryPriority pref",
+        "[command-palette] Failed to persist categoryPriority pref status message",
         e,
       );
     }
@@ -491,7 +491,7 @@ function createFrequency(): [
         JSON.stringify(freq()),
       );
     } catch (e) {
-      console.error("[command-palette] Failed to persist frequency", e);
+      console.error("[command-palette] Failed to persist frequency status message", e);
     }
   });
 
@@ -608,7 +608,7 @@ function createShortcuts(): [
         JSON.stringify(shortcuts()),
       );
     } catch (e) {
-      console.error("[command-palette] Failed to persist shortcuts pref", e);
+      console.error("[command-palette] Failed to persist shortcuts pref status message", e);
     }
   });
 
@@ -656,7 +656,7 @@ function createSelectableCommands(): [
       );
     } catch (e) {
       console.error(
-        "[command-palette] Failed to persist selectableCommands pref",
+        "[command-palette] Failed to persist selectableCommands pref status message",
         e,
       );
     }
@@ -744,7 +744,7 @@ function createClampedIntPref(
       );
     } catch (e) {
       const label = prefName.split(".").pop() ?? prefName;
-      console.error(`[command-palette] Failed to persist ${label} pref`, e);
+      console.error(`[command-palette] Failed to persist ${label} pref status message`, e);
     }
   });
 
@@ -812,7 +812,7 @@ function createHorizontalAlign(): [
       );
     } catch (e) {
       console.error(
-        "[command-palette] Failed to persist horizontalAlign pref",
+        "[command-palette] Failed to persist horizontalAlign pref status message",
         e,
       );
     }

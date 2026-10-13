@@ -227,7 +227,7 @@ export class ContextMenuController {
         // One Firefox-owned menu changing shape must not prevent the remaining
         // adapters, config observation, or popup event handlers from starting.
         console.error(
-          "[ContextMenuCustomizer] Initial catalog capture failed",
+          "[ContextMenuCustomizer] Initial catalog capture failed status message",
           error,
         );
       }

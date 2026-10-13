@@ -644,7 +644,7 @@ export class ContextMenuTransaction {
       return changed;
     } catch (error) {
       console.error(
-        "[ContextMenuCustomizer] Transaction apply failed; rolling back",
+        "[ContextMenuCustomizer] Transaction apply failed; rolling back status message",
         error,
       );
       this.rollback();

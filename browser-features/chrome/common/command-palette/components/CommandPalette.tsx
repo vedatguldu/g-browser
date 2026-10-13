@@ -73,7 +73,7 @@ export function CommandPaletteUI() {
       if (state.mode() !== "command") return;
       requestAnimationFrame(() => {
         const selected = document.querySelector(
-          '.command-palette-item[data-selected="true"]',
+          '.command-palette-item[aria-selected="true"]',
         );
         selected?.scrollIntoView({ block: "nearest" });
       });
@@ -87,12 +87,30 @@ export function CommandPaletteUI() {
       if (state.mode() !== "input") return;
       requestAnimationFrame(() => {
         const selected = document.querySelector(
-          '.command-palette-step-choice-item[data-selected="true"]',
+          '.command-palette-step-choice-item[aria-selected="true"]',
         );
         selected?.scrollIntoView({ block: "nearest" });
       });
     }),
   );
+
+  // Focus Restoration (WCAG 2.4.3 Focus Order)
+  let previousActiveElement: HTMLElement | null = null;
+  createEffect(() => {
+    if (state.isVisible()) {
+      previousActiveElement = document.activeElement as HTMLElement | null;
+    } else if (!state.isAnimatingOut() && previousActiveElement) {
+      if (typeof previousActiveElement.focus === "function") {
+        previousActiveElement.focus();
+      }
+      previousActiveElement = null;
+    }
+  });
+
+  const activeItemId = () => {
+    const idx = state.selectedIndex();
+    return idx >= 0 ? `cp-item-${idx}` : undefined;
+  };
 
   return (
     <Portal mount={document.getElementById("main-window") ?? undefined}>
@@ -122,12 +140,21 @@ export function CommandPaletteUI() {
               onInput={handleInput}
               onBack={handleBack}
               state={state}
+              activeItemId={activeItemId()}
+              commandCount={state.filteredCommands().length}
             />
             <Show when={state.mode() === "input"}>
               <StepIndicator state={state} controller={controller} />
               <Show when={state.stepError()}>
                 {(error) => (
-                  <div class="command-palette-step-error">{error()}</div>
+                  <div
+                    id="command-palette-step-error-msg"
+                    role="alert"
+                    aria-live="assertive"
+                    class="command-palette-step-error"
+                  >
+                    {error()}
+                  </div>
                 )}
               </Show>
               <StepChoices

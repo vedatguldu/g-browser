@@ -57,7 +57,7 @@ export default class Workspaces extends NoraComponentBase {
             try {
               ctx.resetWorkspaces();
             } catch (error) {
-              console.error("Workspaces: failed to reset workspaces", error);
+              console.error("Workspaces: failed to reset workspaces status message", error);
             }
           },
         };

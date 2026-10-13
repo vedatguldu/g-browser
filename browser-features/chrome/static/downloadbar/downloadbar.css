@@ -89,3 +89,10 @@
 .downloadMainArea {
   padding-block: 0 !important;
 }
+
+@media (forced-colors: active) {
+  #floorpDownloadbar,
+  .downloadButton {
+    forced-color-adjust: auto;
+  }
+}

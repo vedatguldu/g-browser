@@ -114,3 +114,10 @@
 #navigator-toolbox {
   --browser-area-z-index-toolbox: 4;
 }
+
+@media (forced-colors: active) {
+  #PersonalToolbar,
+  #navigator-toolbox {
+    forced-color-adjust: auto;
+  }
+}

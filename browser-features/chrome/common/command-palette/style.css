@@ -128,8 +128,14 @@
   border-left-color: var(--arrowpanel-color, -moz-dialogtext);
 }
 
-.command-palette-item:focus {
+.command-palette-item:focus:not(:focus-visible) {
   outline: none;
+}
+
+.command-palette-item:focus-visible,
+.command-palette-item[aria-selected="true"] {
+  outline: 2px solid currentColor;
+  outline-offset: -2px;
 }
 
 .command-palette-item-info {
@@ -298,4 +304,13 @@
   text-align: center;
   font-size: 0.86em;
   color: var(--text-color-deemphasized, rgba(0, 0, 0, 0.5));
+}
+
+@media (forced-colors: active) {
+  .command-palette-item:focus-visible,
+  .command-palette-item[data-selected="true"],
+  .command-palette-item[aria-selected="true"],
+  .command-palette-step-choice-item[data-selected="true"] {
+    outline: 2px solid Highlight !important;
+  }
 }

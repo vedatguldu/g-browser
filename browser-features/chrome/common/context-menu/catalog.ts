@@ -37,7 +37,7 @@ function loadOptionalReporter(): ContextMenuCatalogReporter | null {
     }
   } catch (error) {
     console.warn(
-      "[ContextMenuCustomizer] Catalog service is unavailable; continuing locally",
+      "[ContextMenuCustomizer] Catalog service is unavailable status message; continuing locally",
       error,
     );
   }
@@ -133,7 +133,7 @@ export class OptionalContextMenuCatalogReporter
     try {
       this.#reporter?.report(ownerId, snapshot);
     } catch (error) {
-      console.error("[ContextMenuCustomizer] Catalog report failed", error);
+      console.error("[ContextMenuCustomizer] Catalog report failed status message", error);
     }
   }
 
@@ -142,7 +142,7 @@ export class OptionalContextMenuCatalogReporter
       this.#reporter?.removeOwner(ownerId);
     } catch (error) {
       console.error(
-        "[ContextMenuCustomizer] Catalog owner cleanup failed",
+        "[ContextMenuCustomizer] Catalog owner cleanup failed status message",
         error,
       );
     }

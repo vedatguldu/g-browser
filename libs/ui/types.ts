@@ -16,12 +16,15 @@ export interface ModalProps {
   title: string;
   children: ReactNode;
   onClose: () => void;
-  closeLabel: string;
+  closeLabel?: string;
   closeOnEscape?: boolean;
   wide?: boolean;
 }
 
-export type SelectProps = SelectHTMLAttributes<HTMLSelectElement>;
+export interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
+  label?: string;
+  labelId?: string;
+}
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?:
@@ -44,6 +47,8 @@ export interface DropDownOption {
 export interface DropDownProps
   extends Omit<SelectHTMLAttributes<HTMLSelectElement>, "children"> {
   options: DropDownOption[];
+  label?: string;
+  labelId?: string;
 }
 
 export interface ConfirmModalProps {

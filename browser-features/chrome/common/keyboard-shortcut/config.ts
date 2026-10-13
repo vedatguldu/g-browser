@@ -62,7 +62,7 @@ export const parseConfig = (jsonStr: string): KeyboardShortcutConfig => {
     return normalized;
   } catch (e) {
     console.error(
-      "Failed to parse keyboard shortcut configuration JSON, using default",
+      "Failed to parse keyboard shortcut configuration JSON status message, using default",
       e,
     );
     return defaultConfig;

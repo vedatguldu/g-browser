@@ -29,9 +29,16 @@ export function QRCodePageActionButton() {
         }}
         title={tooltip()}
         role="button"
+        tabindex="0"
+        aria-label={tooltip()}
         popup="qrcode-panel"
       >
-        <xul:image id="QRCodeGeneratePageAction-image" class="urlbar-icon" />
+        <xul:image
+          id="QRCodeGeneratePageAction-image"
+          class="urlbar-icon"
+          role="presentation"
+          aria-hidden="true"
+        />
       </xul:hbox>
     </Show>
   );

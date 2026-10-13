@@ -19,7 +19,7 @@ export function getJapaneseReadings(id: string): string[] {
     }
     return [];
   } catch (err) {
-    console.error("[CommandPalette] getJapaneseReadings error:", err);
+    console.error("[CommandPalette] getJapaneseReadings error status message:", err);
     return [];
   }
 }

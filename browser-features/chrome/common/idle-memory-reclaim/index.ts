@@ -228,7 +228,7 @@ export default class IdleMemoryReclaim extends NoraComponentBase {
       }
       return sanitizeSettings(JSON.parse(raw));
     } catch (error) {
-      console.error("[IdleMemoryReclaim] Failed to load settings:", error);
+      console.error("[IdleMemoryReclaim] Failed to load settings status message:", error);
       return { ...DEFAULT_SETTINGS };
     }
   }
@@ -245,7 +245,7 @@ export default class IdleMemoryReclaim extends NoraComponentBase {
       }
       return sanitizeStats(JSON.parse(raw));
     } catch (error) {
-      console.error("[IdleMemoryReclaim] Failed to load stats:", error);
+      console.error("[IdleMemoryReclaim] Failed to load stats status message:", error);
       return { ...DEFAULT_STATS };
     }
   }
@@ -258,7 +258,7 @@ export default class IdleMemoryReclaim extends NoraComponentBase {
         JSON.stringify(stats),
       );
     } catch (error) {
-      console.error("[IdleMemoryReclaim] Failed to save stats:", error);
+      console.error("[IdleMemoryReclaim] Failed to save stats status message:", error);
     }
   }
 
@@ -268,7 +268,7 @@ export default class IdleMemoryReclaim extends NoraComponentBase {
         Ci.nsIMemoryReporterManager,
       );
     } catch (error) {
-      console.error("[IdleMemoryReclaim] Memory manager unavailable:", error);
+      console.error("[IdleMemoryReclaim] Memory manager unavailable status message:", error);
       return null;
     }
   }
@@ -279,7 +279,7 @@ export default class IdleMemoryReclaim extends NoraComponentBase {
         Ci.nsIUserIdleService,
       );
     } catch (error) {
-      console.error("[IdleMemoryReclaim] Idle service unavailable:", error);
+      console.error("[IdleMemoryReclaim] Idle service unavailable status message:", error);
       return null;
     }
   }
@@ -303,7 +303,7 @@ export default class IdleMemoryReclaim extends NoraComponentBase {
       );
     } catch (error) {
       console.error(
-        "[IdleMemoryReclaim] requestProcInfo failed; falling back to the",
+        "[IdleMemoryReclaim] requestProcInfo status message failed; falling back to the",
         "parent-only figure:",
         error,
       );
@@ -323,7 +323,7 @@ export default class IdleMemoryReclaim extends NoraComponentBase {
     try {
       return isIdleEnough(idleService.idleTime, this.settings);
     } catch (error) {
-      console.error("[IdleMemoryReclaim] Failed to read idleTime:", error);
+      console.error("[IdleMemoryReclaim] Failed to read idleTime status message:", error);
       return false;
     }
   }
@@ -340,7 +340,7 @@ export default class IdleMemoryReclaim extends NoraComponentBase {
         ghostWindows: manager.ghostWindows,
       };
     } catch (error) {
-      console.error("[IdleMemoryReclaim] Failed to read memory:", error);
+      console.error("[IdleMemoryReclaim] Failed to read memory status message:", error);
       return null;
     }
   }
@@ -396,7 +396,7 @@ export default class IdleMemoryReclaim extends NoraComponentBase {
       this.idleObserver = observer;
       this.registeredIdleSec = idleSec;
     } catch (error) {
-      console.error("[IdleMemoryReclaim] Failed to add idle observer:", error);
+      console.error("[IdleMemoryReclaim] Failed to add idle observer status message:", error);
       return;
     }
 
@@ -405,7 +405,7 @@ export default class IdleMemoryReclaim extends NoraComponentBase {
       Services.obs.addObserver(observer, RECLAIM_REQUEST_TOPIC);
     } catch (error) {
       console.error(
-        "[IdleMemoryReclaim] Failed to add request observer:",
+        "[IdleMemoryReclaim] Failed to add request observer status message:",
         error,
       );
     }
@@ -425,7 +425,7 @@ export default class IdleMemoryReclaim extends NoraComponentBase {
         );
       } catch (error) {
         console.error(
-          "[IdleMemoryReclaim] Failed to remove idle observer:",
+          "[IdleMemoryReclaim] Failed to remove idle observer status message:",
           error,
         );
       }
@@ -551,7 +551,7 @@ export default class IdleMemoryReclaim extends NoraComponentBase {
         `ghostWindows ${snapshot.ghostWindows} -> ${after?.ghostWindows ?? 0})`,
       );
     } catch (error) {
-      console.error("[IdleMemoryReclaim] Reclaim failed:", error);
+      console.error("[IdleMemoryReclaim] Reclaim failed status message:", error);
     }
   }
 
@@ -591,7 +591,7 @@ export default class IdleMemoryReclaim extends NoraComponentBase {
         );
       } catch (error) {
         console.error(
-          "[IdleMemoryReclaim] Failed to remove pref observer:",
+          "[IdleMemoryReclaim] Failed to remove pref observer status message:",
           error,
         );
       }

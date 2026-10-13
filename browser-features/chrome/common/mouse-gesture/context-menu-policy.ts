@@ -29,7 +29,7 @@ export function handleContextMenuAfterMouseUp(
   } catch (error) {
     // A failed preference write must not interrupt controller/observer setup.
     console.error(
-      "[MouseGestureService] Failed to update native menu timing:",
+      "[MouseGestureService] Failed to update native menu timing status message:",
       error,
     );
   }

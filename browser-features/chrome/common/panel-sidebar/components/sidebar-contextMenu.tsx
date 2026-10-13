@@ -100,7 +100,7 @@ export class SidebarContextMenuElem {
     try {
       callback();
     } catch (error) {
-      console.error("Command execution error:", error);
+      console.error("Command execution error status message:", error);
     } finally {
       if (typeof document !== "undefined" && document) {
         const contextMenu = document.getElementById("webpanel-context");

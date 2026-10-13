@@ -150,7 +150,7 @@ export class WebPanelFindController {
           break;
       }
     } catch (error) {
-      console.error("[WebPanelFindController] Find command failed:", error);
+      console.error("[WebPanelFindController] Find command failed status message:", error);
     }
   }
 
@@ -230,7 +230,7 @@ export class WebPanelFindController {
     try {
       findbar.destroy?.();
     } catch (error) {
-      console.error("[WebPanelFindController] Findbar cleanup failed:", error);
+      console.error("[WebPanelFindController] Findbar cleanup failed status message:", error);
     }
     findbar.remove();
 

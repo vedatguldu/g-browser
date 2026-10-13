@@ -86,7 +86,7 @@ export function applyUserJS(userjs: string): void {
         skippedCount++;
       }
     } catch (error) {
-      console.error("[applyUserJS] Error processing line:", line, error);
+      console.error("[applyUserJS] Error processing line status message:", line, error);
       skippedCount++;
     }
   }

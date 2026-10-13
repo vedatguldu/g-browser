@@ -153,7 +153,7 @@ export function parseContextMenuConfigWithStatus(
     return { status: "ok", config: normalizeContextMenuConfig(parsed) };
   } catch (error) {
     console.error(
-      "[ContextMenuCustomizer] Failed to parse configuration",
+      "[ContextMenuCustomizer] Failed to parse configuration status message",
       error,
     );
     return {

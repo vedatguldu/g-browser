@@ -366,7 +366,7 @@ export class PwaWindowSupport {
       }, import.meta.hot);
     } catch (error) {
       console.error(
-        "[PwaWindowSupport] Failed to configure titlebar behavior:",
+        "[PwaWindowSupport] Failed to configure titlebar behavior status message:",
         error,
       );
     }
@@ -377,7 +377,7 @@ export class PwaWindowSupport {
       redirectViewSourceToBrowserWindow(window as unknown as ViewSourceWindow);
     } catch (error) {
       console.error(
-        "[PwaWindowSupport] Failed to redirect view source:",
+        "[PwaWindowSupport] Failed to redirect view source status message:",
         error,
       );
     }
@@ -412,10 +412,12 @@ export class PwaWindowSupport {
       if (urlbarInput) {
         urlbarInput.readOnly = true;
         urlbarInput.setAttribute("aria-readonly", "true");
+        urlbarInput.setAttribute("tabindex", "-1");
+        urlbarInput.setAttribute("aria-hidden", "true");
       }
     } catch (error) {
       console.error(
-        "[PwaWindowSupport] Failed to disable urlbar interactions:",
+        "[PwaWindowSupport] Failed to disable urlbar interactions status message:",
         error,
       );
     }

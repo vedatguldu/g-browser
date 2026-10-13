@@ -134,7 +134,10 @@ function onPopupShowing(): void {
     if (!item) continue;
 
     item.className = "floorp-split-view-menu-item";
-    item.setAttribute("label", t(opt.i18nKey));
+    const labelText = t(opt.i18nKey);
+    item.setAttribute("label", labelText);
+    item.setAttribute("aria-label", labelText);
+    item.setAttribute("role", "menuitemradio");
     item.setAttribute("type", "radio");
     item.setAttribute(
       "data-floorp-context-menu-key",
@@ -167,7 +170,10 @@ function onPopupShowing(): void {
     const addItem = document?.createXULElement("menuitem");
     if (addItem) {
       addItem.className = "floorp-split-view-menu-item";
-      addItem.setAttribute("label", t("splitView.layoutPicker.addPane"));
+      const addLabel = t("splitView.layoutPicker.addPane");
+      addItem.setAttribute("label", addLabel);
+      addItem.setAttribute("aria-label", addLabel);
+      addItem.setAttribute("role", "menuitem");
       addItem.setAttribute(
         "data-floorp-context-menu-key",
         "floorp.split-view.layout.add-pane",
@@ -184,7 +190,10 @@ function onPopupShowing(): void {
     const removeItem = document?.createXULElement("menuitem");
     if (removeItem) {
       removeItem.className = "floorp-split-view-menu-item";
-      removeItem.setAttribute("label", t("splitView.layoutPicker.removePane"));
+      const removeLabel = t("splitView.layoutPicker.removePane");
+      removeItem.setAttribute("label", removeLabel);
+      removeItem.setAttribute("aria-label", removeLabel);
+      removeItem.setAttribute("role", "menuitem");
       removeItem.setAttribute(
         "data-floorp-context-menu-key",
         "floorp.split-view.layout.remove-pane",

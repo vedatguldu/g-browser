@@ -19,3 +19,9 @@
 :root[inDOMFullscreen] #TabsToolbar {
   display: none !important;
 }
+
+@media (forced-colors: active) {
+  #TabsToolbar[class] {
+    forced-color-adjust: auto;
+  }
+}

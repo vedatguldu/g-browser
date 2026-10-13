@@ -6,6 +6,7 @@ import { getHighlightSegments, type TextSegment } from "../utils/highlight.ts";
 import { getShortcutForAction } from "../command-registry.ts";
 
 interface CommandItemProps {
+  id?: string;
   command: PaletteCommand;
   isSelected: boolean;
   query: string;
@@ -30,6 +31,7 @@ export function CommandItem(props: CommandItemProps) {
 
   return (
     <div
+      id={props.id}
       class="command-palette-item"
       data-selected={props.isSelected ? "true" : undefined}
       onMouseEnter={handleMouseEnter}

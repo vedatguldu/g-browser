@@ -32,7 +32,7 @@ const httpRequestObserver = {
     try {
       channel.setRequestHeader("User-Agent", MOBILE_UA, false);
     } catch (error) {
-      console.error("Failed to set User-Agent:", error);
+      console.error("Failed to set User-Agent status message:", error);
     }
   },
 };

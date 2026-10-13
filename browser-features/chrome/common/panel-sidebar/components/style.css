@@ -444,3 +444,37 @@
 #after-splitter {
   max-width: var(--panel-sidebar-splitter-width);
 }
+
+@media (forced-colors: active) {
+  #panel-sidebar-select-box {
+    border-inline: 1px solid ButtonBorder !important;
+    background-color: Canvas !important;
+    color: CanvasText !important;
+  }
+
+  #panel-sidebar-box {
+    border: 1px solid ButtonBorder !important;
+    background-color: Canvas !important;
+  }
+
+  .panel-sidebar-panel {
+    border: 1px solid transparent !important;
+  }
+
+  .panel-sidebar-panel:focus-visible,
+  .panel-sidebar-panel[active="true"] {
+    border-color: Highlight !important;
+    outline: 2px solid Highlight !important;
+    outline-offset: 1px !important;
+  }
+
+  .panel-sidebar-actions:focus-visible {
+    outline: 2px solid Highlight !important;
+    outline-offset: 1px !important;
+  }
+
+  #panel-sidebar-splitter,
+  #after-splitter {
+    background-color: ButtonBorder !important;
+  }
+}

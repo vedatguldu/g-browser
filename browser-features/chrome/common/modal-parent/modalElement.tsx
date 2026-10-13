@@ -68,7 +68,7 @@ export class ModalElement {
         const reason = error instanceof Error
           ? error
           : new Error(String(error));
-        console.error("[ModalElement] Failed to render modal styles.", reason);
+        console.error("[ModalElement] Failed to render modal styles status message.", reason);
       }
     }, import.meta.hot);
 
@@ -93,7 +93,7 @@ export class ModalElement {
         const reason = error instanceof Error
           ? error
           : new Error(String(error));
-        console.error("[ModalElement] Failed to render modal root.", reason);
+        console.error("[ModalElement] Failed to render modal root status message.", reason);
       }
     }, import.meta.hot);
 

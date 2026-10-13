@@ -159,3 +159,9 @@
     transition-delay: 0s !important;
   }
 }
+
+@media (forced-colors: active) {
+  :root[zenmode] #navigator-toolbox {
+    forced-color-adjust: auto;
+  }
+}

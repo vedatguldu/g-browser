@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
@@ -25,7 +25,7 @@ static class Program {
         string defaultTarget = Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
             "Programs",
-            "Floorp"
+            "G-Browser"
         );
 
         if (silent) {
@@ -43,6 +43,9 @@ static class Program {
     }
 
     public static void DoInstall(string targetDir, bool createDesktopShortcut, bool createStartShortcut, Action<string, int> progressCallback) {
+        foreach (var p in Process.GetProcessesByName("g-browser")) {
+            try { p.Kill(); p.WaitForExit(2000); } catch {}
+        }
         foreach (var p in Process.GetProcessesByName("floorp")) {
             try { p.Kill(); p.WaitForExit(2000); } catch {}
         }
@@ -85,28 +88,32 @@ static class Program {
 
         if (progressCallback != null) progressCallback("Kisayollar olusturuluyor...", 85);
 
-        string exePath = Path.Combine(targetDir, "floorp.exe");
+        string exePath = Path.Combine(targetDir, "g-browser.exe");
+        if (!File.Exists(exePath)) {
+            string altPath = Path.Combine(targetDir, "floorp.exe");
+            if (File.Exists(altPath)) exePath = altPath;
+        }
 
         try {
             dynamic shell = Activator.CreateInstance(Type.GetTypeFromProgID("WScript.Shell"));
             if (createDesktopShortcut) {
                 string desktopDir = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
-                string desktopLnk = Path.Combine(desktopDir, "Floorp.lnk");
+                string desktopLnk = Path.Combine(desktopDir, "G-Browser.lnk");
                 dynamic sc = shell.CreateShortcut(desktopLnk);
                 sc.TargetPath = exePath;
                 sc.WorkingDirectory = targetDir;
-                sc.Description = "Ablaze Floorp Web Tarayicisi";
+                sc.Description = "G-Browser - Modern, Hızlı ve Erişilebilir Web Tarayıcısı";
                 sc.IconLocation = exePath + ",0";
                 sc.Save();
             }
 
             if (createStartShortcut) {
                 string startDir = Environment.GetFolderPath(Environment.SpecialFolder.Programs);
-                string startLnk = Path.Combine(startDir, "Floorp.lnk");
+                string startLnk = Path.Combine(startDir, "G-Browser.lnk");
                 dynamic sc = shell.CreateShortcut(startLnk);
                 sc.TargetPath = exePath;
                 sc.WorkingDirectory = targetDir;
-                sc.Description = "Ablaze Floorp Web Tarayicisi";
+                sc.Description = "G-Browser - Modern, Hızlı ve Erişilebilir Web Tarayıcısı";
                 sc.IconLocation = exePath + ",0";
                 sc.Save();
             }
@@ -115,16 +122,16 @@ static class Program {
         if (progressCallback != null) progressCallback("Kayit defteri yapilandiriliyor...", 95);
 
         try {
-            using (var key = Registry.CurrentUser.CreateSubKey(@"Software\Microsoft\Windows\CurrentVersion\App Paths\floorp.exe")) {
+            using (var key = Registry.CurrentUser.CreateSubKey(@"Software\Microsoft\Windows\CurrentVersion\App Paths\g-browser.exe")) {
                 if (key != null) {
                     key.SetValue("", exePath);
                     key.SetValue("Path", targetDir);
                 }
             }
 
-            using (var key = Registry.CurrentUser.CreateSubKey(@"Software\Clients\StartMenuInternet\Floorp")) {
+            using (var key = Registry.CurrentUser.CreateSubKey(@"Software\Clients\StartMenuInternet\G-Browser")) {
                 if (key != null) {
-                    key.SetValue("", "Ablaze Floorp");
+                    key.SetValue("", "G-Browser");
                     using (var cmd = key.CreateSubKey(@"shell\open\command")) {
                         if (cmd != null) cmd.SetValue("", "\"" + exePath + "\"");
                     }
@@ -133,19 +140,19 @@ static class Program {
                     }
                     using (var cap = key.CreateSubKey("Capabilities")) {
                         if (cap != null) {
-                            cap.SetValue("ApplicationDescription", "Ablaze Floorp Web Tarayicisi");
+                            cap.SetValue("ApplicationDescription", "G-Browser - Modern, Hızlı ve Erişilebilir Web Tarayıcısı");
                             cap.SetValue("ApplicationIcon", exePath + ",0");
-                            cap.SetValue("ApplicationName", "Floorp");
+                            cap.SetValue("ApplicationName", "G-Browser");
                             using (var fa = cap.CreateSubKey("FileAssociations")) {
                                 if (fa != null) {
-                                    fa.SetValue(".htm", "FloorpHTML");
-                                    fa.SetValue(".html", "FloorpHTML");
+                                    fa.SetValue(".htm", "GBrowserHTML");
+                                    fa.SetValue(".html", "GBrowserHTML");
                                 }
                             }
                             using (var ua = cap.CreateSubKey("URLAssociations")) {
                                 if (ua != null) {
-                                    ua.SetValue("http", "FloorpHTML");
-                                    ua.SetValue("https", "FloorpHTML");
+                                    ua.SetValue("http", "GBrowserHTML");
+                                    ua.SetValue("https", "GBrowserHTML");
                                 }
                             }
                         }
@@ -155,15 +162,15 @@ static class Program {
 
             using (var regApps = Registry.CurrentUser.CreateSubKey(@"Software\RegisteredApplications")) {
                 if (regApps != null) {
-                    regApps.SetValue("Floorp", @"Software\Clients\StartMenuInternet\Floorp\Capabilities");
+                    regApps.SetValue("G-Browser", @"Software\Clients\StartMenuInternet\G-Browser\Capabilities");
                 }
             }
 
-            using (var unKey = Registry.CurrentUser.CreateSubKey(@"Software\Microsoft\Windows\CurrentVersion\Uninstall\Floorp")) {
+            using (var unKey = Registry.CurrentUser.CreateSubKey(@"Software\Microsoft\Windows\CurrentVersion\Uninstall\G-Browser")) {
                 if (unKey != null) {
-                    unKey.SetValue("DisplayName", "Ablaze Floorp");
-                    unKey.SetValue("DisplayVersion", "12.20.1");
-                    unKey.SetValue("Publisher", "Ablaze");
+                    unKey.SetValue("DisplayName", "G-Browser");
+                    unKey.SetValue("DisplayVersion", "1.0.0");
+                    unKey.SetValue("Publisher", "G-Browser Team");
                     unKey.SetValue("InstallLocation", targetDir);
                     unKey.SetValue("DisplayIcon", exePath + ",0");
                     string uninstallExe = Path.Combine(targetDir, "uninstall.exe");
@@ -199,7 +206,7 @@ public class InstallerForm : Form {
     }
 
     private void InitializeComponents() {
-        this.Text = "Ablaze Floorp Kurulum Sihirbazi";
+        this.Text = "G-Browser Kurulum Sihirbazi";
         this.Size = new Size(540, 390);
         this.StartPosition = FormStartPosition.CenterScreen;
         this.FormBorderStyle = FormBorderStyle.FixedDialog;
@@ -213,14 +220,14 @@ public class InstallerForm : Form {
             BackColor = Color.White
         };
         Label lblTitle = new Label {
-            Text = "Ablaze Floorp Kurulumu",
+            Text = "G-Browser Kurulumu",
             Font = new Font("Segoe UI", 12F, FontStyle.Bold),
             ForeColor = Color.FromArgb(30, 41, 59),
             Location = new Point(20, 12),
             AutoSize = true
         };
         Label lblSubtitle = new Label {
-            Text = "Modern, gizlilik odakli ve tam erisilebilir web tarayicisi",
+            Text = "Modern, hizli, gizlilik odakli ve tam erisilebilir web tarayicisi",
             Font = new Font("Segoe UI", 8.5F, FontStyle.Regular),
             ForeColor = Color.FromArgb(100, 116, 139),
             Location = new Point(21, 38),
@@ -285,7 +292,7 @@ public class InstallerForm : Form {
 
         top += 24;
         chkLaunch = new CheckBox {
-            Text = "Kurulum tamamlandiginda Floorp'u baslat",
+            Text = "Kurulum tamamlandiginda G-Browser'i baslat",
             Checked = true,
             Location = new Point(22, top),
             AutoSize = true
@@ -335,7 +342,9 @@ public class InstallerForm : Form {
         if (isInstalled) {
             if (chkLaunch.Checked) {
                 try {
-                    Process.Start(Path.Combine(targetDir, "floorp.exe"));
+                    string runExe = Path.Combine(targetDir, "g-browser.exe");
+                    if (!File.Exists(runExe)) runExe = Path.Combine(targetDir, "floorp.exe");
+                    Process.Start(runExe);
                 } catch {}
             }
             this.Close();

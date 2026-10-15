@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" fill="none">
+  <defs>
+    <!-- Background Aura (Private Mode Stealth) -->
+    <radialGradient id="gbp-aura" cx="50%" cy="50%" r="50%" fx="45%" fy="40%">
+      <stop offset="0%" stop-color="#C084FC" stop-opacity="0.22" />
+      <stop offset="65%" stop-color="#9333EA" stop-opacity="0.08" />
+      <stop offset="100%" stop-color="#0F172A" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Main Private Ribbon Gradient -->
+    <linearGradient id="gbp-ribbon-main" x1="60" y1="60" x2="450" y2="460" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#E879F9" />
+      <stop offset="30%" stop-color="#A855F7" />
+      <stop offset="70%" stop-color="#6B21A8" />
+      <stop offset="100%" stop-color="#BE185D" />
+    </linearGradient>
+
+    <!-- Inner Core & Crossbar Gradient -->
+    <linearGradient id="gbp-crossbar" x1="200" y1="260" x2="440" y2="340" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#F472B6" />
+      <stop offset="50%" stop-color="#C084FC" />
+      <stop offset="100%" stop-color="#9333EA" />
+    </linearGradient>
+
+    <!-- Specular Highlight Overlay -->
+    <linearGradient id="gbp-highlight" x1="120" y1="40" x2="300" y2="200" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.75" />
+      <stop offset="45%" stop-color="#FFFFFF" stop-opacity="0.2" />
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0" />
+    </linearGradient>
+
+    <!-- Private Lens/Orb Gradient -->
+    <radialGradient id="gbp-lens" cx="40%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#FDF4FF" />
+      <stop offset="35%" stop-color="#F472B6" />
+      <stop offset="75%" stop-color="#C026D3" />
+      <stop offset="100%" stop-color="#701A75" />
+    </radialGradient>
+
+    <!-- Shadow for Depth -->
+    <filter id="gbp-shadow" x="-10%" y="-10%" width="125%" height="125%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#000000" flood-opacity="0.45" />
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#3B0764" flood-opacity="0.3" />
+    </filter>
+  </defs>
+
+  <circle cx="256" cy="256" r="236" fill="url(#gbp-aura)" />
+
+  <g filter="url(#gbp-shadow)">
+    <path d="M 376 116 C 342 82 298 64 252 64 C 148.17 64 64 148.17 64 252 C 64 355.83 148.17 440 252 440 C 345 440 422 374 437 284 C 440 266 426 252 408 252 L 256 252 C 242.75 252 232 262.75 232 276 L 232 284 C 232 297.25 242.75 308 256 308 L 362 308 C 346 352 303 384 252 384 C 179.1 384 120 324.9 120 252 C 120 179.1 179.1 120 252 120 C 285 120 315 132 338 153 C 348 162 364 161 373 151 L 388 135 C 397 125 395 109 384 100 Z"
+          fill="url(#gbp-ribbon-main)" />
+
+    <path d="M 252 252 L 408 252 C 424 252 436 264 435 280 C 428 322 404 358 370 382 L 340 338 C 356 322 366 300 368 276 L 252 276 C 243 276 236 269 236 260 C 236 251 243 252 252 252 Z"
+          fill="url(#gbp-crossbar)" />
+
+    <path d="M 252 72 C 320 72 376 100 398 126 C 392 128 384 124 378 118 C 344 86 300 70 252 70 C 158 70 80 144 74 238 C 72 232 72 226 72 220 C 72 138 153 72 252 72 Z"
+          fill="url(#gbp-highlight)" />
+
+    <circle cx="216" cy="204" r="38" fill="url(#gbp-lens)" />
+    <ellipse cx="206" cy="192" rx="14" ry="9" fill="#FFFFFF" opacity="0.7" transform="rotate(-25 206 192)" />
+  </g>
+</svg>

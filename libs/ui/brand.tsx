@@ -10,7 +10,7 @@ export function FloorpBrand({ onDark = false }: BrandProps) {
   return (
     <img
       src={onDark ? darkLogoUrl : lightLogoUrl}
-      alt="Floorp"
+      alt="G-Browser"
       width="160"
       height="40"
       style={{ objectFit: "contain", objectPosition: "left center" }}

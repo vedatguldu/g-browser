@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
@@ -16,8 +16,8 @@ static class Program {
 
         if (!silent) {
             var confirm = MessageBox.Show(
-                "Ablaze Floorp tarayicisini bilgisayarinizdan kaldirmak istediginizden emin misiniz?",
-                "Ablaze Floorp Kaldirici",
+                "G-Browser tarayicisini bilgisayarinizdan kaldirmak istediginizden emin misiniz?",
+                "G-Browser Kaldirici",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question
             );
@@ -25,7 +25,10 @@ static class Program {
         }
 
         try {
-            // Kill running floorp processes
+            // Kill running g-browser and floorp processes
+            foreach (var p in Process.GetProcessesByName("g-browser")) {
+                try { p.Kill(); p.WaitForExit(2000); } catch {}
+            }
             foreach (var p in Process.GetProcessesByName("floorp")) {
                 try { p.Kill(); p.WaitForExit(2000); } catch {}
             }
@@ -34,14 +37,30 @@ static class Program {
             string desktopDir = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
             string startMenuDir = Environment.GetFolderPath(Environment.SpecialFolder.Programs);
 
-            // Remove shortcuts
+            // Remove shortcuts (both G-Browser and legacy Floorp)
+            string gDesktopLnk = Path.Combine(desktopDir, "G-Browser.lnk");
+            if (File.Exists(gDesktopLnk)) File.Delete(gDesktopLnk);
+
+            string gStartLnk = Path.Combine(startMenuDir, "G-Browser.lnk");
+            if (File.Exists(gStartLnk)) File.Delete(gStartLnk);
+
             string desktopLnk = Path.Combine(desktopDir, "Floorp.lnk");
             if (File.Exists(desktopLnk)) File.Delete(desktopLnk);
 
             string startLnk = Path.Combine(startMenuDir, "Floorp.lnk");
             if (File.Exists(startLnk)) File.Delete(startLnk);
 
-            // Remove Registry Keys
+            // Remove Registry Keys (G-Browser)
+            try { Registry.CurrentUser.DeleteSubKeyTree(@"Software\Microsoft\Windows\CurrentVersion\Uninstall\G-Browser", false); } catch {}
+            try { Registry.CurrentUser.DeleteSubKeyTree(@"Software\Microsoft\Windows\CurrentVersion\App Paths\g-browser.exe", false); } catch {}
+            try { Registry.CurrentUser.DeleteSubKeyTree(@"Software\Clients\StartMenuInternet\G-Browser", false); } catch {}
+            try {
+                using (var reg = Registry.CurrentUser.OpenSubKey(@"Software\RegisteredApplications", true)) {
+                    if (reg != null) reg.DeleteValue("G-Browser", false);
+                }
+            } catch {}
+
+            // Clean legacy keys
             try { Registry.CurrentUser.DeleteSubKeyTree(@"Software\Microsoft\Windows\CurrentVersion\Uninstall\Floorp", false); } catch {}
             try { Registry.CurrentUser.DeleteSubKeyTree(@"Software\Microsoft\Windows\CurrentVersion\App Paths\floorp.exe", false); } catch {}
             try { Registry.CurrentUser.DeleteSubKeyTree(@"Software\Clients\StartMenuInternet\Floorp", false); } catch {}
@@ -53,7 +72,7 @@ static class Program {
             try { Registry.CurrentUser.DeleteSubKeyTree(@"Software\Ablaze\Floorp", false); } catch {}
 
             if (!silent) {
-                MessageBox.Show("Ablaze Floorp basariyla kaldirildi.", "Ablaze Floorp", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("G-Browser basariyla kaldirildi.", "G-Browser", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
             // Self-delete app directory

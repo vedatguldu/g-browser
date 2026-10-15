@@ -1,6 +1,6 @@
 {
   "aboutDialog": {
-    "ariaLabel": "Om Floorp",
+    "ariaLabel": "Om G-Browser",
     "version": "Version",
     "channel": {
       "nightly": "Nightly",
@@ -35,13 +35,13 @@
     },
     "links": {
       "releaseNotes": "Versionsinformation",
-      "help": "Floorp hjälp",
+      "help": "G-Browser hjälp",
       "feedback": "Skicka in feedback",
       "licensing": "Licens",
       "terms": "Användarvillkor",
       "privacy": "Integritetspolicy"
     },
-    "trademark": "Namnet Floorp är ett varumärke i Japan.",
+    "trademark": "G-Browser is a modern web browser developed by Vedat Güldü.",
     "opensExternal": "opens external link",
     "opensInNewWindow": "opens in new window"
   }

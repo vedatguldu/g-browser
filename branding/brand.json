@@ -1,0 +1,84 @@
+{
+  "name": "G-Browser",
+  "shortName": "GBrowser",
+  "binaryName": "g-browser.exe",
+  "internalId": "gbrowser",
+  "appUserModelId": "GBrowser.WebBrowser",
+  "vendor": "G-Browser Project",
+  "author": "Vedat Güldü",
+  "version": "12.20.1",
+  "description": "Yüksek Performanslı, Erişilebilir ve Güvenli Web Tarayıcısı",
+  "copyright": "© 2026 G-Browser Project. Tüm hakları saklıdır.",
+  "urls": {
+    "repository": "https://github.com/vedatguldu/g-browser",
+    "releases": "https://github.com/vedatguldu/g-browser/releases",
+    "issues": "https://github.com/vedatguldu/g-browser/issues",
+    "home": "https://github.com/vedatguldu/g-browser"
+  },
+  "palette": {
+    "primary": "#2563eb",
+    "primaryHover": "#1d4ed8",
+    "secondary": "#7c3aed",
+    "highlight": "#38bdf8",
+    "accent": "#ec4899",
+    "backgroundDark": "#0f172a",
+    "surfaceDark": "#1e293b",
+    "focusRing": "#0061e0"
+  },
+  "locales": {
+    "tr-TR": {
+      "name": "G-Browser",
+      "tagline": "Yüksek Performanslı, Erişilebilir ve Güvenli Web Tarayıcısı",
+      "description": "G-Browser, kullanıcı gizliliğini en üst düzeyde koruyan, yerleşik reklam ve izleyici kalkanı, evrensel ortam indirici ve tam WCAG erişilebilirlik standartlarına sahip modern bir web tarayıcısıdır.",
+      "installedApp": "G-Browser Web Tarayıcısı"
+    },
+    "en-US": {
+      "name": "G-Browser",
+      "tagline": "High Performance, Accessible, and Secure Web Browser",
+      "description": "G-Browser is a modern web browser engineered for user privacy, featuring built-in AdShield protection, universal media downloader, and full WCAG accessibility compliance.",
+      "installedApp": "G-Browser Web Browser"
+    },
+    "de-DE": {
+      "name": "G-Browser",
+      "tagline": "Leistungsstarker, barrierefreier und sicherer Webbrowser",
+      "description": "G-Browser ist ein moderner Webbrowser mit Fokus auf Datenschutz, integriertem Werbeschutz, Medien-Downloader und voller Barrierefreiheit nach WCAG.",
+      "installedApp": "G-Browser Webbrowser"
+    },
+    "fr-FR": {
+      "name": "G-Browser",
+      "tagline": "Navigateur Web performant, accessible et sécurisé",
+      "description": "G-Browser est un navigateur moderne conçu pour la confidentialité, intégrant un bouclier anti-pistage, un téléchargeur multimédia et une accessibilité WCAG complète.",
+      "installedApp": "Navigateur Web G-Browser"
+    },
+    "es-ES": {
+      "name": "G-Browser",
+      "tagline": "Navegador web seguro, accesible y de alto rendimiento",
+      "description": "G-Browser es un navegador web moderno diseñado para la privacidad, con protección contra anuncios, descargador de medios y total accesibilidad WCAG.",
+      "installedApp": "Navegador web G-Browser"
+    },
+    "it-IT": {
+      "name": "G-Browser",
+      "tagline": "Browser web sicuro, accessibile e ad alte prestazioni",
+      "description": "G-Browser è un moderno browser web orientato alla privacy con protezione integrata da annunci e tracciamento, downloader multimediale e accessibilità WCAG.",
+      "installedApp": "Browser Web G-Browser"
+    },
+    "ja-JP": {
+      "name": "G-Browser",
+      "tagline": "高性能でアクセシブル、安全な次世代ウェブブラウザ",
+      "description": "G-Browserは、プライバシー保護、広告・トラッカー遮断機能、メディアダウンローダー、WCAGアクセシビリティ標準を完全統合したモダンなブラウザです。",
+      "installedApp": "G-Browser ウェブブラウザー"
+    },
+    "zh-CN": {
+      "name": "G-Browser",
+      "tagline": "高性能、高无障碍、安全的现代网页浏览器",
+      "description": "G-Browser 是一款专注于用户隐私的现代化网页浏览器，内置广告屏蔽、通用媒体下载器和完全的 WCAG 无障碍支持。",
+      "installedApp": "G-Browser 网页浏览器"
+    },
+    "ru-RU": {
+      "name": "G-Browser",
+      "tagline": "Высокопроизводительный, доступный и безопасный веб-браузер",
+      "description": "G-Browser — это современный браузер, ориентированный на конфиденциальность, со встроенной защитой от рекламы, загрузчиком медиа и полной поддержкой WCAG.",
+      "installedApp": "Веб-браузер G-Browser"
+    }
+  }
+}

@@ -1,6 +1,6 @@
 {
   "aboutDialog": {
-    "ariaLabel": "Over Floorp",
+    "ariaLabel": "Over G-Browser",
     "version": "Versie",
     "channel": {
       "nightly": "Nachtelijke",
@@ -35,13 +35,13 @@
     },
     "links": {
       "releaseNotes": "Versie-informatie",
-      "help": "Floorp Help",
+      "help": "G-Browser Help",
       "feedback": "Feedback geven",
       "licensing": "Licentie",
       "terms": "Gebruiksvoorwaarden",
       "privacy": "Privacy Beleid"
     },
-    "trademark": "Floorp is een handelsmerk in Japan.",
+    "trademark": "G-Browser is a modern web browser developed by Vedat Güldü.",
     "opensExternal": "opens external link",
     "opensInNewWindow": "opens in new window"
   }

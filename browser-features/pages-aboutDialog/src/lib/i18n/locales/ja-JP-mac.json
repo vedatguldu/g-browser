@@ -1,6 +1,6 @@
 {
   "aboutDialog": {
-    "ariaLabel": "Floorp について",
+    "ariaLabel": "G-Browser について",
     "version": "バージョン",
     "channel": {
       "nightly": "Nightly",
@@ -35,13 +35,13 @@
     },
     "links": {
       "releaseNotes": "リリースノート",
-      "help": "Floorp ヘルプ",
+      "help": "G-Browser ヘルプ",
       "feedback": "フィードバックを送る",
       "licensing": "ライセンス",
       "terms": "利用規約",
       "privacy": "プライバシーポリシー"
     },
-    "trademark": "Floorp の名称は日本国における商標です。",
+    "trademark": "G-Browser is a modern web browser developed by Vedat Güldü.",
     "opensExternal": "外部リンクを開きます",
     "opensInNewWindow": "新しいウィンドウで開きます"
   }

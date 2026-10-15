@@ -13,7 +13,7 @@ APP_ZIP = os.path.join(DIST_DIR, "app.zip")
 INSTALLER_CS = os.path.join(PROJECT_ROOT, "tools", "native", "installer.cs")
 UNINSTALL_CS = os.path.join(PROJECT_ROOT, "tools", "native", "uninstall.cs")
 KIT_ICO = os.path.join(PROJECT_ROOT, "tools", "native", "kit.ico")
-SETUP_EXE = os.path.join(PROJECT_ROOT, "Floorp-Setup-x64.exe")
+SETUP_EXE = os.path.join(PROJECT_ROOT, "G-Browser-Setup-x64.exe")
 CSC = r"C:\Windows\Microsoft.NET\Framework64\v4.0.30319\csc.exe"
 DENO_EXE = os.path.expanduser(r"~\.lmstudio\.internal\utils\deno.exe")
 
@@ -25,6 +25,14 @@ if "--build" in sys.argv:
         print("Frontend production build failed!")
         sys.exit(1)
     print("  Production bundles built successfully.")
+
+print("[0.5] Generating and synchronizing G-Browser visual branding assets...")
+brand_script = os.path.join(PROJECT_ROOT, "branding", "generate_branding.py")
+res_brand = subprocess.run([sys.executable, brand_script], cwd=PROJECT_ROOT)
+if res_brand.returncode != 0:
+    print("Branding asset generation failed!")
+    sys.exit(1)
+print("  Branding assets synchronized.")
 
 print("[1] Syncing built assets from _dist/noraneko to package noraneko-devdir...")
 if not os.path.exists(DEVDIR_IN_PACKAGE):
@@ -127,21 +135,29 @@ if res_un.returncode != 0:
     sys.exit(1)
 print(f"  uninstall.exe compiled successfully: {os.path.getsize(uninstall_out)} bytes")
 
-print("[3] Checking PE header of floorp.exe...")
+print("[3] Ensuring g-browser.exe exists and checking PE headers...")
 floorp_exe = os.path.join(PACKAGE_DIR, "floorp.exe")
-with open(floorp_exe, "r+b") as f:
-    data = bytearray(f.read())
-    pe_offset = int.from_bytes(data[0x3C:0x40], "little")
-    magic = int.from_bytes(data[pe_offset+24:pe_offset+26], "little")
-    subsystem_offset = pe_offset + 24 + (68 if magic == 0x20b else 68)
-    cur_subsystem = int.from_bytes(data[subsystem_offset:subsystem_offset+2], "little")
-    print(f"  Current Subsystem: {cur_subsystem} ({'GUI' if cur_subsystem==2 else 'CUI'})")
-    if cur_subsystem != 2:
-        data[subsystem_offset] = 2
-        data[subsystem_offset+1] = 0
-        f.seek(0)
-        f.write(data)
-        print("  Patched Subsystem to 2 (GUI) successfully!")
+gbrowser_exe = os.path.join(PACKAGE_DIR, "g-browser.exe")
+
+# Always ensure g-browser.exe is synchronized with floorp.exe
+shutil.copy2(floorp_exe, gbrowser_exe)
+print("  Synchronized g-browser.exe from floorp.exe")
+
+for target_exe in [floorp_exe, gbrowser_exe]:
+    exe_name = os.path.basename(target_exe)
+    with open(target_exe, "r+b") as f:
+        data = bytearray(f.read())
+        pe_offset = int.from_bytes(data[0x3C:0x40], "little")
+        magic = int.from_bytes(data[pe_offset+24:pe_offset+26], "little")
+        subsystem_offset = pe_offset + 24 + (68 if magic == 0x20b else 68)
+        cur_subsystem = int.from_bytes(data[subsystem_offset:subsystem_offset+2], "little")
+        print(f"  {exe_name} Subsystem: {cur_subsystem} ({'GUI' if cur_subsystem==2 else 'CUI'})")
+        if cur_subsystem != 2:
+            data[subsystem_offset] = 2
+            data[subsystem_offset+1] = 0
+            f.seek(0)
+            f.write(data)
+            print(f"  Patched {exe_name} Subsystem to 2 (GUI) successfully!")
 
 print(f"[4] Creating {APP_ZIP} from {PACKAGE_DIR}...")
 if os.path.exists(APP_ZIP):
@@ -155,7 +171,7 @@ with zipfile.ZipFile(APP_ZIP, "w", zipfile.ZIP_DEFLATED, compresslevel=6) as zip
 zip_size_mb = os.path.getsize(APP_ZIP) / (1024 * 1024)
 print(f"  app.zip created: {zip_size_mb:.2f} MB")
 
-print("[5] Compiling Floorp-Setup-x64.exe with csc.exe...")
+print(f"[5] Compiling {os.path.basename(SETUP_EXE)} with csc.exe...")
 csc_cmd = [
     CSC,
     "/target:winexe",
@@ -176,15 +192,15 @@ if res.returncode != 0:
     sys.exit(1)
 
 setup_size_mb = os.path.getsize(SETUP_EXE) / (1024 * 1024)
-print(f"  Floorp-Setup-x64.exe compiled successfully: {setup_size_mb:.2f} MB")
+print(f"  {os.path.basename(SETUP_EXE)} compiled successfully: {setup_size_mb:.2f} MB")
 
 # If in Downloads, also copy to Downloads folder if not already there
-user_downloads_setup = os.path.join(os.path.expanduser("~"), "Downloads", "Floorp-Setup-x64.exe")
+user_downloads_setup = os.path.join(os.path.expanduser("~"), "Downloads", os.path.basename(SETUP_EXE))
 if os.path.abspath(SETUP_EXE) != os.path.abspath(user_downloads_setup):
     shutil.copy2(SETUP_EXE, user_downloads_setup)
     print(f"  Copied installer to: {user_downloads_setup}")
 
-print("[6] Running silent install to update %LocalAppData%\\Programs\\Floorp...")
+print("[6] Running silent install to update %LocalAppData%\\Programs\\G-Browser...")
 res_install = subprocess.run([SETUP_EXE, "/S"], capture_output=True)
 print(f"  Silent install finished with exit code {res_install.returncode}")
 print("ALL DONE!")

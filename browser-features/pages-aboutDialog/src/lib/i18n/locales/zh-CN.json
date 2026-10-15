@@ -1,6 +1,6 @@
 {
   "aboutDialog": {
-    "ariaLabel": "关于 Floorp",
+    "ariaLabel": "关于 G-Browser",
     "version": "版本",
     "channel": {
       "nightly": "Nightly",
@@ -35,13 +35,13 @@
     },
     "links": {
       "releaseNotes": "新版变化",
-      "help": "Floorp 帮助",
+      "help": "G-Browser 帮助",
       "feedback": "提交反馈",
       "licensing": "许可协议",
       "terms": "使用条款",
       "privacy": "隐私声明"
     },
-    "trademark": "“Floorp”是日本的注册商标。",
+    "trademark": "G-Browser is a modern web browser developed by Vedat Güldü.",
     "opensExternal": "opens external link",
     "opensInNewWindow": "opens in new window"
   }

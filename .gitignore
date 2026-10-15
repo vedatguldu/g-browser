@@ -21,4 +21,5 @@ bin-portable/
 *.log
 __pycache__/
 Floorp-Setup-x64.exe
+G-Browser-Setup-x64.exe
 tools/native/*.exe

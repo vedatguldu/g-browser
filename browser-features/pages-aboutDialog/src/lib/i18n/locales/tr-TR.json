@@ -1,6 +1,6 @@
 {
   "aboutDialog": {
-    "ariaLabel": "Floorp Hakkında",
+    "ariaLabel": "G-Browser Hakkında",
     "version": "Sürüm",
     "channel": {
       "nightly": "Nightly",
@@ -35,13 +35,13 @@
     },
     "links": {
       "releaseNotes": "Sürüm Notları",
-      "help": "Floorp Yardımı",
+      "help": "G-Browser Yardımı",
       "feedback": "Geri Bildirim Gönder",
       "licensing": "Lisans",
       "terms": "Kullanım Koşulları",
       "privacy": "Gizlilik Politikası"
     },
-    "trademark": "Floorp adı Japonya'da tescilli bir ticari markadır.",
+    "trademark": "G-Browser, Vedat Güldü tarafından geliştirilen modern bir web tarayıcısıdır.",
     "opensExternal": "harici bağlantı",
     "opensInNewWindow": "yeni pencerede açılır"
   }

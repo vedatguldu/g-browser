@@ -379,7 +379,7 @@ export function AboutDialog() {
             alt=""
             aria-hidden="true"
           />
-          <h1 class="ad-name">Floorp</h1>
+          <h1 class="ad-name">G-Browser</h1>
           <div class="ad-version">
             {t("aboutDialog.version")} {version || "…"}
             {channelBadge && (
@@ -397,7 +397,7 @@ export function AboutDialog() {
             <h2 class="ad-section-title">{t("aboutDialog.community.title")}</h2>
             <div class="ad-community-row">
               <a
-                href="https://github.com/Floorp-Projects/Floorp"
+                href="https://github.com/vedatguldu/g-browser"
                 target="_blank"
                 rel="noopener noreferrer"
                 class="ad-community-item"
@@ -405,7 +405,7 @@ export function AboutDialog() {
                 aria-label={`GitHub (${t("aboutDialog.opensExternal", { defaultValue: "opens external link" })})`}
                 onClick={(e) => {
                   e.preventDefault();
-                  openExternalUrl("https://github.com/Floorp-Projects/Floorp");
+                  openExternalUrl("https://github.com/vedatguldu/g-browser");
                 }}
               >
                 <span class="ad-community-icon">

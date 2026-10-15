@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fare Hareketleri | G-Browser Dokümantasyonu</title>
+  <meta name="description" content="G-Browser Fare Hareketleri (Mouse Gestures) rehberi: Sağ tık sürükleme ile geri gitme, ileri gitme, sekme kapatma ve özel hareket yapılandırmaları.">
+  <link rel="icon" type="image/svg+xml" href="../assets/img/logo.svg">
+  <link rel="stylesheet" href="../assets/css/docs.css">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">İçeriğe Atla</a>
+
+  <header class="docs-header">
+    <div class="header-container">
+      <a href="../index.html" class="brand-section" aria-label="G-Browser Dokümantasyon Ana Sayfası">
+        <img src="../assets/img/logo.svg" alt="G-Browser Logo" class="brand-logo">
+        <span class="brand-title">G-Browser</span>
+        <span class="brand-badge">Fare Hareketleri</span>
+      </a>
+
+      <nav class="header-nav" aria-label="Üst Gezinti">
+        <a href="../index.html" class="nav-link">Ana Sayfa</a>
+        <a href="index.html" class="nav-link active">Özellikler</a>
+        <a href="../support.html" class="nav-link">Destek & Katkı</a>
+        <a href="../release-notes.html" class="nav-link">Sürüm Notları</a>
+        <a href="https://github.com/vedatguldu/g-browser" target="_blank" rel="noopener noreferrer" class="nav-link">GitHub</a>
+        <a href="https://github.com/sponsors/vedatguldu" target="_blank" rel="noopener noreferrer" class="btn-sponsor" aria-label="GitHub Sponsors ile Vedat Güldü'ye Destek Ol">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+          Destek Ol
+        </a>
+        <button id="themeToggle" class="theme-toggle" aria-label="Karanlık/Aydınlık Tema Değiştir"></button>
+      </nav>
+    </div>
+  </header>
+
+  <div class="docs-layout">
+    <aside class="docs-sidebar" aria-label="Dokümantasyon Menüsü">
+      <div class="sidebar-category">
+        <div class="sidebar-heading">Başlarken</div>
+        <ul class="sidebar-menu">
+          <li class="sidebar-item"><a href="../index.html" class="sidebar-link">Tanıtım & Genel Bakış</a></li>
+          <li class="sidebar-item"><a href="index.html" class="sidebar-link">Tüm Özellikler Dizini</a></li>
+          <li class="sidebar-item"><a href="../release-notes.html" class="sidebar-link">Sürüm Notları</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-category">
+        <div class="sidebar-heading">Temel Özellikler</div>
+        <ul class="sidebar-menu">
+          <li class="sidebar-item"><a href="tab-bar-layout.html" class="sidebar-link">Sekme Çubuğu Düzeni</a></li>
+          <li class="sidebar-item"><a href="workspaces.html" class="sidebar-link">Çalışma Alanları</a></li>
+          <li class="sidebar-item"><a href="panel-sidebar.html" class="sidebar-link">Yan Panel (Kenar Çubuğu)</a></li>
+          <li class="sidebar-item"><a href="split-view.html" class="sidebar-link">Bölünmüş Görünüm</a></li>
+          <li class="sidebar-item"><a href="webapps.html" class="sidebar-link">Web Uygulamaları (PWA)</a></li>
+          <li class="sidebar-item"><a href="mouse-gestures.html" class="sidebar-link active">Fare Hareketleri</a></li>
+          <li class="sidebar-item"><a href="shortcuts-and-palette.html" class="sidebar-link">Kısayollar & Komut Paleti</a></li>
+          <li class="sidebar-item"><a href="start-and-hub.html" class="sidebar-link">Başlangıç & Ayarlar Hub'ı</a></li>
+          <li class="sidebar-item"><a href="privacy-security.html" class="sidebar-link">Gizlilik, Güvenlik & AdShield</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-category">
+        <div class="sidebar-heading">Topluluk & Destek</div>
+        <ul class="sidebar-menu">
+          <li class="sidebar-item"><a href="../support.html" class="sidebar-link">Destek & Hata Bildirimi</a></li>
+          <li class="sidebar-item"><a href="https://github.com/sponsors/vedatguldu" target="_blank" rel="noopener noreferrer" class="sidebar-link">Geliştiriciye Destek Ol</a></li>
+          <li class="sidebar-item"><a href="https://vedatguldu.com" target="_blank" rel="noopener noreferrer" class="sidebar-link">Vedat Güldü Web Sitesi</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <main id="main-content" class="docs-main">
+      <article class="content-wrapper">
+        <ul class="breadcrumbs">
+          <li><a href="../index.html">Dokümantasyon</a></li>
+          <li>/</li>
+          <li><a href="index.html">Özellikler</a></li>
+          <li>/</li>
+          <li aria-current="page">Fare Hareketleri</li>
+        </ul>
+
+        <h1>Fare Hareketleri (Mouse Gestures)</h1>
+        <p class="lead">Sağ fare tuşunu basılı tutup basit geometrik yönlerde kaydırarak tarayıcınızı ışık hızında komuta edin.</p>
+
+        <h2 id="nedir">Fare Hareketleri Nedir?</h2>
+        <p>Fare Hareketleri, web gezintinizi düğmelere veya klavyeye uzanmadan doğrudan fare ile yönetmenizi sağlayan dahili bir teknolojidir. Ek bir eklentiye ihtiyaç duymadan, G-Browser motorunun doğal hızıyla çalışır.</p>
+
+        <h2 id="nasil-calisir">Nasıl Çalışır?</h2>
+        <p>Farenin <strong>sağ tuşuna basılı tutun</strong>, ekranda kısa bir yön çizgisi çizin ve ardından tuşu bırakın. Tarayıcı çizdiğiniz deseni anında tanıyarak ilgili komutu uygular.</p>
+
+        <h2 id="varsayilan-hareketler">Varsayılan Hareketler</h2>
+        <ul>
+          <li><strong>← (Sola Çizgi):</strong> Önceki Sayfa (Geri)</li>
+          <li><strong>→ (Sağa Çizgi):</strong> Sonraki Sayfa (İleri)</li>
+          <li><strong>↓ → (Aşağı ve Sağa Çizgi):</strong> Mevcut Sekmeyi Kapat</li>
+          <li><strong>↓ ↑ (Aşağı ve Yukarı Çizgi):</strong> Sayfayı Yenile (F5)</li>
+          <li><strong>↑ ↓ (Yukarı ve Aşağı Çizgi):</strong> Önbelleği Temizleyerek Sayfayı Zorla Yenile</li>
+          <li><strong>↑ (Yukarı Çizgi):</strong> Sayfanın En Üstüne Kaydır</li>
+          <li><strong>↓ (Aşağı Çizgi):</strong> Sayfanın En Altına Kaydır</li>
+        </ul>
+
+        <div class="admonition tip">
+          <div class="admonition-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4"/><path d="M12 18v4"/><path d="m4.93 4.93 2.83 2.83"/><path d="m16.24 16.24 2.83 2.83"/><path d="M2 12h4"/><path d="M18 12h4"/><path d="m4.93 19.07 2.83-2.83"/><path d="m16.24 7.76 2.83-2.83"/></svg>
+            Görsel Yol İzi (Trail)
+          </div>
+          <p>Fare hareketi yaparken ekranda farenin izlediği yolu gösteren renkli bir çizgi görüntülenir. İsterseniz bu izin rengini, kalınlığını veya görünürlüğünü ayarlardan değiştirebilirsiniz.</p>
+        </div>
+
+        <h2 id="ozellestirme">Hareketleri Özelleştirme</h2>
+        <p>G-Browser'da fare hareketleri tamamen sizin kontrolünüzdedir. <strong>Ayarlar &gt; Gezinme &gt; Fare Hareketleri</strong> sayfasından:</p>
+        <ol>
+          <li>Özelliği dilediğiniz zaman açıp kapatabilirsiniz.</li>
+          <li>Tetikleyici fare düğmesini seçebilirsiniz (Varsayılan: Sağ tık; alternatif: Orta tık).</li>
+          <li>Herhangi bir hareketi seçip atanan işlevi dilediğiniz gibi değiştirebilir veya yeni desenler tanımlayabilirsiniz.</li>
+        </ol>
+
+        <nav class="docs-pagination" aria-label="Sayfa Gezintisi">
+          <a href="webapps.html" class="pagination-btn">
+            <span class="pagination-sub">Önceki Konu</span>
+            <span class="pagination-title">← Web Uygulamaları (PWA)</span>
+          </a>
+          <a href="shortcuts-and-palette.html" class="pagination-btn pagination-next">
+            <span class="pagination-sub">Sonraki Konu</span>
+            <span class="pagination-title">Kısayollar & Komut Paleti →</span>
+          </a>
+        </nav>
+      </article>
+
+      <aside class="docs-toc" aria-label="Bu Sayfadaki Başlıklar">
+        <div class="toc-heading">Bu Sayfada</div>
+        <ul class="toc-list">
+          <li class="toc-item"><a href="#nedir" class="toc-link">Fare Hareketleri Nedir?</a></li>
+          <li class="toc-item"><a href="#nasil-calisir" class="toc-link">Nasıl Çalışır?</a></li>
+          <li class="toc-item"><a href="#varsayilan-hareketler" class="toc-link">Varsayılan Hareketler</a></li>
+          <li class="toc-item"><a href="#ozellestirme" class="toc-link">Özelleştirme</a></li>
+        </ul>
+      </aside>
+    </main>
+  </div>
+
+  <footer class="docs-footer">
+    <div class="footer-links">
+      <a href="../index.html">Dokümantasyon</a>
+      <a href="../support.html">Destek</a>
+      <a href="https://vedatguldu.com">Vedat Güldü</a>
+      <a href="https://github.com/vedatguldu/g-browser">GitHub Kaynak Kodu</a>
+      <a href="https://github.com/sponsors/vedatguldu">GitHub Sponsors</a>
+    </div>
+    <p>&copy; 2026 G-Browser. Vedat Güldü tarafından geliştirilmektedir.</p>
+  </footer>
+
+  <script src="../assets/js/docs.js"></script>
+</body>
+</html>

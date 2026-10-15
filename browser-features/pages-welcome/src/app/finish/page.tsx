@@ -55,7 +55,7 @@ export default function FinishPage() {
         )}
         <div className={styles.links}>
           <a
-            href="https://vedatguldu.com"
+            href="https://vedatguldu.github.io/g-browser/support.html"
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`${t("finishPage.support")} (${t("finishPage.opensInNewWindow", { defaultValue: "opens in new window" })})`}

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Destek & Topluluk | G-Browser Dokümantasyonu</title>
+  <meta name="description" content="G-Browser Destek ve Topluluk Merkezi: Hata bildirme, özellik talepleri, geliştirici Vedat Güldü ile iletişim ve GitHub Sponsors üzerinden projeye destek olma.">
+  <link rel="icon" type="image/svg+xml" href="assets/img/logo.svg">
+  <link rel="stylesheet" href="assets/css/docs.css">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">İçeriğe Atla</a>
+
+  <header class="docs-header">
+    <div class="header-container">
+      <a href="index.html" class="brand-section" aria-label="G-Browser Dokümantasyon Ana Sayfası">
+        <img src="assets/img/logo.svg" alt="G-Browser Logo" class="brand-logo">
+        <span class="brand-title">G-Browser</span>
+        <span class="brand-badge">Destek & Topluluk</span>
+      </a>
+
+      <nav class="header-nav" aria-label="Üst Gezinti">
+        <a href="index.html" class="nav-link">Ana Sayfa</a>
+        <a href="features/index.html" class="nav-link">Özellikler</a>
+        <a href="support.html" class="nav-link active">Destek & Katkı</a>
+        <a href="release-notes.html" class="nav-link">Sürüm Notları</a>
+        <a href="https://github.com/vedatguldu/g-browser" target="_blank" rel="noopener noreferrer" class="nav-link">GitHub</a>
+        <a href="https://github.com/sponsors/vedatguldu" target="_blank" rel="noopener noreferrer" class="btn-sponsor" aria-label="GitHub Sponsors ile Vedat Güldü'ye Destek Ol">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+          Destek Ol
+        </a>
+        <button id="themeToggle" class="theme-toggle" aria-label="Karanlık/Aydınlık Tema Değiştir"></button>
+      </nav>
+    </div>
+  </header>
+
+  <div class="docs-layout">
+    <aside class="docs-sidebar" aria-label="Dokümantasyon Menüsü">
+      <div class="sidebar-category">
+        <div class="sidebar-heading">Başlarken</div>
+        <ul class="sidebar-menu">
+          <li class="sidebar-item"><a href="index.html" class="sidebar-link">Tanıtım & Genel Bakış</a></li>
+          <li class="sidebar-item"><a href="features/index.html" class="sidebar-link">Tüm Özellikler Dizini</a></li>
+          <li class="sidebar-item"><a href="release-notes.html" class="sidebar-link">Sürüm Notları</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-category">
+        <div class="sidebar-heading">Temel Özellikler</div>
+        <ul class="sidebar-menu">
+          <li class="sidebar-item"><a href="features/tab-bar-layout.html" class="sidebar-link">Sekme Çubuğu Düzeni</a></li>
+          <li class="sidebar-item"><a href="features/workspaces.html" class="sidebar-link">Çalışma Alanları</a></li>
+          <li class="sidebar-item"><a href="features/panel-sidebar.html" class="sidebar-link">Yan Panel (Kenar Çubuğu)</a></li>
+          <li class="sidebar-item"><a href="features/split-view.html" class="sidebar-link">Bölünmüş Görünüm</a></li>
+          <li class="sidebar-item"><a href="features/webapps.html" class="sidebar-link">Web Uygulamaları (PWA)</a></li>
+          <li class="sidebar-item"><a href="features/mouse-gestures.html" class="sidebar-link">Fare Hareketleri</a></li>
+          <li class="sidebar-item"><a href="features/shortcuts-and-palette.html" class="sidebar-link">Kısayollar & Komut Paleti</a></li>
+          <li class="sidebar-item"><a href="features/start-and-hub.html" class="sidebar-link">Başlangıç & Ayarlar Hub'ı</a></li>
+          <li class="sidebar-item"><a href="features/privacy-security.html" class="sidebar-link">Gizlilik, Güvenlik & AdShield</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-category">
+        <div class="sidebar-heading">Topluluk & Destek</div>
+        <ul class="sidebar-menu">
+          <li class="sidebar-item"><a href="support.html" class="sidebar-link active">Destek & Hata Bildirimi</a></li>
+          <li class="sidebar-item"><a href="https://github.com/sponsors/vedatguldu" target="_blank" rel="noopener noreferrer" class="sidebar-link">Geliştiriciye Destek Ol</a></li>
+          <li class="sidebar-item"><a href="https://vedatguldu.com" target="_blank" rel="noopener noreferrer" class="sidebar-link">Vedat Güldü Web Sitesi</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <main id="main-content" class="docs-main">
+      <article class="content-wrapper">
+        <ul class="breadcrumbs">
+          <li><a href="index.html">Dokümantasyon</a></li>
+          <li>/</li>
+          <li aria-current="page">Destek & Topluluk</li>
+        </ul>
+
+        <h1>G-Browser Destek & Katkı Merkezi</h1>
+        <p class="lead">G-Browser bağımsız, gizlilik odaklı ve açık kaynaklı bir web tarayıcısıdır. Karşılaştığınız sorunları bildirebilir, fikirlerinizi paylaşabilir veya projeye doğrudan destek olabilirsiniz.</p>
+
+        <h2 id="hata-bildirimi">Sorun ve Hata Bildirimi (Bug Report)</h2>
+        <p>G-Browser kullanırken bir sorunla karşılaştıysanız veya bir özelliğin beklendiği gibi çalışmadığını fark ettiyseniz, lütfen GitHub Issues üzerinden hata kaydı açın:</p>
+        <ol>
+          <li><a href="https://github.com/vedatguldu/g-browser/issues" target="_blank" rel="noopener noreferrer"><strong>G-Browser GitHub Sorun Takipçisi</strong></a> sayfasına gidin.</li>
+          <li><em>"New Issue"</em> butonuna tıklayın.</li>
+          <li>Sorunu adım adım nasıl yeniden oluşturabileceğimizi, işletim sisteminizi ve tarayıcı sürümünüzü açıklayın.</li>
+          <li>Varsa ekran görüntüsü veya hata konsolu çıktısı ekleyin.</li>
+        </ol>
+
+        <h2 id="ozellik-talepleri">Yeni Özellik Talepleri (Feature Requests)</h2>
+        <p>G-Browser'da görmek istediğiniz yeni bir özellik veya işlev fikriniz mi var? Topluluk tartışmalarımıza katılabilir veya GitHub üzerinden özellik talebi oluşturabilirsiniz.</p>
+
+        <div class="admonition info">
+          <div class="admonition-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+            Projeye Bağış Yapın & Destek Olun
+          </div>
+          <p>G-Browser, kullanıcılarına tamamen ücretsiz ve açık kaynaklı olarak sunulmaktadır. Geliştirme süreçlerini, sunucu altyapısını ve test çalışmalarını sürdürebilmemiz için GitHub Sponsors üzerinden projeye destek olabilirsiniz:</p>
+          <p style="margin-top: 1rem;">
+            <a href="https://github.com/sponsors/vedatguldu" target="_blank" rel="noopener noreferrer" class="btn-sponsor" style="display: inline-flex; font-size: 1rem; padding: 0.6rem 1.2rem;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              GitHub Sponsors ile Destek Ol
+            </a>
+          </p>
+        </div>
+
+        <h2 id="iletisim">İletişim & Geliştirici Bilgileri</h2>
+        <p>G-Browser'ın baş mimarı ve geliştiricisi <strong>Vedat Güldü</strong>'dür. Projeyle ilgili iş birlikleri, kurumsal destek veya doğrudan sorularınız için aşağıdaki kanalları kullanabilirsiniz:</p>
+        <ul>
+          <li><strong>Kişisel Web Sitesi:</strong> <a href="https://vedatguldu.com" target="_blank" rel="noopener noreferrer">vedatguldu.com</a></li>
+          <li><strong>GitHub Profili:</strong> <a href="https://github.com/vedatguldu" target="_blank" rel="noopener noreferrer">github.com/vedatguldu</a></li>
+          <li><strong>G-Browser Deposu:</strong> <a href="https://github.com/vedatguldu/g-browser" target="_blank" rel="noopener noreferrer">github.com/vedatguldu/g-browser</a></li>
+        </ul>
+
+        <nav class="docs-pagination" aria-label="Sayfa Gezintisi">
+          <a href="features/privacy-security.html" class="pagination-btn">
+            <span class="pagination-sub">Önceki Konu</span>
+            <span class="pagination-title">← Gizlilik, Güvenlik & AdShield</span>
+          </a>
+          <a href="release-notes.html" class="pagination-btn pagination-next">
+            <span class="pagination-sub">Sonraki Konu</span>
+            <span class="pagination-title">Sürüm Notları →</span>
+          </a>
+        </nav>
+      </article>
+
+      <aside class="docs-toc" aria-label="Bu Sayfadaki Başlıklar">
+        <div class="toc-heading">Bu Sayfada</div>
+        <ul class="toc-list">
+          <li class="toc-item"><a href="#hata-bildirimi" class="toc-link">Hata Bildirimi</a></li>
+          <li class="toc-item"><a href="#ozellik-talepleri" class="toc-link">Özellik Talepleri</a></li>
+          <li class="toc-item"><a href="#iletisim" class="toc-link">İletişim Bilgileri</a></li>
+        </ul>
+      </aside>
+    </main>
+  </div>
+
+  <footer class="docs-footer">
+    <div class="footer-links">
+      <a href="index.html">Dokümantasyon</a>
+      <a href="support.html">Destek</a>
+      <a href="https://vedatguldu.com">Vedat Güldü</a>
+      <a href="https://github.com/vedatguldu/g-browser">GitHub Kaynak Kodu</a>
+      <a href="https://github.com/sponsors/vedatguldu">GitHub Sponsors</a>
+    </div>
+    <p>&copy; 2026 G-Browser. Vedat Güldü tarafından geliştirilmektedir.</p>
+  </footer>
+
+  <script src="assets/js/docs.js"></script>
+</body>
+</html>

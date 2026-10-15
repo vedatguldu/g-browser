@@ -81,7 +81,7 @@ function getComponentRegistrar(): nsIComponentRegistrar | null {
 }
 
 const executedFunctions = new Set<string>();
-const RELEASE_NOTES_URL = "https://github.com/vedatguldu/g-browser/releases";
+const RELEASE_NOTES_URL = "https://vedatguldu.github.io/g-browser/release-notes.html";
 
 export function executeOnce(id: string, callback: () => void): boolean {
   if (executedFunctions.has(id)) {

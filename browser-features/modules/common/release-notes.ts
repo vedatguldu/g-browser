@@ -1,5 +1,5 @@
 export const RELEASE_NOTES_SUPPORT_URL =
-  "https://github.com/vedatguldu/g-browser/releases";
+  "https://vedatguldu.github.io/g-browser/release-notes.html";
 
 export const RELEASE_NOTES_MODES = ["disabled", "blocking", "support"] as const;
 export type ReleaseNotesMode = (typeof RELEASE_NOTES_MODES)[number];

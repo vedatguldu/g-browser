@@ -26,13 +26,12 @@ const resources = [
   {
     key: "privacy",
     icon: Shield,
-    href:
-      "https://support.mozilla.org/kb/enhanced-tracking-protection-firefox-desktop",
+    href: "https://vedatguldu.github.io/g-browser/features/privacy-security.html",
   },
   { key: "extensions", href: "about:addons", icon: Puzzle },
   {
     key: "help",
-    href: "https://vedatguldu.com",
+    href: "https://vedatguldu.github.io/g-browser/features/",
     icon: CircleHelp,
   },
 ];

@@ -109,7 +109,7 @@ export function Tabbar() {
           <span className="text-sm">
             {t("design.verticalTabIsRemovedFromBrowser")}{" "}
             <a
-              href="https://vedatguldu.com"
+              href="https://vedatguldu.github.io/g-browser/features/tab-bar-layout.html"
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`${t("design.learnMore")} (${t("common.opensInNewWindow", { defaultValue: "opens in a new tab" })})`}

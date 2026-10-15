@@ -38,7 +38,7 @@ export function Preferences() {
           </CardTitle>
           <div>
             <a
-              href="https://vedatguldu.com"
+              href="https://vedatguldu.github.io/g-browser/features/webapps.html"
               target="_blank"
               rel="noopener noreferrer"
               aria-describedby="pwa-help-newtab"

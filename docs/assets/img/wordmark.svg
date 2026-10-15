@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 80" width="360" height="80" fill="none">
+  <defs>
+    <linearGradient id="gb-wm-grad" x1="0" y1="0" x2="360" y2="80" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#38BDF8" />
+      <stop offset="45%" stop-color="#2563EB" />
+      <stop offset="100%" stop-color="#7C3AED" />
+    </linearGradient>
+    <linearGradient id="gb-text-grad" x1="0" y1="0" x2="200" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="100%" stop-color="#F1F5F9" />
+    </linearGradient>
+  </defs>
+
+  <!-- Mini Emblem Icon on Left -->
+  <g transform="translate(10, 10) scale(0.117)">
+    <path d="M 376 116 C 342 82 298 64 252 64 C 148.17 64 64 148.17 64 252 C 64 355.83 148.17 440 252 440 C 345 440 422 374 437 284 C 440 266 426 252 408 252 L 256 252 C 242.75 252 232 262.75 232 276 L 232 284 C 232 297.25 242.75 308 256 308 L 362 308 C 346 352 303 384 252 384 C 179.1 384 120 324.9 120 252 C 120 179.1 179.1 120 252 120 C 285 120 315 132 338 153 C 348 162 364 161 373 151 L 388 135 C 397 125 395 109 384 100 Z"
+          fill="url(#gb-wm-grad)" />
+    <path d="M 252 252 L 408 252 C 424 252 436 264 435 280 C 428 322 404 358 370 382 L 340 338 C 356 322 366 300 368 276 L 252 276 C 243 276 236 269 236 260 C 236 251 243 252 252 252 Z"
+          fill="#38BDF8" />
+  </g>
+
+  <!-- Typography: G-Browser -->
+  <text x="82" y="52" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="34" font-weight="800" letter-spacing="-0.5" fill="url(#gb-text-grad)">
+    G<tspan fill="#38BDF8">-</tspan><tspan fill="#60A5FA">Browser</tspan>
+  </text>
+</svg>

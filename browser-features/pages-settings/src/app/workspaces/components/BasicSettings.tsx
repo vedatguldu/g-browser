@@ -106,7 +106,7 @@ export function BasicSettings() {
         <CardHeader>
           <CardTitle>{t("workspaceRefresh.behavior")}</CardTitle>
           <a
-            href="https://vedatguldu.com"
+            href="https://vedatguldu.github.io/g-browser/features/workspaces.html"
             target="_blank"
             rel="noopener noreferrer"
             aria-describedby="workspace-help-newtab"

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>G-Browser Dokümantasyon ve Kullanıcı Kılavuzu</title>
+  <meta name="description" content="G-Browser modern, hızlı, telemetrisiz ve erişilebilir web tarayıcısı kullanım kılavuzu ve özellikler dokümantasyonu.">
+  <link rel="icon" type="image/svg+xml" href="assets/img/logo.svg">
+  <link rel="stylesheet" href="assets/css/docs.css">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">İçeriğe Atla</a>
+
+  <header class="docs-header">
+    <div class="header-container">
+      <a href="index.html" class="brand-section" aria-label="G-Browser Dokümantasyon Ana Sayfası">
+        <img src="assets/img/logo.svg" alt="G-Browser Logo" class="brand-logo">
+        <span class="brand-title">G-Browser</span>
+        <span class="brand-badge">Rehber</span>
+      </a>
+
+      <nav class="header-nav" aria-label="Üst Gezinti">
+        <a href="index.html" class="nav-link active">Ana Sayfa</a>
+        <a href="features/index.html" class="nav-link">Özellikler</a>
+        <a href="support.html" class="nav-link">Destek & Katkı</a>
+        <a href="release-notes.html" class="nav-link">Sürüm Notları</a>
+        <a href="https://github.com/vedatguldu/g-browser" target="_blank" rel="noopener noreferrer" class="nav-link">GitHub</a>
+        <a href="https://github.com/sponsors/vedatguldu" target="_blank" rel="noopener noreferrer" class="btn-sponsor" aria-label="GitHub Sponsors ile Vedat Güldü'ye Destek Ol">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+          Destek Ol
+        </a>
+        <button id="themeToggle" class="theme-toggle" aria-label="Karanlık/Aydınlık Tema Değiştir"></button>
+      </nav>
+    </div>
+  </header>
+
+  <div class="docs-layout">
+    <aside class="docs-sidebar" aria-label="Dokümantasyon Menüsü">
+      <div class="sidebar-category">
+        <div class="sidebar-heading">Başlarken</div>
+        <ul class="sidebar-menu">
+          <li class="sidebar-item"><a href="index.html" class="sidebar-link active">Tanıtım & Genel Bakış</a></li>
+          <li class="sidebar-item"><a href="features/index.html" class="sidebar-link">Tüm Özellikler Dizini</a></li>
+          <li class="sidebar-item"><a href="release-notes.html" class="sidebar-link">Sürüm Notları</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-category">
+        <div class="sidebar-heading">Temel Özellikler</div>
+        <ul class="sidebar-menu">
+          <li class="sidebar-item"><a href="features/tab-bar-layout.html" class="sidebar-link">Sekme Çubuğu Düzeni</a></li>
+          <li class="sidebar-item"><a href="features/workspaces.html" class="sidebar-link">Çalışma Alanları</a></li>
+          <li class="sidebar-item"><a href="features/panel-sidebar.html" class="sidebar-link">Yan Panel (Kenar Çubuğu)</a></li>
+          <li class="sidebar-item"><a href="features/split-view.html" class="sidebar-link">Bölünmüş Görünüm</a></li>
+          <li class="sidebar-item"><a href="features/webapps.html" class="sidebar-link">Web Uygulamaları (PWA)</a></li>
+          <li class="sidebar-item"><a href="features/mouse-gestures.html" class="sidebar-link">Fare Hareketleri</a></li>
+          <li class="sidebar-item"><a href="features/shortcuts-and-palette.html" class="sidebar-link">Kısayollar & Komut Paleti</a></li>
+          <li class="sidebar-item"><a href="features/start-and-hub.html" class="sidebar-link">Başlangıç & Ayarlar Hub'ı</a></li>
+          <li class="sidebar-item"><a href="features/privacy-security.html" class="sidebar-link">Gizlilik, Güvenlik & AdShield</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-category">
+        <div class="sidebar-heading">Topluluk & Destek</div>
+        <ul class="sidebar-menu">
+          <li class="sidebar-item"><a href="support.html" class="sidebar-link">Destek & Hata Bildirimi</a></li>
+          <li class="sidebar-item"><a href="https://github.com/sponsors/vedatguldu" target="_blank" rel="noopener noreferrer" class="sidebar-link">Geliştiriciye Destek Ol</a></li>
+          <li class="sidebar-item"><a href="https://vedatguldu.com" target="_blank" rel="noopener noreferrer" class="sidebar-link">Vedat Güldü Web Sitesi</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <main id="main-content" class="docs-main">
+      <article class="content-wrapper">
+        <ul class="breadcrumbs">
+          <li><a href="index.html">Dokümantasyon</a></li>
+          <li>/</li>
+          <li aria-current="page">Genel Bakış</li>
+        </ul>
+
+        <h1>G-Browser Kullanıcı Kılavuzu ve Dokümantasyonu</h1>
+        <p class="lead">G-Browser; hız, sınırsız özelleştirme, güçlü gizlilik ve gelişmiş erişilebilirlik (WCAG 2.2 AA) ilkeleri üzerine inşa edilmiş bağımsız, modern bir masaüstü web tarayıcısıdır.</p>
+
+        <div class="admonition info">
+          <div class="admonition-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+            Bu Kılavuz Hakkında
+          </div>
+          <p>Bu kılavuz, G-Browser'ın sunduğu tüm dahili özellikleri, gelişmiş sekme yönetimi seçeneklerini, gizlilik araçlarını ve özelleştirme yeteneklerini eksiksiz açıklamak üzere hazırlanmıştır. Sol menüden ilgilendiğiniz özelliğin sayfasına gidebilir veya aşağıdaki hızlı kartları kullanabilirsiniz.</p>
+        </div>
+
+        <h2 id="temel-nitelikler">G-Browser'ı Farklı Kılan Temel Nitelikler</h2>
+        <p>G-Browser, standart tarayıcıların sunduğu kısıtlı deneyimin ötesine geçerek kullanıcılara tam kontrol verir:</p>
+
+        <div class="feature-grid">
+          <a href="features/tab-bar-layout.html" class="feature-card">
+            <div class="card-icon">📑</div>
+            <div class="card-title">Sekme Çubuğu Düzeni</div>
+            <div class="card-desc">Klasik yatay, yenilikçi çok satırlı (multi-row) veya dikey sekmeler arasında tek tıkla geçiş yapın.</div>
+          </a>
+
+          <a href="features/workspaces.html" class="feature-card">
+            <div class="card-icon">🗂️</div>
+            <div class="card-title">Çalışma Alanları</div>
+            <div class="card-desc">Sekmelerinizi İş, Kişisel veya Proje bazında bağımsız çalışma alanlarına izole edin; dağınıklığa son verin.</div>
+          </a>
+
+          <a href="features/panel-sidebar.html" class="feature-card">
+            <div class="card-icon">📐</div>
+            <div class="card-title">Gelişmiş Yan Panel</div>
+            <div class="card-desc">Gözatmanızı bölmeden yer imlerine, indirmelere, çeviriye, notlara ve favori web sitelerinize kenar çubuğundan erişin.</div>
+          </a>
+
+          <a href="features/split-view.html" class="feature-card">
+            <div class="card-icon">◫</div>
+            <div class="card-title">Bölünmüş Görünüm</div>
+            <div class="card-desc">Aynı ekranda 2 veya 4 sekmeyi yan yana/alt alta açarak karşılaştırmalı ve kesintisiz çalışın.</div>
+          </a>
+
+          <a href="features/webapps.html" class="feature-card">
+            <div class="card-icon">🚀</div>
+            <div class="card-title">Web Uygulamaları (PWA)</div>
+            <div class="card-desc">Sık kullandığınız web sitelerini bağımsız masaüstü uygulaması olarak kurun ve görev çubuğuna sabitleyin.</div>
+          </a>
+
+          <a href="features/privacy-security.html" class="feature-card">
+            <div class="card-icon">🛡️</div>
+            <div class="card-title">Sıfır Telemetri & AdShield</div>
+            <div class="card-desc">Yerleşik reklam ve izleyici koruması, DNS-over-HTTPS (1.1.1.1) ve şifrelenmiş bağlantı motoru.</div>
+          </a>
+        </div>
+
+        <h2 id="hizli-baslangic">Hızlı Başlangıç</h2>
+        <p>G-Browser'ı verimli kullanmaya başlamak için önerilen ilk adımlar:</p>
+        <ol>
+          <li><strong>G-Browser Başlangıç Sayfası:</strong> Yeni bir sekme açarak saat, arama motoru ve sık kullanılan bağlantılarınızı organize edin.</li>
+          <li><strong>Ayarlar Hub'ı:</strong> Adres çubuğuna <code>about:preferences</code> yazarak veya sağ üstteki menüden Ayarlar'a girerek sekmeler, yan panel ve temaları kişiselleştirin.</li>
+          <li><strong>Kısayollar ve Komut Paleti:</strong> <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> tuşlarına basarak Komut Paletini açın ve tüm tarayıcı komutlarına klavyenizden ulaşın.</li>
+        </ol>
+
+        <div class="admonition tip">
+          <div class="admonition-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4"/><path d="M12 18v4"/><path d="m4.93 4.93 2.83 2.83"/><path d="m16.24 16.24 2.83 2.83"/><path d="M2 12h4"/><path d="M18 12h4"/><path d="m4.93 19.07 2.83-2.83"/><path d="m16.24 7.76 2.83-2.83"/></svg>
+            Erişilebilirlik ve Ekran Okuyucu Desteği
+          </div>
+          <p>G-Browser; NVDA, JAWS ve Windows Ekran Okuyucusu ile tam uyumludur. Tüm butonlar, sekmeler ve menüler erişilebilir ARIA etiketlerine ve yüksek kontrast standartlarına sahiptir.</p>
+        </div>
+
+        <nav class="docs-pagination" aria-label="Sayfa Gezintisi">
+          <div></div>
+          <a href="features/tab-bar-layout.html" class="pagination-btn pagination-next">
+            <span class="pagination-sub">Sonraki Konu</span>
+            <span class="pagination-title">Sekme Çubuğu Düzeni →</span>
+          </a>
+        </nav>
+      </article>
+
+      <aside class="docs-toc" aria-label="Bu Sayfadaki Başlıklar">
+        <div class="toc-heading">Bu Sayfada</div>
+        <ul class="toc-list">
+          <li class="toc-item"><a href="#temel-nitelikler" class="toc-link">Temel Nitelikler</a></li>
+          <li class="toc-item"><a href="#hizli-baslangic" class="toc-link">Hızlı Başlangıç</a></li>
+        </ul>
+      </aside>
+    </main>
+  </div>
+
+  <footer class="docs-footer">
+    <div class="footer-links">
+      <a href="index.html">Dokümantasyon</a>
+      <a href="support.html">Destek</a>
+      <a href="https://vedatguldu.com">Vedat Güldü</a>
+      <a href="https://github.com/vedatguldu/g-browser">GitHub Kaynak Kodu</a>
+      <a href="https://github.com/sponsors/vedatguldu">GitHub Sponsors</a>
+    </div>
+    <p>&copy; 2026 G-Browser. Vedat Güldü tarafından geliştirilmektedir. Özgür ve bağımsız yazılım.</p>
+  </footer>
+
+  <script src="assets/js/docs.js"></script>
+</body>
+</html>

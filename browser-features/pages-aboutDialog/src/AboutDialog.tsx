@@ -501,7 +501,7 @@ export function AboutDialog() {
                 {t("aboutDialog.links.help")}
               </button>
               <a
-                href="https://vedatguldu.com"
+                href="https://vedatguldu.github.io/g-browser/support.html"
                 target="_blank"
                 rel="noopener noreferrer"
                 class="ad-help-link"
@@ -509,7 +509,7 @@ export function AboutDialog() {
                 aria-label={`${t("aboutDialog.help.support")} (${t("aboutDialog.opensExternal", { defaultValue: "opens external link" })})`}
                 onClick={(e) => {
                   e.preventDefault();
-                  openExternalUrl("https://vedatguldu.com");
+                  openExternalUrl("https://vedatguldu.github.io/g-browser/support.html");
                 }}
               >
                 {t("aboutDialog.help.support")}

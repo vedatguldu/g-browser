@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kısayollar & Komut Paleti | G-Browser Dokümantasyonu</title>
+  <meta name="description" content="G-Browser Hızlı Komut Paleti (Ctrl+Shift+P) ve Klavye Kısayolları rehberi: Tüm tarayıcı işlevlerine klavyeden anında erişim ve kısayol özelleştirme.">
+  <link rel="icon" type="image/svg+xml" href="../assets/img/logo.svg">
+  <link rel="stylesheet" href="../assets/css/docs.css">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">İçeriğe Atla</a>
+
+  <header class="docs-header">
+    <div class="header-container">
+      <a href="../index.html" class="brand-section" aria-label="G-Browser Dokümantasyon Ana Sayfası">
+        <img src="../assets/img/logo.svg" alt="G-Browser Logo" class="brand-logo">
+        <span class="brand-title">G-Browser</span>
+        <span class="brand-badge">Komut Paleti</span>
+      </a>
+
+      <nav class="header-nav" aria-label="Üst Gezinti">
+        <a href="../index.html" class="nav-link">Ana Sayfa</a>
+        <a href="index.html" class="nav-link active">Özellikler</a>
+        <a href="../support.html" class="nav-link">Destek & Katkı</a>
+        <a href="../release-notes.html" class="nav-link">Sürüm Notları</a>
+        <a href="https://github.com/vedatguldu/g-browser" target="_blank" rel="noopener noreferrer" class="nav-link">GitHub</a>
+        <a href="https://github.com/sponsors/vedatguldu" target="_blank" rel="noopener noreferrer" class="btn-sponsor" aria-label="GitHub Sponsors ile Vedat Güldü'ye Destek Ol">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+          Destek Ol
+        </a>
+        <button id="themeToggle" class="theme-toggle" aria-label="Karanlık/Aydınlık Tema Değiştir"></button>
+      </nav>
+    </div>
+  </header>
+
+  <div class="docs-layout">
+    <aside class="docs-sidebar" aria-label="Dokümantasyon Menüsü">
+      <div class="sidebar-category">
+        <div class="sidebar-heading">Başlarken</div>
+        <ul class="sidebar-menu">
+          <li class="sidebar-item"><a href="../index.html" class="sidebar-link">Tanıtım & Genel Bakış</a></li>
+          <li class="sidebar-item"><a href="index.html" class="sidebar-link">Tüm Özellikler Dizini</a></li>
+          <li class="sidebar-item"><a href="../release-notes.html" class="sidebar-link">Sürüm Notları</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-category">
+        <div class="sidebar-heading">Temel Özellikler</div>
+        <ul class="sidebar-menu">
+          <li class="sidebar-item"><a href="tab-bar-layout.html" class="sidebar-link">Sekme Çubuğu Düzeni</a></li>
+          <li class="sidebar-item"><a href="workspaces.html" class="sidebar-link">Çalışma Alanları</a></li>
+          <li class="sidebar-item"><a href="panel-sidebar.html" class="sidebar-link">Yan Panel (Kenar Çubuğu)</a></li>
+          <li class="sidebar-item"><a href="split-view.html" class="sidebar-link">Bölünmüş Görünüm</a></li>
+          <li class="sidebar-item"><a href="webapps.html" class="sidebar-link">Web Uygulamaları (PWA)</a></li>
+          <li class="sidebar-item"><a href="mouse-gestures.html" class="sidebar-link">Fare Hareketleri</a></li>
+          <li class="sidebar-item"><a href="shortcuts-and-palette.html" class="sidebar-link active">Kısayollar & Komut Paleti</a></li>
+          <li class="sidebar-item"><a href="start-and-hub.html" class="sidebar-link">Başlangıç & Ayarlar Hub'ı</a></li>
+          <li class="sidebar-item"><a href="privacy-security.html" class="sidebar-link">Gizlilik, Güvenlik & AdShield</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-category">
+        <div class="sidebar-heading">Topluluk & Destek</div>
+        <ul class="sidebar-menu">
+          <li class="sidebar-item"><a href="../support.html" class="sidebar-link">Destek & Hata Bildirimi</a></li>
+          <li class="sidebar-item"><a href="https://github.com/sponsors/vedatguldu" target="_blank" rel="noopener noreferrer" class="sidebar-link">Geliştiriciye Destek Ol</a></li>
+          <li class="sidebar-item"><a href="https://vedatguldu.com" target="_blank" rel="noopener noreferrer" class="sidebar-link">Vedat Güldü Web Sitesi</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <main id="main-content" class="docs-main">
+      <article class="content-wrapper">
+        <ul class="breadcrumbs">
+          <li><a href="../index.html">Dokümantasyon</a></li>
+          <li>/</li>
+          <li><a href="index.html">Özellikler</a></li>
+          <li>/</li>
+          <li aria-current="page">Kısayollar & Komut Paleti</li>
+        </ul>
+
+        <h1>Klavye Kısayolları & Komut Paleti</h1>
+        <p class="lead">G-Browser'daki her özelliğe, menülere girmeden klavyenizden tek bir tuş vuruşuyla erişin.</p>
+
+        <h2 id="komut-paleti">Hızlı Komut Paleti (Command Palette)</h2>
+        <p>Modern kod editörlerinden ilham alan Komut Paleti, tarayıcıdaki tüm komutları, açık sekmeleri, yer imlerini ve ayarları arayıp anında çalıştırmanızı sağlar.</p>
+        <p>Komut Paletini açmak için klavyenizden şu kombinasyona basın:</p>
+        <p><kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> (veya macOS'ta <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd>)</p>
+
+        <h2 id="palet-kullanimi">Palet ile Neler Yapabilirsiniz?</h2>
+        <ul>
+          <li><strong>Komut Çalıştırma:</strong> "Yeni Sekme", "Bölünmüş Görünüm", "Gizli Pencere", "Geçmişi Temizle" gibi komutları yazıp <kbd>Enter</kbd> tuşuna basın.</li>
+          <li><strong>Sekme Arama:</strong> Açık yüzlerce sekmeniz arasında saniyeler içinde arama yapıp istediğiniz sekmeye geçin.</li>
+          <li><strong>Çalışma Alanı Değiştirme:</strong> Farklı bir çalışma alanına geçmek için adını yazmanız yeterlidir.</li>
+        </ul>
+
+        <div class="admonition info">
+          <div class="admonition-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+            Palet Boyutu ve Konum Ayarları
+          </div>
+          <p>Komut paletinin konumunu (ekranın ortasında veya üstünde), genişliğini ve yazı tipi boyutunu <strong>Ayarlar &gt; Komut Paleti</strong> bölümünden kendi görsel tercihinize göre ayarlayabilirsiniz.</p>
+        </div>
+
+        <h2 id="kisayol-duzenleyici">Özel Kısayol Düzenleyici (Shortcut Customizer)</h2>
+        <p>G-Browser, tarayıcıdaki hemen hemen her eylem için klavye kısayollarını yeniden tanımlamanıza imkan tanır.</p>
+        <ol>
+          <li><strong>Ayarlar &gt; Kısayollar</strong> sayfasına gidin.</li>
+          <li>Değiştirmek istediğiniz komutu listede bulun.</li>
+          <li>Komutun yanındaki kısayol kutucuğuna tıklayın ve klavyenizde kullanmak istediğiniz yeni kombinasyona basın.</li>
+          <li>Değişiklik anında kaydedilir ve tarayıcıyı yeniden başlatmaya gerek kalmadan uygulanır.</li>
+        </ol>
+
+        <h2 id="sik-kullanilan-kisayollar">En Sık Kullanılan Kısayollar</h2>
+        <ul>
+          <li><kbd>Ctrl</kbd> + <kbd>T</kbd>: Yeni Sekme Aç</li>
+          <li><kbd>Ctrl</kbd> + <kbd>W</kbd>: Mevcut Sekmeyi Kapat</li>
+          <li><kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>T</kbd>: Son Kapatılan Sekmeyi Geri Getir</li>
+          <li><kbd>Ctrl</kbd> + <kbd>B</kbd>: Yan Paneli Aç / Kapat</li>
+          <li><kbd>F11</kbd>: Tam Ekran Modu</li>
+        </ul>
+
+        <nav class="docs-pagination" aria-label="Sayfa Gezintisi">
+          <a href="mouse-gestures.html" class="pagination-btn">
+            <span class="pagination-sub">Önceki Konu</span>
+            <span class="pagination-title">← Fare Hareketleri</span>
+          </a>
+          <a href="start-and-hub.html" class="pagination-btn pagination-next">
+            <span class="pagination-sub">Sonraki Konu</span>
+            <span class="pagination-title">Başlangıç & Ayarlar Hub'ı →</span>
+          </a>
+        </nav>
+      </article>
+
+      <aside class="docs-toc" aria-label="Bu Sayfadaki Başlıklar">
+        <div class="toc-heading">Bu Sayfada</div>
+        <ul class="toc-list">
+          <li class="toc-item"><a href="#komut-paleti" class="toc-link">Komut Paleti</a></li>
+          <li class="toc-item"><a href="#palet-kullanimi" class="toc-link">Palet Neler Yapar?</a></li>
+          <li class="toc-item"><a href="#kisayol-duzenleyici" class="toc-link">Kısayol Düzenleyici</a></li>
+          <li class="toc-item"><a href="#sik-kullanilan-kisayollar" class="toc-link">Sık Kullanılan Kısayollar</a></li>
+        </ul>
+      </aside>
+    </main>
+  </div>
+
+  <footer class="docs-footer">
+    <div class="footer-links">
+      <a href="../index.html">Dokümantasyon</a>
+      <a href="../support.html">Destek</a>
+      <a href="https://vedatguldu.com">Vedat Güldü</a>
+      <a href="https://github.com/vedatguldu/g-browser">GitHub Kaynak Kodu</a>
+      <a href="https://github.com/sponsors/vedatguldu">GitHub Sponsors</a>
+    </div>
+    <p>&copy; 2026 G-Browser. Vedat Güldü tarafından geliştirilmektedir.</p>
+  </footer>
+
+  <script src="../assets/js/docs.js"></script>
+</body>
+</html>

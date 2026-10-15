@@ -10,15 +10,43 @@ export interface MediaItem {
   type: "video" | "audio" | "stream";
   format: string;
   size?: string;
-  bitrate?: string;
   browserId?: number;
   timestamp: number;
 }
 
+// Minimal structural types for the chrome-window globals used here.
+interface TabBrowser {
+  browserId?: number;
+  contentTitle?: string;
+}
+interface GBrowserLike {
+  browsers?: TabBrowser[];
+  selectedBrowser?: TabBrowser;
+  getTabForBrowser?: (b: TabBrowser) => { label?: string } | null;
+}
+interface ChannelLike {
+  URI?: { spec?: string };
+  contentType?: string;
+  contentLength?: number;
+  browserId?: number;
+  loadInfo?: { browsingContextID?: number };
+}
+
+const LOG_PREFIX = "[MediaDetector]";
+const MAX_ITEMS_PER_TAB = 40;
+const MIN_MEDIA_BYTES = 30 * 1024;
+
+// Media is stored per tab (browserId). The observer is registered once per
+// chrome window and only accepts channels that belong to a tab of that window,
+// so nothing is processed twice and nothing is attributed to the wrong tab.
 const mediaByBrowser = new Map<number, MediaItem[]>();
-const globalFallbackMedia: MediaItem[] = [];
 let mediaUpdateListeners: Array<() => void> = [];
 let observerRegistered = false;
+let itemCounter = 0;
+
+function getGBrowser(): GBrowserLike | null {
+  return (globalThis as unknown as { gBrowser?: GBrowserLike }).gBrowser ?? null;
+}
 
 export function addMediaUpdateListener(listener: () => void): () => void {
   mediaUpdateListeners.push(listener);
@@ -31,26 +59,23 @@ function notifyMediaUpdated(): void {
   for (const listener of mediaUpdateListeners) {
     try {
       listener();
-    } catch {
-      // Ignore listener error
+    } catch (e) {
+      console.warn(`${LOG_PREFIX} media update listener failed:`, e);
     }
   }
 }
 
 function getBoolPrefSafe(pref: string, defVal = true): boolean {
   try {
-    const Services = (globalThis as unknown as { Services?: { prefs?: { getBoolPref?: (p: string, d?: boolean) => boolean } } }).Services;
-    if (Services?.prefs?.getBoolPref) {
-      return Services.prefs.getBoolPref(pref, defVal);
-    }
-  } catch {
-    // fallback
+    return Services.prefs.getBoolPref(pref, defVal);
+  } catch (e) {
+    console.warn(`${LOG_PREFIX} could not read pref ${pref}, using default:`, e);
+    return defVal;
   }
-  return defVal;
 }
 
-function formatBytes(bytes: number): string {
-  if (bytes <= 0 || isNaN(bytes)) return "Bilinmiyor";
+function formatBytes(bytes: number): string | undefined {
+  if (!Number.isFinite(bytes) || bytes <= 0) return undefined;
   if (bytes < 1024) return `${bytes} B`;
   if (bytes < 1048576) return `${(bytes / 1024).toFixed(1)} KB`;
   if (bytes < 1073741824) return `${(bytes / 1048576).toFixed(1)} MB`;
@@ -58,258 +83,206 @@ function formatBytes(bytes: number): string {
 }
 
 function getActiveBrowserId(): number | null {
-  try {
-    // deno-lint-ignore no-explicit-any
-    const gBrowser = (globalThis as any).gBrowser;
-    const selected = gBrowser?.selectedBrowser;
-    if (selected?.browserId) return selected.browserId;
-  } catch {
-    // fallback
-  }
-  return null;
+  return getGBrowser()?.selectedBrowser?.browserId ?? null;
 }
 
 export function getMediaItemsForActiveTab(): MediaItem[] {
   const browserId = getActiveBrowserId();
-  if (browserId && mediaByBrowser.has(browserId)) {
-    return mediaByBrowser.get(browserId) || [];
-  }
-  return globalFallbackMedia;
+  if (browserId === null) return [];
+  return mediaByBrowser.get(browserId) ?? [];
 }
 
 export function clearMediaForTab(browserId: number): void {
-  mediaByBrowser.delete(browserId);
-  notifyMediaUpdated();
+  if (mediaByBrowser.delete(browserId)) {
+    notifyMediaUpdated();
+  }
 }
 
-// deno-lint-ignore no-explicit-any
-function getBrowserIdForChannel(channel: any): number | null {
+/**
+ * Returns the tab browser of THIS window that issued the request, or null when
+ * the request belongs to another window, a background service, or cannot be
+ * attributed. Unattributable requests are dropped instead of being guessed.
+ */
+function findOwnBrowser(channel: ChannelLike): TabBrowser | null {
+  const browsers = getGBrowser()?.browsers;
+  if (!browsers || browsers.length === 0) return null;
+
+  let browserId = 0;
   try {
-    if (channel.browserId && channel.browserId > 0) {
-      return channel.browserId;
-    }
-  } catch {
-    // ignore
+    browserId = Number(channel.browserId ?? 0);
+  } catch (e) {
+    console.debug(`${LOG_PREFIX} channel.browserId unavailable:`, e);
   }
 
-  try {
-    const bcid = channel.loadInfo?.browsingContextID;
-    if (bcid) {
-      // deno-lint-ignore no-explicit-any
-      const gBrowser = (globalThis as any).gBrowser;
-      if (gBrowser?.browsers) {
-        for (const b of gBrowser.browsers) {
-          if (b.browsingContext?.id === bcid || b.browsingContext?.top?.id === bcid) {
-            return b.browserId || null;
-          }
-        }
+  if (!browserId) {
+    try {
+      const bcid = channel.loadInfo?.browsingContextID;
+      if (bcid) {
+        browserId = BrowsingContext.get(bcid)?.top?.browserId ?? 0;
       }
+    } catch (e) {
+      console.debug(`${LOG_PREFIX} browsing context lookup failed:`, e);
     }
-  } catch {
-    // ignore
   }
 
-  try {
-    const ref = channel.referrer?.spec || channel.loadInfo?.loadingPrincipal?.URI?.spec;
-    if (ref) {
-      // deno-lint-ignore no-explicit-any
-      const gBrowser = (globalThis as any).gBrowser;
-      if (gBrowser?.browsers) {
-        for (const b of gBrowser.browsers) {
-          if (b.currentURI?.spec && (ref.startsWith(b.currentURI.spec) || b.currentURI.spec.startsWith(ref))) {
-            return b.browserId || null;
-          }
-        }
-      }
-    }
-  } catch {
-    // ignore
-  }
-
-  return getActiveBrowserId();
+  if (!browserId) return null;
+  return browsers.find((b) => b.browserId === browserId) ?? null;
 }
 
-function getCleanTabTitle(browserId: number | null): string {
-  try {
-    // deno-lint-ignore no-explicit-any
-    const gBrowser = (globalThis as any).gBrowser;
-    if (gBrowser?.browsers && browserId) {
-      for (const b of gBrowser.browsers) {
-        if (b.browserId === browserId) {
-          const tab = gBrowser.getTabForBrowser?.(b);
-          let title = tab?.label || b.contentTitle || "";
-          title = title.replace(/\s*-\s*YouTube$/i, "")
-                       .replace(/\s*\/\s*X$/i, "")
-                       .replace(/\s*:\s*Twitter$/i, "")
-                       .replace(/\s*-\s*Vimeo$/i, "")
-                       .replace(/\s*-\s*Dailymotion$/i, "")
-                       .trim();
-          if (title) return title;
-        }
-      }
-    }
-    // Fallback to selected tab
-    const selected = gBrowser?.selectedBrowser;
-    let title = selected?.contentTitle || "";
-    title = title.replace(/\s*-\s*YouTube$/i, "").trim();
-    if (title) return title;
-  } catch {
-    // ignore
-  }
-  return "Medya Dosyası";
+function getCleanTabTitle(browser: TabBrowser): string {
+  const tab = getGBrowser()?.getTabForBrowser?.(browser);
+  const raw = tab?.label || browser.contentTitle || "";
+  const title = raw
+    .replace(/\s*-\s*YouTube$/i, "")
+    .replace(/\s*\/\s*X$/i, "")
+    .replace(/\s*-\s*Vimeo$/i, "")
+    .replace(/\s*-\s*Dailymotion$/i, "")
+    .trim();
+  return title || "Medya";
 }
 
-// deno-lint-ignore no-explicit-any
-function processChannel(channel: any): void {
-  if (!getBoolPrefSafe("floorp.mediadownloader.enabled", true)) return;
+// HLS/DASH segments are pieces of a stream, not standalone files. Listing them
+// would flood the panel with unplayable fragments; the playlist is listed instead.
+const SEGMENT_PATTERN = /\.(m4s|ts|m4f|cmfv|cmfa)(\?|$)|[/_-](seg|segment|frag|fragment|chunk)[-_]?\d+/i;
+const VIDEO_EXT = /\.(mp4|webm|mkv|m4v|ogv|flv|avi|mov)(\?|$)/i;
+const AUDIO_EXT = /\.(mp3|wav|ogg|oga|m4a|aac|flac|opus)(\?|$)/i;
+const STREAM_EXT = /\.(m3u8|mpd)(\?|$)/i;
 
-  const detectVideo = getBoolPrefSafe("floorp.mediadownloader.detect.video", true);
-  const detectAudio = getBoolPrefSafe("floorp.mediadownloader.detect.audio", true);
-  const detectStream = getBoolPrefSafe("floorp.mediadownloader.detect.stream", true);
+// YouTube itags that carry both picture and sound in one file.
+const YT_MUXED_ITAGS = new Set(["18", "22"]);
 
-  const url = channel.URI?.spec || "";
-  if (!url || url.startsWith("chrome:") || url.startsWith("resource:") || url.startsWith("about:") || url.startsWith("data:")) {
-    return;
+interface YouTubeInfo {
+  downloadUrl: string;
+  dedupeKey: string;
+  format: string;
+  type: "video" | "audio";
+  totalBytes: number;
+}
+
+function parseYouTube(url: string): YouTubeInfo | null {
+  let u: URL;
+  try {
+    u = new URL(url);
+  } catch (e) {
+    console.debug(`${LOG_PREFIX} invalid YouTube URL:`, e);
+    return null;
   }
+  const itag = u.searchParams.get("itag") ?? "";
+  const mime = u.searchParams.get("mime") ?? "";
+  const id = u.searchParams.get("id") ?? "";
+  const clen = Number(u.searchParams.get("clen") ?? "0");
+
+  // The player fetches byte ranges; dropping the range parameters requests the
+  // whole stream for that itag. Whether YouTube serves it this way depends on
+  // the current player protocol and is not guaranteed.
+  for (const p of ["range", "rn", "rbuf", "ump", "srfvp"]) {
+    u.searchParams.delete(p);
+  }
+
+  const isAudio = mime.startsWith("audio");
+  let format: string;
+  if (isAudio) {
+    format = itag === "140" ? "M4A (ses)" : itag === "251" ? "Opus (ses)" : "Ses";
+  } else if (YT_MUXED_ITAGS.has(itag)) {
+    format = itag === "22" ? "MP4 720p" : "MP4 360p";
+  } else {
+    // Adaptive video streams contain no audio track.
+    format = `Video itag ${itag || "?"} (sessiz görüntü)`;
+  }
+
+  return {
+    downloadUrl: u.toString(),
+    dedupeKey: `yt:${id}:${itag}`,
+    format,
+    type: isAudio ? "audio" : "video",
+    totalBytes: clen,
+  };
+}
+
+function processChannel(channel: ChannelLike): void {
+  const url = channel.URI?.spec ?? "";
+  if (!/^https?:/i.test(url)) return;
 
   let contentType = "";
   try {
-    contentType = channel.contentType?.toLowerCase() || "";
-  } catch {
-    // ignore
+    contentType = (channel.contentType ?? "").toLowerCase();
+  } catch (e) {
+    console.debug(`${LOG_PREFIX} contentType unavailable:`, e);
   }
+
+  const isYouTube = url.includes("googlevideo.com/videoplayback");
+  const isStream = contentType.includes("mpegurl") || contentType.includes("dash+xml") || STREAM_EXT.test(url);
+  const isAudio = contentType.startsWith("audio/") || AUDIO_EXT.test(url);
+  const isVideo = contentType.startsWith("video/") || VIDEO_EXT.test(url);
+
+  if (!isYouTube && !isStream && !isAudio && !isVideo) return;
+  if (!isYouTube && !isStream && SEGMENT_PATTERN.test(url)) return;
+
+  const browser = findOwnBrowser(channel);
+  if (!browser?.browserId) return;
 
   let contentLength = -1;
   try {
-    contentLength = channel.contentLength;
-  } catch {
-    // ignore
+    contentLength = Number(channel.contentLength ?? -1);
+  } catch (e) {
+    console.debug(`${LOG_PREFIX} contentLength unavailable:`, e);
   }
 
-  const isVideoExt = /\.(mp4|webm|mkv|m4v|ogv|flv|ts|m4s|avi)(\?.*)?$/i.test(url);
-  const isAudioExt = /\.(mp3|wav|ogg|m4a|aac|flac|opus)(\?.*)?$/i.test(url);
-  const isStreamExt = /\.(m3u8|mpd)(\?.*)?$/i.test(url) || url.includes(".m3u8") || url.includes(".mpd");
-
-  const isYouTubePlayback = url.includes("googlevideo.com/videoplayback");
-  const isTwitterVideo = url.includes("video.twimg.com");
-  const isRedditVideo = url.includes("v.redd.it");
-  const isTiktokVideo = url.includes("tiktokcdn.com") && (contentType.includes("video") || url.includes("video"));
-  const isVimeoVideo = url.includes("vimeocdn.com") && (contentType.includes("video") || isVideoExt || isStreamExt);
-
-  const isVideoType = contentType.startsWith("video/") || isVideoExt || isTwitterVideo || isRedditVideo || isTiktokVideo || isVimeoVideo;
-  const isAudioType = contentType.startsWith("audio/") || isAudioExt;
-  const isStreamType = contentType.includes("mpegurl") || contentType.includes("dash+xml") || isStreamExt;
-
-  if (!isVideoType && !isAudioType && !isStreamType && !isYouTubePlayback) {
-    return;
-  }
-
-  // Filter out tiny files (likely tracking pings or sound effects) unless it's a playlist
-  if (contentLength > 0 && contentLength < 30720 && !isStreamType && !url.includes(".m3u8")) {
-    return;
-  }
-
-  let mediaType: "video" | "audio" | "stream" = "video";
-  if (isStreamType) mediaType = "stream";
-  else if (isAudioType) mediaType = "audio";
-  else if (isYouTubePlayback && url.includes("mime=audio")) mediaType = "audio";
-
-  if (mediaType === "video" && !detectVideo) return;
-  if (mediaType === "audio" && !detectAudio) return;
-  if (mediaType === "stream" && !detectStream) return;
-
-  const browserId = getBrowserIdForChannel(channel);
-  const baseTitle = getCleanTabTitle(browserId);
-
-  let format = "MP4";
-  let title = baseTitle;
+  let type: MediaItem["type"];
+  let format: string;
+  let downloadUrl = url;
   let dedupeKey = url.split("?")[0];
+  let totalBytes = contentLength;
 
-  if (isYouTubePlayback) {
-    // Parse YouTube parameters
-    try {
-      const u = new URL(url);
-      const itag = u.searchParams.get("itag") || "";
-      const mime = u.searchParams.get("mime") || "";
-      dedupeKey = `yt-${itag}`;
-
-      if (itag === "18") format = "MP4 (360p)";
-      else if (itag === "22") format = "MP4 (720p HD)";
-      else if (itag === "137") format = "MP4 (1080p FHD)";
-      else if (itag === "248") format = "WebM (1080p)";
-      else if (itag === "140") {
-        format = "M4A (Ses)";
-        mediaType = "audio";
-      } else if (itag === "251") {
-        format = "Opus (Ses)";
-        mediaType = "audio";
-      } else if (mime.includes("audio")) {
-        format = `Ses (${itag || "Akış"})`;
-        mediaType = "audio";
-      } else {
-        format = `Video (${itag || "Akış"})`;
-      }
-
-      title = `${baseTitle} [${format}]`;
-    } catch {
-      format = "YouTube Akışı";
-    }
-  } else if (isStreamType) {
-    format = url.includes(".mpd") ? "DASH / MPD" : "HLS / M3U8";
-    title = `${baseTitle} (${format})`;
-  } else if (mediaType === "audio") {
-    const extMatch = url.match(/\.(mp3|wav|ogg|m4a|aac|flac|opus)(\?|$)/i);
-    format = extMatch ? extMatch[1].toUpperCase() : (contentType.split("/")[1] || "Ses").toUpperCase();
-    title = `${baseTitle} (${format})`;
+  if (isYouTube) {
+    const yt = parseYouTube(url);
+    if (!yt) return;
+    type = yt.type;
+    format = yt.format;
+    downloadUrl = yt.downloadUrl;
+    dedupeKey = yt.dedupeKey;
+    totalBytes = yt.totalBytes;
+  } else if (isStream) {
+    type = "stream";
+    format = url.includes(".mpd") || contentType.includes("dash") ? "DASH (MPD)" : "HLS (M3U8)";
   } else {
-    const extMatch = url.match(/\.(mp4|webm|mkv|m4v|ogv|flv|ts)(\?|$)/i);
-    format = extMatch ? extMatch[1].toUpperCase() : (contentType.split("/")[1] || "Video").toUpperCase();
-    title = `${baseTitle} (${format})`;
+    // Tiny responses are usually tracking pixels or UI sounds.
+    if (contentLength > 0 && contentLength < MIN_MEDIA_BYTES) return;
+    type = isAudio ? "audio" : "video";
+    const ext = url.match(type === "audio" ? AUDIO_EXT : VIDEO_EXT)?.[1];
+    format = (ext ?? contentType.split("/")[1] ?? type).toUpperCase();
   }
 
-  // Format size
-  const sizeStr = contentLength > 0 ? formatBytes(contentLength) : (isStreamType ? "Canlı Akış" : "Bilinmiyor");
+  if (type === "video" && !getBoolPrefSafe("floorp.mediadownloader.detect.video")) return;
+  if (type === "audio" && !getBoolPrefSafe("floorp.mediadownloader.detect.audio")) return;
+  if (type === "stream" && !getBoolPrefSafe("floorp.mediadownloader.detect.stream")) return;
 
-  const newItem: MediaItem = {
-    id: `media-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
-    url,
-    title,
-    type: mediaType,
-    format,
-    size: sizeStr,
-    browserId: browserId || undefined,
-    timestamp: Date.now(),
-  };
+  const browserId = browser.browserId;
+  const list = mediaByBrowser.get(browserId) ?? [];
+  const size = formatBytes(totalBytes) ?? (type === "stream" ? "Akış" : undefined);
+  const existing = list.find((item) => item.id.endsWith(`|${dedupeKey}`));
 
-  // Add to target store
-  const targetList = browserId ? (mediaByBrowser.get(browserId) || []) : globalFallbackMedia;
-
-  // Check if item already exists with matching dedupe key
-  const existingIdx = targetList.findIndex((item) => {
-    if (isYouTubePlayback && item.url.includes("googlevideo.com")) {
-      const itag1 = new URL(item.url).searchParams.get("itag");
-      const itag2 = new URL(url).searchParams.get("itag");
-      return itag1 === itag2;
-    }
-    return item.url.split("?")[0] === dedupeKey;
-  });
-
-  if (existingIdx >= 0) {
-    // Update existing item with newer URL (fresher token) and size
-    targetList[existingIdx].url = url;
-    if (contentLength > 0) targetList[existingIdx].size = sizeStr;
+  if (existing) {
+    // Keep the freshest URL (tokens expire) and the best known size.
+    existing.url = downloadUrl;
+    if (size) existing.size = size;
   } else {
-    targetList.unshift(newItem);
-    // Keep max 40 items per tab
-    if (targetList.length > 40) targetList.pop();
+    itemCounter += 1;
+    list.unshift({
+      id: `media-${itemCounter}|${dedupeKey}`,
+      url: downloadUrl,
+      title: `${getCleanTabTitle(browser)} (${format})`,
+      type,
+      format,
+      size,
+      browserId,
+      timestamp: Date.now(),
+    });
+    if (list.length > MAX_ITEMS_PER_TAB) list.pop();
   }
+  mediaByBrowser.set(browserId, list);
 
-  if (browserId) {
-    mediaByBrowser.set(browserId, targetList);
-  }
-
-  const activeId = getActiveBrowserId();
-  if (!browserId || browserId === activeId) {
+  if (browserId === getActiveBrowserId()) {
     notifyMediaUpdated();
   }
 }
@@ -319,17 +292,17 @@ const mediaHttpObserver = {
 
   observe(subject: nsISupports, topic: string) {
     if (
-      (topic !== "http-on-examine-response" && topic !== "http-on-examine-cached-response") ||
-      !(subject instanceof Ci.nsIHttpChannel)
+      topic !== "http-on-examine-response" &&
+      topic !== "http-on-examine-cached-response"
     ) {
       return;
     }
-
+    if (!(subject instanceof Ci.nsIHttpChannel)) return;
+    if (!getBoolPrefSafe("floorp.mediadownloader.enabled")) return;
     try {
-      const channel = subject as nsIHttpChannel;
-      processChannel(channel);
-    } catch {
-      // Safe guard
+      processChannel(subject as unknown as ChannelLike);
+    } catch (e) {
+      console.warn(`${LOG_PREFIX} failed to process response:`, e);
     }
   },
 };
@@ -337,132 +310,90 @@ const mediaHttpObserver = {
 export function startMediaObserver(): void {
   if (observerRegistered) return;
   try {
-    const Services = (globalThis as unknown as { Services?: { obs?: { addObserver?: (o: unknown, t: string) => void } } }).Services;
-    if (Services?.obs?.addObserver) {
-      Services.obs.addObserver(mediaHttpObserver, "http-on-examine-response");
-      Services.obs.addObserver(mediaHttpObserver, "http-on-examine-cached-response");
-      observerRegistered = true;
-    }
+    Services.obs.addObserver(mediaHttpObserver, "http-on-examine-response");
+    Services.obs.addObserver(mediaHttpObserver, "http-on-examine-cached-response");
+    observerRegistered = true;
   } catch (e) {
-    console.error("[MediaDetector] Failed to register HTTP observer:", e);
+    console.error(`${LOG_PREFIX} failed to register HTTP observer:`, e);
   }
 }
 
 export function stopMediaObserver(): void {
   if (!observerRegistered) return;
   try {
-    const Services = (globalThis as unknown as { Services?: { obs?: { removeObserver?: (o: unknown, t: string) => void } } }).Services;
-    if (Services?.obs?.removeObserver) {
-      Services.obs.removeObserver(mediaHttpObserver, "http-on-examine-response");
-      Services.obs.removeObserver(mediaHttpObserver, "http-on-examine-cached-response");
-      observerRegistered = false;
-    }
-  } catch {
-    // ignore
+    Services.obs.removeObserver(mediaHttpObserver, "http-on-examine-response");
+    Services.obs.removeObserver(mediaHttpObserver, "http-on-examine-cached-response");
+  } catch (e) {
+    console.warn(`${LOG_PREFIX} failed to remove HTTP observer:`, e);
   }
+  observerRegistered = false;
+  mediaByBrowser.clear();
+}
+
+function fileExtensionFor(item: MediaItem): string {
+  const f = item.format.toUpperCase();
+  if (item.type === "stream") return f.includes("DASH") ? "mpd" : "m3u8";
+  if (f.includes("OPUS") || f.includes("WEBM")) return "webm";
+  if (f.includes("MP3")) return "mp3";
+  if (f.includes("M4A")) return "m4a";
+  const known = f.match(/^(MP4|MKV|M4V|OGV|FLV|AVI|MOV|WAV|OGG|OGA|AAC|FLAC)$/);
+  if (known) return known[1].toLowerCase();
+  return item.type === "audio" ? "m4a" : "mp4";
 }
 
 export async function downloadMediaItem(item: MediaItem): Promise<boolean> {
-  const sanitize = (name: string) => name.replace(/[\\/:*?"<>|]/g, "_").trim() || "medya";
-  let ext = "mp4";
-  if (item.type === "audio") ext = "m4a";
-  if (item.format.includes("MP3")) ext = "mp3";
-  if (item.format.includes("WEBM")) ext = "webm";
-  if (item.format.includes("M3U8")) ext = "m3u8";
-
-  const defaultFileName = `${sanitize(item.title)}.${ext}`;
+  const safeTitle = item.title.replace(/[\\/:*?"<>|]/g, "_").trim().slice(0, 120) || "medya";
+  const fileName = `${safeTitle}.${fileExtensionFor(item)}`;
 
   try {
-    const { Downloads } = ChromeUtils.importESModule("resource://gre/modules/Downloads.sys.mjs");
-    const { PathUtils } = ChromeUtils.importESModule("resource://gre/modules/PathUtils.sys.mjs");
-    const { DownloadsCommon } = ChromeUtils.importESModule("resource:///modules/DownloadsCommon.sys.mjs");
-
-    const defaultDownloadsDir = await PathUtils.getDefaultDownloadsDir();
-    const targetPath = PathUtils.join(defaultDownloadsDir, defaultFileName);
-
+    const { Downloads } = ChromeUtils.importESModule(
+      "resource://gre/modules/Downloads.sys.mjs",
+    );
+    const downloadsDir = await Downloads.getPreferredDownloadsDirectory();
     const download = await Downloads.createDownload({
-      source: {
-        url: item.url,
-        isPrivate: false,
-      },
-      target: {
-        path: targetPath,
-      },
+      source: { url: item.url, isPrivate: false },
+      target: { path: PathUtils.join(downloadsDir, fileName) },
     });
-
     const list = await Downloads.getList(Downloads.ALL);
     await list.add(download);
-    await download.start();
-
-    // Trigger visual feedback in browser toolbar download indicator
-    try {
-      if (typeof DownloadsCommon?.showDownloadsPanel === "function") {
-        DownloadsCommon.showDownloadsPanel();
-      }
-    } catch {
-      // ignore
-    }
-
+    // Adding to the list makes the toolbar download indicator track it.
+    download.start().catch((e: unknown) => {
+      console.error(`${LOG_PREFIX} download failed:`, e);
+    });
     return true;
   } catch (error) {
-    console.error("[MediaDownloader] Error in native download:", error);
-    try {
-      // Fallback to window.saveURL
-      const win = globalThis as unknown as { saveURL?: (...args: unknown[]) => void };
-      if (typeof win.saveURL === "function") {
-        win.saveURL(item.url, defaultFileName, null, false, false, null, document);
-        return true;
-      }
-    } catch {
-      // ignore
-    }
+    console.error(`${LOG_PREFIX} could not start download:`, error);
     return false;
   }
 }
 
 export function openDownloadManager(): void {
-  try {
-    // deno-lint-ignore no-explicit-any
-    const win = globalThis as any;
-    if (typeof win.DownloadsPanel?.showPanel === "function") {
-      win.DownloadsPanel.showPanel();
-      return;
-    }
-    if (typeof win.DownloadsCommon?.showDownloadsPanel === "function") {
-      win.DownloadsCommon.showDownloadsPanel();
-      return;
-    }
-    if (win.gBrowser?.addTrustedTab) {
-      win.gBrowser.addTrustedTab("about:downloads");
-      return;
-    }
-  } catch {
-    try {
-      // deno-lint-ignore no-explicit-any
-      (globalThis as any).gBrowser?.addTrustedTab?.("about:downloads");
-    } catch {
-      // ignore
-    }
+  // Same command as Ctrl+J: opens the Library "Downloads" view
+  // (about:downloads tab in private windows).
+  const win = globalThis as unknown as {
+    BrowserCommands?: { downloadsUI?: () => void };
+    switchToTabHavingURI?: (uri: string, openNew: boolean) => void;
+  };
+  if (typeof win.BrowserCommands?.downloadsUI === "function") {
+    win.BrowserCommands.downloadsUI();
+    return;
   }
+  if (typeof win.switchToTabHavingURI === "function") {
+    win.switchToTabHavingURI("about:downloads", true);
+    return;
+  }
+  console.error(`${LOG_PREFIX} no download manager entry point available`);
 }
 
-export function copyMediaUrlToClipboard(url: string): void {
+export function copyMediaUrlToClipboard(url: string): boolean {
   try {
-    const { Cc, Ci } = specialPowersCcCi();
-    const clipboardHelper = Cc["@mozilla.org/widget/clipboardhelper;1"].getService(
+    const helper = Cc["@mozilla.org/widget/clipboardhelper;1"].getService(
       Ci.nsIClipboardHelper,
     );
-    clipboardHelper.copyString(url);
-  } catch {
-    try {
-      navigator?.clipboard?.writeText(url);
-    } catch {
-      // Ignored
-    }
+    helper.copyString(url);
+    return true;
+  } catch (e) {
+    console.error(`${LOG_PREFIX} could not copy URL to clipboard:`, e);
+    return false;
   }
-}
-
-function specialPowersCcCi() {
-  const c = Components;
-  return { Cc: c.classes, Ci: c.interfaces };
 }

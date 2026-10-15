@@ -20,7 +20,9 @@ export function MediaDownloaderPanel() {
       defaultValue: "Ortam ve Video İndirici",
     }),
   );
-  const [downloadSuccessId, setDownloadSuccessId] = createSignal<string | null>(null);
+  const [status, setStatus] = createSignal<
+    { id: string | null; text: string; announce: string } | null
+  >(null);
 
   addI18nObserver(() => {
     setPanelTitle(
@@ -52,11 +54,25 @@ export function MediaDownloaderPanel() {
   };
 
   const handleDownload = async (item: MediaItem) => {
-    setDownloadSuccessId(item.id);
-    await downloadMediaItem(item);
-    setTimeout(() => {
-      setDownloadSuccessId(null);
-    }, 2500);
+    const ok = await downloadMediaItem(item);
+    setStatus({
+      id: item.id,
+      text: ok ? "Başlatıldı ✓" : "Başarısız",
+      announce: ok
+        ? `${item.title} indirilmeye başlandı. İlerlemeyi İndirme Yöneticisinden izleyebilirsiniz.`
+        : `${item.title} indirilemedi. Bağlantının süresi dolmuş olabilir; sayfayı yenileyip tekrar deneyin.`,
+    });
+    setTimeout(() => setStatus(null), 4000);
+  };
+
+  const handleCopy = (item: MediaItem) => {
+    const ok = copyMediaUrlToClipboard(item.url);
+    setStatus({
+      id: null,
+      text: "",
+      announce: ok ? "Bağlantı panoya kopyalandı." : "Bağlantı panoya kopyalanamadı.",
+    });
+    setTimeout(() => setStatus(null), 4000);
   };
 
   const openInNewTab = (url: string) => {
@@ -66,8 +82,8 @@ export function MediaDownloaderPanel() {
       if (gBrowser?.addTrustedTab) {
         gBrowser.addTrustedTab(url);
       }
-    } catch {
-      // fallback
+    } catch (e) {
+      console.error("[MediaDownloader] Failed to open media in new tab:", e);
     }
   };
 
@@ -106,8 +122,8 @@ export function MediaDownloaderPanel() {
             role="button"
             onClick={openDownloadManager}
             onKeyDown={(e) => handleButtonKeyDown(e, openDownloadManager)}
-            title="İndirme Yöneticisi (about:downloads) - Ctrl+J"
-            aria-label="İndirme Yöneticisini Aç (Ctrl+J)"
+            title="İndirme Yöneticisi (Ctrl+J)"
+            aria-label="İndirme Yöneticisini aç (Ctrl+J)"
           >
             İndirme Yöneticisi
           </button>
@@ -115,11 +131,15 @@ export function MediaDownloaderPanel() {
 
         <xul:toolbarseparator class="media-panel-separator" />
 
+        <div class="media-panel-status" role="status" aria-live="polite">
+          {status()?.announce ?? ""}
+        </div>
+
         <Show
           when={detectedMediaItems().length > 0}
           fallback={
             <div class="media-empty-state" role="status" tabindex="0">
-              Bu sayfada henüz indirilebilir medya akışı tespit edilmedi. Sayfada bir video veya ses oynattığınızda (YouTube, Twitter/X, Instagram, TikTok, Reddit, Vimeo, HLS/M3U8 vb.) akış anında burada listelenecektir.
+              Bu sayfada henüz medya algılanmadı. Sayfada bir video veya ses oynattığınızda burada listelenir. Kopya korumalı (DRM) içerikler indirilemez.
             </div>
           }
         >
@@ -157,8 +177,8 @@ export function MediaDownloaderPanel() {
                       class="media-btn-action"
                       tabindex="0"
                       role="button"
-                      onClick={() => copyMediaUrlToClipboard(item.url)}
-                      onKeyDown={(e) => handleButtonKeyDown(e, () => copyMediaUrlToClipboard(item.url))}
+                      onClick={() => handleCopy(item)}
+                      onKeyDown={(e) => handleButtonKeyDown(e, () => handleCopy(item))}
                       title="Bağlantıyı Kopyala"
                       aria-label={`${item.title} bağlantısını kopyala`}
                     >
@@ -173,7 +193,7 @@ export function MediaDownloaderPanel() {
                       title="İndir"
                       aria-label={`${item.title} indir`}
                     >
-                      {downloadSuccessId() === item.id ? "Başlatıldı ✓" : "İndir"}
+                      {status()?.id === item.id ? status()?.text : "İndir"}
                     </button>
                   </div>
                 </div>

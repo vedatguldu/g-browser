@@ -25,17 +25,13 @@ const [mediaItems, setMediaItems] = createSignal<MediaItem[]>([]);
 export const detectedMediaItems = mediaItems;
 
 export function scanCurrentTabMedia(): void {
-  try {
-    const Services = (globalThis as unknown as { Services?: { prefs?: { getBoolPref?: (p: string, d?: boolean) => boolean } } }).Services;
-    if (Services?.prefs?.getBoolPref && !Services.prefs.getBoolPref("floorp.mediadownloader.enabled", true)) {
-      setMediaItems([]);
-      return;
-    }
-    const items = getMediaItemsForActiveTab();
-    setMediaItems(items);
-  } catch {
-    // Cross-process fallback
+  if (!Services.prefs.getBoolPref("floorp.mediadownloader.enabled", true)) {
+    setMediaItems([]);
+    return;
   }
+  // The detector mutates its per-tab list in place; pass a fresh array so the
+  // Solid signal sees a new value and the panel re-renders.
+  setMediaItems([...getMediaItemsForActiveTab()]);
 }
 
 @noraComponent(import.meta.hot)
@@ -95,44 +91,46 @@ export default class MediaDownloader extends NoraComponentBase {
   }
 
   private setupTabListeners(): void {
-    try {
-      // deno-lint-ignore no-explicit-any
-      const gBrowser = (globalThis as any).gBrowser;
-      if (!gBrowser?.tabContainer) return;
-
-      gBrowser.tabContainer.addEventListener("TabSelect", () => {
-        const Services = (globalThis as unknown as { Services?: { prefs?: { getBoolPref?: (p: string, d?: boolean) => boolean } } }).Services;
-        if (Services?.prefs?.getBoolPref && !Services.prefs.getBoolPref("floorp.mediadownloader.auto_scan", true)) return;
-        scanCurrentTabMedia();
-      });
-
-      // Tab progress listener for navigation (location change)
-      const progressListener = {
-        // deno-lint-ignore no-explicit-any
-        onLocationChange: (browser: any, _webProgress: any, _request: any, _location: any, flags: number) => {
-          // If top-level document navigation, reset previous tab media
-          // deno-lint-ignore no-explicit-any
-          const Ci = (globalThis as any).Ci;
-          if (flags & Ci?.nsIWebProgressListener?.LOCATION_CHANGE_SAME_DOCUMENT) {
-            return;
-          }
-          if (browser?.browserId) {
-            clearMediaForTab(browser.browserId);
-          }
-          scanCurrentTabMedia();
-        },
-      };
-
-      if (typeof gBrowser.addTabsProgressListener === "function") {
-        gBrowser.addTabsProgressListener(progressListener);
-      }
-
-      // Initial scan
-      setTimeout(() => {
-        scanCurrentTabMedia();
-      }, 1000);
-    } catch {
-      // Safe fallback
+    // deno-lint-ignore no-explicit-any
+    const gBrowser = (globalThis as any).gBrowser;
+    if (!gBrowser?.tabContainer) {
+      console.warn("[MediaDownloader] gBrowser.tabContainer unavailable; tab listeners not installed");
+      return;
     }
+
+    const onTabSelect = () => {
+      if (!Services.prefs.getBoolPref("floorp.mediadownloader.auto_scan", true)) return;
+      scanCurrentTabMedia();
+    };
+    gBrowser.tabContainer.addEventListener("TabSelect", onTabSelect);
+
+    // A new top-level page means the previous page's media is gone.
+    const progressListener = {
+      onLocationChange: (
+        browser: { browserId?: number },
+        webProgress: { isTopLevel?: boolean },
+        _request: unknown,
+        _location: unknown,
+        flags: number,
+      ) => {
+        if (!webProgress?.isTopLevel) return;
+        if (flags & Ci.nsIWebProgressListener.LOCATION_CHANGE_SAME_DOCUMENT) return;
+        if (browser?.browserId) clearMediaForTab(browser.browserId);
+        scanCurrentTabMedia();
+      },
+    };
+    gBrowser.addTabsProgressListener(progressListener);
+
+    globalThis.addEventListener(
+      "unload",
+      () => {
+        gBrowser.tabContainer?.removeEventListener("TabSelect", onTabSelect);
+        gBrowser.removeTabsProgressListener?.(progressListener);
+        this.destroy();
+      },
+      { once: true },
+    );
+
+    scanCurrentTabMedia();
   }
 }

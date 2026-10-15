@@ -56,22 +56,19 @@ with open(os.path.join(pref_dir, "zzz-floorp.js"), "w", encoding="utf-8") as f:
 pref("security.allow_parent_unrestricted_js_loads", true);
 pref("security.disallow_privileged_https_script_loads", false);
 pref("nora.dev.allow_http_loader", false);
-pref("layers.gpu-process.enabled", true);
+// GPU process stays disabled: it crashes on startup on this Windows setup
+// (COM apartment assertion in ApartmentRegion.h). Compositing runs in-process.
+pref("layers.gpu-process.enabled", false);
 pref("browser.newtabpage.enabled", true);
 
-// Hardware Acceleration, GPU Compositing & Startup Speed
-pref("gfx.webrender.all", true);
-pref("gfx.canvas.accelerated", true);
-pref("browser.startup.preXULSkeletonUI", true);
+// Startup: skip blocking first-run / release-notes pages
 pref("browser.startup.homepage_override.mstone", "ignore");
 pref("browser.tabs.remote.warmup.enabled", true);
 pref("browser.slowStartup.notificationDisabled", true);
 pref("floorp.releaseNotes.choiceConfirmed", true);
-pref("floorp.releaseNotes.mode", "none");
+pref("floorp.releaseNotes.mode", "disabled");
 pref("toolkit.telemetry.enabled", false);
 pref("toolkit.telemetry.unified", false);
-pref("app.update.enabled", false);
-pref("app.update.auto", false);
 pref("browser.search.update", false);
 
 // Secure DNS (DoH) & Network Acceleration
@@ -79,8 +76,6 @@ pref("network.trr.mode", 2);
 pref("network.trr.uri", "https://cloudflare-dns.com/dns-query");
 pref("network.trr.custom_uri", "https://cloudflare-dns.com/dns-query");
 pref("network.trr.bootstrapAddress", "1.1.1.1");
-pref("network.trr.wait-for-portal", false);
-pref("network.trr.confirmationNS", "skip");
 pref("network.dns.echconfig.enabled", true);
 pref("network.dns.use_https_rr_as_alpn", true);
 pref("network.http.http3.enable", true);
@@ -105,6 +100,14 @@ pref("floorp.mediadownloader.detect.audio", true);
 pref("floorp.mediadownloader.detect.stream", true);
 pref("floorp.mediadownloader.notify.detected", true);
 ''')
+
+# Until our own update channel exists, block the upstream updater so it cannot
+# replace this customized build with a stock upstream build. Enterprise policy is
+# the supported mechanism; app.update.* prefs are not honoured by modern Firefox.
+policy_dir = os.path.join(PACKAGE_DIR, "distribution")
+os.makedirs(policy_dir, exist_ok=True)
+with open(os.path.join(policy_dir, "policies.json"), "w", encoding="utf-8") as f:
+    f.write('{\n  "policies": {\n    "DisableAppUpdate": true\n  }\n}\n')
 
 print("[2] Compiling uninstall.exe from tools/native/uninstall.cs...")
 uninstall_out = os.path.join(PACKAGE_DIR, "uninstall.exe")

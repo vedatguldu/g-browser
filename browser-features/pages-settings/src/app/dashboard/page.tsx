@@ -32,7 +32,7 @@ const resources = [
   { key: "extensions", href: "about:addons", icon: Puzzle },
   {
     key: "help",
-    href: "https://docs.floorp.app/docs/features/",
+    href: "https://vedatguldu.com",
     icon: CircleHelp,
   },
 ];

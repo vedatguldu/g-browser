@@ -117,6 +117,23 @@ static class Program {
                 sc.IconLocation = exePath + ",0";
                 sc.Save();
             }
+
+            // Remove legacy Floorp shortcuts
+            try {
+                string desktopDir = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+                string oldFloorpLnk = Path.Combine(desktopDir, "Floorp.lnk");
+                if (File.Exists(oldFloorpLnk)) File.Delete(oldFloorpLnk);
+
+                string startDir = Environment.GetFolderPath(Environment.SpecialFolder.Programs);
+                string[] oldStartLnks = new string[] {
+                    Path.Combine(startDir, "Floorp.lnk"),
+                    Path.Combine(startDir, "Floorp Daylight Private Browsing.lnk"),
+                    Path.Combine(startDir, "Floorp Gizli Gezinti.lnk")
+                };
+                foreach (string oldLnk in oldStartLnks) {
+                    if (File.Exists(oldLnk)) File.Delete(oldLnk);
+                }
+            } catch {}
         } catch {}
 
         if (progressCallback != null) progressCallback("Kayit defteri yapilandiriliyor...", 95);

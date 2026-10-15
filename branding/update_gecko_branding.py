@@ -131,6 +131,41 @@ def sync_gecko_branding():
         browser_icon_ftl.write_text(content, encoding="utf-8")
         print(f"  Synchronized: {browser_icon_ftl.relative_to(ROOT)}")
 
+    # 7. Root and toolkit fallback branding
+    toolkit_brand_prop = PACKAGE_DIR / "chrome" / "en-US" / "locale" / "branding" / "brand.properties"
+    toolkit_brand_prop.parent.mkdir(parents=True, exist_ok=True)
+    toolkit_brand_prop.write_text(BRAND_PROPERTIES_CONTENT, encoding="utf-8")
+
+    toolkit_brand_dtd = PACKAGE_DIR / "chrome" / "en-US" / "locale" / "branding" / "brand.dtd"
+    toolkit_brand_dtd.parent.mkdir(parents=True, exist_ok=True)
+    toolkit_brand_dtd.write_text(BRAND_DTD_CONTENT, encoding="utf-8")
+
+    root_brand_ftl = PACKAGE_DIR / "localization" / "en-US" / "branding" / "brand.ftl"
+    root_brand_ftl.parent.mkdir(parents=True, exist_ok=True)
+    root_brand_ftl.write_text(BRAND_FTL_CONTENT, encoding="utf-8")
+
+    # 8. Root chrome.manifest: ensure browser/chrome.manifest and branding are explicitly declared
+    root_manifest = PACKAGE_DIR / "chrome.manifest"
+    manifest_lines = [
+        "manifest chrome/chrome.manifest",
+        "manifest components/components.manifest",
+        "manifest browser/chrome.manifest",
+        "manifest noraneko-devdir/noraneko.manifest",
+        "locale branding en-US browser/chrome/en-US/locale/branding/",
+        "content branding browser/chrome/browser/content/branding/ contentaccessible=yes",
+    ]
+    root_manifest.write_text("\n".join(manifest_lines) + "\n", encoding="utf-8")
+    print(f"  Synchronized: {root_manifest.relative_to(ROOT)}")
+
+    # 9. Legacy Floorp installation directory application.ini sync (preventing stale title fallback)
+    legacy_floorp_ini = Path(os.path.expandvars(r"%LOCALAPPDATA%\Programs\Floorp\application.ini"))
+    if legacy_floorp_ini.exists():
+        try:
+            legacy_floorp_ini.write_text(APPLICATION_INI_CONTENT, encoding="utf-8")
+            print(f"  Synchronized legacy: {legacy_floorp_ini}")
+        except Exception as e:
+            print(f"  Note: Legacy Floorp ini update skipped: {e}")
+
 
 if __name__ == "__main__":
     print("[branding] Synchronizing Gecko branding files...")

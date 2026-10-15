@@ -106,7 +106,7 @@ export function BasicSettings() {
         <CardHeader>
           <CardTitle>{t("workspaceRefresh.behavior")}</CardTitle>
           <a
-            href="https://docs.floorp.app/docs/features/workspaces"
+            href="https://vedatguldu.com"
             target="_blank"
             rel="noopener noreferrer"
             aria-describedby="workspace-help-newtab"

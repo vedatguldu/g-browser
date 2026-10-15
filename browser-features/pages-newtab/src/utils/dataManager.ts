@@ -81,10 +81,10 @@ const DEFAULT_SETTINGS: NewTabSettings = {
   },
   topSites: {
     pinned: [
-      { url: "https://www.cube-soft.jp/", title: "Cubesoft (Sponsor)" },
+      { url: "https://vedatguldu.com", title: "Vedat Güldü" },
       {
-        url: "https://docs.floorp.app/docs/features/",
-        title: "Floorp Support",
+        url: "https://github.com/vedatguldu/g-browser",
+        title: "G-Browser",
       },
     ],
     blocked: [],
@@ -162,6 +162,18 @@ export async function getNewTabSettings(): Promise<NewTabSettings> {
         ...(settings.topSites as object),
       },
     };
+
+    if (mergedSettings.topSites && Array.isArray(mergedSettings.topSites.pinned)) {
+      mergedSettings.topSites.pinned = mergedSettings.topSites.pinned.map((site) => {
+        if (site && site.url && site.url.includes("cube-soft.jp")) {
+          return { url: "https://vedatguldu.com", title: "Vedat Güldü" };
+        }
+        if (site && ((site.url && site.url.includes("floorp.app")) || (site.title && site.title.includes("Floorp")))) {
+          return { url: "https://github.com/vedatguldu/g-browser", title: "G-Browser" };
+        }
+        return site;
+      });
+    }
 
     return mergedSettings;
   } catch (e) {

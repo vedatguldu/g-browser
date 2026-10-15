@@ -109,7 +109,7 @@ export function Tabbar() {
           <span className="text-sm">
             {t("design.verticalTabIsRemovedFromBrowser")}{" "}
             <a
-              href="https://docs.floorp.app/docs/features/tab-bar-layout"
+              href="https://vedatguldu.com"
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`${t("design.learnMore")} (${t("common.opensInNewWindow", { defaultValue: "opens in a new tab" })})`}

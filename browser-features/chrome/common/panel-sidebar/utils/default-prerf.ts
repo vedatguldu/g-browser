@@ -75,8 +75,8 @@ const defaultData: PanelSidebarData = {
       type: "web",
     },
     {
-      id: "default-panel-docs-floorp-app",
-      url: "https://docs.floorp.app/docs/features/",
+      id: "default-panel-docs-gbrowser",
+      url: "https://vedatguldu.com",
       width: 0,
       icon: undefined,
       userContextId: undefined,

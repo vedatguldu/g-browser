@@ -55,7 +55,7 @@ export default function FinishPage() {
         )}
         <div className={styles.links}>
           <a
-            href="https://docs.floorp.app/docs/features/"
+            href="https://vedatguldu.com"
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`${t("finishPage.support")} (${t("finishPage.opensInNewWindow", { defaultValue: "opens in new window" })})`}
@@ -72,7 +72,7 @@ export default function FinishPage() {
             GitHub<ExternalLink size={16} aria-hidden="true" />
           </a>
           <a
-            href="https://twitter.com/floorp_browser"
+            href="https://x.com/vedatguldu"
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`X (${t("finishPage.opensInNewWindow", { defaultValue: "opens in new window" })})`}

@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Background } from "./components/Background/index.tsx";
 import { BackgroundProvider } from "./contexts/BackgroundContext.tsx";
 import { ComponentsProvider } from "./contexts/ComponentsContext.tsx";
@@ -12,6 +13,11 @@ import { useComponents } from "./contexts/ComponentsContext.tsx";
 function NewTabContent() {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const { components } = useComponents();
+  const { t } = useTranslation();
+
+  useEffect(() => {
+    document.title = t("title", { defaultValue: "G-Browser Başlangıç" });
+  }, [t]);
 
   return (
     <>

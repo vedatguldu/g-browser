@@ -198,7 +198,7 @@ export class PanelSidebarAddModal {
         label: texts.url,
         value: globalThis.gBrowser.currentURI?.spec ?? "",
         required: true,
-        placeholder: "https://floorp.app",
+        placeholder: "https://vedatguldu.com",
         when: { id: "type", value: "web" },
         onInput: (value: string) => {
           if (value) {

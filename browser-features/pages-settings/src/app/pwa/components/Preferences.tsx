@@ -38,7 +38,7 @@ export function Preferences() {
           </CardTitle>
           <div>
             <a
-              href="https://docs.floorp.app/docs/features/webapps"
+              href="https://vedatguldu.com"
               target="_blank"
               rel="noopener noreferrer"
               aria-describedby="pwa-help-newtab"

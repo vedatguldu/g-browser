@@ -78,27 +78,27 @@ export default function WhatsNewPage() {
             <ExternalLink size={14} aria-hidden="true" />
           </a>
           <a
-            href="https://twitter.com/floorp_browser"
+            href="https://x.com/vedatguldu"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label={`X (Twitter) (${t("finishPage.opensInNewWindow", { defaultValue: "opens in new window" })})`}
+            aria-label={`X (${t("finishPage.opensInNewWindow", { defaultValue: "opens in new window" })})`}
           >
-            X (Twitter)
+            X
             <ExternalLink size={14} aria-hidden="true" />
           </a>
           <a
-            href="https://floorp.app/discord"
+            href="https://github.com/vedatguldu/g-browser"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label={`Discord (${t("finishPage.opensInNewWindow", { defaultValue: "opens in new window" })})`}
+            aria-label={`GitHub (${t("finishPage.opensInNewWindow", { defaultValue: "opens in new window" })})`}
           >
-            Discord
+            GitHub
             <ExternalLink size={14} aria-hidden="true" />
           </a>
         </div>
         <div className={styles.links}>
           <a
-            href="https://floorp.app/terms"
+            href="https://vedatguldu.com"
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`${t("whatsNew.footer.terms")} (${t("finishPage.opensInNewWindow", { defaultValue: "opens in new window" })})`}
@@ -107,7 +107,7 @@ export default function WhatsNewPage() {
             <ExternalLink size={14} aria-hidden="true" />
           </a>
           <a
-            href="https://floorp.app/privacy"
+            href="https://vedatguldu.com/gizlilik-politikasi"
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`${t("whatsNew.footer.privacy")} (${t("finishPage.opensInNewWindow", { defaultValue: "opens in new window" })})`}
@@ -116,7 +116,7 @@ export default function WhatsNewPage() {
             <ExternalLink size={14} aria-hidden="true" />
           </a>
           <a
-            href="https://docs.floorp.app"
+            href="https://vedatguldu.com"
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`${t("whatsNew.footer.about")} (${t("finishPage.opensInNewWindow", { defaultValue: "opens in new window" })})`}

@@ -124,7 +124,7 @@
       "choiceDescription": "Choose automatic display after updates and how your blockers work on the G-Browser blog.",
       "dismiss": "Not now"
     },
-    "learnMore": "Read about our funding and this setting (Japanese)",
+    "learnMore": "Learn more about G-Browser release updates and preferences",
     "title": "Release notes and supporting G-Browser",
     "description": "Advertising revenue supports G-Browser development and operation. Choose how to open release notes after updates. You can change this later in Settings → Updates & Experiments.",
     "disabled": {

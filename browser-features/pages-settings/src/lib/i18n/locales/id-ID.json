@@ -67,9 +67,9 @@
       "description": "{{productName}} melindungi data dan privasi Anda dari awal, tetapi Anda juga dapat mengelola pengaturan ini secara manual."
     },
     "ablazeAccount": {
-      "title": "Akun Ablaze (Segera Hadir)",
-      "footerLinkText": "Akun Ablaze",
-      "description": "Gunakan Akun Mozilla untuk menyinkronkan data dengan perangkat lain. Akun Ablaze dapat menyinkronkan data yang tidak dapat disinkronkan dengan Akun Mozilla."
+      "title": "Akun G-Browser (Segera Hadir)",
+      "footerLinkText": "Akun G-Browser",
+      "description": "Gunakan Akun Mozilla untuk menyinkronkan data dengan perangkat lain. Akun G-Browser dapat menyinkronkan data yang tidak dapat disinkronkan dengan Akun Mozilla."
     },
     "manageExtensions": {
       "title": "Kelola Ekstensi",
@@ -325,7 +325,7 @@
     "releaseNotes": "Catatan Rilis dan Informasi Tambahan",
     "browserVersion": "Versi {{productName}}: {{browserVersion}} | Versi Firefox: {{firefoxVersion}}",
     "isOfficialBuild": "(Build Resmi)",
-    "browserDescription": "{{productName}} adalah peramban yang dibuat di Jepang. Peramban ini berdasar Firefos dan dikembangkan oleh Ablaze untuk meningkatkan web.",
+    "browserDescription": "{{productName}} adalah peramban yang dibuat di Jepang. Peramban ini berdasar Firefos dan dikembangkan oleh G-Browser untuk meningkatkan web.",
     "browser": "{{productName}}",
     "copyright": "© 2024 {{productName}} Project. Semua hak cipta dilindungi undang-undang.",
     "openSourceLicense": "{{productName}} adalah perangkat lunak sumber terbuka di bawah Lisensi Publik Mozilla 2.0, yang dimungkinkan oleh proyek sumber terbuka Firefox dan perangkat lunak sumber terbuka lainnya.",
@@ -341,7 +341,7 @@
   },
   "updates": {
     "releaseNotes": {
-      "learnMore": "Read about our funding and this setting (Japanese)",
+      "learnMore": "Learn more about G-Browser release updates and preferences",
       "title": "Release notes after updates",
       "description": "Choose how G-Browser opens release notes after an update.",
       "disabled": {

@@ -67,9 +67,9 @@
       "description": "{{productName}} varsayılan olarak verilerinizi ve gizliliğinizi korur, ancak bu ayarları manuel olarak da değiştirebilirsiniz."
     },
     "ablazeAccount": {
-      "title": "Ablaze Hesabı (Çok Yakında)",
-      "footerLinkText": "Ablaze Hesabı",
-      "description": "Bazı verileri diğer cihazlarla senkronize etmek için bir Mozilla Hesabı kullanın. Ablaze Hesabı, Mozilla Hesabı ile senkronize edilemeyen verileri senkronize eder."
+      "title": "G-Browser Hesabı (Çok Yakında)",
+      "footerLinkText": "G-Browser Hesabı",
+      "description": "Bazı verileri diğer cihazlarla senkronize etmek için bir Mozilla Hesabı kullanın. G-Browser Hesabı, Mozilla Hesabı ile senkronize edilemeyen verileri senkronize eder."
     },
     "manageExtensions": {
       "title": "Eklentileri yönet",
@@ -325,7 +325,7 @@
     "releaseNotes": "Sürüm Notları ve Daha Fazla Bilgi",
     "browserVersion": "{{productName}} sürümü: {{browserVersion}} | Firefox sürümü: {{firefoxVersion}}",
     "isOfficialBuild": "(Resmi Yapı)",
-    "browserDescription": "{{productName}} Japonya'da geliştirilen bir tarayıcıdır. Web'i geliştirmek için Ablaze altında Firefox üzerine inşa edilmiştir.",
+    "browserDescription": "{{productName}} Kullanıcı gizliliğini ve yüksek performansı merkezine alan modern, güvenli ve bağımsız bir web tarayıcısıdır.",
     "browser": "{{productName}}",
     "copyright": "© 2024 {{productName}} Projesi. Tüm hakları saklıdır.",
     "openSourceLicense": "{{productName}}, Mozilla Kamu Lisansı 2.0 kapsamıda bulunan Firefox açık kaynak projesi ve diğer açık kaynak yazılımlar sayesinde mümkün kılınan açık kaynaklı bir yazılımdır.",
@@ -353,7 +353,7 @@
         "description": "Sürüm notlarını eklentilerinizi kısıtlamadan açar. Bu seçenek yeni bir reklam engelleyici yüklemez veya etkinleştirmez."
       },
       "support": {
-        "label": "G-Browser'ı desteklemek için reklamlara izin ver (önerilen)",
+        "label": "Sürüm notlarını web sayfasında aç (önerilen)",
         "description": "G-Browser blogunda uBlock Origin, AdGuard, Adblock Plus, AdBlock ve Ghostery eklentilerinin filtre uygulamasını devre dışı bırakır."
       },
       "supportMessage": "Sürüm notlarındaki reklam gelirleri G-Browser'ın geliştirilmesini ve sunucu giderlerini destekler. Bizi size uygun şekilde desteklediğiniz için teşekkür ederiz.",

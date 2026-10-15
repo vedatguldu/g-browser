@@ -14,7 +14,7 @@
     "supportLabels": {
       "disabled": "Otomatik olarak açma",
       "blocking": "Engelleyici ayarlarımla aç",
-      "support": "G-Browser'ı desteklemek için reklamlara izin ver"
+      "support": "Sürüm notlarını web sayfasında aç"
     },
     "supportNotice": "Bu bir taslak seçimdir. Bir sonraki sayfadaki “G-Browser'ı Kullanmaya Başla” düğmesine bastığınızda yürürlüğe girer. Kurulumu bundan önce kapatırsanız mevcut ayarlarınız korunur.",
     "steps": [
@@ -107,7 +107,7 @@
     "customizeTitle": "İlk Tercihleriniz",
     "searchHint": "Adres çubuğundan doğrudan arama yaparken kullanılır.",
     "supportTitle": "Güncelleme Sonrası Sürüm Notları",
-    "scopeTitle": "Reklamlara izin verildiğindeki kapsam",
+    "scopeTitle": "Sürüm notları sayfası kapsamı",
     "summaryTitle": "Ayarlarınızı Gözden Geçirin",
     "change": "Değiştir",
     "defaultTitle": "G-Browser'ı varsayılan tarayıcınız yapın",
@@ -118,13 +118,13 @@
   "releaseNotes": {
     "prompt": {
       "title": "Yeni bir tercih.\nGeleceği birlikte inşa edelim.",
-      "description": "Reklam gelirleri G-Browser'ın kesintisiz geliştirilmesini ve sunucu maliyetlerini destekler. Sürüm notlarının nasıl açılacağını ve engelleyicilerin G-Browser blogunda nasıl davranacağını seçebilirsiniz.",
+      "description": "G-Browser bağımsız ve açık kaynaklı bir web tarayıcısıdır. Güncellemelerden sonra sürüm notlarının ve bildirimlerin nasıl görüntüleneceğini belirleyebilirsiniz.",
       "hint": "Bir seçim kaydedilene kadar ayarlarınız değişmeden kalır. Bunu daha sonra Güncellemeler ve Deneyler bölümünden değiştirebilirsiniz.",
       "choiceTitle": "Sürüm notlarının nasıl açılacağını seçin",
       "choiceDescription": "Güncellemelerden sonra otomatik gösterimi ve G-Browser blogunda engelleyicilerin nasıl çalışacağını belirleyin.",
       "dismiss": "Şimdi değil"
     },
-    "learnMore": "Finansmanımız ve bu ayar hakkında bilgi edinin (Japonca)",
+    "learnMore": "G-Browser sürüm güncellemeleri ve tercihler hakkında bilgi edinin",
     "title": "Sürüm Notları ve G-Browser'ı Destekleme",
     "description": "Reklam gelirleri G-Browser'ın geliştirilmesini ve devamlılığını destekler. Güncellemelerden sonra sürüm notlarının nasıl açılacağını belirleyin. Bu ayarı daha sonra Ayarlar → Güncellemeler ve Deneyler altından değiştirebilirsiniz.",
     "disabled": {
@@ -136,8 +136,8 @@
       "description": "Eklentilerinizin mevcut yapılandırmasını korur. Yeni bir reklam engelleyici yüklemez veya etkinleştirmez."
     },
     "support": {
-      "label": "G-Browser'ı desteklemek için reklamlara izin ver (önerilen)",
-      "description": "G-Browser blogunda uBlock Origin, AdGuard, Adblock Plus, AdBlock ve Ghostery filtrelerini devre dışı bırakır."
+      "label": "Sürüm notlarını web sayfasında aç (önerilen)",
+      "description": "Sürüm notları sayfasını varsayılan web sayfası tercihleri ile açar."
     },
     "scope": "Bu kısıtlama, doğrudan açılan sayfalar dahil blog.gbrowser.app üzerindeki tüm HTTPS sayfaları için geçerlidir; reklam engellemenin yanı sıra izleme koruması ve özel filtreleri de kapsar. Diğer eklentiler bu ayardan etkilenmez. Harici güvenlik araçları reklamları engellemeye devam edebilir. Ayarı değiştirdikten sonra açık blog sayfalarını yenileyin.",
     "currentSetting": "Mevcut ayar: {{mode}}",

@@ -32,6 +32,27 @@ TURKISH_REPLACEMENTS = [
     ("docs.floorp.app", "docs.gbrowser.app"),
     ("floorp.app", "gbrowser.app"),
     ("Floorp", "G-Browser"),
+    ("Ablaze Hesabı", "G-Browser Hesabı"),
+    ("Ablaze Hesabını", "G-Browser Hesabını"),
+    ("Ablaze Hesabına", "G-Browser Hesabına"),
+    ("Ablaze Hesabında", "G-Browser Hesabında"),
+    ("Ablaze Hesabından", "G-Browser Hesabından"),
+    ("Ablaze'in", "G-Browser'ın"),
+    ("Ablaze'ın", "G-Browser'ın"),
+    ("Ablaze'i", "G-Browser'ı"),
+    ("Ablaze'e", "G-Browser'a"),
+    ("Ablaze'de", "G-Browser'da"),
+    ("Ablaze", "G-Browser"),
+    ("Japonya'da geliştirilen bir tarayıcıdır. Web'i geliştirmek için Ablaze altında Firefox üzerine inşa edilmiştir.", "Kullanıcı gizliliğini ve yüksek performansı merkezine alan modern, güvenli ve bağımsız bir web tarayıcısıdır."),
+    ("Japonya'da geliştirilen bir tarayıcıdır. Web'i geliştirmek için G-Browser altında Firefox üzerine inşa edilmiştir.", "Kullanıcı gizliliğini ve yüksek performansı merkezine alan modern, güvenli ve bağımsız bir web tarayıcısıdır."),
+    ("Finansmanımız ve bu ayar hakkında bilgi edinin (Japonca)", "G-Browser sürüm güncellemeleri ve tercihler hakkında bilgi edinin"),
+    ("Reklam gelirleri Floorp'un kesintisiz geliştirilmesini ve sunucu maliyetlerini destekler. Sürüm notlarının nasıl açılacağını ve engelleyicilerin Floorp blogunda nasıl davranacağını seçebilirsiniz.", "G-Browser bağımsız ve açık kaynaklı bir web tarayıcısıdır. Güncellemelerden sonra sürüm notlarının ve bildirimlerin nasıl görüntüleneceğini belirleyebilirsiniz."),
+    ("Reklam gelirleri G-Browser'ın kesintisiz geliştirilmesini ve sunucu maliyetlerini destekler. Sürüm notlarının nasıl açılacağını ve engelleyicilerin G-Browser blogunda nasıl davranacağını seçebilirsiniz.", "G-Browser bağımsız ve açık kaynaklı bir web tarayıcısıdır. Güncellemelerden sonra sürüm notlarının ve bildirimlerin nasıl görüntüleneceğini belirleyebilirsiniz."),
+    ("Floorp'u desteklemek için reklamlara izin ver", "Sürüm notlarını web sayfasında aç"),
+    ("G-Browser'ı desteklemek için reklamlara izin ver", "Sürüm notlarını web sayfasında aç"),
+    ("Floorp blogunda uBlock Origin, AdGuard, Adblock Plus, AdBlock ve Ghostery filtrelerini devre dışı bırakır.", "Sürüm notları sayfasını varsayılan web sayfası tercihleri ile açar."),
+    ("G-Browser blogunda uBlock Origin, AdGuard, Adblock Plus, AdBlock ve Ghostery filtrelerini devre dışı bırakır.", "Sürüm notları sayfasını varsayılan web sayfası tercihleri ile açar."),
+    ("Reklamlara izin verildiğindeki kapsam", "Sürüm notları sayfası kapsamı"),
 ]
 
 GENERAL_REPLACEMENTS = [
@@ -41,6 +62,12 @@ GENERAL_REPLACEMENTS = [
     ("docs.floorp.app", "docs.gbrowser.app"),
     ("floorp.app", "gbrowser.app"),
     ("Floorp", "G-Browser"),
+    ("Ablaze Account", "G-Browser Account"),
+    ("Ablaze's", "G-Browser's"),
+    ("Ablaze", "G-Browser"),
+    ("is a browser developed in Japan. It's built on Firefox under Ablaze to improve the web.", "is a modern, high-performance web browser designed for privacy and productivity."),
+    ("is a browser developed in Japan. It's built on Firefox under G-Browser to improve the web.", "is a modern, high-performance web browser designed for privacy and productivity."),
+    ("Read about our funding and this setting (Japanese)", "Learn more about G-Browser release updates and preferences"),
 ]
 
 

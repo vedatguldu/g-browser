@@ -67,9 +67,9 @@
       "description": "{{productName}} beskytter dine data og dit privatliv som standard, men du kan også justere indstillingerne manuelt."
     },
     "ablazeAccount": {
-      "title": "Ablaze-konto (kommer snart)",
-      "footerLinkText": "Ablaze-konto",
-      "description": "Brug en Mozilla-konto til at synkronisere visse data mellem enheder. Ablaze-kontoen synkroniserer data, som ikke kan synkroniseres med en Mozilla-konto."
+      "title": "G-Browser-konto (kommer snart)",
+      "footerLinkText": "G-Browser-konto",
+      "description": "Brug en Mozilla-konto til at synkronisere visse data mellem enheder. G-Browser-kontoen synkroniserer data, som ikke kan synkroniseres med en Mozilla-konto."
     },
     "manageExtensions": {
       "title": "Administrer udvidelser",
@@ -325,7 +325,7 @@
     "releaseNotes": "Udgivelsesnoter og flere oplysninger",
     "browserVersion": "{{productName}}-version: {{browserVersion}} | Firefox-version: {{firefoxVersion}}",
     "isOfficialBuild": "(Officiel version)",
-    "browserDescription": "{{productName}} er en browser udviklet i Japan. Den er bygget på Firefox under Ablaze for at forbedre nettet.",
+    "browserDescription": "{{productName}} er en browser udviklet i Japan. Den er bygget på Firefox under G-Browser for at forbedre nettet.",
     "browser": "{{productName}}",
     "copyright": "© 2024 {{productName}} Projekt. Alle rettigheder forbeholdes.",
     "openSourceLicense": "{{productName}} er open source-software tilgængelig under Mozilla Public License 2.0, muliggjort af Firefox open source-projekt og anden open source-software.",
@@ -341,7 +341,7 @@
   },
   "updates": {
     "releaseNotes": {
-      "learnMore": "Read about our funding and this setting (Japanese)",
+      "learnMore": "Learn more about G-Browser release updates and preferences",
       "title": "Release notes after updates",
       "description": "Choose how G-Browser opens release notes after an update.",
       "disabled": {

@@ -131,10 +131,8 @@ export function onFinalUIStartup(): void {
     console.error("Failed to create default userChrome files:", error);
   });
 
-  openReleaseNotesInRecentWindow()
-    .catch(console.error)
-    .then(showReleaseNotesChoice)
-    .catch(console.error);
+  // In G-Browser, upstream release notes and donation/ad prompts on startup are disabled
+  // to ensure instant cold start and a clean browsing experience without unwanted popups.
 
   // int OS Modules
   ChromeUtils.importESModule(
@@ -188,11 +186,10 @@ async function openReleaseNotesInRecentWindow(): Promise<void> {
   const WORKSPACE_TAB_ATTRIBUTION_ID = "floorpWorkspaceId";
   let currentWorkspaceID: string | null = null;
 
-  // Poll for workspacesFuncs if not immediately available or if ID is missing.
-  // We'll give it a few tries (e.g. up to 2 seconds) to let WorkspacesService initialize.
+  // Poll for workspacesFuncs if not immediately available.
   const waitForWorkspaceID = async (): Promise<string | null> => {
     let attempts = 0;
-    while (attempts < 20) {
+    while (attempts < 3) {
       const funcs = (recentWindow as Window).workspacesFuncs;
       if (funcs?.getSelectedWorkspaceID) {
         try {
@@ -202,7 +199,7 @@ async function openReleaseNotesInRecentWindow(): Promise<void> {
           console.error("[NoranekoStartup] Failed to get workspace ID status message", e);
         }
       }
-      await new Promise((r) => setTimeout(r, 100));
+      await new Promise((r) => setTimeout(r, 20));
       attempts++;
     }
     return null;
@@ -320,6 +317,11 @@ NOTE: You can use the userContent.css file without change preferences (about:con
 }
 
 async function isResourceAvailable(url: string): Promise<boolean> {
+  // In packaged builds, registered chrome:// resources are always locally available.
+  // Skipping async fetch() avoids latency and network stack overhead at startup.
+  if (isMainBrowser && url.startsWith("chrome://")) {
+    return true;
+  }
   try {
     const response = await fetch(url);
     return response.ok;

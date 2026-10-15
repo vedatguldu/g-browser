@@ -38,6 +38,11 @@ if res_brand.returncode != 0:
     sys.exit(1)
 print("  Branding assets synchronized.")
 
+print("[0.7] Synchronizing Gecko application identity, vendor, and window branding...")
+gecko_brand_script = os.path.join(PROJECT_ROOT, "branding", "update_gecko_branding.py")
+subprocess.run([sys.executable, gecko_brand_script], cwd=PROJECT_ROOT, check=True)
+
+
 print("[1] Syncing built assets from _dist/noraneko to package noraneko-devdir...")
 if not os.path.exists(DEVDIR_IN_PACKAGE):
     os.makedirs(DEVDIR_IN_PACKAGE, exist_ok=True)
@@ -73,12 +78,25 @@ pref("nora.dev.allow_http_loader", false);
 pref("layers.gpu-process.enabled", false);
 pref("browser.newtabpage.enabled", true);
 
-// Startup: skip blocking first-run / release-notes pages
+// Startup Acceleration & Instant Blank Shell
+pref("browser.startup.blankWindow", true);
 pref("browser.startup.homepage_override.mstone", "ignore");
 pref("browser.tabs.remote.warmup.enabled", true);
 pref("browser.slowStartup.notificationDisabled", true);
+pref("browser.sessionstore.restore_on_demand", true);
+pref("browser.sessionstore.restore_tabs_lazily", true);
+pref("browser.sessionstore.restore_pinned_tabs_on_demand", true);
+pref("browser.sessionstore.interval", 30000);
+pref("browser.newtabpage.activity-stream.prerender", false);
+
+// First-run / Welcome / Release Notes permanent suppression
 pref("floorp.releaseNotes.choiceConfirmed", true);
+pref("floorp.releaseNotes.promptShown", true);
 pref("floorp.releaseNotes.mode", "disabled");
+pref("floorp.browser.welcome.page.shown", true);
+pref("browser.aboutwelcome.enabled", false);
+pref("startup.homepage_welcome_url", "");
+pref("startup.homepage_override_url", "");
 pref("toolkit.telemetry.enabled", false);
 pref("toolkit.telemetry.unified", false);
 pref("browser.search.update", false);

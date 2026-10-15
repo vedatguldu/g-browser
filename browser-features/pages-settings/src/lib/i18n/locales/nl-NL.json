@@ -67,9 +67,9 @@
       "description": "{{productName}} beschermt standaard je gegevens en privacy, maar je kunt deze instellingen ook handmatig beheren."
     },
     "ablazeAccount": {
-      "title": "Ablaze Account (binnenkort beschikbaar)",
-      "footerLinkText": "Ablaze Account",
-      "description": "Gebruik een Mozilla-account om bepaalde gegevens met andere apparaten te synchroniseren. Ablaze Account synchroniseert gegevens die niet met een Mozilla-account gesynchroniseerd kunnen worden."
+      "title": "G-Browser Account (binnenkort beschikbaar)",
+      "footerLinkText": "G-Browser Account",
+      "description": "Gebruik een Mozilla-account om bepaalde gegevens met andere apparaten te synchroniseren. G-Browser Account synchroniseert gegevens die niet met een Mozilla-account gesynchroniseerd kunnen worden."
     },
     "manageExtensions": {
       "title": "Extensies beheren",
@@ -325,7 +325,7 @@
     "releaseNotes": "Releasenotes en meer informatie",
     "browserVersion": "{{productName}} versie: {{browserVersion}} | Firefox-versie: {{firefoxVersion}}",
     "isOfficialBuild": "(Officiële versie)",
-    "browserDescription": "{{productName}} is een in Japan ontwikkelde browser, door Ablaze gebouwd op Firefox om het web te verbeteren.",
+    "browserDescription": "{{productName}} is een in Japan ontwikkelde browser, door G-Browser gebouwd op Firefox om het web te verbeteren.",
     "browser": "{{productName}}",
     "copyright": "© 2024 {{productName}} Project. Alle rechten voorbehouden.",
     "openSourceLicense": "{{productName}} is opensourcesoftware beschikbaar onder de Mozilla Public License 2.0, mede mogelijk gemaakt door het Firefox-opensourceproject en andere opensourcesoftware.",

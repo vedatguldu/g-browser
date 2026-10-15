@@ -1,0 +1,53 @@
+name: "G-Browser Automated Upstream Sync & Rebrand"
+
+on:
+  schedule:
+    - cron: '0 4 * * *' # Every day at 04:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync-upstream:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout G-Browser Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Dependencies
+        run: |
+          pip install Pillow
+
+      - name: Check and Fetch Upstream
+        run: |
+          git config --global user.name "G-Browser Bot"
+          git config --global user.email "bot@gbrowser.app"
+          git remote add upstream https://github.com/Floorp-Projects/Floorp.git || true
+          git fetch upstream --tags
+
+      - name: Run Rebranding Pipeline
+        run: |
+          python branding/update_all_locales.py
+          python branding/update_gecko_branding.py
+          python branding/localize_gecko_menus.py
+          python branding/generate_branding.py
+
+      - name: Check For Changes and Commit
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            git add branding/ browser-features/
+            git commit -m "chore(sync): synchronize upstream core improvements and apply G-Browser branding"
+            git push origin main
+          else
+            echo "No new upstream changes or rebranding needed."
+          fi

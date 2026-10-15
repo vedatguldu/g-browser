@@ -1,5 +1,5 @@
 export const RELEASE_NOTES_SUPPORT_URL =
-  "https://blog.floorp.app/ja/notice/260913-operational-transparency/";
+  "https://github.com/vedatguldu/g-browser/releases";
 
 export const RELEASE_NOTES_MODES = ["disabled", "blocking", "support"] as const;
 export type ReleaseNotesMode = (typeof RELEASE_NOTES_MODES)[number];

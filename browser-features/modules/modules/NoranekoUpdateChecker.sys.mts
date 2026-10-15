@@ -118,36 +118,63 @@ function getUpdateType(oldVersion: string, newVersion: string): UpdateType {
   return null;
 }
 
-/**
- * Get the update.xml URL using nsIUpdateChecker.
- * This respects MOZ_UPDATE_URL and other Firefox update settings.
- */
-function getUpdateXmlUrl(): string {
-  // DEV ENVIRONMENT OVERRIDE
-  const url = "http://localhost:5173/update.xml";
-  console.log(`[NoranekoUpdateChecker] Using DEV URL: ${url}`);
-  return url;
-}
+export const G_BROWSER_RELEASES_API =
+  "https://api.github.com/repos/vedatguldu/g-browser/releases/latest";
 
 /**
- * Fetch and parse update.xml from the server.
+ * Fetch and parse release update info from official G-Browser GitHub Releases.
  */
 export async function fetchRemoteUpdateInfo(): Promise<RemoteUpdateInfo | null> {
   try {
-    const url = await getUpdateXmlUrl();
-    const response = await fetch(url);
+    const response = await fetch(G_BROWSER_RELEASES_API, {
+      headers: {
+        Accept: "application/vnd.github.v3+json",
+        "User-Agent": "G-Browser-UpdateChecker",
+      },
+    });
 
     if (!response.ok) {
-      console.error(
-        `[NoranekoUpdateChecker] Failed to fetch update.xml: ${response.status}`,
+      console.warn(
+        `[NoranekoUpdateChecker] GitHub releases API status: ${response.status}`,
       );
       return null;
     }
 
-    const xmlText = await response.text();
-    return parseUpdateXml(xmlText);
+    const release = await response.json();
+    if (!release || !release.tag_name) {
+      return null;
+    }
+
+    const versionTag = String(release.tag_name).replace(/^v/, "");
+    const assets = Array.isArray(release.assets) ? release.assets : [];
+    const installerAsset = assets.find(
+      (a: { name?: string }) =>
+        a.name?.endsWith(".exe") || a.name?.includes("Setup"),
+    );
+
+    return {
+      appVersion: versionTag,
+      appVersion2: versionTag,
+      buildID: release.target_commitish || "",
+      buildID2: release.target_commitish || "",
+      displayVersion: release.name || `G-Browser v${versionTag}`,
+      detailsURL:
+        release.html_url || "https://github.com/vedatguldu/g-browser/releases",
+      patchURL:
+        installerAsset?.browser_download_url ||
+        release.html_url ||
+        "https://github.com/vedatguldu/g-browser/releases",
+      patchSize: installerAsset?.size ?? 0,
+      patchType: "complete",
+      patchHashFunction: "sha256",
+      patchHashValue: "",
+      updateType: "minor",
+    };
   } catch (error) {
-    console.error("[NoranekoUpdateChecker] Error fetching update.xml status message:", error);
+    console.warn(
+      "[NoranekoUpdateChecker] Check update status message:",
+      error,
+    );
     return null;
   }
 }

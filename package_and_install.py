@@ -42,6 +42,11 @@ print("[0.7] Synchronizing Gecko application identity, vendor, and window brandi
 gecko_brand_script = os.path.join(PROJECT_ROOT, "branding", "update_gecko_branding.py")
 subprocess.run([sys.executable, gecko_brand_script], cwd=PROJECT_ROOT, check=True)
 
+print("[0.8] Localizing Gecko Alt menus and application menu to Turkish...")
+menu_l10n_script = os.path.join(PROJECT_ROOT, "branding", "localize_gecko_menus.py")
+subprocess.run([sys.executable, menu_l10n_script], cwd=PROJECT_ROOT, check=True)
+
+
 
 print("[1] Syncing built assets from _dist/noraneko to package noraneko-devdir...")
 if not os.path.exists(DEVDIR_IN_PACKAGE):

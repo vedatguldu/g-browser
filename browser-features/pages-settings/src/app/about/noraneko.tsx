@@ -61,7 +61,7 @@ export default function Page() {
           <CardFooter>
             <Button asChild>
               <a
-                href="https://floorp.app"
+                href="https://github.com/vedatguldu/g-browser/releases"
                 className="flex items-center gap-2"
               >
                 {t("about.releaseNotes")}
@@ -98,7 +98,7 @@ export default function Page() {
             </Button>
             <Button asChild className="w-full">
               <a
-                href="https://github.com/Floorp-Projects/Floorp"
+                href="https://github.com/vedatguldu/g-browser"
                 className="flex items-center gap-2"
               >
                 <SiGithub className="size-4" />

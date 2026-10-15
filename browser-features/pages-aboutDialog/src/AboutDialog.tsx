@@ -414,24 +414,24 @@ export function AboutDialog() {
                 GitHub
               </a>
               <a
-                href="https://floorp.app/discord"
+                href="https://vedatguldu.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 class="ad-community-item"
                 aria-describedby="opensInNewWindow"
-                aria-label={`Discord (${t("aboutDialog.opensExternal", { defaultValue: "opens external link" })})`}
+                aria-label={`Web (${t("aboutDialog.opensExternal", { defaultValue: "opens external link" })})`}
                 onClick={(e) => {
                   e.preventDefault();
-                  openExternalUrl("https://floorp.app/discord");
+                  openExternalUrl("https://vedatguldu.com");
                 }}
               >
                 <span class="ad-community-icon">
-                  <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M13.55 3.15A13.3 13.3 0 0010.23 2a9.5 9.5 0 00-.43.87 12.4 12.4 0 00-3.6 0A9.5 9.5 0 005.77 2a13.4 13.4 0 00-3.32 1.15C.35 6.4-.22 9.56.07 12.67A13.5 13.5 0 004.13 15a10 10 0 00.87-1.41 8.7 8.7 0 01-1.37-.66l.33-.26a9.6 9.6 0 008.08 0l.33.26c-.44.26-.9.48-1.37.66.25.5.54.97.87 1.41a13.4 13.4 0 004.06-2.33c.38-3.98-.65-7.1-2.98-10.52zM5.35 10.84c-.87 0-1.58-.82-1.58-1.82s.7-1.82 1.58-1.82 1.6.82 1.58 1.82c0 1-.7 1.82-1.58 1.82zm5.3 0c-.87 0-1.58-.82-1.58-1.82s.7-1.82 1.58-1.82 1.59.82 1.58 1.82c0 1-.7 1.82-1.58 1.82z" /></svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style={{ width: 16, height: 16 }}><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
                 </span>
-                Discord
+                Web
               </a>
               <a
-                href="https://x.com/Floorp_Browser"
+                href="https://x.com/vedatguldu"
                 target="_blank"
                 rel="noopener noreferrer"
                 class="ad-community-item"
@@ -439,7 +439,7 @@ export function AboutDialog() {
                 aria-label={`X (${t("aboutDialog.opensExternal", { defaultValue: "opens external link" })})`}
                 onClick={(e) => {
                   e.preventDefault();
-                  openExternalUrl("https://x.com/Floorp_Browser");
+                  openExternalUrl("https://x.com/vedatguldu");
                 }}
               >
                 <span class="ad-community-icon">
@@ -448,21 +448,38 @@ export function AboutDialog() {
                 X
               </a>
               <a
-                href="https://www.reddit.com/r/floorp/"
+                href="https://www.linkedin.com/in/vedat-g%C3%BCld%C3%BC"
                 target="_blank"
                 rel="noopener noreferrer"
                 class="ad-community-item"
                 aria-describedby="opensInNewWindow"
-                aria-label={`Reddit (${t("aboutDialog.opensExternal", { defaultValue: "opens external link" })})`}
+                aria-label={`LinkedIn (${t("aboutDialog.opensExternal", { defaultValue: "opens external link" })})`}
                 onClick={(e) => {
                   e.preventDefault();
-                  openExternalUrl("https://www.reddit.com/r/floorp/");
+                  openExternalUrl("https://www.linkedin.com/in/vedat-g%C3%BCld%C3%BC");
                 }}
               >
                 <span class="ad-community-icon">
-                  <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0Zm-3.828-1.165a1.09 1.09 0 0 0-1.086.025 1.09 1.09 0 0 0-.478.387c-.96-.6-2.12-.95-3.33-.99l.67-3.02 2.16.48a.77.77 0 1 0 .08-.39l-2.38-.53a.2.2 0 0 0-.24.15l-.74 3.34c-1.26.02-2.46.38-3.45 1a1.09 1.09 0 0 0-1.82.82 1.09 1.09 0 0 0 .43.87c-.03.15-.04.3-.04.46 0 2.27 2.65 4.12 5.92 4.12s5.92-1.85 5.92-4.12c0-.16-.01-.31-.04-.46a1.09 1.09 0 0 0 .36-1.14ZM5.35 9a.77.77 0 1 1 0 1.54.77.77 0 0 1 0-1.54Zm4.56 2.87c-.56.56-1.63.6-1.91.6s-1.35-.05-1.91-.6a.2.2 0 0 1 .28-.28c.35.35 1.1.48 1.63.48s1.28-.13 1.63-.48a.2.2 0 0 1 .28.28Zm-.15-1.33a.77.77 0 1 1 0-1.54.77.77 0 0 1 0 1.54Z" /></svg>
+                  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false" style={{ width: 16, height: 16 }}><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.62 1.62 0 1 0 0-3.24 1.62 1.62 0 0 0 0 3.24m1.4 9.74v-8.37H5.06v8.37z"/></svg>
                 </span>
-                Reddit
+                LinkedIn
+              </a>
+              <a
+                href="https://www.youtube.com/@vedat-guldu"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="ad-community-item"
+                aria-describedby="opensInNewWindow"
+                aria-label={`YouTube (${t("aboutDialog.opensExternal", { defaultValue: "opens external link" })})`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  openExternalUrl("https://www.youtube.com/@vedat-guldu");
+                }}
+              >
+                <span class="ad-community-icon">
+                  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false" style={{ width: 16, height: 16 }}><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                </span>
+                YouTube
               </a>
             </div>
           </section>
@@ -484,7 +501,7 @@ export function AboutDialog() {
                 {t("aboutDialog.links.help")}
               </button>
               <a
-                href="https://docs.floorp.app/docs/features/"
+                href="https://vedatguldu.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 class="ad-help-link"
@@ -492,7 +509,7 @@ export function AboutDialog() {
                 aria-label={`${t("aboutDialog.help.support")} (${t("aboutDialog.opensExternal", { defaultValue: "opens external link" })})`}
                 onClick={(e) => {
                   e.preventDefault();
-                  openExternalUrl("https://docs.floorp.app/docs/features/");
+                  openExternalUrl("https://vedatguldu.com");
                 }}
               >
                 {t("aboutDialog.help.support")}
@@ -503,7 +520,7 @@ export function AboutDialog() {
           <section>
             <h2 class="ad-section-title">{t("aboutDialog.sponsor.title")}</h2>
             <a
-              href="https://github.com/sponsors/Ryosuke-Asano"
+              href="https://github.com/sponsors/vedatguldu"
               target="_blank"
               rel="noopener noreferrer"
               class="ad-btn ad-btn-outline"
@@ -511,7 +528,7 @@ export function AboutDialog() {
               aria-label={`${t("aboutDialog.sponsor.button")} (${t("aboutDialog.opensExternal", { defaultValue: "opens external link" })})`}
               onClick={(e) => {
                 e.preventDefault();
-                openExternalUrl("https://github.com/sponsors/Ryosuke-Asano");
+                openExternalUrl("https://github.com/sponsors/vedatguldu");
               }}
             >
               {t("aboutDialog.sponsor.button")}
@@ -560,36 +577,28 @@ export function AboutDialog() {
           {t("aboutDialog.links.licensing")}
         </a>
         <a
-          href={i18n.language?.startsWith("ja") ? "https://ja.floorp.app/privacy" : "https://floorp.app/privacy"}
+          href="https://vedatguldu.com/gizlilik-politikasi"
           target="_blank"
           rel="noopener noreferrer"
           aria-describedby="opensInNewWindow"
           aria-label={`${t("aboutDialog.links.privacy")} (${t("aboutDialog.opensExternal", { defaultValue: "opens external link" })})`}
           onClick={(e) => {
             e.preventDefault();
-            openExternalUrl(
-              i18n.language?.startsWith("ja")
-                ? "https://ja.floorp.app/privacy"
-                : "https://floorp.app/privacy",
-            );
+            openExternalUrl("https://vedatguldu.com/gizlilik-politikasi");
           }}
           data-l10n-id="bottom-links-privacy"
         >
           {t("aboutDialog.links.privacy")}
         </a>
         <a
-          href={i18n.language?.startsWith("ja") ? "https://ja.floorp.app/terms" : "https://floorp.app/terms"}
+          href="https://vedatguldu.com"
           target="_blank"
           rel="noopener noreferrer"
           aria-describedby="opensInNewWindow"
           aria-label={`${t("aboutDialog.links.terms")} (${t("aboutDialog.opensExternal", { defaultValue: "opens external link" })})`}
           onClick={(e) => {
             e.preventDefault();
-            openExternalUrl(
-              i18n.language?.startsWith("ja")
-                ? "https://ja.floorp.app/terms"
-                : "https://floorp.app/terms",
-            );
+            openExternalUrl("https://vedatguldu.com");
           }}
           data-l10n-id="bottom-links-terms"
         >

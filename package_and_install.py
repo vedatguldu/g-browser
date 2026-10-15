@@ -17,8 +17,12 @@ SETUP_EXE = os.path.join(PROJECT_ROOT, "G-Browser-Setup-x64.exe")
 CSC = r"C:\Windows\Microsoft.NET\Framework64\v4.0.30319\csc.exe"
 DENO_EXE = os.path.expanduser(r"~\.lmstudio\.internal\utils\deno.exe")
 
+print("[0] Synchronizing G-Browser internal page strings, titles, and locales...")
+locales_script = os.path.join(PROJECT_ROOT, "branding", "update_all_locales.py")
+subprocess.run([sys.executable, locales_script], cwd=PROJECT_ROOT, check=True)
+
 if "--build" in sys.argv:
-    print("[0] Building production frontend bundles via Deno...")
+    print("[0.2] Building production frontend bundles via Deno...")
     build_script = os.path.join(PROJECT_ROOT, "tools", "scripts", "build-prod.ts")
     res_b = subprocess.run([DENO_EXE, "run", "-A", build_script], cwd=PROJECT_ROOT)
     if res_b.returncode != 0:

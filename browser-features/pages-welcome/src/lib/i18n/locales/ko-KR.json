@@ -7,59 +7,59 @@
     "enlarge": "{{feature}} 스크린샷 확대",
     "enlargeShort": "더 크게 보기",
     "closePreview": "미리보기 닫기",
-    "actualScreenshot": "실제 Floorp의 스크린샷입니다. 외관은 사용 중인 버전과 설정에 따라 달라질 수 있습니다."
+    "actualScreenshot": "실제 G-Browser의 스크린샷입니다. 외관은 사용 중인 버전과 설정에 따라 달라질 수 있습니다."
   },
   "setupV5": {
     "back": "뒤로 가기",
     "supportLabels": {
       "disabled": "자동으로 열지 않기",
       "blocking": "차단기 설정을 유지한 채 열기",
-      "support": "Floorp를 돕기 위해 광고 허용하기"
+      "support": "G-Browser를 돕기 위해 광고 허용하기"
     },
-    "supportNotice": "임시 선택입니다. 다음 화면에서 \"Floorp 사용 시작\"을 누르면 적용됩니다. 그 전에 설정을 닫으면 현재 설정이 유지됩니다.",
+    "supportNotice": "임시 선택입니다. 다음 화면에서 \"G-Browser 사용 시작\"을 누르면 적용됩니다. 그 전에 설정을 닫으면 현재 설정이 유지됩니다.",
     "steps": [
       "환영합니다",
       "언어",
       "기능",
-      "Floorp Hub",
+      "G-Browser Hub",
       "설정",
       "지원",
       "마침"
     ],
     "pages": [
       {
-        "title": "Floorp 사용을\n환영합니다.",
+        "title": "G-Browser 사용을\n환영합니다.",
         "description": "브라우저를 당신의 방식대로 맞추세요.",
         "hint": "이 도움말은 기능을 소개하고 초기 설정을 선택할 수 있도록 돕습니다."
       },
       {
         "title": "가장 친숙한 언어로\n시작하세요.",
-        "description": "Floorp의 표시 언어를 확인하고 필요하면 변경하세요.",
+        "description": "G-Browser의 표시 언어를 확인하고 필요하면 변경하세요.",
         "hint": "선택하신 언어는 즉시 적용됩니다."
       },
       {
-        "title": "Floorp의 기능을\n둘러보세요.",
+        "title": "G-Browser의 기능을\n둘러보세요.",
         "description": "작업을 분리하고, 페이지를 나란히 표시해, 더 빠르게 작업하세요. 관심 있는 기능을 살펴보세요.",
         "hint": "이 기능들은 나중에 설정에서 조정할 수 있습니다."
       },
       {
-        "title": "당신의 설정,\nFloorp Hub에서.",
-        "description": "Floorp만의 특별한 기능을 한 곳에서 설정하세요.",
+        "title": "당신의 설정,\nG-Browser Hub에서.",
+        "description": "G-Browser만의 특별한 기능을 한 곳에서 설정하세요.",
         "hint": "설정이 끝나면 언제든 열 수 있습니다."
       },
       {
         "title": "외관과 검색 기능을\n나에게 맞게.",
         "description": "일상적으로 이용할 테마와 검색 엔진을 선택하세요.",
-        "hint": "나중에 Floorp Hub나 Firefox 설정에서 변경할 수 있습니다."
+        "hint": "나중에 G-Browser Hub나 Firefox 설정에서 변경할 수 있습니다."
       },
       {
-        "title": "업데이트 및\nFloorp 지원.",
-        "description": "광고 수익을 바탕으로 Floorp를 개발하고 운영할 수 있습니다. 릴리스 노트를 열 방식을 선택하세요.",
+        "title": "업데이트 및\nG-Browser 지원.",
+        "description": "광고 수익을 바탕으로 G-Browser를 개발하고 운영할 수 있습니다. 릴리스 노트를 열 방식을 선택하세요.",
         "hint": "나중에 '업데이트 및 실험'에서 이 설정을 변경할 수 있습니다."
       },
       {
         "title": "시작할 준비가\n되었습니다.",
-        "description": "선택을 검토하고 Floorp 사용을 시작하세요.",
+        "description": "선택을 검토하고 G-Browser 사용을 시작하세요.",
         "hint": "나중에도 설정을 변경할 수 있습니다."
       }
     ],
@@ -80,7 +80,7 @@
     ],
     "changeLater": "나중에 설정을 변경할 수 있습니다.",
     "languageTitle": "표시 언어",
-    "languageLabel": "Floorp 표시 언어",
+    "languageLabel": "G-Browser 표시 언어",
     "languageHint": "메뉴와 설정에 쓰입니다.",
     "languageNotice": "일부 부가 기능은 언어 변경을 지원하지 않을 수 있습니다.",
     "languageCurrent": "{{language}} 사용 중",
@@ -100,7 +100,7 @@
         "description": "자주 쓰는 동작의 바로가기"
       }
     ],
-    "openHub": "Floorp Hub 열기",
+    "openHub": "G-Browser Hub 열기",
     "openPreferences": "Firefox 설정 열기",
     "newTab": "새 탭에서 열립니다.",
     "hubAddress": "주소 표시줄에서 about:hub를 입력하셔도 됩니다.",
@@ -110,23 +110,23 @@
     "scopeTitle": "광고 허용 범위",
     "summaryTitle": "설정 검토",
     "change": "변경",
-    "defaultTitle": "Floorp를 일상의 브라우저로 만드세요",
-    "defaultHint": "링크가 Floorp에서 열리도록 하세요.",
-    "getStarted": "Floorp 사용 시작",
-    "finishNotice": "\"Floorp 사용 시작\"을 누르면 릴리스 노트에 대한 선택을 확정합니다."
+    "defaultTitle": "G-Browser를 일상의 브라우저로 만드세요",
+    "defaultHint": "링크가 G-Browser에서 열리도록 하세요.",
+    "getStarted": "G-Browser 사용 시작",
+    "finishNotice": "\"G-Browser 사용 시작\"을 누르면 릴리스 노트에 대한 선택을 확정합니다."
   },
   "releaseNotes": {
     "prompt": {
       "title": "새로운 선택.\n미래의 변화를 지원해주세요.",
-      "description": "광고 수익을 바탕으로 Floorp를 개발하고 운영할 수 있습니다. 이제 릴리스 노트를 열 방식과 Floorp 블로그 내 차단기의 동작 방식을 선택할 수 있습니다.",
+      "description": "광고 수익을 바탕으로 G-Browser를 개발하고 운영할 수 있습니다. 이제 릴리스 노트를 열 방식과 G-Browser 블로그 내 차단기의 동작 방식을 선택할 수 있습니다.",
       "hint": "선택 사항을 저장하기 전까지는 설정이 그대로 유지됩니다. 나중에 '업데이트 및 실험'에서 변경할 수 있습니다.",
       "choiceTitle": "릴리스 노트를 열 방식 선택",
-      "choiceDescription": "업데이트 후 자동으로 표시할 방식과 Floorp 블로그 내 차단기의 동작 방식을 선택하세요.",
+      "choiceDescription": "업데이트 후 자동으로 표시할 방식과 G-Browser 블로그 내 차단기의 동작 방식을 선택하세요.",
       "dismiss": "나중에"
     },
     "learnMore": "이 설정과 자금 마련에 대해 자세히 알아보기 (일본어)",
-    "title": "릴리스 노트 및 Floorp 지원",
-    "description": "광고 수익을 바탕으로 Floorp를 개발하고 운영할 수 있습니다. 업데이트 후 릴리스 노트를 열 방식을 선택하세요. 나중에 설정 → 업데이트 및 실험에서 변경할 수 있습니다.",
+    "title": "릴리스 노트 및 G-Browser 지원",
+    "description": "광고 수익을 바탕으로 G-Browser를 개발하고 운영할 수 있습니다. 업데이트 후 릴리스 노트를 열 방식을 선택하세요. 나중에 설정 → 업데이트 및 실험에서 변경할 수 있습니다.",
     "disabled": {
       "label": "자동으로 열지 않기",
       "description": "업데이트 후 릴리스 노트를 열지 않습니다. 블로그에 방문할 때 차단기 설정을 유지합니다."
@@ -136,10 +136,10 @@
       "description": "확장을 설정한 대로 작동하도록 유지합니다. 이 설정이 광고 차단기를 자동으로 설치하거나 활성화하지는 않습니다."
     },
     "support": {
-      "label": "Floorp를 돕기 위해 광고 허용하기 (권장)",
-      "description": "Floorp 블로그에서 uBlock Origin, AdGuard, Adblock Plus, AdBlock, Ghostery를 제한합니다."
+      "label": "G-Browser를 돕기 위해 광고 허용하기 (권장)",
+      "description": "G-Browser 블로그에서 uBlock Origin, AdGuard, Adblock Plus, AdBlock, Ghostery를 제한합니다."
     },
-    "scope": "이 제한은 수동으로 열린 페이지를 포함하여 blog.floorp.app의 모든 HTTPS 페이지에 적용되며, 광고 차단뿐 아니라 추적 보호 기능 및 사용자 필터에도 영향을 미칩니다. 다른 확장은 이 설정의 제한을 받지 않습니다. 다른 보호 도구는 여전히 광고를 차단할 수 있습니다. 설정을 변경한 뒤에는 열린 블로그 페이지를 새로고침하세요.",
+    "scope": "이 제한은 수동으로 열린 페이지를 포함하여 blog.gbrowser.app의 모든 HTTPS 페이지에 적용되며, 광고 차단뿐 아니라 추적 보호 기능 및 사용자 필터에도 영향을 미칩니다. 다른 확장은 이 설정의 제한을 받지 않습니다. 다른 보호 도구는 여전히 광고를 차단할 수 있습니다. 설정을 변경한 뒤에는 열린 블로그 페이지를 새로고침하세요.",
     "currentSetting": "현재 설정: {{mode}}",
     "applyOnConfirm": "확인을 눌러야 선택한 내용이 적용됩니다. 이 페이지를 닫으면 현재 설정을 유지합니다.",
     "changeSelection": "선택 변경",
@@ -149,14 +149,14 @@
     "error": "선택을 불러오거나 저장할 수 있습니다. 이 페이지를 닫았다 연 뒤 다시 시도해 주세요."
   },
   "navigation": {
-    "support": "Floorp 지원",
+    "support": "G-Browser 지원",
     "welcome": "환영합니다",
     "language": "언어",
     "languageSupport": "언어 지원",
     "features": "기능",
     "featureIntroduction": "기능 소개",
-    "hub": "Floorp Hub",
-    "hubIntro": "Floorp Hub에 대해",
+    "hub": "G-Browser Hub",
+    "hubIntro": "G-Browser Hub에 대해",
     "customize": "맞춤 설정",
     "initialSettings": "초기 설정",
     "complete": "완료",
@@ -164,25 +164,25 @@
     "next": "다음"
   },
   "hubPage": {
-    "title": "Floorp Hub에 대해",
-    "subtitle": "Floorp별 설정을 위한 집중 공간입니다.",
-    "sectionTitle": "Floorp Hub",
-    "description": "Floorp Hub는 플로어별 옵션을 위한 전용 설정 센터입니다. 'about:hub'로 이동하여 열 수 있습니다. Firefox 설정 페이지의 왼쪽 사이드바에 있는 'about:환경설정'에서도 액세스할 수 있습니다.",
+    "title": "G-Browser Hub에 대해",
+    "subtitle": "G-Browser별 설정을 위한 집중 공간입니다.",
+    "sectionTitle": "G-Browser Hub",
+    "description": "G-Browser Hub는 플로어별 옵션을 위한 전용 설정 센터입니다. 'about:hub'로 이동하여 열 수 있습니다. Firefox 설정 페이지의 왼쪽 사이드바에 있는 'about:환경설정'에서도 액세스할 수 있습니다.",
     "openHub": "about:hub 열기",
     "openPreferences": "설정(about:preferences)을 열기",
-    "tip": "팁: Firefox 설정 사이드바에서 Floorp Hub에 액세스할 수도 있습니다.",
+    "tip": "팁: Firefox 설정 사이드바에서 G-Browser Hub에 액세스할 수도 있습니다.",
     "features": {
-      "dedicated": "Floorp 전용 설정 센터",
+      "dedicated": "G-Browser 전용 설정 센터",
       "accessible": "about:hub 또는 Firefox 설정에서 사용가능",
-      "centralized": "모든 Floorp 옵션을 한 곳에서 확인하세요"
+      "centralized": "모든 G-Browser 옵션을 한 곳에서 확인하세요"
     }
   },
   "customize": {
-    "title": "Floorp 맞춤 설정",
-    "description": "원하는 설정으로 맞춤 설정합니다. 나중에 Floorp 허브 또는 설정 페이지에서 언제든지 변경할 수 있습니다.",
+    "title": "G-Browser 맞춤 설정",
+    "description": "원하는 설정으로 맞춤 설정합니다. 나중에 G-Browser 허브 또는 설정 페이지에서 언제든지 변경할 수 있습니다.",
     "appearance": {
       "title": "모양 설정",
-      "description": "원하는 대로 Floorp의 모양을 맞춤 설정할 수 있습니다. 밝거나 어두운 테마를 선택하거나 시스템 설정에 따라 자동으로 전환되도록 설정할 수 있습니다."
+      "description": "원하는 대로 G-Browser의 모양을 맞춤 설정할 수 있습니다. 밝거나 어두운 테마를 선택하거나 시스템 설정에 따라 자동으로 전환되도록 설정할 수 있습니다."
     },
     "themes": {
       "light": "밝음",
@@ -201,34 +201,34 @@
       "noEnginesFound": "검색 엔진을 찾을 수 없습니다."
     },
     "floorpHub": {
-      "title": "Floorp Hub",
-      "description": "Floorp Hub는 Floorp 옵션을 위한 전용 설정 센터입니다. 'about:hub'로 이동하여 열 수 있습니다. Firefox 설정 페이지의 왼쪽 사이드바에 있는 'about:preferences'에서도 액세스할 수 있습니다.",
+      "title": "G-Browser Hub",
+      "description": "G-Browser Hub는 G-Browser 옵션을 위한 전용 설정 센터입니다. 'about:hub'로 이동하여 열 수 있습니다. Firefox 설정 페이지의 왼쪽 사이드바에 있는 'about:preferences'에서도 액세스할 수 있습니다.",
       "openHub": "about:hub 열기",
       "openPreferences": "설정(about:preferences)을 열기"
     }
   },
   "finish": {
     "title": "설정이 완료되었습니다!",
-    "subtitle": "축하합니다! Floorp 설정을 완료했습니다. 빠르고 안전한 인터넷 브라우저 환경을 즐기세요.",
+    "subtitle": "축하합니다! G-Browser 설정을 완료했습니다. 빠르고 안전한 인터넷 브라우저 환경을 즐기세요.",
     "nextSteps": {
       "title": "다음 단계 (선택적)",
       "setDefault": "기본 브라우저로 설정",
       "documentation": "문서"
     },
-    "getStarted": "Floorp 시작하기",
+    "getStarted": "G-Browser 시작하기",
     "hint": "더 자세한 설정은 오른쪽 상단의 메뉴 버튼에 있는 설정 옵션을 통해 사용자 지정할 수 있습니다."
   },
   "setupGuide": {
-    "welcome": "Floorp에 오신 것을 환영합니다.",
+    "welcome": "G-Browser에 오신 것을 환영합니다.",
     "description": "브라우저를 당신의 방식대로 맞추세요.",
-    "introduction": "이 도움말은 Floorp의 기능을 소개하고 초기 설정을 선택할 수 있도록 돕습니다.",
+    "introduction": "이 도움말은 G-Browser의 기능을 소개하고 초기 설정을 선택할 수 있도록 돕습니다.",
     "start": "설정 시작",
     "next": "다음으로, 표시 언어를 확인하세요.",
     "progress": "설정 {{current}} / {{total}}",
     "title": "도움말의 내용",
     "subtitle": "기능을 둘러보고 맞는 설정을 고르세요.",
     "discover": {
-      "title": "Floorp 기능 살펴보기",
+      "title": "G-Browser 기능 살펴보기",
       "description": "탭을 정리하고 브라우저를 맞춤 설정하는 법을 알아보세요."
     },
     "personalize": {
@@ -241,10 +241,10 @@
     }
   },
   "welcomePage": {
-    "welcome": "Floorp에 오신 것을 환영합니다!",
-    "description": "Floorp는 개인 정보 보호와 보안을 강조하는 빠르고 사용자 친화적인 웹 브라우저입니다. 이 가이드에서는 Floorp의 주요 기능과 설정에 대해 소개합니다.",
+    "welcome": "G-Browser에 오신 것을 환영합니다!",
+    "description": "G-Browser는 개인 정보 보호와 보안을 강조하는 빠르고 사용자 친화적인 웹 브라우저입니다. 이 가이드에서는 G-Browser의 주요 기능과 설정에 대해 소개합니다.",
     "readyToStart": "준비가 완료되면 아래 버튼을 클릭하여 계속 진행하세요.",
-    "features": "Floorp 기능",
+    "features": "G-Browser 기능",
     "privacy": "개인 정보 보호 정책",
     "privacyDesc": "데이터 보호",
     "speed": "속도",
@@ -254,28 +254,28 @@
     "start": "시작하기"
   },
   "localizationPage": {
-    "title": "Floorp는 당신의 언어를 말합니다",
+    "title": "G-Browser는 당신의 언어를 말합니다",
     "subtitle": "변경이 필요하다면 언어 설정을 확인하세요",
     "languageSettings": "언어 설정",
     "languageChanged": "언어 변경 완료!",
     "currentLanguageInfo": "이 언어 정보",
     "systemLanguage": "시스템 언어",
-    "floorpLanguage": "Floorp 언어",
+    "floorpLanguage": "G-Browser 언어",
     "selectLanguage": "언어 선택",
     "useSystemLanguage": "시스템 언어 사용",
     "multilingual": "다국어 지원",
     "chooseLanguage": "다양한 언어 중에서 선택하세요",
-    "languageChangeNotice": "언어를 변경하면 Floorp를 다시 시작하지 않고도 새 언어가 적용됩니다. 일부 애드온은 언어 변경을 지원하지 않을 수 있습니다."
+    "languageChangeNotice": "언어를 변경하면 G-Browser를 다시 시작하지 않고도 새 언어가 적용됩니다. 일부 애드온은 언어 변경을 지원하지 않을 수 있습니다."
   },
   "featuresPage": {
-    "title": "Floorp 기능",
-    "subtitle": "Floorp에는 유용한 기능이 많이 있습니다. 기능 개요를 확인하세요!",
+    "title": "G-Browser 기능",
+    "subtitle": "G-Browser에는 유용한 기능이 많이 있습니다. 기능 개요를 확인하세요!",
     "panelSidebar": {
       "title": "패널 사이드바",
       "description": "탐색하는 동안 오른쪽 사이드바에서 편리한 기능에 액세스하세요. 사이드바에 웹 패널, 메모 기능, 애드온, 북마크 등을 배치할 수 있습니다.",
       "features": [
         "사이드바에 웹사이트 고정",
-        "탐색하는 동안 Floorp 노트로 빠르게 메모하기",
+        "탐색하는 동안 G-Browser 노트로 빠르게 메모하기",
         "컨테이너 지원"
       ]
     },
@@ -311,20 +311,20 @@
   },
   "finishPage": {
     "title": "설정 완료!",
-    "subtitle": "축하합니다! Floorp 설정을 완료했습니다. 이제 빠르고 안전한 인터넷 브라우징을 즐기세요.",
+    "subtitle": "축하합니다! G-Browser 설정을 완료했습니다. 이제 빠르고 안전한 인터넷 브라우징을 즐기세요.",
     "nextSteps": "다음 단계 (선택적)",
     "defaultBrowser": "기본 브라우저로 설정",
     "support": "지원",
     "documentation": "문서",
-    "getStarted": "Floorp 시작하기",
+    "getStarted": "G-Browser 시작하기",
     "hint": "더 자세한 설정은 오른쪽 상단의 메뉴 버튼에 있는 설정 옵션을 통해 사용자 지정할 수 있습니다.",
     "resourcesLabel": "리소스",
-    "defaultBrowserSuccess": "Floorp가 기본 브라우저로 설정되었습니다!",
+    "defaultBrowserSuccess": "G-Browser가 기본 브라우저로 설정되었습니다!",
     "opensInNewWindow": "opens in new window"
   },
   "whatsNew": {
-    "title": "Floorp {{version}} 에 오신 것을 환영합니다!",
-    "subtitle": "Floorp의 새로운 기능을 확인하세요!",
+    "title": "G-Browser {{version}} 에 오신 것을 환영합니다!",
+    "subtitle": "G-Browser의 새로운 기능을 확인하세요!",
     "tags": {
       "settings": "설정",
       "productivity": "편의 기능",
@@ -336,8 +336,8 @@
       "follow": "팔로우",
       "terms": "이용 약관",
       "privacy": "개인 정보 보호 정책",
-      "about": "Floorp Hub에 대해",
-      "copyright": "© {{year}} Floorp Projects. All Rights Reserved."
+      "about": "G-Browser Hub에 대해",
+      "copyright": "© {{year}} G-Browser Projects. All Rights Reserved."
     }
   },
   "ui": {
@@ -477,7 +477,7 @@
     "descriptions": [
       "선호하는 표시 언어를 확인하세요.",
       "테마와 검색 엔진을 선택하세요.",
-      "선택을 검토하고 Floorp 사용을 시작하세요."
+      "선택을 검토하고 G-Browser 사용을 시작하세요."
     ],
     "replay": "다시 보기"
   },

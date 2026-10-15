@@ -35,7 +35,7 @@ export const initializeI18n = async () => {
       interpolation: {
         escapeValue: false,
         defaultVariables: {
-          productName: "Floorp",
+          productName: "G-Browser",
         },
       },
       react: {

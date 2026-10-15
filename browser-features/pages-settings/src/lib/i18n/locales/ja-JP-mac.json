@@ -258,7 +258,7 @@
       },
       "newtab": {
         "title": "新規タブ",
-        "disableFloorpStart": "{{productName}} Start を無効にする"
+        "disableG-BrowserStart": "{{productName}} Start を無効にする"
       },
       "multirowTab": {
         "title": "多段タブ",
@@ -334,16 +334,16 @@
     "license": "ライセンス",
     "noraneko": {
       "logoAlt": "ブラウザーのロゴ",
-      "description": "Noraneko は Floorp 12 のテストヘッドブラウザーです。Floorp は Firefox と Noraneko をベースにしています。",
+      "description": "Noraneko は G-Browser 12 のテストヘッドブラウザーです。G-Browser は Firefox と Noraneko をベースにしています。",
       "communityCredit": "Noraneko コミュニティより ❤ を込めて制作",
-      "repositoryLabel": "GitHub リポジトリ: Floorp-Projects/Floorp"
+      "repositoryLabel": "GitHub リポジトリ: G-Browser-Projects/G-Browser"
     }
   },
   "updates": {
     "releaseNotes": {
       "learnMore": "この設定とご支援についての詳細を読む",
       "title": "更新後のリリースノート",
-      "description": "Floorp の更新後にリリースノートを開く方法を選択します。",
+      "description": "G-Browser の更新後にリリースノートを開く方法を選択します。",
       "disabled": {
         "label": "自動で開かない",
         "description": "更新後にリリースノートを開きません。ブログを閲覧する際は、お使いのブロッカーの設定が適用されます。"
@@ -353,11 +353,11 @@
         "description": "お使いの拡張機能をそのままにリリースノートを開きます。広告ブロッカーを自動でインストールまたは有効化することはありません。"
       },
       "support": {
-        "label": "Floorp を支援するために、広告を許可して開く (おすすめ)",
-        "description": "uBlock Origin、AdGuard、Adblock Plus、AdBlock、Ghostery が、Floorp ブログをフィルタリングするのを防ぎます。"
+        "label": "G-Browser を支援するために、広告を許可して開く (おすすめ)",
+        "description": "uBlock Origin、AdGuard、Adblock Plus、AdBlock、Ghostery が、G-Browser ブログをフィルタリングするのを防ぎます。"
       },
-      "supportMessage": "リリースノートからの広告収入は、Floorpの開発と運営を支えています。皆様のご都合に沿った形でのご支援に、心より感謝申し上げます。",
-      "scope": "この制限は、手動で開いた場合を含む blog.floorp.app 上のすべての HTTPS ページに適用され、広告ブロックやトラッキング保護、カスタムフィルター機能に影響します。他の拡張機能はこの設定による制限を受けません。他の保護ツールによって広告がブロックされる場合があります。設定を変更した後は、開いているブログページを再読み込みしてください。",
+      "supportMessage": "リリースノートからの広告収入は、G-Browserの開発と運営を支えています。皆様のご都合に沿った形でのご支援に、心より感謝申し上げます。",
+      "scope": "この制限は、手動で開いた場合を含む blog.gbrowser.app 上のすべての HTTPS ページに適用され、広告ブロックやトラッキング保護、カスタムフィルター機能に影響します。他の拡張機能はこの設定による制限を受けません。他の保護ツールによって広告がブロックされる場合があります。設定を変更した後は、開いているブログページを再読み込みしてください。",
       "error": "設定の読み込み、または保存に失敗しました。このページを再度開いて、もう一度お試しください。"
     },
     "title": "更新と実験",
@@ -708,7 +708,7 @@
       "gecko-scroll-line-down": "下にスクロール",
       "floorp-toggle-command-palette": "コマンドパレットの表示を切り替える",
       "floorp-open-settings": "設定",
-      "floorp-open-hub": "Floorp Hub を開く",
+      "floorp-open-hub": "G-Browser Hub を開く",
       "floorp-toggle-share-mode": "共有モードの表示を切り替える",
       "floorp-copy-page-url-as-markdown": "ページの URL を Markdown 形式でコピー",
       "floorp-split-view-open-left": "分割ビューで左側に開く",
@@ -847,7 +847,7 @@
     "loadError": "Could not load settings. Please reload this page."
   },
   "settingsHome": {
-    "title": "Make Floorp yours",
+    "title": "Make G-Browser yours",
     "description": "Adjust the look and controls to suit the way you browse.",
     "open": "Explore settings",
     "manage": "Manage your browser",
@@ -920,7 +920,7 @@
       "tools": "ツール",
       "downloads": "ダウンロード",
       "workspace": "ワークスペース",
-      "floorp": "Floorp",
+      "floorp": "G-Browser",
       "media": "メディア",
       "open-tabs": "タブを開く",
       "switcher": "スイッチャー",
@@ -994,11 +994,11 @@
     "confirmReset": "Reset everything",
     "saving": "Saving context-menu changes…",
     "saveError": "The context-menu changes could not be saved. The last saved layout is still in use.",
-    "saveConflict": "These settings changed in another Floorp Hub window. The latest saved layout was reloaded; please try your change again.",
+    "saveConflict": "These settings changed in another G-Browser Hub window. The latest saved layout was reloaded; please try your change again.",
     "loadError": "Some saved settings could not be read. Editing is disabled to protect the existing configuration; reload the page to try again.",
     "invalidConfigError": "The saved context-menu configuration is damaged. Editing is disabled, but Reset everything can safely replace it with a clean configuration.",
-    "unsupportedConfigError": "This context-menu configuration was created by a newer Floorp version. Editing and reset are disabled to protect it.",
-    "repairConflict": "The saved configuration changed before it could be repaired. Reload Floorp Hub to inspect the latest value.",
+    "unsupportedConfigError": "This context-menu configuration was created by a newer G-Browser version. Editing and reset are disabled to protect it.",
+    "repairConflict": "The saved configuration changed before it could be repaired. Reload G-Browser Hub to inspect the latest value.",
     "loadingCatalog": "Reading available browser menus…",
     "catalogUnavailable": "Menu items are not available yet",
     "catalogErrorDescription": "The browser could not provide its context-menu catalog. You can still enable the feature or reset all settings.",
@@ -1017,8 +1017,8 @@
     "independentProfileOffDescription": "This context uses the shared layout for the browser menu.",
     "resetProfile": "Reset profile",
     "items": "Menu items",
-    "editingIndependent": "Use the arrow buttons or Move to… to reorder items. Dragging is also available in Current context. Visibility switches apply only to items Floorp can safely hide in this context profile.",
-    "editingShared": "Use the arrow buttons or Move to… to reorder items. Dragging is also available in Current context. Visibility switches apply only to items Floorp can safely hide in the shared layout.",
+    "editingIndependent": "Use the arrow buttons or Move to… to reorder items. Dragging is also available in Current context. Visibility switches apply only to items G-Browser can safely hide in this context profile.",
+    "editingShared": "Use the arrow buttons or Move to… to reorder items. Dragging is also available in Current context. Visibility switches apply only to items G-Browser can safely hide in the shared layout.",
     "incompleteContainer": "Firefox reported only part of this menu. Unreported saved items will be kept unchanged.",
     "capabilityHelp": "“Conditional in Firefox” means Firefox hid the item for the most recently observed right-click context. It remains available in All items so you can configure its relative order. “Order fixed” items stay in their native positions and cannot be moved or used as destinations.",
     "viewMode": "Items shown",
@@ -1063,7 +1063,7 @@
     },
     "source": {
       "firefox": "Firefox",
-      "floorp": "Floorp",
+      "floorp": "G-Browser",
       "extension": "Extension",
       "unknown": "Other"
     }

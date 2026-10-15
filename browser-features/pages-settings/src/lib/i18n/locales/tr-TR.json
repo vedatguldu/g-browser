@@ -258,7 +258,7 @@
       },
       "newtab": {
         "title": "Yeni Sekme",
-        "disableFloorpStart": "{{productName}} Başlangıç Sayfasını Devre Dışı Bırak"
+        "disableG-BrowserStart": "{{productName}} Başlangıç Sayfasını Devre Dışı Bırak"
       },
       "multirowTab": {
         "title": "Çok Satırlı Sekme",
@@ -334,16 +334,16 @@
     "license": "Lisans",
     "noraneko": {
       "logoAlt": "Tarayıcı Logosu",
-      "description": "Noraneko, Floorp 12 için bir test öncüsü tarayıcıdır. Floorp; Firefox ve Noraneko temelleri üzerinde geliştirilmiştir.",
+      "description": "Noraneko, G-Browser 12 için bir test öncüsü tarayıcıdır. G-Browser; Firefox ve Noraneko temelleri üzerinde geliştirilmiştir.",
       "communityCredit": "Noraneko Topluluğu tarafından ❤ ile yapıldı",
-      "repositoryLabel": "GitHub Deposu: Floorp-Projects/Floorp"
+      "repositoryLabel": "GitHub Deposu: G-Browser-Projects/G-Browser"
     }
   },
   "updates": {
     "releaseNotes": {
       "learnMore": "Gelir modelimiz ve bu ayar hakkında bilgi edinin (Japonca)",
       "title": "Güncelleme Sonrası Sürüm Notları",
-      "description": "Güncelleme yapıldıktan sonra Floorp'un sürüm notlarını nasıl açacağını belirleyin.",
+      "description": "Güncelleme yapıldıktan sonra G-Browser'ın sürüm notlarını nasıl açacağını belirleyin.",
       "disabled": {
         "label": "Otomatik olarak açma",
         "description": "Güncellemelerden sonra sürüm notları kendiliğinden açılmaz. Blogu ziyaret ettiğinizde reklam engelleyici ayarlarınız aynen geçerlidir."
@@ -353,11 +353,11 @@
         "description": "Sürüm notlarını eklentilerinizi kısıtlamadan açar. Bu seçenek yeni bir reklam engelleyici yüklemez veya etkinleştirmez."
       },
       "support": {
-        "label": "Floorp'u desteklemek için reklamlara izin ver (önerilen)",
-        "description": "Floorp blogunda uBlock Origin, AdGuard, Adblock Plus, AdBlock ve Ghostery eklentilerinin filtre uygulamasını devre dışı bırakır."
+        "label": "G-Browser'ı desteklemek için reklamlara izin ver (önerilen)",
+        "description": "G-Browser blogunda uBlock Origin, AdGuard, Adblock Plus, AdBlock ve Ghostery eklentilerinin filtre uygulamasını devre dışı bırakır."
       },
-      "supportMessage": "Sürüm notlarındaki reklam gelirleri Floorp'un geliştirilmesini ve sunucu giderlerini destekler. Bizi size uygun şekilde desteklediğiniz için teşekkür ederiz.",
-      "scope": "Bu istisna kuralı, elle açılan sayfalar dahil blog.floorp.app üzerindeki tüm HTTPS ziyaretleri için geçerlidir. Listelenen beş eklentideki izleme korumasını ve özel filtreleri de etkiler. Diğer eklentiler bu ayardan etkilenmez. Harici koruma araçları reklamları engellemeye devam edebilir. Ayarı değiştirdikten sonra açık blog sayfalarını yenileyin.",
+      "supportMessage": "Sürüm notlarındaki reklam gelirleri G-Browser'ın geliştirilmesini ve sunucu giderlerini destekler. Bizi size uygun şekilde desteklediğiniz için teşekkür ederiz.",
+      "scope": "Bu istisna kuralı, elle açılan sayfalar dahil blog.gbrowser.app üzerindeki tüm HTTPS ziyaretleri için geçerlidir. Listelenen beş eklentideki izleme korumasını ve özel filtreleri de etkiler. Diğer eklentiler bu ayardan etkilenmez. Harici koruma araçları reklamları engellemeye devam edebilir. Ayarı değiştirdikten sonra açık blog sayfalarını yenileyin.",
       "error": "Bu ayar yüklenemedi veya kaydedilemedi. Lütfen sayfayı yeniden açıp tekrar deneyin."
     },
     "title": "Güncellemeler & Deneyler",
@@ -708,7 +708,7 @@
       "gecko-scroll-line-down": "Aşağı Kaydır",
       "floorp-toggle-command-palette": "Komut Paletini Aç/Kapat",
       "floorp-open-settings": "Ayarları Aç",
-      "floorp-open-hub": "Floorp Hub'ı aç",
+      "floorp-open-hub": "G-Browser Hub'ı aç",
       "floorp-toggle-share-mode": "Paylaşım Modunu Aç/Kapat",
       "floorp-copy-page-url-as-markdown": "Sayfa Adresini Markdown Olarak Kopyala",
       "floorp-split-view-open-left": "Bölünmüş Görünüm: Sola Aç",
@@ -771,11 +771,11 @@
     "confirmReset": "Her şeyi sıfırla",
     "saving": "Bağlam menüsü değişiklikleri kaydediliyor…",
     "saveError": "Bağlam menüsü değişiklikleri kaydedilemedi. Son kaydedilen düzen hala kullanımda.",
-    "saveConflict": "Bu ayarlar başka bir Floorp Hub penceresinde değişti. En son kaydedilen düzen yeniden yüklendi; lütfen değişikliğinizi tekrar deneyin.",
+    "saveConflict": "Bu ayarlar başka bir G-Browser Hub penceresinde değişti. En son kaydedilen düzen yeniden yüklendi; lütfen değişikliğinizi tekrar deneyin.",
     "loadError": "Bazı kayıtlı ayarlar okunamadı. Mevcut yapılandırmayı korumak için düzenleme devre dışı bırakıldı; tekrar denemek için sayfayı yenileyin.",
     "invalidConfigError": "Kayıtlı bağlam menüsü yapılandırması hasarlı. Düzenleme devre dışı bırakıldı, ancak Her şeyi sıfırla seçeneği temiz bir yapılandırmayla güvenle değiştirebilir.",
-    "unsupportedConfigError": "Bu bağlam menüsü yapılandırması daha yeni bir Floorp sürümü tarafından oluşturuldu. Korumak için düzenleme ve sıfırlama devre dışı bırakıldı.",
-    "repairConflict": "Kayıtlı yapılandırma onarılmadan önce değişti. En son değeri incelemek için Floorp Hub'ı yeniden yükleyin.",
+    "unsupportedConfigError": "Bu bağlam menüsü yapılandırması daha yeni bir G-Browser sürümü tarafından oluşturuldu. Korumak için düzenleme ve sıfırlama devre dışı bırakıldı.",
+    "repairConflict": "Kayıtlı yapılandırma onarılmadan önce değişti. En son değeri incelemek için G-Browser Hub'ı yeniden yükleyin.",
     "loadingCatalog": "Kullanılabilir tarayıcı menüleri okunuyor…",
     "catalogUnavailable": "Menü öğeleri henüz mevcut değil",
     "catalogErrorDescription": "Tarayıcı, bağlam menüsü kataloğunu sağlayamadı. Özelliği etkinleştirebilir veya tüm ayarları sıfırlayabilirsiniz.",
@@ -794,8 +794,8 @@
     "independentProfileOffDescription": "Bu bağlam, tarayıcı menüsü için paylaşılan düzeni kullanır.",
     "resetProfile": "Profili sıfırla",
     "items": "Menü öğeleri",
-    "editingIndependent": "Öğeleri yeniden sıralamak için ok düğmelerini veya Şuraya taşı… seçeneğini kullanın. Sürükleme Geçerli bağlam görünümünde de kullanılabilir. Görünürlük anahtarları yalnızca Floorp'un bu bağlam profilinde güvenle gizleyebileceği öğeler için geçerlidir.",
-    "editingShared": "Öğeleri yeniden sıralamak için ok düğmelerini veya Şuraya taşı… seçeneğini kullanın. Sürükleme Geçerli bağlam görünümünde de kullanılabilir. Görünürlük anahtarları yalnızca Floorp'un paylaşılan düzende güvenle gizleyebileceği öğeler için geçerlidir.",
+    "editingIndependent": "Öğeleri yeniden sıralamak için ok düğmelerini veya Şuraya taşı… seçeneğini kullanın. Sürükleme Geçerli bağlam görünümünde de kullanılabilir. Görünürlük anahtarları yalnızca G-Browser'ın bu bağlam profilinde güvenle gizleyebileceği öğeler için geçerlidir.",
+    "editingShared": "Öğeleri yeniden sıralamak için ok düğmelerini veya Şuraya taşı… seçeneğini kullanın. Sürükleme Geçerli bağlam görünümünde de kullanılabilir. Görünürlük anahtarları yalnızca G-Browser'ın paylaşılan düzende güvenle gizleyebileceği öğeler için geçerlidir.",
     "incompleteContainer": "Firefox bu menünün yalnızca bir kısmını bildirdi. Bildirilmeyen kaydedilmiş öğeler değiştirilmeden tutulacaktır.",
     "capabilityHelp": "“Firefox'ta Koşullu”, Firefox'un en son gözlemlenen sağ tıklama bağlamı için öğeyi gizlediği anlamına gelir. Göreli sırasını yapılandırabilmeniz için Tüm öğeler içinde kullanılabilir kalır. “Sırası sabit” öğeler yerel konumlarında kalır ve taşınamaz veya hedef olarak kullanılamaz.",
     "viewMode": "Gösterilen öğeler",
@@ -840,7 +840,7 @@
     },
     "source": {
       "firefox": "Firefox",
-      "floorp": "Floorp",
+      "floorp": "G-Browser",
       "extension": "Eklenti",
       "unknown": "Diğer"
     }
@@ -933,7 +933,7 @@
     "loadError": "Ayarlar yüklenemedi. Lütfen bu sayfayı yenileyin."
   },
   "settingsHome": {
-    "title": "Floorp'u kişiselleştirin",
+    "title": "G-Browser'ı kişiselleştirin",
     "description": "Görünümü ve kontrolleri gezinme tarzınıza uyarlayın.",
     "open": "Ayarları keşfet",
     "manage": "Tarayıcınızı yönetin",
@@ -1006,7 +1006,7 @@
       "tools": "Araçlar",
       "downloads": "İndirilenler",
       "workspace": "Çalışma Alanları",
-      "floorp": "Floorp",
+      "floorp": "G-Browser",
       "media": "Medya",
       "open-tabs": "Açık Sekmeler",
       "switcher": "Geçiş Yapıcı",
@@ -1128,6 +1128,6 @@
     "detectStream": "HLS ve Canlı Yayın Akışları (M3U8)",
     "detectStreamDesc": "Canlı yayın ve parçalı akış oynatma listelerini yakalar, doğrudan akış adresini kopyalama veya kaydetme imkanı sunar.",
     "privacyNoticeTitle": "Tamamen Yerel ve Güvenli Çalışma Mantığı",
-    "privacyNoticeText": "Floorp Ortam İndirici, tarama ve indirme işlemlerini doğrudan Gecko yerel indirme motoru (Downloads.sys.mjs) ile cihazınızda gerçekleştirir. Hiçbir URL veya ortam verisi harici sunuculara veya üçüncü parti servislere iletilmez."
+    "privacyNoticeText": "G-Browser Ortam İndirici, tarama ve indirme işlemlerini doğrudan Gecko yerel indirme motoru (Downloads.sys.mjs) ile cihazınızda gerçekleştirir. Hiçbir URL veya ortam verisi harici sunuculara veya üçüncü parti servislere iletilmez."
   }
 }

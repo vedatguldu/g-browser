@@ -64,7 +64,7 @@ export default function FinishPage() {
             <ExternalLink size={16} aria-hidden="true" />
           </a>
           <a
-            href="https://github.com/Floorp-Projects/Floorp"
+            href="https://github.com/vedatguldu/g-browser"
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`GitHub (${t("finishPage.opensInNewWindow", { defaultValue: "opens in new window" })})`}

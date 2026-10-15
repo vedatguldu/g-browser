@@ -258,7 +258,7 @@
       },
       "newtab": {
         "title": "新分頁",
-        "disableFloorpStart": "停用 {{productName}} Start"
+        "disableG-BrowserStart": "停用 {{productName}} Start"
       },
       "multirowTab": {
         "title": "多層分頁列",
@@ -334,16 +334,16 @@
     "license": "授權",
     "noraneko": {
       "logoAlt": "瀏覽器標誌",
-      "description": "Noraneko 是 Floorp 12 的測試版瀏覽器。Floorp 是以 Firefox 與 Noraneko 為基礎開發的。",
+      "description": "Noraneko 是 G-Browser 12 的測試版瀏覽器。G-Browser 是以 Firefox 與 Noraneko 為基礎開發的。",
       "communityCredit": "由 Noraneko 社群用 ❤ 製作",
-      "repositoryLabel": "GitHub 儲存庫：Floorp-Projects/Floorp"
+      "repositoryLabel": "GitHub 儲存庫：G-Browser-Projects/G-Browser"
     }
   },
   "updates": {
     "releaseNotes": {
       "learnMore": "了解我們的資金來源及此計畫的背景（日文）",
       "title": "歷來更新版本說明",
-      "description": "選擇 Floorp 在更新後如何開啟版本說明。",
+      "description": "選擇 G-Browser 在更新後如何開啟版本說明。",
       "disabled": {
         "label": "不要自動開啟",
         "description": "版本說明將不會在更新後自動開啟。攔截設定在你造訪官方部落格時也會生效。"
@@ -353,11 +353,11 @@
         "description": "在不限制擴充功能的情況下開啟版本說明。此操作不會開啟或安裝廣告攔截器。"
       },
       "support": {
-        "label": "開啟並顯示廣告來支持 Floorp（建議）",
-        "description": "阻止 uBlock Origin、AdGuard、Adblock Plus、AdBlock 及 Ghostery 過濾 Floorp 部落格的內容。"
+        "label": "開啟並顯示廣告來支持 G-Browser（建議）",
+        "description": "阻止 uBlock Origin、AdGuard、Adblock Plus、AdBlock 及 Ghostery 過濾 G-Browser 部落格的內容。"
       },
-      "supportMessage": "版本說明中的廣告收入全部用於支持 Floorp 的開發與營運。感謝你以適合自己的方式支持我們。",
-      "scope": "此例外適用於所有透過 HTTPS 存取 blog.floorp.app 的情況，包括手動開啟的頁面。此設定亦會影響所列五款擴充功能中的追蹤防護與自訂篩選器。其他擴充功能不受此設定限制。其他防護工具仍可能阻擋廣告。變更此設定後，請重新載入已開啟的部落格頁面。",
+      "supportMessage": "版本說明中的廣告收入全部用於支持 G-Browser 的開發與營運。感謝你以適合自己的方式支持我們。",
+      "scope": "此例外適用於所有透過 HTTPS 存取 blog.gbrowser.app 的情況，包括手動開啟的頁面。此設定亦會影響所列五款擴充功能中的追蹤防護與自訂篩選器。其他擴充功能不受此設定限制。其他防護工具仍可能阻擋廣告。變更此設定後，請重新載入已開啟的部落格頁面。",
       "error": "無法載入或儲存此設定。請重新開啟此頁面並再次嘗試。"
     },
     "title": "更新與實驗功能",
@@ -709,7 +709,7 @@
       "gecko-scroll-line-down": "向下捲動",
       "floorp-toggle-command-palette": "開關指令面板",
       "floorp-open-settings": "開啟設定",
-      "floorp-open-hub": "開啟 Floorp Hub",
+      "floorp-open-hub": "開啟 G-Browser Hub",
       "floorp-toggle-share-mode": "開關分享模式",
       "floorp-copy-page-url-as-markdown": "以 Markdown 格式複製分頁網址",
       "floorp-split-view-open-left": "在左側新增分割檢視",
@@ -848,7 +848,7 @@
     "loadError": "無法載入設定。請重新載入此頁面。"
   },
   "settingsHome": {
-    "title": "讓 Floorp 成為你想要的樣子",
+    "title": "讓 G-Browser 成為你想要的樣子",
     "description": "根據瀏覽習慣來調整外觀與控制方式。",
     "open": "探索設定",
     "manage": "管理你的瀏覽器",
@@ -883,11 +883,11 @@
     "confirmReset": "Reset everything",
     "saving": "Saving context-menu changes…",
     "saveError": "The context-menu changes could not be saved. The last saved layout is still in use.",
-    "saveConflict": "These settings changed in another Floorp Hub window. The latest saved layout was reloaded; please try your change again.",
+    "saveConflict": "These settings changed in another G-Browser Hub window. The latest saved layout was reloaded; please try your change again.",
     "loadError": "Some saved settings could not be read. Editing is disabled to protect the existing configuration; reload the page to try again.",
     "invalidConfigError": "The saved context-menu configuration is damaged. Editing is disabled, but Reset everything can safely replace it with a clean configuration.",
-    "unsupportedConfigError": "This context-menu configuration was created by a newer Floorp version. Editing and reset are disabled to protect it.",
-    "repairConflict": "The saved configuration changed before it could be repaired. Reload Floorp Hub to inspect the latest value.",
+    "unsupportedConfigError": "This context-menu configuration was created by a newer G-Browser version. Editing and reset are disabled to protect it.",
+    "repairConflict": "The saved configuration changed before it could be repaired. Reload G-Browser Hub to inspect the latest value.",
     "loadingCatalog": "Reading available browser menus…",
     "catalogUnavailable": "Menu items are not available yet",
     "catalogErrorDescription": "The browser could not provide its context-menu catalog. You can still enable the feature or reset all settings.",
@@ -906,8 +906,8 @@
     "independentProfileOffDescription": "This context uses the shared layout for the browser menu.",
     "resetProfile": "Reset profile",
     "items": "Menu items",
-    "editingIndependent": "Use the arrow buttons or Move to… to reorder items. Dragging is also available in Current context. Visibility switches apply only to items Floorp can safely hide in this context profile.",
-    "editingShared": "Use the arrow buttons or Move to… to reorder items. Dragging is also available in Current context. Visibility switches apply only to items Floorp can safely hide in the shared layout.",
+    "editingIndependent": "Use the arrow buttons or Move to… to reorder items. Dragging is also available in Current context. Visibility switches apply only to items G-Browser can safely hide in this context profile.",
+    "editingShared": "Use the arrow buttons or Move to… to reorder items. Dragging is also available in Current context. Visibility switches apply only to items G-Browser can safely hide in the shared layout.",
     "incompleteContainer": "Firefox reported only part of this menu. Unreported saved items will be kept unchanged.",
     "capabilityHelp": "“Conditional in Firefox” means Firefox hid the item for the most recently observed right-click context. It remains available in All items so you can configure its relative order. “Order fixed” items stay in their native positions and cannot be moved or used as destinations.",
     "viewMode": "Items shown",
@@ -952,7 +952,7 @@
     },
     "source": {
       "firefox": "Firefox",
-      "floorp": "Floorp",
+      "floorp": "G-Browser",
       "extension": "Extension",
       "unknown": "Other"
     }
@@ -1007,7 +1007,7 @@
       "tools": "Tools",
       "downloads": "Downloads",
       "workspace": "Workspaces",
-      "floorp": "Floorp",
+      "floorp": "G-Browser",
       "media": "Media",
       "open-tabs": "Open Tabs",
       "switcher": "Switcher",
@@ -1121,7 +1121,7 @@
     "badgeCount": "Address Bar Count Badge",
     "badgeCountDesc": "Displays a numeric counter badge on the address bar icon when downloadable media is detected.",
     "typesTitle": "Detectable Media Categories",
-    "typesDesc": "Choose which types of media Floorp should capture. All supported items can be downloaded directly to your native Downloads folder.",
+    "typesDesc": "Choose which types of media G-Browser should capture. All supported items can be downloaded directly to your native Downloads folder.",
     "detectVideo": "Video Files (MP4, WebM, MKV, M4V)",
     "detectVideoDesc": "Detects HTML5 video elements and direct video links.",
     "detectAudio": "Audio Files (MP3, WAV, OGG, FLAC, AAC)",
@@ -1129,6 +1129,6 @@
     "detectStream": "HLS & Live Streams (M3U8)",
     "detectStreamDesc": "Captures HLS playlist streams with options to copy stream URLs or save locally.",
     "privacyNoticeTitle": "100% Local & Privacy-Preserving Architecture",
-    "privacyNoticeText": "Floorp Media Downloader performs all detection and downloading directly on your device via Gecko's native download service (Downloads.sys.mjs). No URLs or media data are ever sent to remote servers."
+    "privacyNoticeText": "G-Browser Media Downloader performs all detection and downloading directly on your device via Gecko's native download service (Downloads.sys.mjs). No URLs or media data are ever sent to remote servers."
   }
 }

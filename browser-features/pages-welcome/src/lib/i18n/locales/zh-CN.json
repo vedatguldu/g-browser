@@ -7,59 +7,59 @@
     "enlarge": "Enlarge the {{feature}} screenshot",
     "enlargeShort": "View larger",
     "closePreview": "Close preview",
-    "actualScreenshot": "An actual Floorp screenshot. Appearance varies with your version and settings."
+    "actualScreenshot": "An actual G-Browser screenshot. Appearance varies with your version and settings."
   },
   "setupV5": {
     "back": "后退",
     "supportLabels": {
       "disabled": "Do not open automatically",
       "blocking": "Open with my blocker settings",
-      "support": "Allow ads to support Floorp"
+      "support": "Allow ads to support G-Browser"
     },
-    "supportNotice": "This is a draft choice. It takes effect when you press “Start using Floorp” on the next page. Closing setup before then keeps your current settings.",
+    "supportNotice": "This is a draft choice. It takes effect when you press “Start using G-Browser” on the next page. Closing setup before then keeps your current settings.",
     "steps": [
       "欢迎",
       "语言",
       "技术特性",
-      "Floorp 中心",
+      "G-Browser 中心",
       "常规",
       "支持",
       "Finish"
     ],
     "pages": [
       {
-        "title": "Welcome\nto Floorp.",
+        "title": "Welcome\nto G-Browser.",
         "description": "Make your browser work the way you do.",
         "hint": "This guide introduces the features and helps you choose your first settings."
       },
       {
         "title": "Start in the language\nyou know best.",
-        "description": "Check Floorp’s display language and change it if needed.",
+        "description": "Check G-Browser’s display language and change it if needed.",
         "hint": "Your chosen language takes effect immediately."
       },
       {
-        "title": "Explore what\nFloorp can do.",
+        "title": "Explore what\nG-Browser can do.",
         "description": "Separate tasks, view pages side by side, and work faster. Explore the features that interest you.",
         "hint": "You can adjust these features in Settings later."
       },
       {
-        "title": "Your settings,\nin Floorp Hub.",
-        "description": "Adjust Floorp-specific features in one place.",
+        "title": "Your settings,\nin G-Browser Hub.",
+        "description": "Adjust G-Browser-specific features in one place.",
         "hint": "You can open it any time after setup."
       },
       {
         "title": "Make appearance\nand search your own.",
         "description": "Choose the theme and search engine you use every day.",
-        "hint": "You can change them later in Floorp Hub or Firefox Settings."
+        "hint": "You can change them later in G-Browser Hub or Firefox Settings."
       },
       {
-        "title": "Updates and\nsupporting Floorp.",
-        "description": "Advertising revenue supports Floorp’s development and operation. Choose how release notes open.",
+        "title": "Updates and\nsupporting G-Browser.",
+        "description": "Advertising revenue supports G-Browser’s development and operation. Choose how release notes open.",
         "hint": "You can change this later under Updates and experiments."
       },
       {
         "title": "You’re ready\nto browse.",
-        "description": "Review your choices and start using Floorp.",
+        "description": "Review your choices and start using G-Browser.",
         "hint": "You can still change your settings later."
       }
     ],
@@ -80,7 +80,7 @@
     ],
     "changeLater": "You can change these settings later.",
     "languageTitle": "Display language",
-    "languageLabel": "Floorp display language",
+    "languageLabel": "G-Browser display language",
     "languageHint": "Used for menus and settings.",
     "languageNotice": "Some add-ons may not support changing languages.",
     "languageCurrent": "Using {{language}}",
@@ -100,7 +100,7 @@
         "description": "Shortcuts to frequently used actions"
       }
     ],
-    "openHub": "打开 Floorp Hub",
+    "openHub": "打开 G-Browser Hub",
     "openPreferences": "Open Firefox Settings",
     "newTab": "Opens in a new tab.",
     "hubAddress": "You can also enter about:hub in the address bar.",
@@ -110,23 +110,23 @@
     "scopeTitle": "Scope when allowing advertising",
     "summaryTitle": "Review your settings",
     "change": "更改",
-    "defaultTitle": "Make Floorp your everyday browser",
-    "defaultHint": "Set links to open in Floorp.",
-    "getStarted": "Start using Floorp",
-    "finishNotice": "“Start using Floorp” confirms your release notes choice."
+    "defaultTitle": "Make G-Browser your everyday browser",
+    "defaultHint": "Set links to open in G-Browser.",
+    "getStarted": "Start using G-Browser",
+    "finishNotice": "“Start using G-Browser” confirms your release notes choice."
   },
   "releaseNotes": {
     "prompt": {
       "title": "A new choice.\nSupport what comes next.",
-      "description": "Advertising revenue supports Floorp development and operation. You can now choose how release notes open and how blockers work on the Floorp blog.",
+      "description": "Advertising revenue supports G-Browser development and operation. You can now choose how release notes open and how blockers work on the G-Browser blog.",
       "hint": "Your settings stay as they are until you save a selection. You can change it later in Updates & Experiments.",
       "choiceTitle": "Choose how release notes open",
-      "choiceDescription": "Choose automatic display after updates and how your blockers work on the Floorp blog.",
+      "choiceDescription": "Choose automatic display after updates and how your blockers work on the G-Browser blog.",
       "dismiss": "Not now"
     },
     "learnMore": "Read about our funding and this setting (Japanese)",
-    "title": "Release notes and supporting Floorp",
-    "description": "Advertising revenue supports Floorp development and operation. Choose how to open release notes after updates. You can change this later in Settings → Updates & Experiments.",
+    "title": "Release notes and supporting G-Browser",
+    "description": "Advertising revenue supports G-Browser development and operation. Choose how to open release notes after updates. You can change this later in Settings → Updates & Experiments.",
     "disabled": {
       "label": "Do not open automatically",
       "description": "Do not open release notes after updates. Keep your blocker settings when visiting the blog."
@@ -136,10 +136,10 @@
       "description": "Keep your extensions working as configured. This does not install or enable an ad blocker."
     },
     "support": {
-      "label": "Allow ads to support Floorp (recommended)",
-      "description": "Restrict uBlock Origin, AdGuard, Adblock Plus, AdBlock and Ghostery on the Floorp blog."
+      "label": "Allow ads to support G-Browser (recommended)",
+      "description": "Restrict uBlock Origin, AdGuard, Adblock Plus, AdBlock and Ghostery on the G-Browser blog."
     },
-    "scope": "The restriction applies to all HTTPS pages on blog.floorp.app, including manually opened pages, and affects tracking protection and custom filters as well as ad blocking. Other extensions are not restricted by this setting. Ads may still be blocked by other protection tools. Reload open blog pages after changing the setting.",
+    "scope": "The restriction applies to all HTTPS pages on blog.gbrowser.app, including manually opened pages, and affects tracking protection and custom filters as well as ad blocking. Other extensions are not restricted by this setting. Ads may still be blocked by other protection tools. Reload open blog pages after changing the setting.",
     "currentSetting": "Current setting: {{mode}}",
     "applyOnConfirm": "Your selection takes effect only when you confirm. Closing this page keeps your current setting.",
     "changeSelection": "Change selection",
@@ -149,14 +149,14 @@
     "error": "Could not load or save your selection. Please reopen this page and try again."
   },
   "navigation": {
-    "support": "Support Floorp",
+    "support": "Support G-Browser",
     "welcome": "欢迎",
     "language": "语言",
     "languageSupport": "语言支持",
     "features": "技术特性",
     "featureIntroduction": "功能介绍",
-    "hub": "Floorp 中心",
-    "hubIntro": "关于 Floorp 中心",
+    "hub": "G-Browser 中心",
+    "hubIntro": "关于 G-Browser 中心",
     "customize": "自定义",
     "initialSettings": "初始设置",
     "complete": "完成",
@@ -164,25 +164,25 @@
     "next": "下一步"
   },
   "hubPage": {
-    "title": "关于 Floorp 中心",
-    "subtitle": "Floorp 特定设置的中心位置。",
-    "sectionTitle": "Floorp 中心",
-    "description": "Floorp 中心是用于设置 Floorp 特定选项的设置中心。你可以通过导航到“关于：中心”来打开它。也可以从 Firefox 设置页面左侧的“关于：首选项”进入。",
+    "title": "关于 G-Browser 中心",
+    "subtitle": "G-Browser 特定设置的中心位置。",
+    "sectionTitle": "G-Browser 中心",
+    "description": "G-Browser 中心是用于设置 G-Browser 特定选项的设置中心。你可以通过导航到“关于：中心”来打开它。也可以从 Firefox 设置页面左侧的“关于：首选项”进入。",
     "openHub": "打开 关于：中心",
     "openPreferences": "打开设置（关于：首选项）",
-    "tip": "提示：你也可以从 Firefox 设置左侧访问 Floorp 中心。",
+    "tip": "提示：你也可以从 Firefox 设置左侧访问 G-Browser 中心。",
     "features": {
-      "dedicated": "Floorp 专用设置中心",
+      "dedicated": "G-Browser 专用设置中心",
       "accessible": "可从 关于：中心 或 Firefox 设置中访问",
-      "centralized": "将所有 Floorp 选项集中到一处"
+      "centralized": "将所有 G-Browser 选项集中到一处"
     }
   },
   "customize": {
-    "title": "自定义 Floorp",
-    "description": "自定义您喜欢的设置。您可以随时更改 Floorp Hub 或设置页面。",
+    "title": "自定义 G-Browser",
+    "description": "自定义您喜欢的设置。您可以随时更改 G-Browser Hub 或设置页面。",
     "appearance": {
       "title": "外观设置",
-      "description": "你可以根据自己的喜好定制 Floorp 的外观。选择浅色或深色主题，或根据系统设置自动切换。"
+      "description": "你可以根据自己的喜好定制 G-Browser 的外观。选择浅色或深色主题，或根据系统设置自动切换。"
     },
     "themes": {
       "light": "浅色",
@@ -201,34 +201,34 @@
       "noEnginesFound": "未找到搜索引擎。"
     },
     "floorpHub": {
-      "title": "Floorp 中心",
-      "description": "Floorp 中心是用于设置 Floorp 特定选项的设置中心。你可以通过导航到“关于：中心”来打开它。也可以从 Firefox 设置页面左侧的“关于：首选项”进入。",
+      "title": "G-Browser 中心",
+      "description": "G-Browser 中心是用于设置 G-Browser 特定选项的设置中心。你可以通过导航到“关于：中心”来打开它。也可以从 Firefox 设置页面左侧的“关于：首选项”进入。",
       "openHub": "打开 关于：中心",
       "openPreferences": "打开设置（关于：首选项）"
     }
   },
   "finish": {
     "title": "设置已完成！",
-    "subtitle": "恭喜！您已完成 Floorp 设置。请尽情享受舒适安全的网络浏览体验。",
+    "subtitle": "恭喜！您已完成 G-Browser 设置。请尽情享受舒适安全的网络浏览体验。",
     "nextSteps": {
       "title": "下一步（可选）",
       "setDefault": "设置为默认浏览器",
       "documentation": "文档"
     },
-    "getStarted": "开始使用 Floorp",
+    "getStarted": "开始使用 G-Browser",
     "hint": "要进行更详细的设置，可以通过右上角菜单按钮中的选项进行自定义。"
   },
   "setupGuide": {
-    "welcome": "欢迎使用 Floorp.",
+    "welcome": "欢迎使用 G-Browser.",
     "description": "Make your browser work the way you do.",
-    "introduction": "This guide introduces Floorp's features and helps you choose your first settings.",
+    "introduction": "This guide introduces G-Browser's features and helps you choose your first settings.",
     "start": "Start setup",
     "next": "Next, check your display language.",
     "progress": "Setup {{current}} / {{total}}",
     "title": "What this guide covers",
     "subtitle": "Explore the features and choose settings that suit you.",
     "discover": {
-      "title": "Discover Floorp's features",
+      "title": "Discover G-Browser's features",
       "description": "Explore ways to organize tabs and customize your browser."
     },
     "personalize": {
@@ -241,10 +241,10 @@
     }
   },
   "welcomePage": {
-    "welcome": "欢迎来到 Floorp！",
-    "description": "Floorp 是一款快速、用户友好的网页浏览器，注重隐私和安全。本指南将向你介绍 Floorp 的主要功能和设置。",
+    "welcome": "欢迎来到 G-Browser！",
+    "description": "G-Browser 是一款快速、用户友好的网页浏览器，注重隐私和安全。本指南将向你介绍 G-Browser 的主要功能和设置。",
     "readyToStart": "准备就绪后，点击下面的按钮继续。",
-    "features": "Floorp 特性",
+    "features": "G-Browser 特性",
     "privacy": "隐私政策",
     "privacyDesc": "保护您的数据",
     "speed": "速度",
@@ -254,28 +254,28 @@
     "start": "开始使用"
   },
   "localizationPage": {
-    "title": "Floorp 会说您的语言",
+    "title": "G-Browser 会说您的语言",
     "subtitle": "检查语言设置并按需更改",
     "languageSettings": "语言设置",
     "languageChanged": "语言已更改！",
     "currentLanguageInfo": "当前语言信息",
     "systemLanguage": "系统语言",
-    "floorpLanguage": "Floorp 语言",
+    "floorpLanguage": "G-Browser 语言",
     "selectLanguage": "选择语言",
     "useSystemLanguage": "跟随系统语言",
     "multilingual": "多语言支持",
     "chooseLanguage": "从多种语言中选择",
-    "languageChangeNotice": "更改语言将应用新语言，无需重启 Floorp。某些附加组件可能不支持语言更改。"
+    "languageChangeNotice": "更改语言将应用新语言，无需重启 G-Browser。某些附加组件可能不支持语言更改。"
   },
   "featuresPage": {
-    "title": "Floorp 主要特性",
-    "subtitle": "Floorp 拥有许多实用功能。请查看功能概览！",
+    "title": "G-Browser 主要特性",
+    "subtitle": "G-Browser 拥有许多实用功能。请查看功能概览！",
     "panelSidebar": {
       "title": "面板侧边栏",
       "description": "浏览时从右侧的侧边栏访问便捷功能。您可以在侧边栏中放置网页面板、笔记功能、附加组件、书签等。",
       "features": [
         "将网站固定到侧边栏",
-        "浏览时使用 Floorp Notes 快速笔记",
+        "浏览时使用 G-Browser Notes 快速笔记",
         "支持容器功能"
       ]
     },
@@ -311,20 +311,20 @@
   },
   "finishPage": {
     "title": "设置已完成！",
-    "subtitle": "恭喜！您已完成 Floorp 设置。请尽情享受舒适安全的网络浏览体验。",
+    "subtitle": "恭喜！您已完成 G-Browser 设置。请尽情享受舒适安全的网络浏览体验。",
     "nextSteps": "下一步（可选）",
     "defaultBrowser": "设置为默认浏览器",
     "support": "支持",
     "documentation": "文档",
-    "getStarted": "开始使用 Floorp",
+    "getStarted": "开始使用 G-Browser",
     "hint": "要进行更详细的设置，可以通过右上角菜单按钮中的选项进行自定义。",
     "resourcesLabel": "资源",
-    "defaultBrowserSuccess": "Floorp 已被设置为您的默认浏览器！",
+    "defaultBrowserSuccess": "G-Browser 已被设置为您的默认浏览器！",
     "opensInNewWindow": "opens in new window"
   },
   "whatsNew": {
-    "title": "欢迎访问 Floorp {{version}}！",
-    "subtitle": "查看 Floorp 的新功能！",
+    "title": "欢迎访问 G-Browser {{version}}！",
+    "subtitle": "查看 G-Browser 的新功能！",
     "tags": {
       "settings": "设置",
       "productivity": "效率",
@@ -336,8 +336,8 @@
       "follow": "关注",
       "terms": "使用条款",
       "privacy": "隐私声明",
-      "about": "关于 Floorp",
-      "copyright": "© {{year}} Floorp 项目。保留所有权利。"
+      "about": "关于 G-Browser",
+      "copyright": "© {{year}} G-Browser 项目。保留所有权利。"
     }
   },
   "ui": {
@@ -477,7 +477,7 @@
     "descriptions": [
       "Check your preferred display language.",
       "Choose a theme and search engine.",
-      "Review your choices and start using Floorp."
+      "Review your choices and start using G-Browser."
     ],
     "replay": "Watch again"
   },

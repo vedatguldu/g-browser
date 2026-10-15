@@ -1,5 +1,5 @@
 {
-  "title": "Floorp Start",
+  "title": "G-Browser Start",
   "topSites": {
     "addSite": "Site toevoegen",
     "addNewSite": "Nieuwe site toevoegen",
@@ -28,7 +28,7 @@
     "randomImage": "Willekeurige afbeelding",
     "customImage": "Eigen afbeelding",
     "folderImages": "Afbeeldingen uit een map",
-    "floorpImages": "Floorp Afbeeldingen",
+    "floorpImages": "G-Browser Afbeeldingen",
     "currentImage": "Huidige afbeelding:",
     "imageRecommendation": "Advies: gebruik afbeeldingen met een resolutie van 1920x1080 of hoger.",
     "currentFolder": "Huidige map:",
@@ -36,9 +36,9 @@
     "selected": "Geselecteerd",
     "enableSlideshow": "Diavoorstelling inschakelen",
     "slideshowInterval": "Interval (seconden)",
-    "floorpStart": "Floorp Start",
-    "disableFloorpStart": "Floorp Start uitschakelen (gebruik klassieke about:newtab)",
-    "disableFloorpStartDescription": "Indien ingeschakeld, zal Floorp Start worden vervangen door het klassieke nieuwe tabblad/startpagina van Firefox.",
+    "floorpStart": "G-Browser Start",
+    "disableG-BrowserStart": "G-Browser Start uitschakelen (gebruik klassieke about:newtab)",
+    "disableG-BrowserStartDescription": "Indien ingeschakeld, zal G-Browser Start worden vervangen door het klassieke nieuwe tabblad/startpagina van Firefox.",
     "restartRequired": "Vereist een herstart van de browser om volledig van kracht te worden.",
     "firefoxLayout": "Legacy lay-out gebruiken (zoals Firefox Home)",
     "blockedSites": "Blocked Sites",

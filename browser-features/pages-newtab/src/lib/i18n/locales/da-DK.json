@@ -1,5 +1,5 @@
 {
-  "title": "Floorp start",
+  "title": "G-Browser start",
   "topSites": {
     "addSite": "Add site",
     "addNewSite": "Add new site",
@@ -28,7 +28,7 @@
     "randomImage": "Tilfældigt billede",
     "customImage": "Brugerdefineret billede",
     "folderImages": "Billeder fra mappe",
-    "floorpImages": "Floorp-billeder",
+    "floorpImages": "G-Browser-billeder",
     "currentImage": "Nuværende billede:",
     "imageRecommendation": "Anbefalet: 1920x1080 eller højere",
     "currentFolder": "Nuværende mappe:",
@@ -36,9 +36,9 @@
     "selected": "Valgt",
     "enableSlideshow": "Enable Slideshow",
     "slideshowInterval": "Slideshow Interval",
-    "floorpStart": "Floorp start",
-    "disableFloorpStart": "Disable Floorp Start (use classic about:newtab)",
-    "disableFloorpStartDescription": "When enabled, Floorp Start will be replaced by the classic Firefox new tab / home page.",
+    "floorpStart": "G-Browser start",
+    "disableG-BrowserStart": "Disable G-Browser Start (use classic about:newtab)",
+    "disableG-BrowserStartDescription": "When enabled, G-Browser Start will be replaced by the classic Firefox new tab / home page.",
     "restartRequired": "Requires browser restart to take full effect.",
     "firefoxLayout": "Use Legacy Layout (Like Firefox Home)",
     "blockedSites": "Blocked Sites",

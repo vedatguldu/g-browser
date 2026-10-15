@@ -1,5 +1,5 @@
 {
-  "title": "Floorp Start",
+  "title": "G-Browser Start",
   "topSites": {
     "addSite": "Lägg till webbplats",
     "addNewSite": "Lägg till ny webbplats",
@@ -28,7 +28,7 @@
     "randomImage": "Slumpmässig bild",
     "customImage": "Anpassad bild",
     "folderImages": "Bilder från mapp",
-    "floorpImages": "Floorp bilder",
+    "floorpImages": "G-Browser bilder",
     "currentImage": "Nuvarande bild:",
     "imageRecommendation": "Rekommenderas: 1920x1080 eller högre",
     "currentFolder": "Nuvarande mapp:",
@@ -36,9 +36,9 @@
     "selected": "Vald",
     "enableSlideshow": "Aktivera bildspel",
     "slideshowInterval": "Slideshow Interval",
-    "floorpStart": "Floorp Start",
-    "disableFloorpStart": "Inaktivera Floorp Start (använd klassisk about:newtab)",
-    "disableFloorpStartDescription": "När aktiverad, Floorp Start kommer att ersättas av den klassiska Firefox ny fliken / startsidan.",
+    "floorpStart": "G-Browser Start",
+    "disableG-BrowserStart": "Inaktivera G-Browser Start (använd klassisk about:newtab)",
+    "disableG-BrowserStartDescription": "När aktiverad, G-Browser Start kommer att ersättas av den klassiska Firefox ny fliken / startsidan.",
     "restartRequired": "Kräver omstart av webbläsaren för att få full effekt.",
     "firefoxLayout": "Använd äldre layout (som Firefox Home)",
     "blockedSites": "Blocked Sites",

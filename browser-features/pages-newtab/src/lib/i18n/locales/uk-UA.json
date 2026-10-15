@@ -1,5 +1,5 @@
 {
-  "title": "Домівка Floorp",
+  "title": "Домівка G-Browser",
   "topSites": {
     "addSite": "Додати сайт",
     "addNewSite": "Додати новий сайт",
@@ -28,7 +28,7 @@
     "randomImage": "Випадкове зображення",
     "customImage": "Користувацьке зображення",
     "folderImages": "Зображення з папки",
-    "floorpImages": "Зображення Floorp",
+    "floorpImages": "Зображення G-Browser",
     "currentImage": "Поточне зображення:",
     "imageRecommendation": "Рекомендація: Використовуйте зображення з роздільною здатністю 1920x1080 або вище.",
     "currentFolder": "Поточна тека:",
@@ -36,9 +36,9 @@
     "selected": "Вибрані",
     "enableSlideshow": "Увімкнути слайд-шоу",
     "slideshowInterval": "Інтервал (секунди)",
-    "floorpStart": "Домівка Floorp",
-    "disableFloorpStart": "Вимкнути Домівку Floorp (використовувати класичну about:newtab)",
-    "disableFloorpStartDescription": "Якщо цю опцію увімкнути, Домівка Floorp буде замінена класичною новою вкладкою/домашньою сторінкою Firefox.",
+    "floorpStart": "Домівка G-Browser",
+    "disableG-BrowserStart": "Вимкнути Домівку G-Browser (використовувати класичну about:newtab)",
+    "disableG-BrowserStartDescription": "Якщо цю опцію увімкнути, Домівка G-Browser буде замінена класичною новою вкладкою/домашньою сторінкою Firefox.",
     "restartRequired": "Для повного застосування змін необхідно перезапустити браузер.",
     "firefoxLayout": "Використовувати старий макет (як Домівка Firefox)",
     "blockedSites": "Blocked Sites",

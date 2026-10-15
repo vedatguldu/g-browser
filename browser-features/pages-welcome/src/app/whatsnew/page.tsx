@@ -15,7 +15,7 @@ export default function WhatsNewPage() {
     const previousTitle = document.title;
     document.title = t("whatsNew.documentTitle", {
       version,
-      defaultValue: "Floorp – What's New",
+      defaultValue: "G-Browser – What's New",
     });
     return () => {
       document.title = previousTitle;
@@ -69,7 +69,7 @@ export default function WhatsNewPage() {
         <h2>{t("whatsNew.footer.follow")}</h2>
         <div className={styles.links}>
           <a
-            href="https://github.com/Floorp-Projects/Floorp"
+            href="https://github.com/vedatguldu/g-browser"
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`GitHub (${t("finishPage.opensInNewWindow", { defaultValue: "opens in new window" })})`}

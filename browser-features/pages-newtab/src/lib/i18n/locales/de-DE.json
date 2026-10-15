@@ -1,5 +1,5 @@
 {
-  "title": "Floorp-Start",
+  "title": "G-Browser-Start",
   "topSites": {
     "addSite": "Seite hinzufügen",
     "addNewSite": "Neue Seite hinzufügen",
@@ -28,7 +28,7 @@
     "randomImage": "Zufälliges Bild",
     "customImage": "Benutzerdefiniertes Bild",
     "folderImages": "Bilder aus einem Ordner",
-    "floorpImages": "Floorp-Bilder",
+    "floorpImages": "G-Browser-Bilder",
     "currentImage": "Aktuelles Bild:",
     "imageRecommendation": "Empfohlen: Verwenden Sie Bilder mit einer Auflösung von 1920x1080 oder höher.",
     "currentFolder": "Aktueller Ordner:",
@@ -36,9 +36,9 @@
     "selected": "Ausgewählt",
     "enableSlideshow": "Diashow aktivieren",
     "slideshowInterval": "Intervall (Sekunden)",
-    "floorpStart": "Floorp-Start",
-    "disableFloorpStart": "Floorp-Start deaktivieren (Klassisches about:newtab verwenden)",
-    "disableFloorpStartDescription": "Wenn aktiviert, wird Floorp-Start durch den klassischen neuen Firefox-Tab ersetzt.",
+    "floorpStart": "G-Browser-Start",
+    "disableG-BrowserStart": "G-Browser-Start deaktivieren (Klassisches about:newtab verwenden)",
+    "disableG-BrowserStartDescription": "Wenn aktiviert, wird G-Browser-Start durch den klassischen neuen Firefox-Tab ersetzt.",
     "restartRequired": "Erfordert einen Neustart des Browsers, um vollständig wirksam zu werden.",
     "firefoxLayout": "Legacy-Layout verwenden (wie Firefox Home)",
     "blockedSites": "Blocked Sites",

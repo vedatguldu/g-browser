@@ -7,59 +7,59 @@
     "enlarge": "Schermafbeelding van {{feature}} vergroten",
     "enlargeShort": "Groter weergeven",
     "closePreview": "Sluit voorbeeld",
-    "actualScreenshot": "Echte schermafbeelding van Floorp. Het uiterlijk hangt af van je versie en instellingen."
+    "actualScreenshot": "Echte schermafbeelding van G-Browser. Het uiterlijk hangt af van je versie en instellingen."
   },
   "setupV5": {
     "back": "Terug",
     "supportLabels": {
       "disabled": "Niet automatisch openen",
       "blocking": "Open met mijn blocker-instellingen",
-      "support": "Advertenties toestaan om Floorp te ondersteunen"
+      "support": "Advertenties toestaan om G-Browser te ondersteunen"
     },
-    "supportNotice": "Dit is een conceptkeuze. Deze wordt pas van kracht wanneer je op de volgende pagina op „Start met het gebruik van Floorp” klikt. Als je de installatie voor die tijd sluit, behoud je je huidige instellingen.",
+    "supportNotice": "Dit is een conceptkeuze. Deze wordt pas van kracht wanneer je op de volgende pagina op „Start met het gebruik van G-Browser” klikt. Als je de installatie voor die tijd sluit, behoud je je huidige instellingen.",
     "steps": [
       "Welkom",
       "Taal",
       "Functies",
-      "Floorp Hub",
+      "G-Browser Hub",
       "Voorkeuren",
       "Ondersteuning",
       "Voltooien"
     ],
     "pages": [
       {
-        "title": "Welkom\nbij Floorp.",
+        "title": "Welkom\nbij G-Browser.",
         "description": "Laat je browser aansluiten op jouw manier van werken.",
         "hint": "Deze gids laat je kennismaken met de functies en helpt je bij het kiezen van je eerste instellingen."
       },
       {
         "title": "Start in de taal\ndie je het beste kent.",
-        "description": "Controleer de weergavetaal van Floorp en pas deze indien nodig aan.",
+        "description": "Controleer de weergavetaal van G-Browser en pas deze indien nodig aan.",
         "hint": "Je gekozen taal wordt direct toegepast."
       },
       {
-        "title": "Ontdek wat\nFloorp allemaal kan.",
+        "title": "Ontdek wat\nG-Browser allemaal kan.",
         "description": "Scheid je taken, bekijk pagina's zij aan zij en werk sneller. Ontdek de functies die je interesseren.",
         "hint": "Je kunt deze functies later aanpassen in de Instellingen."
       },
       {
-        "title": "Je instellingen,\nin de Floorp Hub.",
-        "description": "Pas Floorp-specifieke functies aan op één plek.",
+        "title": "Je instellingen,\nin de G-Browser Hub.",
+        "description": "Pas G-Browser-specifieke functies aan op één plek.",
         "hint": "Na de installatie kun je dit op elk moment openen."
       },
       {
         "title": "Maak uiterlijk\n en zoeken helemaal van jou.",
         "description": "Kies je dagelijkse thema en zoekmachine.",
-        "hint": "Je kunt deze later wijzigen in de Floorp Hub of de Firefox-instellingen."
+        "hint": "Je kunt deze later wijzigen in de G-Browser Hub of de Firefox-instellingen."
       },
       {
-        "title": "Updates en\nsteun aan Floorp.",
-        "description": "Advertentie-inkomsten ondersteunen de ontwikkeling en werking van Floorp. Kies hoe release-opmerkingen worden geopend.",
+        "title": "Updates en\nsteun aan G-Browser.",
+        "description": "Advertentie-inkomsten ondersteunen de ontwikkeling en werking van G-Browser. Kies hoe release-opmerkingen worden geopend.",
         "hint": "Later aan te passen via Updates en experimenten."
       },
       {
         "title": "Je bent klaar\nom te surfen.",
-        "description": "Bekijk je keuzes en begin met Floorp.",
+        "description": "Bekijk je keuzes en begin met G-Browser.",
         "hint": "Je kunt je instellingen later altijd nog wijzigen."
       }
     ],
@@ -80,7 +80,7 @@
     ],
     "changeLater": "Je kunt deze instellingen later altijd nog wijzigen.",
     "languageTitle": "Weergavetaal",
-    "languageLabel": "Weergavetaal van Floorp",
+    "languageLabel": "Weergavetaal van G-Browser",
     "languageHint": "Gebruikt voor menu's en instellingen.",
     "languageNotice": "Sommige add-ons ondersteunen taalwijzigingen mogelijk niet.",
     "languageCurrent": "{{language}} wordt gebruikt",
@@ -100,7 +100,7 @@
         "description": "Sneltoetsen voor veelgebruikte acties"
       }
     ],
-    "openHub": "Open Floorp Hub",
+    "openHub": "Open G-Browser Hub",
     "openPreferences": "Open de Firefox-instellingen",
     "newTab": "Opent in nieuw tabblad.",
     "hubAddress": "Je kunt ook about:hub invoeren in de adresbalk.",
@@ -110,23 +110,23 @@
     "scopeTitle": "Bereik van toegestane advertenties",
     "summaryTitle": "Controleer je instellingen",
     "change": "Wijzigen",
-    "defaultTitle": "Stel Floorp in als je standaardbrowser",
-    "defaultHint": "Stel links in om te openen in Floorp.",
-    "getStarted": "Start met Floorp",
-    "finishNotice": "“Start met Floorp” bevestigt je keuze voor de releaseopmerkingen."
+    "defaultTitle": "Stel G-Browser in als je standaardbrowser",
+    "defaultHint": "Stel links in om te openen in G-Browser.",
+    "getStarted": "Start met G-Browser",
+    "finishNotice": "“Start met G-Browser” bevestigt je keuze voor de releaseopmerkingen."
   },
   "releaseNotes": {
     "prompt": {
       "title": "Een nieuwe keuze.\nOndersteun wat hierna komt.",
-      "description": "Advertentie-inkomsten ondersteunen de ontwikkeling en werking van Floorp. Je kunt nu kiezen hoe releaseopmerkingen openen en hoe blokkeerders werken op de Floorp-blog.",
+      "description": "Advertentie-inkomsten ondersteunen de ontwikkeling en werking van G-Browser. Je kunt nu kiezen hoe releaseopmerkingen openen en hoe blokkeerders werken op de G-Browser-blog.",
       "hint": "Je instellingen blijven ongewijzigd tot je een selectie opslaat. Je kunt dit later aanpassen bij Updates & Experimenten.",
       "choiceTitle": "Kies hoe releaseopmerkingen openen",
-      "choiceDescription": "Kies voor automatische weergave na updates en bepaal hoe uw blokkeerders werken op de Floorp-blog.",
+      "choiceDescription": "Kies voor automatische weergave na updates en bepaal hoe uw blokkeerders werken op de G-Browser-blog.",
       "dismiss": "Nu niet"
     },
     "learnMore": "Lees meer over onze financiering en deze instelling (Japans)",
-    "title": "Releaseopmerkingen en het steunen van Floorp",
-    "description": "Advertentie-inkomsten ondersteunen de ontwikkeling en exploitatie van Floorp. Kies hoe releaseopmerkingen na updates worden geopend. Je kunt dit later wijzigen via Instellingen → Updates & Experimenten.",
+    "title": "Releaseopmerkingen en het steunen van G-Browser",
+    "description": "Advertentie-inkomsten ondersteunen de ontwikkeling en exploitatie van G-Browser. Kies hoe releaseopmerkingen na updates worden geopend. Je kunt dit later wijzigen via Instellingen → Updates & Experimenten.",
     "disabled": {
       "label": "Niet automatisch openen",
       "description": "Releaseopmerkingen niet openen na updates. Behoud je blocker-instellingen bij het bezoeken van de blog."
@@ -136,10 +136,10 @@
       "description": "Zorg dat je extensies blijven werken zoals geconfigureerd. Dit installeert of activeert geen advertentieblokker."
     },
     "support": {
-      "label": "Advertenties toestaan om Floorp te steunen (aanbevolen)",
-      "description": "Beperk uBlock Origin, AdGuard, Adblock Plus, AdBlock en Ghostery op de Floorp-blog."
+      "label": "Advertenties toestaan om G-Browser te steunen (aanbevolen)",
+      "description": "Beperk uBlock Origin, AdGuard, Adblock Plus, AdBlock en Ghostery op de G-Browser-blog."
     },
-    "scope": "De beperking is van toepassing op alle HTTPS-pagina's op blog.floorp.app, inclusief handmatig geopende pagina's, en heeft zowel invloed op trackingbescherming en aangepaste filters als op het blokkeren van advertenties. Andere extensies worden niet beperkt door deze instelling. Advertenties kunnen nog steeds worden geblokkeerd door andere beschermingsmiddelen. Herlaad geopende blogpagina's na het wijzigen van de instelling.",
+    "scope": "De beperking is van toepassing op alle HTTPS-pagina's op blog.gbrowser.app, inclusief handmatig geopende pagina's, en heeft zowel invloed op trackingbescherming en aangepaste filters als op het blokkeren van advertenties. Andere extensies worden niet beperkt door deze instelling. Advertenties kunnen nog steeds worden geblokkeerd door andere beschermingsmiddelen. Herlaad geopende blogpagina's na het wijzigen van de instelling.",
     "currentSetting": "Huidige instelling: {{mode}}",
     "applyOnConfirm": "Je selectie wordt pas van kracht nadat je deze bevestigt. Als je deze pagina sluit, behoud je je huidige instelling.",
     "changeSelection": "Keuze wijzigen",
@@ -149,14 +149,14 @@
     "error": "Kon je selectie niet laden of opslaan. Open deze pagina opnieuw en probeer het nog een keer."
   },
   "navigation": {
-    "support": "Steun Floorp",
+    "support": "Steun G-Browser",
     "welcome": "Welkom",
     "language": "Taal",
     "languageSupport": "Taal ondersteuning",
     "features": "Functies",
     "featureIntroduction": "Maak kennis met de functies",
     "hub": "Floor Hub",
-    "hubIntro": "Over Floorp Hub",
+    "hubIntro": "Over G-Browser Hub",
     "customize": "Personaliseren",
     "initialSettings": "Standaard instellingen",
     "complete": "Voltooien",
@@ -164,25 +164,25 @@
     "next": "Volgende"
   },
   "hubPage": {
-    "title": "Over Floorp Hub",
-    "subtitle": "Een centrale plek voor Floorp specifieke instellingen.",
-    "sectionTitle": "Floorp Hub",
-    "description": "Floorp Hub is een speciaal instellingencentrum voor Floorp-specifieke opties. Je kunt dit openen door naar 'about:hub' te navigeren. Het is ook toegankelijk via de linkerzijbalk van de instellingenpagina van Firefox op 'about:preferences'.",
+    "title": "Over G-Browser Hub",
+    "subtitle": "Een centrale plek voor G-Browser specifieke instellingen.",
+    "sectionTitle": "G-Browser Hub",
+    "description": "G-Browser Hub is een speciaal instellingencentrum voor G-Browser-specifieke opties. Je kunt dit openen door naar 'about:hub' te navigeren. Het is ook toegankelijk via de linkerzijbalk van de instellingenpagina van Firefox op 'about:preferences'.",
     "openHub": "Open about:hub",
     "openPreferences": "Open instellingen (about:preferences)",
-    "tip": "Tip: Je kunt Floorp Hub ook openen via de zijbalk van de Firefox-instellingen.",
+    "tip": "Tip: Je kunt G-Browser Hub ook openen via de zijbalk van de Firefox-instellingen.",
     "features": {
-      "dedicated": "Speciaal instellingencentrum voor Floorp",
+      "dedicated": "Speciaal instellingencentrum voor G-Browser",
       "accessible": "Toegankelijk via about:hub of de Firefox-instellingen",
-      "centralized": "Alle Floorp-specifieke opties op één plek"
+      "centralized": "Alle G-Browser-specifieke opties op één plek"
     }
   },
   "customize": {
-    "title": "Floorp aanpassen",
-    "description": "Pas dit aan naar je eigen voorkeursinstellingen. Je kunt ze later altijd wijzigen vanuit de Floorp Hub of de instellingenpagina.",
+    "title": "G-Browser aanpassen",
+    "description": "Pas dit aan naar je eigen voorkeursinstellingen. Je kunt ze later altijd wijzigen vanuit de G-Browser Hub of de instellingenpagina.",
     "appearance": {
       "title": "Weergave-instellingen",
-      "description": "Je kunt het uiterlijk van Floorp naar eigen wens aanpassen. Kies een licht of donker thema, of laat het automatisch wisselen op basis van je systeeminstellingen."
+      "description": "Je kunt het uiterlijk van G-Browser naar eigen wens aanpassen. Kies een licht of donker thema, of laat het automatisch wisselen op basis van je systeeminstellingen."
     },
     "themes": {
       "light": "Licht",
@@ -201,34 +201,34 @@
       "noEnginesFound": "Geen zoekmachines gevonden."
     },
     "floorpHub": {
-      "title": "Floorp Hub",
-      "description": "Floorp Hub is een speciaal instellingencentrum voor Floorp-specifieke opties. Je kunt dit openen door naar 'about:hub' te navigeren. Het is ook toegankelijk via de linkerzijbalk van de instellingenpagina van Firefox op 'about:preferences'.",
+      "title": "G-Browser Hub",
+      "description": "G-Browser Hub is een speciaal instellingencentrum voor G-Browser-specifieke opties. Je kunt dit openen door naar 'about:hub' te navigeren. Het is ook toegankelijk via de linkerzijbalk van de instellingenpagina van Firefox op 'about:preferences'.",
       "openHub": "Open about:hub",
       "openPreferences": "Open Instellingen (about:preferences)"
     }
   },
   "finish": {
     "title": "Installatie voltooid!",
-    "subtitle": "Gefeliciteerd! Je hebt de installatie van Floorp voltooid. Geniet van een comfortabele en veilige internetervaring.",
+    "subtitle": "Gefeliciteerd! Je hebt de installatie van G-Browser voltooid. Geniet van een comfortabele en veilige internetervaring.",
     "nextSteps": {
       "title": "Volgende stappen (optioneel)",
       "setDefault": "Als standaardbrowser instellen",
       "documentation": "Documentatie"
     },
-    "getStarted": "Aan de slag met Floorp",
+    "getStarted": "Aan de slag met G-Browser",
     "hint": "Voor meer gedetailleerde instellingen kun je dingen aanpassen via de optie Instellingen in de menuknop rechtsboven."
   },
   "setupGuide": {
-    "welcome": "Welkom bij Floorp.",
+    "welcome": "Welkom bij G-Browser.",
     "description": "Laat je browser werken zoals jij werkt.",
-    "introduction": "Deze gids laat je kennismaken met de functies van Floorp en helpt je bij het kiezen van je eerste instellingen.",
+    "introduction": "Deze gids laat je kennismaken met de functies van G-Browser en helpt je bij het kiezen van je eerste instellingen.",
     "start": "Installatie starten",
     "next": "Controleer vervolgens je weergavetaal.",
     "progress": "Installatie {{current}} / {{total}}",
     "title": "Inhoud van deze gids",
     "subtitle": "Ontdek de functies en kies de instellingen die bij je passen.",
     "discover": {
-      "title": "Ontdek de functies van Floorp",
+      "title": "Ontdek de functies van G-Browser",
       "description": "Ontdek manieren om tabbladen te organiseren en je browser aan te passen."
     },
     "personalize": {
@@ -241,10 +241,10 @@
     }
   },
   "welcomePage": {
-    "welcome": "Welkom bij Floorp!",
-    "description": "Floorp is een snelle en gebruiksvriendelijke webbrowser die de nadruk legt op privacy en veiligheid [A]. Deze gids maakt je wegwijs in de belangrijkste functies en instellingen van Floorp.",
+    "welcome": "Welkom bij G-Browser!",
+    "description": "G-Browser is een snelle en gebruiksvriendelijke webbrowser die de nadruk legt op privacy en veiligheid [A]. Deze gids maakt je wegwijs in de belangrijkste functies en instellingen van G-Browser.",
     "readyToStart": "Wanneer je er klaar voor bent, klik dan op de onderstaande knop om door te gaan.",
-    "features": "Floorp-functies",
+    "features": "G-Browser-functies",
     "privacy": "Privacy",
     "privacyDesc": "Beschermt uw gegevens",
     "speed": "Snelheid",
@@ -254,28 +254,28 @@
     "start": "Aan de slag"
   },
   "localizationPage": {
-    "title": "Floorp spreekt jouw taal",
+    "title": "G-Browser spreekt jouw taal",
     "subtitle": "Controleer de taalinstellingen en pas deze indien nodig aan",
     "languageSettings": "Taalinstellingen",
     "languageChanged": "Taal gewijzigd!",
     "currentLanguageInfo": "Huidige taalinformatie",
     "systemLanguage": "Systeemtaal",
-    "floorpLanguage": "Floorp-taal",
+    "floorpLanguage": "G-Browser-taal",
     "selectLanguage": "Taal selecteren",
     "useSystemLanguage": "Systeemtaal gebruiken",
     "multilingual": "Meertalige ondersteuning",
     "chooseLanguage": "Kies uit een breed aanbod van talen",
-    "languageChangeNotice": "De nieuwe taal wordt direct toegepast zonder Floorp opnieuw op te starten. Sommige add-ons ondersteunen dit mogelijk niet."
+    "languageChangeNotice": "De nieuwe taal wordt direct toegepast zonder G-Browser opnieuw op te starten. Sommige add-ons ondersteunen dit mogelijk niet."
   },
   "featuresPage": {
-    "title": "Belangrijkste Floorp-functies",
-    "subtitle": "Floorp biedt tal van handige functies. Bekijk het overzicht van de functies!",
+    "title": "Belangrijkste G-Browser-functies",
+    "subtitle": "G-Browser biedt tal van handige functies. Bekijk het overzicht van de functies!",
     "panelSidebar": {
       "title": "Paneelzijbalk",
       "description": "Gebruik tijdens het browsen handige functies via de rechterzijbalk. Je kunt hier webpanelen, notities, add-ons, bladwijzers en meer in plaatsen.",
       "features": [
         "Zet websites vast in de zijbalk",
-        "Maak tijdens het browsen snel notities met Floorp Notes",
+        "Maak tijdens het browsen snel notities met G-Browser Notes",
         "Ondersteunt containers"
       ]
     },
@@ -311,20 +311,20 @@
   },
   "finishPage": {
     "title": "Installatie voltooid!",
-    "subtitle": "Gefeliciteerd! Je hebt de installatie van Floorp voltooid. Je kunt nu comfortabel en veilig op internet surfen.",
+    "subtitle": "Gefeliciteerd! Je hebt de installatie van G-Browser voltooid. Je kunt nu comfortabel en veilig op internet surfen.",
     "nextSteps": "Volgende stappen (optioneel)",
     "defaultBrowser": "Als standaardbrowser instellen",
     "support": "Ondersteuning",
     "documentation": "Documentatie",
-    "getStarted": "Aan de slag met Floorp",
+    "getStarted": "Aan de slag met G-Browser",
     "hint": "Voor meer gedetailleerde instellingen, kun je deze aanpassen via de optie ‘Instellingen’ in de menuknop rechtsboven.",
     "resourcesLabel": "Bronnen",
-    "defaultBrowserSuccess": "Floorp is ingesteld als uw standaardbrowser!",
+    "defaultBrowserSuccess": "G-Browser is ingesteld als uw standaardbrowser!",
     "opensInNewWindow": "opens in new window"
   },
   "whatsNew": {
-    "title": "Welkom bij Floorp {{version}}!",
-    "subtitle": "Bekijk wat er nieuw is in Floorp!",
+    "title": "Welkom bij G-Browser {{version}}!",
+    "subtitle": "Bekijk wat er nieuw is in G-Browser!",
     "tags": {
       "settings": "Instellingen",
       "productivity": "Productiviteit",
@@ -336,8 +336,8 @@
       "follow": "Volg",
       "terms": "Gebruiksvoorwaarden",
       "privacy": "Privacy Beleid",
-      "about": "Over Floorp",
-      "copyright": "© {{year}} Floorp Projects. Alle rechten voorbehouden."
+      "about": "Over G-Browser",
+      "copyright": "© {{year}} G-Browser Projects. Alle rechten voorbehouden."
     }
   },
   "ui": {
@@ -477,7 +477,7 @@
     "descriptions": [
       "Gewenste weergavetaal controleren.",
       "Kies een thema en zoekmachine.",
-      "Controleer je keuzes en start met Floorp."
+      "Controleer je keuzes en start met G-Browser."
     ],
     "replay": "Kijk nog eens"
   },

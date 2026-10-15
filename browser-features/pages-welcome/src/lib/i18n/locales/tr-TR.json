@@ -7,59 +7,59 @@
     "enlarge": "{{feature}} ekran görüntüsünü büyüt",
     "enlargeShort": "Büyük görüntüle",
     "closePreview": "Önizlemeyi kapat",
-    "actualScreenshot": "Gerçek Floorp ekran görüntüsü. Görünüm, sürümünüze ve ayarlarınıza göre farklılık gösterebilir."
+    "actualScreenshot": "Gerçek G-Browser ekran görüntüsü. Görünüm, sürümünüze ve ayarlarınıza göre farklılık gösterebilir."
   },
   "setupV5": {
     "back": "Geri",
     "supportLabels": {
       "disabled": "Otomatik olarak açma",
       "blocking": "Engelleyici ayarlarımla aç",
-      "support": "Floorp'u desteklemek için reklamlara izin ver"
+      "support": "G-Browser'ı desteklemek için reklamlara izin ver"
     },
-    "supportNotice": "Bu bir taslak seçimdir. Bir sonraki sayfadaki “Floorp'u Kullanmaya Başla” düğmesine bastığınızda yürürlüğe girer. Kurulumu bundan önce kapatırsanız mevcut ayarlarınız korunur.",
+    "supportNotice": "Bu bir taslak seçimdir. Bir sonraki sayfadaki “G-Browser'ı Kullanmaya Başla” düğmesine bastığınızda yürürlüğe girer. Kurulumu bundan önce kapatırsanız mevcut ayarlarınız korunur.",
     "steps": [
       "Hoş Geldiniz",
       "Dil",
       "Özellikler",
-      "Floorp Hub",
+      "G-Browser Hub",
       "Tercihler",
       "Destek",
       "Finish"
     ],
     "pages": [
       {
-        "title": "Welcome\nto Floorp.",
+        "title": "Welcome\nto G-Browser.",
         "description": "Make your browser work the way you do.",
         "hint": "This guide introduces the features and helps you choose your first settings."
       },
       {
         "title": "Start in the language\nyou know best.",
-        "description": "Check Floorp’s display language and change it if needed.",
+        "description": "Check G-Browser’s display language and change it if needed.",
         "hint": "Your chosen language takes effect immediately."
       },
       {
-        "title": "Explore what\nFloorp can do.",
+        "title": "Explore what\nG-Browser can do.",
         "description": "Separate tasks, view pages side by side, and work faster. Explore the features that interest you.",
         "hint": "You can adjust these features in Settings later."
       },
       {
-        "title": "Your settings,\nin Floorp Hub.",
-        "description": "Adjust Floorp-specific features in one place.",
+        "title": "Your settings,\nin G-Browser Hub.",
+        "description": "Adjust G-Browser-specific features in one place.",
         "hint": "You can open it any time after setup."
       },
       {
         "title": "Make appearance\nand search your own.",
         "description": "Choose the theme and search engine you use every day.",
-        "hint": "You can change them later in Floorp Hub or Firefox Settings."
+        "hint": "You can change them later in G-Browser Hub or Firefox Settings."
       },
       {
-        "title": "Updates and\nsupporting Floorp.",
-        "description": "Advertising revenue supports Floorp’s development and operation. Choose how release notes open.",
+        "title": "Updates and\nsupporting G-Browser.",
+        "description": "Advertising revenue supports G-Browser’s development and operation. Choose how release notes open.",
         "hint": "You can change this later under Updates and experiments."
       },
       {
         "title": "You’re ready\nto browse.",
-        "description": "Review your choices and start using Floorp.",
+        "description": "Review your choices and start using G-Browser.",
         "hint": "You can still change your settings later."
       }
     ],
@@ -80,7 +80,7 @@
     ],
     "changeLater": "Bu ayarları daha sonra dilediğiniz zaman değiştirebilirsiniz.",
     "languageTitle": "Görüntüleme Dili",
-    "languageLabel": "Floorp arayüz dili",
+    "languageLabel": "G-Browser arayüz dili",
     "languageHint": "Menüler ve ayarlar sayfasında kullanılır.",
     "languageNotice": "Bazı eklentiler dil değişimini desteklemeyebilir.",
     "languageCurrent": "Seçili dil: {{language}}",
@@ -100,7 +100,7 @@
         "description": "Shortcuts to frequently used actions"
       }
     ],
-    "openHub": "Floorp Hub'ı aç",
+    "openHub": "G-Browser Hub'ı aç",
     "openPreferences": "Firefox Ayarlarını Aç",
     "newTab": "Yeni sekmede açılır.",
     "hubAddress": "Ayrıca adres çubuğuna about:hub yazarak da erişebilirsiniz.",
@@ -110,23 +110,23 @@
     "scopeTitle": "Reklamlara izin verildiğindeki kapsam",
     "summaryTitle": "Ayarlarınızı Gözden Geçirin",
     "change": "Değiştir",
-    "defaultTitle": "Floorp'u varsayılan tarayıcınız yapın",
-    "defaultHint": "Tüm web bağlantılarının doğrudan Floorp ile açılmasını sağlar.",
-    "getStarted": "Floorp'u Kullanmaya Başla",
-    "finishNotice": "“Floorp'u Kullanmaya Başla” düğmesine tıkladığınızda sürüm notları tercihiniz onaylanacaktır."
+    "defaultTitle": "G-Browser'ı varsayılan tarayıcınız yapın",
+    "defaultHint": "Tüm web bağlantılarının doğrudan G-Browser ile açılmasını sağlar.",
+    "getStarted": "G-Browser'ı Kullanmaya Başla",
+    "finishNotice": "“G-Browser'ı Kullanmaya Başla” düğmesine tıkladığınızda sürüm notları tercihiniz onaylanacaktır."
   },
   "releaseNotes": {
     "prompt": {
       "title": "Yeni bir tercih.\nGeleceği birlikte inşa edelim.",
-      "description": "Reklam gelirleri Floorp'un kesintisiz geliştirilmesini ve sunucu maliyetlerini destekler. Sürüm notlarının nasıl açılacağını ve engelleyicilerin Floorp blogunda nasıl davranacağını seçebilirsiniz.",
+      "description": "Reklam gelirleri G-Browser'ın kesintisiz geliştirilmesini ve sunucu maliyetlerini destekler. Sürüm notlarının nasıl açılacağını ve engelleyicilerin G-Browser blogunda nasıl davranacağını seçebilirsiniz.",
       "hint": "Bir seçim kaydedilene kadar ayarlarınız değişmeden kalır. Bunu daha sonra Güncellemeler ve Deneyler bölümünden değiştirebilirsiniz.",
       "choiceTitle": "Sürüm notlarının nasıl açılacağını seçin",
-      "choiceDescription": "Güncellemelerden sonra otomatik gösterimi ve Floorp blogunda engelleyicilerin nasıl çalışacağını belirleyin.",
+      "choiceDescription": "Güncellemelerden sonra otomatik gösterimi ve G-Browser blogunda engelleyicilerin nasıl çalışacağını belirleyin.",
       "dismiss": "Şimdi değil"
     },
     "learnMore": "Finansmanımız ve bu ayar hakkında bilgi edinin (Japonca)",
-    "title": "Sürüm Notları ve Floorp'u Destekleme",
-    "description": "Reklam gelirleri Floorp'un geliştirilmesini ve devamlılığını destekler. Güncellemelerden sonra sürüm notlarının nasıl açılacağını belirleyin. Bu ayarı daha sonra Ayarlar → Güncellemeler ve Deneyler altından değiştirebilirsiniz.",
+    "title": "Sürüm Notları ve G-Browser'ı Destekleme",
+    "description": "Reklam gelirleri G-Browser'ın geliştirilmesini ve devamlılığını destekler. Güncellemelerden sonra sürüm notlarının nasıl açılacağını belirleyin. Bu ayarı daha sonra Ayarlar → Güncellemeler ve Deneyler altından değiştirebilirsiniz.",
     "disabled": {
       "label": "Otomatik olarak açma",
       "description": "Güncellemelerden sonra sürüm notlarını açmaz. Blogu ziyaret ettiğinizde engelleyici ayarlarınız korunur."
@@ -136,10 +136,10 @@
       "description": "Eklentilerinizin mevcut yapılandırmasını korur. Yeni bir reklam engelleyici yüklemez veya etkinleştirmez."
     },
     "support": {
-      "label": "Floorp'u desteklemek için reklamlara izin ver (önerilen)",
-      "description": "Floorp blogunda uBlock Origin, AdGuard, Adblock Plus, AdBlock ve Ghostery filtrelerini devre dışı bırakır."
+      "label": "G-Browser'ı desteklemek için reklamlara izin ver (önerilen)",
+      "description": "G-Browser blogunda uBlock Origin, AdGuard, Adblock Plus, AdBlock ve Ghostery filtrelerini devre dışı bırakır."
     },
-    "scope": "Bu kısıtlama, doğrudan açılan sayfalar dahil blog.floorp.app üzerindeki tüm HTTPS sayfaları için geçerlidir; reklam engellemenin yanı sıra izleme koruması ve özel filtreleri de kapsar. Diğer eklentiler bu ayardan etkilenmez. Harici güvenlik araçları reklamları engellemeye devam edebilir. Ayarı değiştirdikten sonra açık blog sayfalarını yenileyin.",
+    "scope": "Bu kısıtlama, doğrudan açılan sayfalar dahil blog.gbrowser.app üzerindeki tüm HTTPS sayfaları için geçerlidir; reklam engellemenin yanı sıra izleme koruması ve özel filtreleri de kapsar. Diğer eklentiler bu ayardan etkilenmez. Harici güvenlik araçları reklamları engellemeye devam edebilir. Ayarı değiştirdikten sonra açık blog sayfalarını yenileyin.",
     "currentSetting": "Mevcut ayar: {{mode}}",
     "applyOnConfirm": "Seçiminiz yalnızca onayladığınızda geçerli olur. Bu sayfayı kapatırsanız mevcut ayarınız korunur.",
     "changeSelection": "Seçimi değiştir",
@@ -149,14 +149,14 @@
     "error": "Seçiminiz yüklenemedi veya kaydedilemedi. Lütfen sayfayı yeniden açıp deneyin."
   },
   "navigation": {
-    "support": "Floorp'u Destekle",
+    "support": "G-Browser'ı Destekle",
     "welcome": "Hoş Geldiniz",
     "language": "Dil",
     "languageSupport": "Dil Desteği",
     "features": "Özellikler",
     "featureIntroduction": "Özellik Tanıtımı",
-    "hub": "Floorp Hub",
-    "hubIntro": "Floorp Hub Hakkında",
+    "hub": "G-Browser Hub",
+    "hubIntro": "G-Browser Hub Hakkında",
     "customize": "Kişiselleştir",
     "initialSettings": "İlk Ayarlar",
     "complete": "Tamamla",
@@ -164,25 +164,25 @@
     "next": "Sıradaki"
   },
   "hubPage": {
-    "title": "Floorp Hub Hakkında",
-    "subtitle": "Floorp'a özgü ayarlar için merkezi bir yer.",
-    "sectionTitle": "Floorp Hub",
-    "description": "Floorp Hub, Floorp’a özel ayarlar için tasarlanmış bir merkezdir. ‘about:hub’ adresini ziyaret ederek açabilirsiniz. Ayrıca Firefox’un ‘about:preferences’ adresindeki ayarlar sayfasının sol kenar çubuğundan da ulaşabilirsiniz.",
+    "title": "G-Browser Hub Hakkında",
+    "subtitle": "G-Browser'a özgü ayarlar için merkezi bir yer.",
+    "sectionTitle": "G-Browser Hub",
+    "description": "G-Browser Hub, G-Browser'a özel ayarlar için tasarlanmış bir merkezdir. ‘about:hub’ adresini ziyaret ederek açabilirsiniz. Ayrıca Firefox’un ‘about:preferences’ adresindeki ayarlar sayfasının sol kenar çubuğundan da ulaşabilirsiniz.",
     "openHub": "Aç about:hub",
     "openPreferences": "Ayarlar'ı aç (about:preferences)",
-    "tip": "İpucu: Floorp Hub'a Firefox ayarları kenar çubuğundan da erişebilirsiniz.",
+    "tip": "İpucu: G-Browser Hub'a Firefox ayarları kenar çubuğundan da erişebilirsiniz.",
     "features": {
-      "dedicated": "Özel Floorp ayar merkezi",
+      "dedicated": "Özel G-Browser ayar merkezi",
       "accessible": "about:hub veya Firefox ayarlarından ulaşılabilir",
-      "centralized": "Floorp'a özgü tüm seçenekler tek bir yerde"
+      "centralized": "G-Browser'a özgü tüm seçenekler tek bir yerde"
     }
   },
   "customize": {
-    "title": "Floorp'u Kişiselleştirin",
-    "description": "Tercih ettiğiniz ayarlara göre kişiselleştirin. Bunları daha sonra Floorp Hub veya ayarlar sayfasından her zaman değiştirebilirsiniz.",
+    "title": "G-Browser'ı Kişiselleştirin",
+    "description": "Tercih ettiğiniz ayarlara göre kişiselleştirin. Bunları daha sonra G-Browser Hub veya ayarlar sayfasından her zaman değiştirebilirsiniz.",
     "appearance": {
       "title": "Görünüm Ayarları",
-      "description": "Floorp'un görünümünü tercihinize göre kişiselleştirebilirsiniz. Açık veya koyu bir tema seçin ya da sistem ayarlarınıza göre otomatik olarak geçiş yapmasını sağlayın."
+      "description": "G-Browser'ın görünümünü tercihinize göre kişiselleştirebilirsiniz. Açık veya koyu bir tema seçin ya da sistem ayarlarınıza göre otomatik olarak geçiş yapmasını sağlayın."
     },
     "themes": {
       "light": "Aydınlık",
@@ -201,34 +201,34 @@
       "noEnginesFound": "Arama motoru bulunamadı."
     },
     "floorpHub": {
-      "title": "Floorp Hub",
-      "description": "Floorp Hub, Floorp’a özel ayarlar için tasarlanmış bir merkezdir. ‘about:hub’ adresini ziyaret ederek açabilirsiniz. Ayrıca Firefox’un ‘about:preferences’ adresindeki ayarlar sayfasının sol kenar çubuğundan da ulaşabilirsiniz.",
+      "title": "G-Browser Hub",
+      "description": "G-Browser Hub, G-Browser'a özel ayarlar için tasarlanmış bir merkezdir. ‘about:hub’ adresini ziyaret ederek açabilirsiniz. Ayrıca Firefox’un ‘about:preferences’ adresindeki ayarlar sayfasının sol kenar çubuğundan da ulaşabilirsiniz.",
       "openHub": "Aç about:hub",
       "openPreferences": "Ayarlar'ı aç (about:preferences)"
     }
   },
   "finish": {
     "title": "Kurulum Tamamlandı!",
-    "subtitle": "Tebrikler! Floorp kurulumunu tamamladınız. Rahat ve güvenli bir internet tarama deneyiminin keyfini çıkarın.",
+    "subtitle": "Tebrikler! G-Browser kurulumunu tamamladınız. Rahat ve güvenli bir internet tarama deneyiminin keyfini çıkarın.",
     "nextSteps": {
       "title": "Sonraki Adımlar (İsteğe Bağlı)",
       "setDefault": "Varsayılan Tarayıcı Olarak Ayarla",
       "documentation": "Dokümantasyon"
     },
-    "getStarted": "Floorp ile Başlayın",
+    "getStarted": "G-Browser ile Başlayın",
     "hint": "Daha ayrıntılı ayarlar için, sağ üstteki menü düğmesindeki Ayarlar seçeneği aracılığıyla özelleştirebilirsiniz."
   },
   "setupGuide": {
-    "welcome": "Floorp'a Hoş Geldiniz.",
+    "welcome": "G-Browser'a Hoş Geldiniz.",
     "description": "Tarayıcınızı tam istediğiniz gibi özelleştirin.",
-    "introduction": "Bu rehber Floorp'un benzersiz özelliklerini tanıtır ve ilk ayarlarınızı kolayca yapmanızı sağlar.",
+    "introduction": "Bu rehber G-Browser'ın benzersiz özelliklerini tanıtır ve ilk ayarlarınızı kolayca yapmanızı sağlar.",
     "start": "Kuruluma Başla",
     "next": "Sırada görüntüleme dili kontrolü var.",
     "progress": "Kurulum Adımı {{current}} / {{total}}",
     "title": "Bu rehberin içeriği",
     "subtitle": "Özellikleri keşfedin ve size en uygun ayarları belirleyin.",
     "discover": {
-      "title": "Floorp'un Özelliklerini Keşfedin",
+      "title": "G-Browser'ın Özelliklerini Keşfedin",
       "description": "Sekmeleri düzenlemenin ve tarayıcınızı özelleştirmenin yollarını keşfedin."
     },
     "personalize": {
@@ -241,10 +241,10 @@
     }
   },
   "welcomePage": {
-    "welcome": "Floorp'a hoş geldiniz!",
-    "description": "Floorp, gizlilik ve güvenliği vurgulayan hızlı ve kullanıcı dostu bir web tarayıcısıdır. Bu kılavuz size Floorp'un ana özelliklerini ve ayarlarını tanıtacaktır.",
+    "welcome": "G-Browser'a hoş geldiniz!",
+    "description": "G-Browser, gizlilik ve güvenliği vurgulayan hızlı ve kullanıcı dostu bir web tarayıcısıdır. Bu kılavuz size G-Browser'ın ana özelliklerini ve ayarlarını tanıtacaktır.",
     "readyToStart": "Hazır olduğunuzda, devam etmek için aşağıdaki düğmeye tıklayın.",
-    "features": "Floorp Özellikleri",
+    "features": "G-Browser Özellikleri",
     "privacy": "Gizlilik",
     "privacyDesc": "Verilerinizi korur",
     "speed": "Hız",
@@ -254,28 +254,28 @@
     "start": "Başlayın"
   },
   "localizationPage": {
-    "title": "Floorp sizin dilinizi konuşur",
+    "title": "G-Browser sizin dilinizi konuşur",
     "subtitle": "Dil ayarlarını kontrol edin ve gerekirse değiştirin",
     "languageSettings": "Dil Ayarları",
     "languageChanged": "Dil Değişti!",
     "currentLanguageInfo": "Güncel Dil Bilgileri",
     "systemLanguage": "Sistem Dili",
-    "floorpLanguage": "Floorp Dili",
+    "floorpLanguage": "G-Browser Dili",
     "selectLanguage": "Dil Seçiniz",
     "useSystemLanguage": "Sistem Dilini Kullanın",
     "multilingual": "Çoklu dil desteği",
     "chooseLanguage": "Çok çeşitli diller arasından seçim yapın",
-    "languageChangeNotice": "Dili değiştirmek, Floorp'u yeniden başlatmaya gerek duymadan seçilen dili uygulayacaktır. Bazı eklentiler dil değişikliklerini desteklemeyebilir."
+    "languageChangeNotice": "Dili değiştirmek, G-Browser'ı yeniden başlatmaya gerek duymadan seçilen dili uygulayacaktır. Bazı eklentiler dil değişikliklerini desteklemeyebilir."
   },
   "featuresPage": {
-    "title": "Floorp'un Ana Özellikleri",
-    "subtitle": "Floorp birçok kullanışlı özellikle birlikte gelir. Onlara bir göz atın!",
+    "title": "G-Browser'ın Ana Özellikleri",
+    "subtitle": "G-Browser birçok kullanışlı özellikle birlikte gelir. Onlara bir göz atın!",
     "panelSidebar": {
       "title": "Panel Kenar Çubuğu",
       "description": "Gezinirken sağ taraftaki kenar çubuğundan kullanışlı özelliklere erişin. Kenar çubuğuna web panelleri, not alma işlevleri, eklentiler, yer imleri vb. yerleştirebilirsiniz.",
       "features": [
         "Web sitelerini kenar çubuğuna sabitleyin",
-        "Arama yaparken Floorp Notlar ile hızlıca not alın",
+        "Arama yaparken G-Browser Notlar ile hızlıca not alın",
         "Kapsayıcıları destekler"
       ]
     },
@@ -311,20 +311,20 @@
   },
   "finishPage": {
     "title": "Kurulum Tamamlandı!",
-    "subtitle": "Tebrikler! Floorp kurulumunu tamamladınız. Rahat ve güvenli bir internet tarama deneyiminin keyfini çıkarın.",
+    "subtitle": "Tebrikler! G-Browser kurulumunu tamamladınız. Rahat ve güvenli bir internet tarama deneyiminin keyfini çıkarın.",
     "nextSteps": "Sonraki Adımlar (İsteğe Bağlı)",
     "defaultBrowser": "Varsayılan Tarayıcı Olarak Ayarla",
     "support": "Destek",
     "documentation": "Dokümantasyon",
-    "getStarted": "Floorp ile Başlayın",
+    "getStarted": "G-Browser ile Başlayın",
     "hint": "Daha detaylı ayarlar için, sağ üstteki menü düğmesindeki Ayarlar kısmını kullanabilirsiniz.",
     "resourcesLabel": "Kaynaklar",
-    "defaultBrowserSuccess": "Floorp varsayılan tarayıcınız olarak ayarlandı!",
+    "defaultBrowserSuccess": "G-Browser varsayılan tarayıcınız olarak ayarlandı!",
     "opensInNewWindow": "yeni pencerede açılır"
   },
   "whatsNew": {
-    "title": "Floorp {{version}} sürümüne hoş geldiniz!",
-    "subtitle": "Floorp'taki yeniliklere göz atın!",
+    "title": "G-Browser {{version}} sürümüne hoş geldiniz!",
+    "subtitle": "G-Browser'daki yeniliklere göz atın!",
     "tags": {
       "settings": "Ayarlar",
       "productivity": "Üretkenlik",
@@ -336,8 +336,8 @@
       "follow": "Takip Et",
       "terms": "Kullanım Koşulları",
       "privacy": "Gizlilik Politikası",
-      "about": "Floorp Hakkında",
-      "copyright": "© {{year}} Floorp Projesi. Tüm hakları saklıdır."
+      "about": "G-Browser Hakkında",
+      "copyright": "© {{year}} G-Browser Projesi. Tüm hakları saklıdır."
     }
   },
   "ui": {
@@ -477,7 +477,7 @@
     "descriptions": [
       "Check your preferred display language.",
       "Choose a theme and search engine.",
-      "Review your choices and start using Floorp."
+      "Review your choices and start using G-Browser."
     ],
     "replay": "Yeniden İzle"
   },

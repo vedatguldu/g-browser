@@ -258,7 +258,7 @@
       },
       "newtab": {
         "title": "Ny flik",
-        "disableFloorpStart": "Inaktivera {{productName}} Start"
+        "disableG-BrowserStart": "Inaktivera {{productName}} Start"
       },
       "multirowTab": {
         "title": "Flik med flera rader",
@@ -334,16 +334,16 @@
     "license": "Licens",
     "noraneko": {
       "logoAlt": "Webbläsarens logotyp",
-      "description": "Noraneko är en webbläsare som används som testmiljö för Floorp 12. Floorp bygger på Firefox och Noraneko.",
+      "description": "Noraneko är en webbläsare som används som testmiljö för G-Browser 12. G-Browser bygger på Firefox och Noraneko.",
       "communityCredit": "Skapad av Noraneko gemenskapen med ❤",
-      "repositoryLabel": "GitHub-arkiv: Floorp-Projects/Floorp"
+      "repositoryLabel": "GitHub-arkiv: G-Browser-Projects/G-Browser"
     }
   },
   "updates": {
     "releaseNotes": {
       "learnMore": "Läs mer om vår finansiering och denna verksamhetsmiljö (japanska)",
       "title": "Släpp anteckningar efter uppdateringar",
-      "description": "Välj hur Floorp ska öppna versionsinformation efter en uppdatering.",
+      "description": "Välj hur G-Browser ska öppna versionsinformation efter en uppdatering.",
       "disabled": {
         "label": "Öppnas inte automatiskt",
         "description": "Släpp anteckningar kommer inte att öppnas efter uppdateringar. Dina blockerarinställningar gäller när du besöker bloggen."
@@ -353,11 +353,11 @@
         "description": "Öppna versionsinformation utan att begränsa dina tillägg. Detta installerar eller aktiverar inte en annonsblockerare."
       },
       "support": {
-        "label": "Öppna och tillåt annonser för att stödja Floorp (rekommenderas)",
-        "description": "Förhindra uBlock Origin, AdGuard, Adblock Plus, AdBlock och Ghostery från att filtrera Floorp blogg."
+        "label": "Öppna och tillåt annonser för att stödja G-Browser (rekommenderas)",
+        "description": "Förhindra uBlock Origin, AdGuard, Adblock Plus, AdBlock och Ghostery från att filtrera G-Browser blogg."
       },
-      "supportMessage": "Reklam intäkter från versionsfakta stöder Floorp utveckling och drift. Tack för att stödja oss på ett sätt som fungerar för dig.",
-      "scope": "Detta undantag gäller alla HTTPS-besök på blog.floorp.app, inklusive sidor som öppnas manuellt. Det påverkar även spårningsskyddet och anpassade filter i de fem angivna tilläggen. Övriga tillägg påverkas inte av den här inställningen. Andra skyddsverktyg kan fortfarande blockera annonser. Ladda om öppna bloggsidor efter att du har ändrat den här inställningen.",
+      "supportMessage": "Reklam intäkter från versionsfakta stöder G-Browser utveckling och drift. Tack för att stödja oss på ett sätt som fungerar för dig.",
+      "scope": "Detta undantag gäller alla HTTPS-besök på blog.gbrowser.app, inklusive sidor som öppnas manuellt. Det påverkar även spårningsskyddet och anpassade filter i de fem angivna tilläggen. Övriga tillägg påverkas inte av den här inställningen. Andra skyddsverktyg kan fortfarande blockera annonser. Ladda om öppna bloggsidor efter att du har ändrat den här inställningen.",
       "error": "Kunde inte ladda eller spara den här inställningen. Öppna den här sidan igen och försök igen."
     },
     "title": "Uppdateringar och experiment",
@@ -709,7 +709,7 @@
       "gecko-scroll-line-down": "Scrolla ner",
       "floorp-toggle-command-palette": "Växla kommandopalett",
       "floorp-open-settings": "Öppna inställningar",
-      "floorp-open-hub": "Öppna Floorp Hub",
+      "floorp-open-hub": "Öppna G-Browser Hub",
       "floorp-toggle-share-mode": "Växla dela läge",
       "floorp-copy-page-url-as-markdown": "Kopiera sidans URL som Markdown",
       "floorp-split-view-open-left": "Delad vy vänster",
@@ -848,7 +848,7 @@
     "loadError": "Kunde inte ladda inställningarna. Ladda om sidan."
   },
   "settingsHome": {
-    "title": "Gör Floorp till din egen",
+    "title": "Gör G-Browser till din egen",
     "description": "Anpassa utseendet och kontrollerna efter hur du brukar surfa.",
     "open": "Utforska inställningarna",
     "manage": "Hantera din webbläsare",
@@ -883,11 +883,11 @@
     "confirmReset": "Reset everything",
     "saving": "Saving context-menu changes…",
     "saveError": "The context-menu changes could not be saved. The last saved layout is still in use.",
-    "saveConflict": "These settings changed in another Floorp Hub window. The latest saved layout was reloaded; please try your change again.",
+    "saveConflict": "These settings changed in another G-Browser Hub window. The latest saved layout was reloaded; please try your change again.",
     "loadError": "Some saved settings could not be read. Editing is disabled to protect the existing configuration; reload the page to try again.",
     "invalidConfigError": "The saved context-menu configuration is damaged. Editing is disabled, but Reset everything can safely replace it with a clean configuration.",
-    "unsupportedConfigError": "This context-menu configuration was created by a newer Floorp version. Editing and reset are disabled to protect it.",
-    "repairConflict": "The saved configuration changed before it could be repaired. Reload Floorp Hub to inspect the latest value.",
+    "unsupportedConfigError": "This context-menu configuration was created by a newer G-Browser version. Editing and reset are disabled to protect it.",
+    "repairConflict": "The saved configuration changed before it could be repaired. Reload G-Browser Hub to inspect the latest value.",
     "loadingCatalog": "Reading available browser menus…",
     "catalogUnavailable": "Menu items are not available yet",
     "catalogErrorDescription": "The browser could not provide its context-menu catalog. You can still enable the feature or reset all settings.",
@@ -906,8 +906,8 @@
     "independentProfileOffDescription": "This context uses the shared layout for the browser menu.",
     "resetProfile": "Reset profile",
     "items": "Menu items",
-    "editingIndependent": "Use the arrow buttons or Move to… to reorder items. Dragging is also available in Current context. Visibility switches apply only to items Floorp can safely hide in this context profile.",
-    "editingShared": "Use the arrow buttons or Move to… to reorder items. Dragging is also available in Current context. Visibility switches apply only to items Floorp can safely hide in the shared layout.",
+    "editingIndependent": "Use the arrow buttons or Move to… to reorder items. Dragging is also available in Current context. Visibility switches apply only to items G-Browser can safely hide in this context profile.",
+    "editingShared": "Use the arrow buttons or Move to… to reorder items. Dragging is also available in Current context. Visibility switches apply only to items G-Browser can safely hide in the shared layout.",
     "incompleteContainer": "Firefox reported only part of this menu. Unreported saved items will be kept unchanged.",
     "capabilityHelp": "“Conditional in Firefox” means Firefox hid the item for the most recently observed right-click context. It remains available in All items so you can configure its relative order. “Order fixed” items stay in their native positions and cannot be moved or used as destinations.",
     "viewMode": "Items shown",
@@ -952,7 +952,7 @@
     },
     "source": {
       "firefox": "Firefox",
-      "floorp": "Floorp",
+      "floorp": "G-Browser",
       "extension": "Extension",
       "unknown": "Other"
     }
@@ -1007,7 +1007,7 @@
       "tools": "Tools",
       "downloads": "Downloads",
       "workspace": "Workspaces",
-      "floorp": "Floorp",
+      "floorp": "G-Browser",
       "media": "Media",
       "open-tabs": "Open Tabs",
       "switcher": "Switcher",
@@ -1121,7 +1121,7 @@
     "badgeCount": "Address Bar Count Badge",
     "badgeCountDesc": "Displays a numeric counter badge on the address bar icon when downloadable media is detected.",
     "typesTitle": "Detectable Media Categories",
-    "typesDesc": "Choose which types of media Floorp should capture. All supported items can be downloaded directly to your native Downloads folder.",
+    "typesDesc": "Choose which types of media G-Browser should capture. All supported items can be downloaded directly to your native Downloads folder.",
     "detectVideo": "Video Files (MP4, WebM, MKV, M4V)",
     "detectVideoDesc": "Detects HTML5 video elements and direct video links.",
     "detectAudio": "Audio Files (MP3, WAV, OGG, FLAC, AAC)",
@@ -1129,6 +1129,6 @@
     "detectStream": "HLS & Live Streams (M3U8)",
     "detectStreamDesc": "Captures HLS playlist streams with options to copy stream URLs or save locally.",
     "privacyNoticeTitle": "100% Local & Privacy-Preserving Architecture",
-    "privacyNoticeText": "Floorp Media Downloader performs all detection and downloading directly on your device via Gecko's native download service (Downloads.sys.mjs). No URLs or media data are ever sent to remote servers."
+    "privacyNoticeText": "G-Browser Media Downloader performs all detection and downloading directly on your device via Gecko's native download service (Downloads.sys.mjs). No URLs or media data are ever sent to remote servers."
   }
 }

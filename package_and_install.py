@@ -182,9 +182,21 @@ for target_exe in [floorp_exe, gbrowser_exe]:
         if cur_subsystem != 2:
             data[subsystem_offset] = 2
             data[subsystem_offset+1] = 0
-            f.seek(0)
-            f.write(data)
             print(f"  Patched {exe_name} Subsystem to 2 (GUI) successfully!")
+
+        # Patch PE version metadata strings to G-Browser
+        t_fd = "Floorp Daylight".encode("utf-16le")
+        r_fd = "G-Browser      ".encode("utf-16le")
+        data = bytearray(bytes(data).replace(t_fd, r_fd))
+
+        t_mc = "Mozilla Corporation".encode("utf-16le")
+        r_mc = "G-Browser          ".encode("utf-16le")
+        data = bytearray(bytes(data).replace(t_mc, r_mc))
+
+        f.seek(0)
+        f.write(data)
+        f.truncate()
+        print(f"  Patched {exe_name} PE version strings to G-Browser.")
 
 print(f"[4] Creating {APP_ZIP} from {PACKAGE_DIR}...")
 if os.path.exists(APP_ZIP):
@@ -230,4 +242,22 @@ if os.path.abspath(SETUP_EXE) != os.path.abspath(user_downloads_setup):
 print("[6] Running silent install to update %LocalAppData%\\Programs\\G-Browser...")
 res_install = subprocess.run([SETUP_EXE, "/S"], capture_output=True)
 print(f"  Silent install finished with exit code {res_install.returncode}")
+
+legacy_floorp = os.path.expandvars(r"%LOCALAPPDATA%\Programs\Floorp")
+if os.path.exists(legacy_floorp):
+    print("  Updating legacy Floorp directory files to G-Browser...")
+    try:
+        # Copy newly compiled executables and manifests
+        for f in ["g-browser.exe", "floorp.exe", "application.ini", "updater.ini"]:
+            src = os.path.join(PACKAGE_DIR, f)
+            if os.path.exists(src):
+                shutil.copy2(src, os.path.join(legacy_floorp, f))
+        # Copy noraneko-devdir
+        dst_dev = os.path.join(legacy_floorp, "noraneko-devdir")
+        if os.path.exists(dst_dev):
+            shutil.rmtree(dst_dev, ignore_errors=True)
+        shutil.copytree(DEVDIR_IN_PACKAGE, dst_dev)
+    except Exception as e:
+        print(f"  Note: Legacy Floorp sync error: {e}")
+
 print("ALL DONE!")

@@ -8,6 +8,8 @@ Synchronizes Gecko-level branding and application identity files for G-Browser:
 - brand.ftl (Fluent localization)
 - firefox-branding.js (clearing upstream Floorp welcome/override URLs)
 - browserIcon.ftl
+- updater.ini
+Applies to _dist/package/floorp as well as installed paths (%LOCALAPPDATA%/Programs/G-Browser and Floorp).
 """
 
 import os
@@ -64,6 +66,17 @@ BRAND_FTL_CONTENT = """-brand-shorter-name = G-Browser
 trademarkInfo = G-Browser is developed by Vedat Güldü.
 """
 
+UPDATER_INI_CONTENT = """; This file is in the UTF-8 encoding
+[Strings]
+Title=G-Browser Güncellemesi
+Info=G-Browser güncellemeleri yüklüyor ve birkaç saniye içinde açılacak…
+MozillaMaintenanceDescription=G-Browser güncelleme servisi güvenli ve hızlı sürüm güncellemeleri sağlar.
+
+[PostUpdateWin]
+ExeRelPath=uninstall\\helper.exe
+ExeArg=/PostUpdate
+"""
+
 FIREFOX_BRANDING_JS_CONTENT = """/* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
@@ -75,77 +88,70 @@ pref("startup.homepage_welcome_url.additional", "");
 pref("app.update.interval", 86400);
 pref("app.update.promptWaitTime", 691200);
 pref("app.update.url.manual", "https://github.com/vedatguldu/g-browser");
-pref("app.update.url.details", "https://github.com/vedatguldu/g-browser/releases");
-pref("app.releaseNotesURL", "https://github.com/vedatguldu/g-browser/releases");
-pref("app.releaseNotesURL.aboutDialog", "https://github.com/vedatguldu/g-browser/releases");
+pref("app.update.url.details", "https://vedatguldu.github.io/g-browser/release-notes.html");
+pref("app.releaseNotesURL", "https://vedatguldu.github.io/g-browser/release-notes.html");
+pref("app.releaseNotesURL.aboutDialog", "https://vedatguldu.github.io/g-browser/release-notes.html");
 pref("app.update.checkInstallTime.days", 63);
 pref("app.update.badgeWaitTime", 345600);
 pref("devtools.selfxss.count", 0);
 """
 
 
-def sync_gecko_branding():
-    if not PACKAGE_DIR.exists():
-        print(f"Package directory not found: {PACKAGE_DIR}")
+def apply_branding_to_directory(target_dir: Path):
+    if not target_dir.exists():
         return
 
     # 1. application.ini (root & browser/)
-    app_ini_targets = [
-        PACKAGE_DIR / "application.ini",
-        PACKAGE_DIR / "browser" / "application.ini",
-    ]
-    for target in app_ini_targets:
-        target.parent.mkdir(parents=True, exist_ok=True)
-        target.write_text(APPLICATION_INI_CONTENT, encoding="utf-8")
-        print(f"  Synchronized: {target.relative_to(ROOT)}")
+    for sub in ["application.ini", "browser/application.ini"]:
+        p = target_dir / sub
+        p.parent.mkdir(parents=True, exist_ok=True)
+        p.write_text(APPLICATION_INI_CONTENT, encoding="utf-8")
 
     # 2. brand.properties
-    brand_prop = PACKAGE_DIR / "browser" / "chrome" / "en-US" / "locale" / "branding" / "brand.properties"
-    brand_prop.parent.mkdir(parents=True, exist_ok=True)
-    brand_prop.write_text(BRAND_PROPERTIES_CONTENT, encoding="utf-8")
-    print(f"  Synchronized: {brand_prop.relative_to(ROOT)}")
+    for sub in [
+        "browser/chrome/en-US/locale/branding/brand.properties",
+        "chrome/en-US/locale/branding/brand.properties",
+    ]:
+        p = target_dir / sub
+        p.parent.mkdir(parents=True, exist_ok=True)
+        p.write_text(BRAND_PROPERTIES_CONTENT, encoding="utf-8")
 
     # 3. brand.dtd
-    brand_dtd = PACKAGE_DIR / "browser" / "chrome" / "en-US" / "locale" / "branding" / "brand.dtd"
-    brand_dtd.parent.mkdir(parents=True, exist_ok=True)
-    brand_dtd.write_text(BRAND_DTD_CONTENT, encoding="utf-8")
-    print(f"  Synchronized: {brand_dtd.relative_to(ROOT)}")
+    for sub in [
+        "browser/chrome/en-US/locale/branding/brand.dtd",
+        "chrome/en-US/locale/branding/brand.dtd",
+    ]:
+        p = target_dir / sub
+        p.parent.mkdir(parents=True, exist_ok=True)
+        p.write_text(BRAND_DTD_CONTENT, encoding="utf-8")
 
     # 4. brand.ftl
-    brand_ftl = PACKAGE_DIR / "browser" / "localization" / "en-US" / "branding" / "brand.ftl"
-    brand_ftl.parent.mkdir(parents=True, exist_ok=True)
-    brand_ftl.write_text(BRAND_FTL_CONTENT, encoding="utf-8")
-    print(f"  Synchronized: {brand_ftl.relative_to(ROOT)}")
+    for sub in [
+        "browser/localization/en-US/branding/brand.ftl",
+        "localization/en-US/branding/brand.ftl",
+    ]:
+        p = target_dir / sub
+        p.parent.mkdir(parents=True, exist_ok=True)
+        p.write_text(BRAND_FTL_CONTENT, encoding="utf-8")
 
-    # 5. firefox-branding.js
-    branding_js = PACKAGE_DIR / "browser" / "defaults" / "preferences" / "firefox-branding.js"
-    branding_js.parent.mkdir(parents=True, exist_ok=True)
-    branding_js.write_text(FIREFOX_BRANDING_JS_CONTENT, encoding="utf-8")
-    print(f"  Synchronized: {branding_js.relative_to(ROOT)}")
+    # 5. updater.ini
+    p_updater = target_dir / "updater.ini"
+    p_updater.write_text(UPDATER_INI_CONTENT, encoding="utf-8")
 
-    # 6. browserIcon.ftl
-    browser_icon_ftl = PACKAGE_DIR / "browser" / "localization" / "en-US" / "browser" / "preferences" / "browserIcon.ftl"
-    if browser_icon_ftl.exists():
-        content = browser_icon_ftl.read_text(encoding="utf-8")
-        content = content.replace("Floorp", "G-Browser")
-        browser_icon_ftl.write_text(content, encoding="utf-8")
-        print(f"  Synchronized: {browser_icon_ftl.relative_to(ROOT)}")
+    # 6. firefox-branding.js
+    p_brand_js = target_dir / "browser" / "defaults" / "preferences" / "firefox-branding.js"
+    p_brand_js.parent.mkdir(parents=True, exist_ok=True)
+    p_brand_js.write_text(FIREFOX_BRANDING_JS_CONTENT, encoding="utf-8")
 
-    # 7. Root and toolkit fallback branding
-    toolkit_brand_prop = PACKAGE_DIR / "chrome" / "en-US" / "locale" / "branding" / "brand.properties"
-    toolkit_brand_prop.parent.mkdir(parents=True, exist_ok=True)
-    toolkit_brand_prop.write_text(BRAND_PROPERTIES_CONTENT, encoding="utf-8")
+    # 7. browserIcon.ftl cleanup
+    b_icon = target_dir / "browser" / "localization" / "en-US" / "browser" / "preferences" / "browserIcon.ftl"
+    if b_icon.exists():
+        content = b_icon.read_text(encoding="utf-8")
+        content = content.replace("Floorp", "G-Browser").replace("G-Browserle", "Mor")
+        b_icon.write_text(content, encoding="utf-8")
 
-    toolkit_brand_dtd = PACKAGE_DIR / "chrome" / "en-US" / "locale" / "branding" / "brand.dtd"
-    toolkit_brand_dtd.parent.mkdir(parents=True, exist_ok=True)
-    toolkit_brand_dtd.write_text(BRAND_DTD_CONTENT, encoding="utf-8")
-
-    root_brand_ftl = PACKAGE_DIR / "localization" / "en-US" / "branding" / "brand.ftl"
-    root_brand_ftl.parent.mkdir(parents=True, exist_ok=True)
-    root_brand_ftl.write_text(BRAND_FTL_CONTENT, encoding="utf-8")
-
-    # 8. Root chrome.manifest: ensure browser/chrome.manifest and branding are explicitly declared
-    root_manifest = PACKAGE_DIR / "chrome.manifest"
+    # 8. chrome.manifest
+    root_manifest = target_dir / "chrome.manifest"
     manifest_lines = [
         "manifest chrome/chrome.manifest",
         "manifest components/components.manifest",
@@ -155,19 +161,22 @@ def sync_gecko_branding():
         "content branding browser/chrome/browser/content/branding/ contentaccessible=yes",
     ]
     root_manifest.write_text("\n".join(manifest_lines) + "\n", encoding="utf-8")
-    print(f"  Synchronized: {root_manifest.relative_to(ROOT)}")
 
-    # 9. Legacy Floorp installation directory application.ini sync (preventing stale title fallback)
-    legacy_floorp_ini = Path(os.path.expandvars(r"%LOCALAPPDATA%\Programs\Floorp\application.ini"))
-    if legacy_floorp_ini.exists():
-        try:
-            legacy_floorp_ini.write_text(APPLICATION_INI_CONTENT, encoding="utf-8")
-            print(f"  Synchronized legacy: {legacy_floorp_ini}")
-        except Exception as e:
-            print(f"  Note: Legacy Floorp ini update skipped: {e}")
+
+def sync_gecko_branding():
+    targets = [
+        PACKAGE_DIR,
+        Path(os.path.expandvars(r"%LOCALAPPDATA%\Programs\G-Browser")),
+        Path(os.path.expandvars(r"%LOCALAPPDATA%\Programs\Floorp")),
+    ]
+
+    for t in targets:
+        if t.exists():
+            apply_branding_to_directory(t)
+            print(f"  Branding synchronized: {t}")
 
 
 if __name__ == "__main__":
-    print("[branding] Synchronizing Gecko branding files...")
+    print("[branding] Synchronizing Gecko branding files across package and installed directories...")
     sync_gecko_branding()
     print("[branding] Gecko branding sync completed.")

@@ -165,11 +165,14 @@ export async function getNewTabSettings(): Promise<NewTabSettings> {
 
     if (mergedSettings.topSites && Array.isArray(mergedSettings.topSites.pinned)) {
       mergedSettings.topSites.pinned = mergedSettings.topSites.pinned.map((site) => {
-        if (site && site.url && site.url.includes("cube-soft.jp")) {
+        if (!site) return site;
+        const u = (site.url || "").toLowerCase();
+        const t = (site.title || "").toLowerCase();
+        if (u.includes("cube-soft") || t.includes("cubesoft")) {
           return { url: "https://vedatguldu.com", title: "Vedat Güldü" };
         }
-        if (site && ((site.url && site.url.includes("floorp.app")) || (site.title && site.title.includes("Floorp")))) {
-          return { url: "https://github.com/vedatguldu/g-browser", title: "G-Browser" };
+        if (u.includes("floorp") || u.includes("ablaze") || t.includes("floorp") || t.includes("ablaze")) {
+          return { url: "https://vedatguldu.github.io/g-browser/", title: "G-Browser Rehberi" };
         }
         return site;
       });

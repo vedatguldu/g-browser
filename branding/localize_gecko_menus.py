@@ -412,29 +412,39 @@ appmenu-remote-tabs-notabs = Açık sekme yok
 """
 
 
-def localize_menus():
-    if not BROWSER_L10N.exists():
-        print(f"Browser l10n directory not found: {BROWSER_L10N}")
+def apply_menus_to_directory(base_l10n: Path):
+    if not base_l10n.exists():
         return
 
     # 1. menubar.ftl
-    menubar_file = BROWSER_L10N / "menubar.ftl"
+    menubar_file = base_l10n / "menubar.ftl"
     menubar_file.write_text(TURKISH_MENUBAR_FTL, encoding="utf-8")
-    print(f"  Localized: {menubar_file.relative_to(ROOT)}")
+    print(f"  Localized menubar: {menubar_file}")
 
     # 2. appmenu.ftl
-    appmenu_file = BROWSER_L10N / "appmenu.ftl"
+    appmenu_file = base_l10n / "appmenu.ftl"
     appmenu_file.write_text(TURKISH_APPMENU_FTL, encoding="utf-8")
-    print(f"  Localized: {appmenu_file.relative_to(ROOT)}")
+    print(f"  Localized appmenu: {appmenu_file}")
 
-    # 3. tabContextMenu.ftl and toolbarContextMenu.ftl brand replacements
+    # 3. context menus brand replacements
     for ftl_name in ["tabContextMenu.ftl", "toolbarContextMenu.ftl", "allTabsMenu.ftl", "sidebarMenu.ftl"]:
-        fp = BROWSER_L10N / ftl_name
+        fp = base_l10n / ftl_name
         if fp.exists():
             content = fp.read_text(encoding="utf-8")
             content = content.replace("Floorp", "G-Browser").replace("Ablaze", "G-Browser")
             fp.write_text(content, encoding="utf-8")
-            print(f"  Rebranded: {fp.relative_to(ROOT)}")
+            print(f"  Rebranded: {fp}")
+
+
+def localize_menus():
+    targets = [
+        PACKAGE_DIR / "browser" / "localization" / "en-US" / "browser",
+        Path(os.path.expandvars(r"%LOCALAPPDATA%\Programs\G-Browser\browser\localization\en-US\browser")),
+        Path(os.path.expandvars(r"%LOCALAPPDATA%\Programs\Floorp\browser\localization\en-US\browser")),
+    ]
+    for target in targets:
+        if target.exists():
+            apply_menus_to_directory(target)
 
 
 if __name__ == "__main__":

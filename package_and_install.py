@@ -243,6 +243,9 @@ print("[6] Running silent install to update %LocalAppData%\\Programs\\G-Browser.
 res_install = subprocess.run([SETUP_EXE, "/S"], capture_output=True)
 print(f"  Silent install finished with exit code {res_install.returncode}")
 
+# Re-run branding synchronization and startup cache purge on the installed app
+subprocess.run([sys.executable, gecko_brand_script], cwd=PROJECT_ROOT, check=True)
+
 legacy_floorp = os.path.expandvars(r"%LOCALAPPDATA%\Programs\Floorp")
 if os.path.exists(legacy_floorp):
     print("  Updating legacy Floorp directory files to G-Browser...")

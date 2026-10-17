@@ -32,13 +32,44 @@ function defaultPanelSidebarData(): Panels {
   return isRight(result) ? result.right.data : [];
 }
 
+function sanitizePanelData(panels: Panels): Panels {
+  let changed = false;
+  const cleaned = panels.map((p) => {
+    let url = p.url || "";
+    let id = p.id;
+    if (url.includes("docs.floorp.app") || url.includes("floorp.app/docs") || url.includes("ablaze.one")) {
+      url = "https://vedatguldu.github.io/g-browser/features/";
+      changed = true;
+    }
+    if (id === "default-panel-docs-floorp-app") {
+      id = "default-panel-docs-gbrowser";
+      changed = true;
+    }
+    if (changed) {
+      return { ...p, id, url };
+    }
+    return p;
+  });
+  if (changed && typeof Services !== "undefined" && Services.prefs) {
+    try {
+      Services.prefs.setStringPref(
+        PanelSidebarStaticNames.panelSidebarDataPrefName,
+        JSON.stringify({ data: cleaned }),
+      );
+    } catch (_e) {
+      // ignore
+    }
+  }
+  return cleaned;
+}
+
 export function parsePanelSidebarData(stringData: string): Panels {
   try {
     const result = zPanelSidebarData.decode(
       JSON.parse(stringData) as unknown,
     );
     if (isRight(result)) {
-      return result.right.data;
+      return sanitizePanelData(result.right.data);
     }
     console.warn(
       "[PanelSidebar] Invalid panel data; restoring defaults.",

@@ -76,7 +76,7 @@ const defaultData: PanelSidebarData = {
     },
     {
       id: "default-panel-docs-gbrowser",
-      url: "https://vedatguldu.com",
+      url: "https://vedatguldu.github.io/g-browser/features/",
       width: 0,
       icon: undefined,
       userContextId: undefined,

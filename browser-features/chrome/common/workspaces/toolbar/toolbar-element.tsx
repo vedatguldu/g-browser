@@ -108,15 +108,20 @@ export class WorkspacesToolbarButton {
         icon ? `url(${icon})` : `url("chrome://branding/content/icon32.png")`,
       );
 
-      const workspacesHeader = i18next.t("workspaces.shortcut.workspace", { defaultValue: "Workspaces" });
-      const fullWorkspaceLabel = workspace.name ? `${workspacesHeader}: ${workspace.name}` : workspacesHeader;
+      let cleanWorkspaceName = workspace.name || "";
+      if (cleanWorkspaceName.toLowerCase().includes("floorp")) {
+        cleanWorkspaceName = cleanWorkspaceName.replace(/floorp/gi, "G-Browser");
+      }
+
+      const workspacesHeader = i18next.t("workspaces.shortcut.workspace", { defaultValue: "Çalışma Alanı" });
+      const fullWorkspaceLabel = cleanWorkspaceName ? `${workspacesHeader}: ${cleanWorkspaceName}` : workspacesHeader;
 
       xulElement.setAttribute("role", "button");
       xulElement.setAttribute("aria-label", fullWorkspaceLabel);
       xulElement.setAttribute("tooltiptext", fullWorkspaceLabel);
 
       if (configStore.showWorkspaceNameOnToolbar) {
-        xulElement.setAttribute("label", workspace.name);
+        xulElement.setAttribute("label", cleanWorkspaceName);
       } else {
         xulElement.removeAttribute("label");
       }

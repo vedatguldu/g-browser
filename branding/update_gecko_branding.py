@@ -44,6 +44,9 @@ BRAND_PROPERTIES_CONTENT = """brandShorterName=G-Browser
 brandShortName=G-Browser
 brandFullName=G-Browser
 vendorShortName=G-Browser
+mainWindow.titlemodifier=G-Browser
+mainWindow.titlemodifiermenuseparator= — 
+mainWindow.titlepreface=
 """
 
 BRAND_DTD_CONTENT = """<!-- This Source Code Form is subject to the terms of the Mozilla Public
@@ -55,6 +58,9 @@ BRAND_DTD_CONTENT = """<!-- This Source Code Form is subject to the terms of the
 <!ENTITY  brandFullName         "G-Browser">
 <!ENTITY  vendorShortName       "G-Browser">
 <!ENTITY  trademarkInfo.part1   "G-Browser is developed by Vedat Güldü.">
+<!ENTITY  mainWindow.titlemodifier "G-Browser">
+<!ENTITY  mainWindow.titlemodifiermenuseparator " — ">
+<!ENTITY  mainWindow.titlepreface "">
 """
 
 BRAND_FTL_CONTENT = """-brand-shorter-name = G-Browser
@@ -162,6 +168,64 @@ def apply_branding_to_directory(target_dir: Path):
     ]
     root_manifest.write_text("\n".join(manifest_lines) + "\n", encoding="utf-8")
 
+    # 9. browser.xhtml window title & appmenu branding
+    p_browser_xhtml = target_dir / "browser" / "chrome" / "browser" / "content" / "browser" / "browser.xhtml"
+    if p_browser_xhtml.exists():
+        xhtml_content = p_browser_xhtml.read_text(encoding="utf-8")
+        modified = False
+
+        # Ensure titlemodifier is set on root window element
+        if 'titlemodifier="G-Browser"' not in xhtml_content:
+            xhtml_content = xhtml_content.replace(
+                '<html id="main-window"',
+                '<html id="main-window" titlemodifier="G-Browser" titlemenuseparator=" — " titlepreface=""',
+                1
+            )
+            modified = True
+
+        # Ensure PanelUI-menu-button has explicit G-Browser label and aria-label
+        if 'id="PanelUI-menu-button"' in xhtml_content and 'aria-label="G-Browser Menüsü"' not in xhtml_content:
+            xhtml_content = xhtml_content.replace(
+                'id="PanelUI-menu-button" class="toolbarbutton-1" delegatesanchor="true" badged="true" consumeanchor="PanelUI-button" data-l10n-id="appmenu-menu-button-closed2"',
+                'id="PanelUI-menu-button" class="toolbarbutton-1" delegatesanchor="true" badged="true" consumeanchor="PanelUI-button" data-l10n-id="appmenu-menu-button-closed2" aria-label="G-Browser Menüsü" label="G-Browser Menüsü" tooltiptext="Uygulama menüsünü aç"',
+                1
+            )
+            modified = True
+
+        if modified:
+            p_browser_xhtml.write_text(xhtml_content, encoding="utf-8")
+            print(f"  Patched browser.xhtml window title and menu attributes: {p_browser_xhtml}")
+
+
+def purge_startup_caches():
+    """Purges Gecko startupCache so compiled XUL/FTL/DTD files are cleanly reloaded."""
+    import shutil
+    cache_roots = [
+        Path(os.path.expandvars(r"%LOCALAPPDATA%\Floorp\Profiles")),
+        Path(os.path.expandvars(r"%LOCALAPPDATA%\G-Browser\Profiles")),
+        Path(os.path.expandvars(r"%APPDATA%\Floorp\Profiles")),
+        Path(os.path.expandvars(r"%APPDATA%\G-Browser\Profiles")),
+    ]
+
+    for root in cache_roots:
+        if not root.exists():
+            continue
+        for profile_dir in root.iterdir():
+            if not profile_dir.is_dir():
+                continue
+            startup_cache = profile_dir / "startupCache"
+            if startup_cache.exists():
+                try:
+                    shutil.rmtree(startup_cache, ignore_errors=True)
+                    print(f"  Purged startupCache: {startup_cache}")
+                except Exception as e:
+                    print(f"  Failed to purge {startup_cache}: {e}")
+            for extra in profile_dir.glob(".startup-*"):
+                try:
+                    extra.unlink(missing_ok=True)
+                except Exception:
+                    pass
+
 
 def sync_gecko_branding():
     targets = [
@@ -174,6 +238,8 @@ def sync_gecko_branding():
         if t.exists():
             apply_branding_to_directory(t)
             print(f"  Branding synchronized: {t}")
+
+    purge_startup_caches()
 
 
 if __name__ == "__main__":

@@ -22,8 +22,8 @@ type ProfileManagerTexts = {
 };
 
 const defaultTexts: ProfileManagerTexts = {
-  label: "Profile",
-  tooltipText: "Manage profiles",
+  label: "Profil Yöneticisi",
+  tooltipText: "G-Browser Profillerini Yönet",
 };
 
 const getTranslatedTexts = (): ProfileManagerTexts => {

@@ -17,11 +17,53 @@ import { isExtensionExist } from "../extension-panels";
 import { getUserContextColor } from "../utils/userContextColor-getter";
 import { setContextPanel } from "./sidebar-contextMenu";
 
+function getPanelAccessibleLabel(panel: Panel): string {
+  const url = (panel.url || "").trim();
+  const id = (panel.id || "").trim();
+
+  if (url === "floorp//bookmarks" || id === "default-panel-bookmarks" || id.includes("bookmarks")) {
+    return "Yer İmleri";
+  }
+  if (url === "floorp//history" || id === "default-panel-history" || id.includes("history")) {
+    return "Geçmiş";
+  }
+  if (url === "floorp//downloads" || id === "default-panel-downloads" || id.includes("downloads")) {
+    return "İndirilenler";
+  }
+  if (url === "floorp//notes" || id === "default-panel-notes" || id.includes("notes")) {
+    return "Notlar";
+  }
+  if (url.includes("translate.google.com") || id.includes("translate")) {
+    return "Google Çeviri";
+  }
+  if (
+    url.includes("docs.floorp.app") ||
+    url.includes("vedatguldu.github.io/g-browser") ||
+    url.includes("vedatguldu.com") ||
+    id.includes("docs")
+  ) {
+    return "G-Browser Özellikler Rehberi ve Dokümantasyon";
+  }
+  if (panel.type === "extension" && panel.extensionId) {
+    return `Eklenti Paneli: ${panel.extensionId}`;
+  }
+  if (url) {
+    try {
+      const parsed = new URL(url);
+      return parsed.hostname.replace(/^www\./, "");
+    } catch {
+      return url;
+    }
+  }
+  return id || "Kenar Çubuğu Paneli";
+}
+
 export function PanelSidebarButton(props: {
   panel: Panel;
   ctx: CPanelSidebar;
 }) {
   const gPanelSidebar = props.ctx;
+  const accessibleName = () => getPanelAccessibleLabel(props.panel);
   const [faviconURL] = createResource(
     () => props.panel,
     async () => await getFaviconURLForPanel(props.panel),
@@ -126,8 +168,8 @@ export function PanelSidebarButton(props: {
         data-panel-id={props.panel.id}
         role="button"
         tabindex={0}
-        aria-label={props.panel.url || props.panel.extensionId ||
-          props.panel.id}
+        aria-label={accessibleName()}
+        title={accessibleName()}
         aria-expanded={selectedPanelId() === props.panel.id &&
           isPanelSidebarVisible()}
         onKeyDown={(event: KeyboardEvent) => {

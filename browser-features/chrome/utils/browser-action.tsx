@@ -9,6 +9,29 @@ const { CustomizableUI } = ChromeUtils.importESModule(
   "moz-src:///browser/components/customizableui/CustomizableUI.sys.mjs",
 );
 
+const DEFAULT_WIDGET_A11Y: Record<string, { label: string; tooltip: string }> = {
+  "profile-manager-button": {
+    label: "Profil Yöneticisi",
+    tooltip: "G-Browser Profillerini Yönet",
+  },
+  "zen-mode-button": {
+    label: "Zen Modu",
+    tooltip: "Zen Modunu Aç/Kapat",
+  },
+  "undo-closed-tab": {
+    label: "Kapatılan Sekmeyi Geri Aç",
+    tooltip: "Son kapatılan sekmeyi tekrar aç (Ctrl+Shift+T)",
+  },
+  "sidebar-reverse-position-toolbar": {
+    label: "Kenar Çubuğu Konumunu Değiştir",
+    tooltip: "Kenar çubuğunu sol veya sağ tarafa taşı",
+  },
+  "workspaces-toolbar-button": {
+    label: "Çalışma Alanları",
+    tooltip: "Çalışma Alanlarını Yönet",
+  },
+};
+
 // deno-lint-ignore no-namespace
 export namespace BrowserActionUtils {
   export function createToolbarClickActionButton(
@@ -45,20 +68,24 @@ export namespace BrowserActionUtils {
         }
       }
 
+      const fallback = DEFAULT_WIDGET_A11Y[widgetId];
+      const finalLabel = resolvedLabel || fallback?.label || widgetId;
+      const finalTooltip = resolvedLabel || fallback?.tooltip || finalLabel;
+
       CustomizableUI.createWidget({
         id: widgetId,
         type: "button",
-        tooltiptext: resolvedLabel,
-        label: resolvedLabel,
+        tooltiptext: finalTooltip,
+        label: finalLabel,
         removable: true,
         onCommand: () => {
           onCommandFunc?.();
         },
         onCreated: (aNode: XULElement) => {
           aNode.setAttribute("role", "button");
-          if (resolvedLabel) {
-            aNode.setAttribute("aria-label", resolvedLabel);
-          }
+          aNode.setAttribute("aria-label", finalLabel);
+          aNode.setAttribute("label", finalLabel);
+          aNode.setAttribute("tooltiptext", finalTooltip);
           onCreatedFunc?.(aNode);
         },
         defaultArea: area ?? undefined,
@@ -139,18 +166,22 @@ export namespace BrowserActionUtils {
         }
       }
 
+      const fallback = DEFAULT_WIDGET_A11Y[widgetId];
+      const finalLabel = resolvedLabel || fallback?.label || widgetId;
+      const finalTooltip = resolvedTooltip || fallback?.tooltip || finalLabel;
+
       CustomizableUI.createWidget({
         id: widgetId,
         type: "view",
         viewId: targetViewId,
-        tooltiptext: resolvedTooltip,
-        label: resolvedLabel,
+        tooltiptext: finalTooltip,
+        label: finalLabel,
         removable: true,
         onCreated: (aNode: XULElement) => {
           aNode.setAttribute("role", "button");
-          if (resolvedLabel) {
-            aNode.setAttribute("aria-label", resolvedLabel);
-          }
+          aNode.setAttribute("aria-label", finalLabel);
+          aNode.setAttribute("label", finalLabel);
+          aNode.setAttribute("tooltiptext", finalTooltip);
           createRoot(() => onCreatedFunc?.(aNode), owner);
         },
         onViewShowing: (event: Event) => {

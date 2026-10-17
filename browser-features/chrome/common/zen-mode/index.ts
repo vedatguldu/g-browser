@@ -50,8 +50,8 @@ export default class ZenMode extends NoraComponentBase {
     let iconStyleElement: HTMLStyleElement | null = null;
     let toolbarNode: Element | null = null;
     let tooltipElement: Element | null = null;
-    let buttonLabel = "Zen Mode";
-    let tooltipText = "Toggle Zen Mode";
+    let buttonLabel = "Zen Modu";
+    let tooltipText = "Zen Modunu Aç/Kapat";
 
     const ensureIconStyle = () => {
       if (iconStyleElement?.isConnected) {

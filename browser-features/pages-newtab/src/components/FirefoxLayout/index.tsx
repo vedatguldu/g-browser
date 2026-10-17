@@ -3,12 +3,13 @@ export function FirefoxLayout() {
     <div className="flex justify-center items-center mb-8">
       <img
         src="chrome://branding/content/about-logo.png"
-        alt="Logo"
+        alt=""
+        aria-hidden="true"
         className="w-16 h-16 mr-4"
       />
       <img
         src="chrome://branding/content/firefox-wordmark.svg"
-        alt="Wordmark"
+        alt="G-Browser"
         className="h-12"
       />
     </div>

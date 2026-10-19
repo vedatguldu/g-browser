@@ -148,6 +148,7 @@ print("[2] Compiling uninstall.exe from tools/native/uninstall.cs...")
 uninstall_out = os.path.join(PACKAGE_DIR, "uninstall.exe")
 csc_uninstall_cmd = [
     CSC,
+    "/codepage:65001",
     "/target:winexe",
     f"/out:{uninstall_out}",
     f"/win32icon:{KIT_ICO}",
@@ -213,6 +214,7 @@ print(f"  app.zip created: {zip_size_mb:.2f} MB")
 print(f"[5] Compiling {os.path.basename(SETUP_EXE)} with csc.exe...")
 csc_cmd = [
     CSC,
+    "/codepage:65001",
     "/target:winexe",
     f"/out:{SETUP_EXE}",
     f"/win32icon:{KIT_ICO}",

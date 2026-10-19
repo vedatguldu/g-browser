@@ -17,24 +17,34 @@ import { isExtensionExist } from "../extension-panels";
 import { getUserContextColor } from "../utils/userContextColor-getter";
 import { setContextPanel } from "./sidebar-contextMenu";
 
+function isTurkishLocale(): boolean {
+  try {
+    const req = Services?.locale?.requestedLocale || navigator?.language || "tr";
+    return req.toLowerCase().startsWith("tr");
+  } catch {
+    return true;
+  }
+}
+
 function getPanelAccessibleLabel(panel: Panel): string {
   const url = (panel.url || "").trim();
   const id = (panel.id || "").trim();
+  const tr = isTurkishLocale();
 
   if (url === "floorp//bookmarks" || id === "default-panel-bookmarks" || id.includes("bookmarks")) {
-    return "Yer İmleri";
+    return tr ? "Yer İmleri" : "Bookmarks";
   }
   if (url === "floorp//history" || id === "default-panel-history" || id.includes("history")) {
-    return "Geçmiş";
+    return tr ? "Geçmiş" : "History";
   }
   if (url === "floorp//downloads" || id === "default-panel-downloads" || id.includes("downloads")) {
-    return "İndirilenler";
+    return tr ? "İndirilenler" : "Downloads";
   }
   if (url === "floorp//notes" || id === "default-panel-notes" || id.includes("notes")) {
-    return "Notlar";
+    return tr ? "Notlar" : "Notes";
   }
   if (url.includes("translate.google.com") || id.includes("translate")) {
-    return "Google Çeviri";
+    return tr ? "Google Çeviri" : "Google Translate";
   }
   if (
     url.includes("docs.floorp.app") ||
@@ -42,10 +52,10 @@ function getPanelAccessibleLabel(panel: Panel): string {
     url.includes("vedatguldu.com") ||
     id.includes("docs")
   ) {
-    return "G-Browser Özellikler Rehberi ve Dokümantasyon";
+    return tr ? "G-Browser Özellikler Rehberi ve Dokümantasyon" : "G-Browser Features Guide & Documentation";
   }
   if (panel.type === "extension" && panel.extensionId) {
-    return `Eklenti Paneli: ${panel.extensionId}`;
+    return tr ? `Eklenti Paneli: ${panel.extensionId}` : `Extension Panel: ${panel.extensionId}`;
   }
   if (url) {
     try {
@@ -55,7 +65,7 @@ function getPanelAccessibleLabel(panel: Panel): string {
       return url;
     }
   }
-  return id || "Kenar Çubuğu Paneli";
+  return id || (tr ? "Kenar Çubuğu Paneli" : "Sidebar Panel");
 }
 
 export function PanelSidebarButton(props: {

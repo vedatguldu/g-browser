@@ -1,5 +1,5 @@
-name: "\U0001F41B Bug report"
-description: Create a report to help us improve the browser experience.
+name: "🐛 Hata Bildirimi / Bug Report"
+description: "G-Browser deneyimini geliştirmemize yardımcı olmak için bir hata kaydı oluşturun. / Create a report to help improve G-Browser."
 title: "[Bug]: "
 labels: [bug]
 assignees: []
@@ -8,92 +8,69 @@ body:
   - type: markdown
     attributes:
       value: |
-        ## Reminder
-        To help resolve your issue quickly, please describe your problem as accurately and concisely as possible.
+        ## Bilgilendirme / Reminder
+        Sorununuzu en hızlı şekilde çözebilmemiz için lütfen karşılaştığınız durumu açık ve adım adım anlatın. (Türkçe veya İngilizce yazabilirsiniz.)
+        To help resolve your issue quickly, please describe the problem clearly and step by step.
 
-        **Feature Requests:** Use [Discussions](https://github.com/Floorp-Projects/Floorp/discussions/new?category=feature-request) instead of GitHub Issues.
-
-        For Japanese: 日本人の場合は、日本語で書いても構いません。
-
-        ## Disclaimer
-        > [!NOTE]
-        > Windows 7, 8, 8.1, and earlier versions are not supported due to maintenance costs.
-        > DRM is not supported, esp. on Netflix.
-        > In addition, kindly refer to the [Issue Tracker](https://docs.floorp.app/docs/issue-tracker/).
-
-  - type: markdown
-    attributes:
-      value: |
-        ## Before submitting your issue
-        Kindly refer to the guidelines in the ["When you submit an issue to Floorp"](https://docs.floorp.app/docs/other/issue-checklist/) section of Floorp Docs!
+        - **Resmi Dokümantasyon / Documentation:** [https://vedatguldu.github.io/g-browser/](https://vedatguldu.github.io/g-browser/)
+        - **Destek Sayfası / Support:** [https://vedatguldu.github.io/g-browser/support.html](https://vedatguldu.github.io/g-browser/support.html)
 
   - type: checkboxes
     attributes:
-      label: Pre-Submission Checklist
-      description: Please go through the checklist below before submitting your issue.
+      label: Ön Kontrol Listesi / Pre-Submission Checklist
+      description: Lütfen göndermeden önce aşağıdaki maddeleri kontrol edin / Please check the items below before submitting.
       options:
-        - label: I have checked the existing/closed issues to ensure this issue has not already been reported.
-        - label: I am using the latest supported version of the browser.
-        - label: I have tried disabling all browser extensions/add-ons to rule out interference from these.
-        - label: I have tried clearing the browser cache and cookies.
-        - label: I have checked with a new profile and the issue still occurs.
-        - label: I have provided detailed step-by-step instructions on how to reproduce the issue.
-        - label: I have included relevant screenshots or console outputs.
-        - label: I have checked that this problem is not occurring in the latest version of Firefox.
-        - label: This issue is specific to this browser and does not occur in other browsers.
+        - label: Bu sorunun daha önce bildirilmediğinden emin olmak için mevcut kayıtları kontrol ettim. / I checked existing issues to avoid duplicates.
+        - label: G-Browser'ın en güncel sürümünü kullanıyorum. / I am using the latest version of G-Browser.
+        - label: Sorunun nasıl yeniden oluşturulacağını adım adım yazdım. / I provided step-by-step reproduction instructions.
 
   - type: textarea
     attributes:
-      label: Bug Summary
-      description: Provide a clear, concise description of the bug.
-      placeholder: Brief bug description...
+      label: Hata Özeti / Bug Summary
+      description: Hatayı kısaca ve net biçimde özetleyin. / Provide a clear and concise summary of the bug.
+      placeholder: Kısa hata açıklaması / Brief description...
     validations:
       required: true
 
   - type: textarea
     attributes:
-      label: Reproduction Steps
-      description: List the steps to reproduce the behavior.
-      placeholder: "1.\n2.\n3.\n4."
+      label: Yeniden Oluşturma Adımları / Reproduction Steps
+      description: Hatayı tetikleyen adımları sırasıyla yazın. / List the steps to reproduce the behavior.
+      placeholder: "1.\n2.\n3."
     validations:
       required: true
 
   - type: textarea
     attributes:
-      label: Expected Behavior
-      description: A clear and concise description of what you expected to happen.
+      label: Beklenen Davranış / Expected Behavior
+      description: Normalde ne olmasını bekliyordunuz? / What did you expect to happen?
     validations:
       required: true
 
   - type: textarea
     attributes:
-      label: Actual Behavior
-      description: A clear and concise description of what actually happened. Include screenshots if applicable.
-    validations:
-      required: true
-
-  - type: textarea
-    id: screenshots
-    attributes:
-      label: Screenshots
-      description: Add screenshots to help explain your problem.
-      placeholder: Drag or paste images or videos to upload (video is recommended).
+      label: Gerçekleşen Davranış / Actual Behavior
+      description: Gerçekte ne oldu? / What actually happened?
     validations:
       required: true
 
   - type: input
     attributes:
-      label: Browser Version
+      label: G-Browser Sürümü / Browser Version
+      placeholder: "v12.20.1"
     validations:
       required: true
 
   - type: input
     attributes:
-      label: Operating System
+      label: İşletim Sistemi ve Ekran Okuyucu (Varsa) / OS & Screen Reader (If applicable)
+      placeholder: "Windows 11 x64 / NVDA 2024.4"
     validations:
       required: true
 
   - type: textarea
     attributes:
-      label: Additional Context
-      description: Add any other context about the problem here, such as specific web pages affected, frequency of the issue, etc.
+      label: Ek Bağlam veya Ekran Görüntüsü / Additional Context or Screenshots
+      description: Varsa konsol çıktısını, ekran görüntüsünü veya ek detayları buraya ekleyin. / Add any console logs, screenshots, or extra details here.
+    validations:
+      required: false

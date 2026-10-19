@@ -1,11 +1,11 @@
-blank_issues_enabled: false
+blank_issues_enabled: true
 contact_links:
-  - name: Feature Request
-    url: https://github.com/Floorp-Projects/Floorp/discussions/new?category=feature-request
-    about: Suggest an idea for Floorp.
-  - name: User Support
-    url: https://docs.floorp.app/docs/features
-    about: Support for end-user.
-  - name: Floorp for iOS issue
-    url: https://github.com/Floorp-Projects/floorp-ios/issues
-    about: Feedback on the mobile browser.
+  - name: G-Browser Dokümantasyon & Özellikler Rehberi / Documentation
+    url: https://vedatguldu.github.io/g-browser/
+    about: G-Browser kullanımı, kısayollar ve özellikler hakkında resmi rehbere göz atın. / Browse the official G-Browser documentation.
+  - name: Destek & Topluluk Merkezi / Support Center
+    url: https://vedatguldu.github.io/g-browser/support.html
+    about: Destek kanalları ve geliştirici iletişim bilgileri. / Support channels and developer contact info.
+  - name: Projeye Sponsor Olun / Sponsor G-Browser
+    url: https://vedatguldu.github.io/g-browser/sponsor.html
+    about: Bağımsız G-Browser geliştirmesini GitHub Sponsors veya doğrudan havale ile destekleyin. / Support independent G-Browser development.

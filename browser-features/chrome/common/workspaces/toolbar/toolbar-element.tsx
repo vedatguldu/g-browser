@@ -113,7 +113,10 @@ export class WorkspacesToolbarButton {
         cleanWorkspaceName = cleanWorkspaceName.replace(/floorp/gi, "G-Browser");
       }
 
-      const workspacesHeader = i18next.t("workspaces.shortcut.workspace", { defaultValue: "Çalışma Alanı" });
+      const isTr = (Services?.locale?.requestedLocale || navigator?.language || "tr").toLowerCase().startsWith("tr");
+      const workspacesHeader = i18next.t("workspaces.shortcut.workspace", {
+        defaultValue: isTr ? "Çalışma Alanı" : "Workspace",
+      });
       const fullWorkspaceLabel = cleanWorkspaceName ? `${workspacesHeader}: ${cleanWorkspaceName}` : workspacesHeader;
 
       xulElement.setAttribute("role", "button");

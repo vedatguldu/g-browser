@@ -9,28 +9,41 @@ const { CustomizableUI } = ChromeUtils.importESModule(
   "moz-src:///browser/components/customizableui/CustomizableUI.sys.mjs",
 );
 
-const DEFAULT_WIDGET_A11Y: Record<string, { label: string; tooltip: string }> = {
-  "profile-manager-button": {
-    label: "Profil Yöneticisi",
-    tooltip: "G-Browser Profillerini Yönet",
-  },
-  "zen-mode-button": {
-    label: "Zen Modu",
-    tooltip: "Zen Modunu Aç/Kapat",
-  },
-  "undo-closed-tab": {
-    label: "Kapatılan Sekmeyi Geri Aç",
-    tooltip: "Son kapatılan sekmeyi tekrar aç (Ctrl+Shift+T)",
-  },
-  "sidebar-reverse-position-toolbar": {
-    label: "Kenar Çubuğu Konumunu Değiştir",
-    tooltip: "Kenar çubuğunu sol veya sağ tarafa taşı",
-  },
-  "workspaces-toolbar-button": {
-    label: "Çalışma Alanları",
-    tooltip: "Çalışma Alanlarını Yönet",
-  },
-};
+function isTurkishLocale(): boolean {
+  try {
+    const req = Services?.locale?.requestedLocale || navigator?.language || "tr";
+    return req.toLowerCase().startsWith("tr");
+  } catch {
+    return true;
+  }
+}
+
+function getDefaultWidgetA11y(widgetId: string): { label: string; tooltip: string } | undefined {
+  const tr = isTurkishLocale();
+  const map: Record<string, { label: string; tooltip: string }> = {
+    "profile-manager-button": {
+      label: tr ? "Profil Yöneticisi" : "Profile Manager",
+      tooltip: tr ? "G-Browser Profillerini Yönet" : "Manage G-Browser Profiles",
+    },
+    "zen-mode-button": {
+      label: tr ? "Zen Modu" : "Zen Mode",
+      tooltip: tr ? "Zen Modunu Aç/Kapat" : "Toggle Zen Mode",
+    },
+    "undo-closed-tab": {
+      label: tr ? "Kapatılan Sekmeyi Geri Aç" : "Undo Closed Tab",
+      tooltip: tr ? "Son kapatılan sekmeyi tekrar aç (Ctrl+Shift+T)" : "Reopen last closed tab (Ctrl+Shift+T)",
+    },
+    "sidebar-reverse-position-toolbar": {
+      label: tr ? "Kenar Çubuğu Konumunu Değiştir" : "Toggle Sidebar Position",
+      tooltip: tr ? "Kenar çubuğunu sol veya sağ tarafa taşı" : "Move sidebar to left or right",
+    },
+    "workspaces-toolbar-button": {
+      label: tr ? "Çalışma Alanları" : "Workspaces",
+      tooltip: tr ? "Çalışma Alanlarını Yönet" : "Manage Workspaces",
+    },
+  };
+  return map[widgetId];
+}
 
 // deno-lint-ignore no-namespace
 export namespace BrowserActionUtils {
@@ -68,7 +81,7 @@ export namespace BrowserActionUtils {
         }
       }
 
-      const fallback = DEFAULT_WIDGET_A11Y[widgetId];
+      const fallback = getDefaultWidgetA11y(widgetId);
       const finalLabel = resolvedLabel || fallback?.label || widgetId;
       const finalTooltip = resolvedLabel || fallback?.tooltip || finalLabel;
 
@@ -166,7 +179,7 @@ export namespace BrowserActionUtils {
         }
       }
 
-      const fallback = DEFAULT_WIDGET_A11Y[widgetId];
+      const fallback = getDefaultWidgetA11y(widgetId);
       const finalLabel = resolvedLabel || fallback?.label || widgetId;
       const finalTooltip = resolvedTooltip || fallback?.tooltip || finalLabel;
 

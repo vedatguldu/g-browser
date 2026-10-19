@@ -1,248 +1,99 @@
-# Floorp Browser
+# G-Browser — Modern, Hızlı, Gizlilik Odaklı ve Tam Erişilebilir Web Tarayıcısı
 
-A browser built for keeping the Open, Private and Sustainable Web alive. Based on Mozilla Firefox.
-
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![License][license-shield]][license-url]
-[![Crowdin](https://badges.crowdin.net/floorp-browser/localized.svg)](https://crowdin.com/project/floorp-browser)
-[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/Floorp-Projects/Floorp)
-
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-
-[contributors-shield]: https://img.shields.io/github/contributors/Floorp-Projects/Floorp.svg?style=for-the-badge
-[contributors-url]: https://github.com/Floorp-Projects/Floorp/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/Floorp-Projects/Floorp?style=for-the-badge
-[forks-url]: https://github.com/Floorp-Projects/Floorp/network/members
-[stars-shield]: https://img.shields.io/github/stars/Floorp-Projects/Floorp.svg?style=for-the-badge
-[stars-url]: https://github.com/Floorp-Projects/Floorp/stargazers
-[issues-shield]: https://img.shields.io/github/issues/Floorp-Projects/Floorp.svg?style=for-the-badge
-[issues-url]: https://github.com/Floorp-Projects/Floorp/issues
-[license-shield]: https://img.shields.io/github/license/Floorp-Projects/Floorp.svg?style=for-the-badge
-[license-url]: https://github.com/Floorp-Projects/Floorp/blob/main/LICENSE
-
-<!-- PROJECT LOGO -->
-<br />
 <div align="center">
-  <a href="https://github.com/Floorp-Projects/Floorp">
-    <img src="https://avatars.githubusercontent.com/u/94953125?s=200&v=4" alt="Logo" width="150" height="150">
+  <a href="https://vedatguldu.github.io/g-browser/">
+    <img src="docs/assets/img/logo.svg" alt="G-Browser Logo" width="140" height="140">
   </a>
 
-  <h3 align="center">Floorp Browser </h3>
+  <h3>G-Browser (v12.20.1)</h3>
 
-  <p align="center">
-    A browser built for keeping the Open, Private and Sustainable Web alive. Based on Mozilla Firefox.
-    <br />
-    <br />
-    <a href="https://floorp.app">Official Site</a>
+  <p>
+    <strong>Bağımsız, Sıfır Telemetrili, WCAG 2.2 AA Erişilebilir ve Yeni Nesil Masaüstü Web Tarayıcısı</strong><br>
+    <em>Independent, Zero-Telemetry, WCAG 2.2 AA Accessible Next-Generation Desktop Web Browser</em>
+  </p>
+
+  <p>
+    <a href="https://github.com/vedatguldu/g-browser/releases/latest/download/G-Browser-Setup-x64.exe"><strong>⬇ Windows İçin İndir (64-Bit Kurulum .exe)</strong></a>
     ・
-    <a href="#-download--install">Download</a>
+    <a href="https://vedatguldu.github.io/g-browser/">Resmi Dokümantasyon</a>
     ・
-    <a href="https://blog.floorp.app">Blog & Release Notes</a>
+    <a href="https://vedatguldu.github.io/g-browser/features/">Özellikler Rehberi</a>
     ・
-    <a href="https://discord.floorp.app">Official Discord</a>
+    <a href="https://vedatguldu.github.io/g-browser/sponsor.html">Sponsor Ol & Destek Ver</a>
     ・
-    <a href="https://docs.floorp.app">Documentation</a>
+    <a href="https://github.com/sponsors/vedatguldu">GitHub Sponsors</a>
   </p>
 </div>
 
-## 📄 Sponsorship
+---
 
-Floorp Browser is a free and open-source project. If you like Floorp Browser, please consider sponsoring us. Your sponsorship will help us to continue development and pay for the server costs. You may advertise if you continuously sponsor a minimum of $100 per month.
+## 🇹🇷 Türkçe Tanıtım
 
-- [GitHub Sponsors](https://github.com/sponsors/Ryosuke-Asano)
+**G-Browser**, kullanıcı gizliliğini, yüksek performansı ve ekran okuyucu (NVDA / JAWS) erişilebilirliğini merkeze alan, **Vedat Güldü** tarafından geliştirilen bağımsız ve açık kaynaklı bir web tarayıcısıdır.
 
-<h2> 💕 Special Sponsors </h2>
-<div align="left" style="display: flex; flex-wrap: wrap;">
-  <a href="https://www.cube-soft.jp/" style="margin: 10px; overflow: hidden; padding: 0px 30px;">
-    <img src="https://avatars.githubusercontent.com/u/346808?s=200&v=4" alt="CubeSoft, Inc." width="100" height="100">
-    <h4 style="text-align: center;">CubeSoft, Inc.</h4>
-  </a>
-  <a href="https://1password.com/" style="margin: 10px; overflow: hidden; padding: 0px 30px;">
-    <img src="https://avatars.githubusercontent.com/1Password?s=200&v=4" alt="1Password" width="100" height="100">
-    <h4 style="text-align: center;">1Password</h4>
-  </a>
-  <a href="https://signpath.io/" style="margin: 10px; overflow: hidden; padding: 0px 30px;">
-    <img src="https://avatars.githubusercontent.com/u/34448643?s=200&v=4" alt="SignPath" width="100" height="100">
-    <h4 style="text-align: center;">SignPath</h4>
-  </a>
-</div>
+### Öne Çıkan Özellikler
 
-## ⚡ Get Started
+- **Tam Erişilebilirlik (WCAG 2.2 AA):** Tüm araç çubuğu düğmeleri, yan panel bileşenleri, çalışma alanları ve menüler ekran okuyucularla (NVDA, JAWS, Windows Ekran Okuyucusu) tam uyumlu semantik etiketlere ve klavye kısayollarına sahiptir.
+- **Çok Dilli Kurulum Sihirbazı (9 Dil):** Kurulum sihirbazı (`G-Browser-Setup-x64.exe`) işletim sistemi dilini otomatik algılar ve Türkçe, İngilizce, Almanca, Fransızca, İspanyolca, Rusça, Arapça, Japonca ve Çince dillerinde canlı dil seçimi sunar.
+- **Gizlilik, Güvenlik & AdShield:** Varsayılan olarak sıfır telemetri, yerleşik izleyici/reklam engelleme (AdShield), Toplam Çerez Koruması (Total Cookie Protection), URL izleme parametresi temizleyici ve Cloudflare DNS-over-HTTPS (DoH) şifreli DNS altyapısı içerir.
+- **Evrensel Medya İndirici:** Web sayfalarındaki video, ses ve yayın akışlarını otomatik algılayıp indirmeye olanak tanıyan yerleşik medya yakalayıcı.
+- **Çalışma Alanları (Workspaces) & Konteyner İzolasyonu:** İş, araştırma, kişisel ve geliştirme sekmelerinizi farklı oturum konteynerleriyle birbirinden tamamen izole edin.
+- **Bölünmüş Görünüm (Split View) & Yan Panel:** Tek pencerede birden fazla sekmeyi yan yana veya alt alta görüntüleyin; yer imleri, geçmiş, indirilenler, notlar ve çeviri araçlarına sabit yan panelden anında erişin.
+- **Zen Modu & Özelleştirilebilir Sekme Düzeni:** Dikkat dağıtıcı tüm arayüz öğelerini tek tuşla gizleyerek yalnızca içeriğe odaklanın; dikey, çok satırlı veya kompakt sekme çubuğu düzenlerinden dilediğinizi seçin.
 
-### 💻 Supported Operating Systems & Requirements
+### Kurulum (Windows 10 / 11 — x64)
 
-Floorp Browser is available for Windows, macOS, and Linux. You can install it by running the installer or by extracting the archive.
+1. [**G-Browser-Setup-x64.exe İndir**](https://github.com/vedatguldu/g-browser/releases/latest/download/G-Browser-Setup-x64.exe) bağlantısından en güncel kurulum paketini indirin.
+2. Kurulum sihirbazını çalıştırın, sağ üst köşeden dilediğiniz kurulum dilini seçin ve **Kur** düğmesine tıklayın.
+3. Sessiz (katılımsız) kurulum için komut satırından şu komutu kullanabilirsiniz:
+   ```powershell
+   .\G-Browser-Setup-x64.exe /S /LANG=tr
+   ```
 
-#### Windows
+### Projeye Sponsor Olun & Destekleyin
 
-- Windows 10 or later. (Windows 7 and 8 are not supported)
+G-Browser tamamen bağımsızdır; hiçbir reklam ağına veya veri tüccarına bağlı değildir. Geliştirme sürecini ve sunucu altyapısını desteklemek için:
 
-- x86_64 CPU architecture. AArch64 is not supported.
-
-- Floorp provides a `.exe` installer, `winget`, and `Scoop` installation options.
-
-Winget install command:
-
-```
-winget install Ablaze.Floorp
-```
-
-Winget repository provided by [@Hibi_10000](https://github.com/Hibi-10000)
-
-Scoop install command:
-
-```
-scoop bucket add extras
-scoop install extras/floorp
-```
-
-Scoop repository provided by [@SegoCode](https://github.com/SegoCode)
-
-**Floorp has obtained a Certum Open Source Code Signing Certificate. The official Floorp installer is signed by "Open Source Developer, Ryosuke Asano".**
-
-#### macOS
-
-- macOS 10.15 or later.
-
-- x86_64 CPU & ARM64 CPU architecture. Floorp provides a Universal build for both architectures.
-
-Homebrew install command:
-
-```
-brew install --cask floorp
-```
-
-**After version 11.0.0, Floorp has obtained Apple Notarization & Certification. This means that you can install Floorp without any warning messages. Additionally, Floorp now includes an auto-update system.**
-
-#### Linux
-
-- Debian-based distributions (such as Ubuntu and Linux Mint) and Arch-based distributions (such as Manjaro) are supported.
-
-- x86_64 & AArch64 CPU architecture.
-
-- Floorp Browser Requirements: [Firefox system requirements](https://www.mozilla.org/firefox/system-requirements/)
-
-Supported package managers:
-
-- PPA (Ubuntu, Linux Mint, etc.): https://ppa.floorp.app
-- Flatpak (most Linux distributions): https://flathub.org/apps/one.ablaze.floorp
-- Tarball (most Linux distributions): https://github.com/Floorp-Projects/Floorp/releases/latest
-- AUR bin (Arch-based distributions): https://aur.archlinux.org/packages/floorp-bin/ **Unofficial**
-- AUR (Arch-based distributions): https://aur.archlinux.org/packages/floorp/ **Unofficial**
-- SBo bin (Slackware-based distributions): https://slackbuilds.org/repository/15.0/network/floorp-bin/ **Unofficial**
-
-### 📥 Download & 📦 Install
-
-You can download the latest version of Floorp Browser from the official website: [Floorp.app](https://floorp.app/download) or from the [GitHub Releases](https://github.com/Floorp-Projects/Floorp/releases) page.
+- **Çok Dilli Sponsorluk Portalı:** [https://vedatguldu.github.io/g-browser/sponsor.html](https://vedatguldu.github.io/g-browser/sponsor.html)
+- **GitHub Sponsors (Uluslararası / Kredi Kartı):** [https://github.com/sponsors/vedatguldu](https://github.com/sponsors/vedatguldu)
 
 ---
 
-## 📖 Documentation
+## 🇬🇧 English Overview
 
-For more detailed information and guidance, check out our [Floorp Documentation Wiki](https://docs.floorp.app).
+**G-Browser** is an independent, privacy-first, and WCAG 2.2 AA accessible web browser architected and maintained by **Vedat Güldü**. Built on the Gecko engine, it combines modern power-user workflows with strict anti-tracking protections and full screen-reader accessibility.
 
-### 📝 License
+### Key Highlights
 
-[Mozilla Public License 2.0](https://www.mozilla.org/en-US/MPL/2.0/)
+- **First-Class Accessibility (WCAG 2.2 AA):** Every toolbar widget, sidebar panel, workspace switcher, and native menu provides clear accessible names, roles, and keyboard navigation for NVDA, JAWS, and Windows Narrator users.
+- **Multi-Language Setup Wizard (9 Languages):** The native Windows installer (`G-Browser-Setup-x64.exe`) automatically detects your OS language and offers live switching across Turkish, English, German, French, Spanish, Russian, Arabic, Japanese, and Simplified Chinese.
+- **Privacy, Security & AdShield:** Zero telemetry by default, built-in tracker & ad blocking (AdShield), Total Cookie Protection, URL tracking parameter stripping, and pre-configured DNS-over-HTTPS (DoH) with ECH & HTTP/3 acceleration.
+- **Universal Media Downloader:** Built-in detection and downloading for video, audio, and media streams directly from the toolbar.
+- **Workspaces & Container Isolation:** Organize tabs into dedicated workspaces with isolated cookie/session containers.
+- **Split View & Panel Sidebar:** View multiple tabs side-by-side in a single window and access Bookmarks, History, Downloads, Notes, and web panels from the persistent sidebar.
+- **Zen Mode & Flexible Tab Layouts:** Hide all toolbars and chrome for distraction-free reading, or switch between horizontal, vertical, and multi-row tab layouts.
 
-- Floorp's name is a registered trademark of Floorp's developer, and Floorp's logo is protected by copyright
+### Installation (Windows 10 / 11 — x64)
 
-- Floorp Browser is based on Mozilla Firefox. Floorp Browser is not affiliated with Mozilla & Mozilla Firefox.
+1. Download the latest [**G-Browser-Setup-x64.exe**](https://github.com/vedatguldu/g-browser/releases/latest/download/G-Browser-Setup-x64.exe) from GitHub Releases.
+2. Launch the Setup Wizard, choose your preferred language from the top-right dropdown, and click **Install**.
+3. For unattended/silent installation with a specific language:
+   ```powershell
+   .\G-Browser-Setup-x64.exe /S /LANG=en
+   ```
 
-- Floorp uses Mozilla Firefox's source code and other open-source projects. See [Floorp License Notices](#-Floorp-License-Notices-)
+### Sponsor & Support G-Browser
 
-### 📧 Contact
+G-Browser is 100% free, open-source, and independent. Your backing directly funds ongoing engine updates, security patches, and accessibility engineering:
 
-- [Official Floorp Twitter](https://twitter.com/Floorp_Browser)
-
-- [Official Floorp Projects Discord](https://discord.floorp.app)
-
-### 📜 Privacy Policy
-
-- [Floorp Privacy Policy](https://floorp.app/privacy)
-
-### 📜 About Forks
-
-- Floorp is independent of Mozilla Firefox. Floorp is not affiliated with Mozilla & Mozilla Firefox.
-
-- We are also unaffiliated with the browser that is forking Floorp and we are developing it on our own.
-
-- We are not affiliated with any organization other than Ablaze.
+- **Interactive Sponsorship Portal (TR / EN):** [https://vedatguldu.github.io/g-browser/sponsor.html](https://vedatguldu.github.io/g-browser/sponsor.html)
+- **GitHub Sponsors:** [https://github.com/sponsors/vedatguldu](https://github.com/sponsors/vedatguldu)
 
 ---
 
-## 🌟 Contributing
+## İletişim & Bağlantılar / Links & Contact
 
-Please also check [`CONTRIBUTING.md`](https://github.com/Floorp-Projects/Floorp/blob/main/.github/CONTRIBUTING.md) for more details on how to contribute.
-
-### 🧰 How to Start Development
-
-Floorp's dev workflow is orchestrated by `feles-build` (a Deno task).
-
-To build and run Floorp, follow the [Building section of the documentation](https://docs.floorp.app/docs/building/).
-
-#### Useful commands
-
-- `deno task feles-build stage` (build production assets, run browser in dev mode)
-- `deno task feles-build build --phase before-mach` (production assets step)
-- `deno task feles-build build --phase after-mach` (post-build injection step)
-
-### 🐛 Reporting Bugs
-
-- If you find a bug, please report it to the [Issues](https://github.com/Floorp-Projects/Floorp/issues) page.
-
----
-
-## 📄 Floorp License Notices 📄
-
-Floorp utilizes various open-source projects. Below is a comprehensive list of the open-source projects used in Floorp.
-
-Please note that while some of the software listed below is not included in Floorp itself, it is instead downloaded from the internet. Additionally, Floorp provides a list of recommended add-ons for users to install.
-
-### 🦊 Mozilla Firefox
-
-- [Mozilla Firefox](https://www.mozilla.org/en-US/firefox/new/)
-- [Mozilla Public License 2.0](https://www.mozilla.org/en-US/MPL/2.0/)
-- Authors: [Mozilla & Contributors](https://www.mozilla.org/credits/)
-
-### 🐈 NyanRus Noraneko (Testhead of Floorp 12)
-
-- [Noraneko](https://github.com/nyanrus/noraneko-runtime)
-- [Mozilla Public License 2.0](https://github.com/nyanrus/noraneko-runtime/blob/main/LICENSE)
-- Author: [NyanRus](https://github.com/nyanrus)
-
-### 🎨 Firefox UI FIX (Lepton)
-
-- [Firefox UI FIX (Lepton)](https://github.com/black7375/Firefox-UI-Fix)
-- [Mozilla Public License 2.0](https://github.com/black7375/Firefox-UI-Fix/blob/master/LICENSE)
-- Author: [black7375](https://github.com/black7375)
-
-### 📦 userChromeCSS Loader
-
-- [userChromeCSS Loader](floorp/browser/base/content/browser-chromeCSS.js)
-- [MIT](floorp/browser/base/content/browser-chromeCSS.js)
-- Author: Griever
-
-Notice: if you are a developer of "userChromeCSS Loader", please contact us so that we can add your name and website to the list.
-
-### 📦 Paxmod
-
-- [Paxmod](https://github.com/numirias/paxmod)
-- [MIT](https://github.com/numirias/paxmod/blob/master/LICENSE)
-- Author: [numirias](https://github.com/numirias/)
-
-Notice: If you are a maintainer of any listed component and your name or license is missing or incorrect, please contact us.
-
-### 📦 Fushra Pulse
-
-- [Fushra Pulse](https://pulsebrowser.app/)
-- [Mozilla Public License 2.0](https://github.com/pulse-browser/browser/blob/main/LICENSE)
-- Author: [Fushra](https://github.com/Fushra)
-
-## Star History
-
-[![Star History Chart](https://star-history.dera.page/svg?repos=Floorp-Projects/Floorp&type=date&legend=top-left)](https://star-history.dera.page/#Floorp-Projects/Floorp&type=date&legend=top-left)
+- **Geliştirici / Lead Developer:** [Vedat Güldü](https://vedatguldu.com)
+- **Dokümantasyon / Documentation:** [https://vedatguldu.github.io/g-browser/](https://vedatguldu.github.io/g-browser/)
+- **Hata Bildirimi / Issue Tracker:** [https://github.com/vedatguldu/g-browser/issues](https://github.com/vedatguldu/g-browser/issues)
+- **Lisans / License:** Mozilla Public License 2.0 ([`LICENSE`](LICENSE))
